@@ -1,11 +1,10 @@
-// ./cypress/tsconfig.json
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-      "isolatedModules": false,
-      "noEmit": true,
-      // jest types와 충돌을 피하기 위해 명시적으로 작성해줍니다.
-      "types": ["cypress"]
-    },
-    "include": ["./**/*.ts"]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "isolatedModules": false,
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"]
+  },
+  "include": ["**/*.ts"]
 }

@@ -24,4 +24,5 @@
     "src"
   ],
   "types": ["node", "jest", "@testing-library/jest-dom"],
+  "moduleResolution": "node"
 }
