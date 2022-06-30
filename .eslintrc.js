@@ -1,4 +1,7 @@
 module.exports = {
+    "extends": [
+        'plugin:cypress/recommended',
+    ],
     "env": {
         "browser": true,
         "es2021": true
@@ -15,5 +18,8 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
-    }
+    },
+    files: [
+        'cypress/**/*.ts',
+    ],
 }

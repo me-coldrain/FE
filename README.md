@@ -5,13 +5,14 @@
 
 ## PWA
 
-아직 미적용
+적용 완료
 
 ---
 
 ## Cypress
 
 아직 미완
+https://haranglog.tistory.com/28
 
 ---
 
@@ -25,11 +26,13 @@
 
 ## jest
 
+https://haranglog.tistory.com/28
+
 ---
 
 ## lint
 
-아직 미적용
+적용 완료
 
 ---
 
