@@ -60,6 +60,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-scripts", "virtual:b3df3fd93d57879cc7c5858e74560dbd8c76f2e56fe9fe2851c17ad64c5a82e88b93dfdd2c60e30bb6e5f1c93e5c1d470800d7db9ed395ab5a9830a0eb73574b#npm:5.0.1"],\
             ["start-server-and-test", "npm:1.14.0"],\
             ["styled-components", "virtual:b3df3fd93d57879cc7c5858e74560dbd8c76f2e56fe9fe2851c17ad64c5a82e88b93dfdd2c60e30bb6e5f1c93e5c1d470800d7db9ed395ab5a9830a0eb73574b#npm:5.3.5"],\
+            ["ts-jest", "virtual:b3df3fd93d57879cc7c5858e74560dbd8c76f2e56fe9fe2851c17ad64c5a82e88b93dfdd2c60e30bb6e5f1c93e5c1d470800d7db9ed395ab5a9830a0eb73574b#npm:28.0.5"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"],\
             ["web-vitals", "npm:2.1.4"],\
             ["workbox-background-sync", "npm:6.5.3"],\
@@ -6652,6 +6653,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["bs-logger", [\
+        ["npm:0.2.6", {\
+          "packageLocation": "./.yarn/cache/bs-logger-npm-0.2.6-7670f88b66-d34bdaf68c.zip/node_modules/bs-logger/",\
+          "packageDependencies": [\
+            ["bs-logger", "npm:0.2.6"],\
+            ["fast-json-stable-stringify", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["bser", [\
         ["npm:2.1.1", {\
           "packageLocation": "./.yarn/cache/bser-npm-2.1.1-cc902055ce-9ba4dc58ce.zip/node_modules/bser/",\
@@ -12744,6 +12755,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["make-error", [\
+        ["npm:1.3.6", {\
+          "packageLocation": "./.yarn/cache/make-error-npm-1.3.6-ccb85d9458-b86e5e0e25.zip/node_modules/make-error/",\
+          "packageDependencies": [\
+            ["make-error", "npm:1.3.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["make-fetch-happen", [\
         ["npm:10.1.8", {\
           "packageLocation": "./.yarn/cache/make-fetch-happen-npm-10.1.8-1571a0a77a-5fe9fd9da5.zip/node_modules/make-fetch-happen/",\
@@ -13141,6 +13161,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-scripts", "virtual:b3df3fd93d57879cc7c5858e74560dbd8c76f2e56fe9fe2851c17ad64c5a82e88b93dfdd2c60e30bb6e5f1c93e5c1d470800d7db9ed395ab5a9830a0eb73574b#npm:5.0.1"],\
             ["start-server-and-test", "npm:1.14.0"],\
             ["styled-components", "virtual:b3df3fd93d57879cc7c5858e74560dbd8c76f2e56fe9fe2851c17ad64c5a82e88b93dfdd2c60e30bb6e5f1c93e5c1d470800d7db9ed395ab5a9830a0eb73574b#npm:5.3.5"],\
+            ["ts-jest", "virtual:b3df3fd93d57879cc7c5858e74560dbd8c76f2e56fe9fe2851c17ad64c5a82e88b93dfdd2c60e30bb6e5f1c93e5c1d470800d7db9ed395ab5a9830a0eb73574b#npm:28.0.5"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"],\
             ["web-vitals", "npm:2.1.4"],\
             ["workbox-background-sync", "npm:6.5.3"],\
@@ -17955,6 +17976,52 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["ts-jest", [\
+        ["npm:28.0.5", {\
+          "packageLocation": "./.yarn/cache/ts-jest-npm-28.0.5-8c44d8b86f-53e05db5b7.zip/node_modules/ts-jest/",\
+          "packageDependencies": [\
+            ["ts-jest", "npm:28.0.5"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:b3df3fd93d57879cc7c5858e74560dbd8c76f2e56fe9fe2851c17ad64c5a82e88b93dfdd2c60e30bb6e5f1c93e5c1d470800d7db9ed395ab5a9830a0eb73574b#npm:28.0.5", {\
+          "packageLocation": "./.yarn/__virtual__/ts-jest-virtual-d83c1963ed/0/cache/ts-jest-npm-28.0.5-8c44d8b86f-53e05db5b7.zip/node_modules/ts-jest/",\
+          "packageDependencies": [\
+            ["ts-jest", "virtual:b3df3fd93d57879cc7c5858e74560dbd8c76f2e56fe9fe2851c17ad64c5a82e88b93dfdd2c60e30bb6e5f1c93e5c1d470800d7db9ed395ab5a9830a0eb73574b#npm:28.0.5"],\
+            ["@babel/core", null],\
+            ["@types/babel-jest", null],\
+            ["@types/babel__core", null],\
+            ["@types/esbuild", null],\
+            ["@types/jest", "npm:27.5.2"],\
+            ["@types/typescript", null],\
+            ["babel-jest", null],\
+            ["bs-logger", "npm:0.2.6"],\
+            ["esbuild", null],\
+            ["fast-json-stable-stringify", "npm:2.1.0"],\
+            ["jest", null],\
+            ["jest-util", "npm:28.1.1"],\
+            ["json5", "npm:2.2.1"],\
+            ["lodash.memoize", "npm:4.1.2"],\
+            ["make-error", "npm:1.3.6"],\
+            ["semver", "npm:7.3.7"],\
+            ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"],\
+            ["yargs-parser", "npm:21.0.1"]\
+          ],\
+          "packagePeers": [\
+            "@babel/core",\
+            "@types/babel-jest",\
+            "@types/babel__core",\
+            "@types/esbuild",\
+            "@types/jest",\
+            "@types/typescript",\
+            "babel-jest",\
+            "esbuild",\
+            "jest",\
+            "typescript"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["tsconfig-paths", [\
         ["npm:3.14.1", {\
           "packageLocation": "./.yarn/cache/tsconfig-paths-npm-3.14.1-17a815b5c5-8afa01c673.zip/node_modules/tsconfig-paths/",\
@@ -19230,6 +19297,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/yargs-parser-npm-20.2.9-a1d19e598d-8bb69015f2.zip/node_modules/yargs-parser/",\
           "packageDependencies": [\
             ["yargs-parser", "npm:20.2.9"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:21.0.1", {\
+          "packageLocation": "./.yarn/cache/yargs-parser-npm-21.0.1-b778fd3462-c3ea2ed12c.zip/node_modules/yargs-parser/",\
+          "packageDependencies": [\
+            ["yargs-parser", "npm:21.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\
