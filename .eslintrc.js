@@ -19,7 +19,15 @@ module.exports = {
     ],
     "rules": {
     },
-    files: [
-        'cypress/**/*.ts',
-    ],
+    overrides: [
+        {
+          extends: [
+            'plugin:cypress/recommended',
+          ],
+          files: [
+            'cypress/**/*.ts',
+          ],
+          rules: {},
+        },
+      ],
 }

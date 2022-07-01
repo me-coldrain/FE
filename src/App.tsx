@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FormEvent, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from './rootReducer';
+import { User, addUser } from './Slices/users';
 
 function App() {
+  
+  const users = useSelector<ReducerType, User[]>(state=> state.users);
+  const dispatch = useDispatch();
+  
+  const [ name, setName ] = useState('');
+  
+  const handleChangeName = (e: any) => {
+    setName(e.target.value);
+  }
+  
+  const handleAddUser = (e:FormEvent) => {
+    e.preventDefault();
+    dispatch(addUser({ name } as User));
+    setName('');
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      
+      <form onSubmit={handleAddUser}>
+        <input type='text' value={name} onChange={handleChangeName} />
+        <button type='submit'>Add User</button>
+      </form>
+      
+      {users.map(user=> (
+        <div key={user.id}>{user.name}</div>
+      ))}
+      
     </div>
-  );
+  ) 
 }
 
 export default App;
