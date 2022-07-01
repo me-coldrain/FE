@@ -9,10 +9,28 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  },
-  plugins: ['@typescript-eslint'],
-  rules: {},
-  //   files: ['cypress/**/*.ts'],
-};
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+    },
+    overrides: [
+        {
+          extends: [
+            'plugin:cypress/recommended',
+          ],
+          files: [
+            'cypress/**/*.ts',
+          ],
+          rules: {},
+        },
+      ],
+}

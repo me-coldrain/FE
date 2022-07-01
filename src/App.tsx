@@ -1,18 +1,39 @@
-import React, { lazy, Suspense } from 'react';
-// router && hooks
-import { Header } from './Components/Header';
-import Navigator from './Navigation/Navigator';
-// lazy load
-const About = lazy(() => import('./screen/home/About'));
-const Home = lazy(() => import('./screen/home/Home'));
+import React, { FormEvent, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from './rootReducer';
+import { User, addUser } from './Slices/users';
 
-const App: React.FC = () => (
-  <>
-    <Header />
-    <Navigator />
+function App() {
+  
+  const users = useSelector<ReducerType, User[]>(state=> state.users);
+  const dispatch = useDispatch();
+  
+  const [ name, setName ] = useState('');
+  
+  const handleChangeName = (e: any) => {
+    setName(e.target.value);
+  }
+  
+  const handleAddUser = (e:FormEvent) => {
+    e.preventDefault();
+    dispatch(addUser({ name } as User));
+    setName('');
+  }
+  
+  return (
     <div>
-      <text>test</text>
+      
+      <form onSubmit={handleAddUser}>
+        <input type='text' value={name} onChange={handleChangeName} />
+        <button type='submit'>Add User</button>
+      </form>
+      
+      {users.map(user=> (
+        <div key={user.id}>{user.name}</div>
+      ))}
+      
     </div>
-  </>
-);
+  ) 
+}
+
 export default App;
