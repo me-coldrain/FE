@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import theme from './style/theme';
 // redux
-import store from './store'
+import store from './store/store';
 import { Provider } from 'react-redux';
 // app.js
 import App from './App';
@@ -20,11 +20,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>
 );
