@@ -110,7 +110,6 @@
     // "semi": ["error", "always"],
     "indent": ["warn", 2],
     // "comma-dangle": ["error", "never"],
-    "no-console": 1,
     "eqeqeq": [1, "always"],
     "arrow-parens": [2, "as-needed"]
   }
