@@ -67,19 +67,19 @@
         "ignoreRestSiblings": true
       }
     ],
-    "@typescript-eslint/member-delimiter-style": [
-      "error",
-      {
-        "multiline": {
-          "delimiter": "comma",
-          "requireLast": false
-        },
-        "singleline": {
-          "delimiter": "comma",
-          "requireLast": false
-        }
-      }
-    ],
+    // "@typescript-eslint/member-delimiter-style": [
+    //   "error",
+    //   {
+    //     "multiline": {
+    //       "delimiter": "comma",
+    //       "requireLast": false
+    //     },
+    //     "singleline": {
+    //       "delimiter": "comma",
+    //       "requireLast": false
+    //     }
+    //   }
+    // ],
 
     "import/prefer-default-export": 0,
     "import/no-useless-path-segments": 1,
@@ -107,7 +107,7 @@
     //   }
     // ],
 
-    "semi": ["error", "always"],
+    // "semi": ["error", "always"],
     "indent": ["warn", 2],
     // "comma-dangle": ["error", "never"],
     "no-console": 1,
