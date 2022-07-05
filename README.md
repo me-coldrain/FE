@@ -34,6 +34,8 @@ https://github.com/saseungmin/yarn-berry-example/blob/main/.eslintrc.js
 
 ## github-actions
 
+미적용
+
 ---
 
 ## Next.js
