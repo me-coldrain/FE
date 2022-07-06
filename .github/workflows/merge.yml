@@ -1,0 +1,41 @@
+name: Sync branch
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  sync_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync ${{ github.ref }} to master
+        uses: devmasx/merge-branch@master
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          type: now
+          from_branch: ${{ github.ref }}
+          target_branch: master
+
+      - name: Sync dev with master
+        uses: devmasx/merge-branch@master
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          type: now
+          from_branch: master
+          target_branch: develope
+
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.6
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          release_branches: main
+
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
