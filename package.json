@@ -46,6 +46,7 @@
     "eslint-plugin-react-hooks": "^4.4.0",
     "jest": "^28.1.2",
     "jest-dom": "^4.0.0",
+    "jest-environment-jsdom": "^28.1.2",
     "node-mocks-http": "^1.11.0",
     "stylelint": "^14.8.2",
     "stylelint-config-sass-guidelines": "^9.0.0",
@@ -57,7 +58,8 @@
     "start": "NODE_ENV=production next start",
     "build": "next build",
     "eslint": "eslint ./src",
-    "stylelint": "stylelint ./src"
+    "stylelint": "stylelint ./src",
+    "test": "jest"
   },
   "browserslist": {
     "production": [

@@ -16,7 +16,12 @@
       "version": "detect"
     }
   },
-  "ignorePatterns": ["next.config.js"],
+  "ignorePatterns": [
+    "next.config.js",
+    "jest.config.js",
+    "jest.setup.js",
+    "/__test__"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json",
@@ -32,41 +37,41 @@
     "no-use-before-define": "off",
     "no-unused-expressions": "off",
     "no-unused-vars": "off",
-    "@typescript-eslint/no-empty-interface": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/consistent-type-assertions": "warn",
-    "@typescript-eslint/no-array-constructor": "warn",
-    "@typescript-eslint/explicit-function-return-type": [
-      "warn",
-      {
-        "allowExpressions": true,
-        "allowTypedFunctionExpressions": true
-      }
-    ],
-    "@typescript-eslint/no-use-before-define": [
-      "error",
-      {
-        "functions": false,
-        "classes": false,
-        "variables": false,
-        "typedefs": false
-      }
-    ],
-    "@typescript-eslint/no-unused-expressions": [
-      "warn",
-      {
-        "allowShortCircuit": true,
-        "allowTernary": true,
-        "allowTaggedTemplates": true
-      }
-    ],
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        "args": "none",
-        "ignoreRestSiblings": true
-      }
-    ],
+    // "@typescript-eslint/no-empty-interface": "off",
+    // "@typescript-eslint/no-explicit-any": "off",
+    // "@typescript-eslint/consistent-type-assertions": "warn",
+    // "@typescript-eslint/no-array-constructor": "warn",
+    // "@typescript-eslint/explicit-function-return-type": [
+    //   "warn",
+    //   {
+    //     "allowExpressions": true,
+    //     "allowTypedFunctionExpressions": true
+    //   }
+    // ],
+    // "@typescript-eslint/no-use-before-define": [
+    //   "error",
+    //   {
+    //     "functions": false,
+    //     "classes": false,
+    //     "variables": false,
+    //     "typedefs": false
+    //   }
+    // ],
+    // "@typescript-eslint/no-unused-expressions": [
+    //   "warn",
+    //   {
+    //     "allowShortCircuit": true,
+    //     "allowTernary": true,
+    //     "allowTaggedTemplates": true
+    //   }
+    // ],
+    // "@typescript-eslint/no-unused-vars": [
+    //   "warn",
+    //   {
+    //     "args": "none",
+    //     "ignoreRestSiblings": true
+    //   }
+    // ],
     // "@typescript-eslint/member-delimiter-style": [
     //   "error",
     //   {
