@@ -1,4 +1,4 @@
-import getWindowProperty from 'utils/browser/getWindowProperty';
+import getWindowProperty from "utils/browser/getWindowProperty";
 
 type BrowserStorageEntryName = string;
 type BrowserStorageEntryValue = any;
@@ -6,9 +6,9 @@ type BrowserStorageEntryTTL = number;
 type BrowserStorageEntryCreatedAt = number;
 
 interface BrowserStorageEntry {
-    value: BrowserStorageEntryValue,
-    ttl: BrowserStorageEntryTTL,
-    createdAt: BrowserStorageEntryCreatedAt 
+  value: BrowserStorageEntryValue;
+  ttl: BrowserStorageEntryTTL;
+  createdAt: BrowserStorageEntryCreatedAt;
 }
 
 export class BrowserStorage {
@@ -16,9 +16,15 @@ export class BrowserStorage {
     return getWindowProperty().localStorage || {};
   }
 
+  // BrowserStorage handler --------------------------------------------------
+  /**
+   *
+   * @param name
+   * @returns null if null, value if not
+   */
   getItem(name: BrowserStorageEntryName): any {
     try {
-      const entry = this._storage.getItem(name) || '';
+      const entry = this._storage.getItem(name) || "";
       const { value, ttl, createdAt }: BrowserStorageEntry = JSON.parse(entry);
 
       if (ttl && Date.now() > createdAt + ttl) {
@@ -39,17 +45,25 @@ export class BrowserStorage {
     ttl: BrowserStorageEntryTTL = 0
   ): void | Error {
     if (!this._storage) {
-      throw new Error('setItem called outside of window scope!');
+      throw new Error("setItem called outside of window scope!");
     }
 
     const createdAt = Date.now() as BrowserStorageEntryCreatedAt;
 
-    this._storage.setItem(name, JSON.stringify({
-      value,
-      ttl,
-      createdAt
-    }));
+    this._storage.setItem(
+      name,
+      JSON.stringify({
+        value,
+        ttl,
+        createdAt,
+      })
+    );
   }
+  //--------------------------------------------------------------------------------
+
+  // cookie setting ----------------------------------------------------------------
+
+  // -------------------------------------------------------------------------------
 }
 
 export default new BrowserStorage();
