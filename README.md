@@ -62,6 +62,6 @@ https://github.com/saseungmin/yarn-berry-example/blob/main/.eslintrc.js
 
 ## Next.js
 
-[https://nextjs.org/](https://nextjs.org/)
+[Next.js](https://nextjs.org/)
 
 ---
