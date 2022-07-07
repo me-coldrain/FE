@@ -48,7 +48,7 @@
     "jest-dom": "^4.0.0",
     "jest-environment-jsdom": "^28.1.2",
     "node-mocks-http": "^1.11.0",
-    "stylelint": "^14.8.2",
+    "stylelint": "^14.9.1",
     "stylelint-config-sass-guidelines": "^9.0.0",
     "ts-jest": "^28.0.5",
     "ts-loader": "^9.3.1"
