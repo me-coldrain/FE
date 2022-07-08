@@ -1,0 +1,24 @@
+@use "styles/variables/media";
+@use "styles/variables/button";
+@use "styles/variables/theme";
+
+.button {
+  position: absolute;
+  bottom: 5%;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding: var(--content-padding) 0;
+
+  a {
+    @include button.default;
+    --button-text-color: #f2f2f7;
+    --button-font-weight: 600;
+    --button-background: #000;
+    --button-hover: #000;
+    --button-radius: 30px;
+    --button-padding: 20px 160px;
+    text-align: center;
+  }
+}
