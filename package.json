@@ -43,8 +43,8 @@
     "stylelint-config-sass-guidelines": "^9.0.0"
   },
   "scripts": {
-    "dev": "set NODE_ENV=development & next start",
-    "start": "NODE_ENV=production next start",
+    "dev": "set NODE_ENV=development & next dev",
+    "start": "set NODE_ENV=production & next start",
     "build": "next build",
     "eslint": "eslint ./src",
     "stylelint": "stylelint ./src"
