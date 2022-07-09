@@ -2,7 +2,8 @@ import React from "react";
 import Head from "next/head";
 import { usePageData, usePageDetails } from "hooks/page";
 import Button from "components/button";
-import styles from "./Introduction.module.scss";
+import styles from "./Login.module.scss";
+import Link from "next/link";
 
 export const addTitleTags = (title: string): JSX.Element => {
   if (!title) {
@@ -27,10 +28,9 @@ export const addDescriptionTag = (description: string): JSX.Element => {
   );
 };
 
-export default function Introduction(): JSX.Element {
-  const { introduction } = styles;
+export default function User(): JSX.Element {
+  const { user, inputBox, signup } = styles;
   const { title = "", description = "" } = usePageDetails();
-  const { content = "" } = usePageData();
 
   return (
     <>
@@ -39,17 +39,22 @@ export default function Introduction(): JSX.Element {
         {addDescriptionTag(description)}
         <meta name="robots" content="INDEX,FOLLOW" />
       </Head>
-      <main className={introduction}>
+      <main className={user}>
         <section>
-          <h1>서비스 소개</h1>
-          <p>
-            팀매칭/ 팀원 모집 어려우셨죠?
-            <br />팀 전략/ 개인 전략을 기록해보세요
-          </p>
+          <h1>로고</h1>
+          <div className={inputBox}>
+            <input placeholder="아이디" type="id"></input>
+            <input placeholder="비밀번호" type="password"></input>
+            <Button url="/" bigSquare>
+              로그인
+            </Button>
+          </div>
+          <div className={signup}>
+            <Link href="/signup">
+              <a>회원가입</a>
+            </Link>
+          </div>
         </section>
-        <Button url="/user" bigRound>
-          시작하기
-        </Button>
       </main>
     </>
   );
