@@ -1,0 +1,10 @@
+@use "styles/variables/media";
+@use "styles/variables/button";
+@use "styles/variables/theme";
+
+.back {
+  p {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}

@@ -93,6 +93,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
+  max-width: 768px;
 
   @include font-family("Raleway", sans-serif);
 }
@@ -103,7 +104,7 @@ body {
 
 main {
   margin: 0 auto;
-  max-width: var(--content-max-width);
+  max-width: 768px;
   min-height: calc(
     100vh - var(--header-items-height) - var(--header-height) -
       var(--footer-height) - 2 * var(--content-padding)

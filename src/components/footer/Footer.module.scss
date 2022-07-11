@@ -1,4 +1,4 @@
-@use 'styles/variables/media';
+@use "styles/variables/media";
 
 .footer {
   background-color: var(--primary-block-color);
@@ -8,11 +8,10 @@
   font-size: 16px;
   font-weight: 500;
   justify-content: center;
-  padding:
-    var(--content-padding)
-    var(--content-padding)
+  padding: var(--content-padding) var(--content-padding)
     calc(var(--header-items-height) + var(--content-padding));
-  width: 100%;
+  // width: 100%;
+  max-width: 768px;
 
   p {
     display: inline-block;
