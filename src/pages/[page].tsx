@@ -1,1 +1,1 @@
-export { default } from 'routes/page';
+export { default } from "routes/page";

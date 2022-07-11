@@ -1,22 +1,18 @@
-import React from 'react';
-import Head from 'next/head';
-import Landing from 'routes/page/landing';
-import A2HS from 'components/a2hs';
-import Sidebar from 'components/sidebar';
-import Html from 'components/html';
-import { usePageData, usePageDetails } from 'hooks/page';
-import { injectClassNames } from 'utils/css';
-import styles from './Page.module.scss';
+import React from "react";
+import Head from "next/head";
+import Landing from "routes/page/landing";
+import A2HS from "components/a2hs";
+import Sidebar from "components/sidebar";
+import Html from "components/html";
+import { usePageData, usePageDetails } from "hooks/page";
+import { injectClassNames } from "utils/css";
+import styles from "./Page.module.scss";
+import Link from "next/link";
 
-const {
-  page,
-  pageLanding,
-  pageContent,
-  placeholder
-} = styles;
+const { page, pageLanding, pageContent, placeholder } = styles;
 
 type PageProps = {
-    isLanding?: boolean
+  isLanding?: boolean;
 };
 
 export const addTitleTags = (title: string): JSX.Element => {
@@ -26,8 +22,8 @@ export const addTitleTags = (title: string): JSX.Element => {
 
   return (
     <>
-      <title>{ title }</title>
-      <meta name="og:title" content={ title } />
+      <title>{title}</title>
+      <meta name="og:title" content={title} />
     </>
   );
 };
@@ -38,47 +34,47 @@ export const addDescriptionTag = (description: string): JSX.Element => {
   }
 
   return (
-    <meta
-      name="description"
-      property="og:description"
-      content={ description }
-    />
+    <meta name="description" property="og:description" content={description} />
   );
 };
 
 export default function Page(props: PageProps): JSX.Element {
   const { isLanding } = props;
-  const { title = '', description = '' } = usePageDetails();
-  const { content = '' } = usePageData();
+  const { title = "", description = "" } = usePageDetails();
+  const { content = "" } = usePageData();
 
   const classNames = injectClassNames(page, [pageLanding, isLanding]);
+
+  const name = "teamName";
 
   return (
     <>
       <Head>
-        { addTitleTags(title) }
-        { addDescriptionTag(description) }
+        {addTitleTags(title)}
+        {addDescriptionTag(description)}
         <meta name="robots" content="INDEX,FOLLOW" />
       </Head>
-      <main className={ classNames }>
-        { isLanding && <Landing /> }
+      <main className={classNames}>
+        {isLanding && <Landing />}
         <section>
-          <div className={ pageContent }>
+          <div className={pageContent}>
             <A2HS />
-            <div className={ pageContent }>
-              { content
-                ? <Html content={ content } />
-                : (
-                  <>
-                    <figure className={ placeholder } />
-                    <figure className={ placeholder } />
-                    <figure className={ placeholder } />
-                  </>
-                )
-              }
+            <div className={pageContent}>
+              {content ? (
+                <Html content={content} />
+              ) : (
+                <>
+                  <figure className={placeholder} />
+                  <figure className={placeholder} />
+                  <figure className={placeholder} />
+                </>
+              )}
             </div>
           </div>
           <Sidebar />
+          <Link href={{ pathname: "/team/[name]", query: { name: name } }}>
+            팀 상세
+          </Link>
         </section>
       </main>
     </>

@@ -1,0 +1,13 @@
+@use "styles/variables/placeholder" as *;
+
+.input {
+  display: inline-block;
+  height: var(--icon-size);
+  width: var();
+}
+
+.loader {
+  border-radius: 50%;
+
+  @include placeholder;
+}

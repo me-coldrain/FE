@@ -1,23 +1,19 @@
-import React from 'react';
-import styles from './Footer.module.scss';
+import Link from "next/link";
+import React from "react";
+import styles from "./Footer.module.scss";
 
-const {
-  footer
-} = styles;
+const { footer } = styles;
 
 export default function Footer(): JSX.Element {
+  const id = 1;
   return (
-    <footer className={ footer }>
+    <footer className={footer}>
       <p>© PWA Boilerplate</p>
       <p>
-        View source code on{ ' ' }
-        <a
-          href="https://github.com/tomburgs/pwa-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub
-        </a>
+        View source code on{" "}
+        <Link href="/why-pwa/{id}">
+          <a>Go to pages/post/{id}.js</a>
+        </Link>
       </p>
     </footer>
   );
