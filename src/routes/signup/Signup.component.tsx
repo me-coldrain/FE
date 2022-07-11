@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Head from "next/head";
-import { usePageData, usePageDetails } from "hooks/page";
+import { usePageDetails } from "hooks/page";
 import Button from "components/button";
+import Back from "components/back";
+import Progressbar from "components/progressbar";
 import styles from "./signup.module.scss";
-import Link from "next/link";
 
 export const addTitleTags = (title: string): JSX.Element => {
   if (!title) {
@@ -29,9 +31,58 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 };
 
 export default function User(): JSX.Element {
-  const { user, inputBox, signup } = styles;
+  const dispatch = useDispatch();
+  const { user, inputBox } = styles;
   const { title = "", description = "" } = usePageDetails();
-  const { content = "" } = usePageData();
+  const [inputs, setInputs] = useState({});
+  const { email, pwd, pwdChk } = inputs;
+
+  const handleChange = (e) => {
+    const { id } = e.target;
+    const { value } = e.target;
+    setInputs((values = String) => ({ ...values, [id]: value }));
+  };
+
+  const handleSubmit = () => {
+    const idCheck = (email) => {
+      const _reg =
+        // 임시, 바꿔야 함
+        /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
+      return _reg.test(email);
+    };
+
+    const pwdCheck = (pwd) => {
+      //임시, 바꿔야함
+      const _reg = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,20}$/;
+
+      return _reg.test(pwd);
+    };
+
+    if (!email || !pwd) {
+      alert("빈값이 있습니다.");
+      return;
+    }
+
+    if (pwd !== pwdChk) {
+      alert("비밀번호와 비밀번호확인 값이 다릅니다.");
+      return;
+    }
+
+    if (!idCheck(email)) {
+      alert("아이디는 이메일 양식으로 작성해주세요!");
+      return;
+    }
+
+    if (!pwdCheck(pwd)) {
+      alert(
+        "비밀번호는 8~20 영문 대소문자, 최소 1개의 숫자 혹은 특수 문자를 포함해야합니다."
+      );
+      return;
+    }
+
+    // dispatch(userActions.signUpDB(inputs));
+  };
 
   return (
     <>
@@ -42,17 +93,34 @@ export default function User(): JSX.Element {
       </Head>
       <main className={user}>
         <section>
+          <Progressbar size="100%"></Progressbar>
+          <Back></Back>
+          <h1>회원가입</h1>
+        </section>
+        <section>
           <div className={inputBox}>
-            <label htmlFor="id">아이디</label>
-            <input id="id"></input>
+            <label htmlFor="email">아이디</label>
+            <input
+              id="email"
+              onChange={handleChange}
+              value={email || ""}
+            ></input>
             <label htmlFor="pwd">비밀번호</label>
-            <input id="pwd"></input>
-            <label htmlFor="pwdchk">비밀번호 재확인</label>
-            <input id="pwdchk"></input>
+            <input
+              id="pwd"
+              type="password"
+              onChange={handleChange}
+              value={pwd || ""}
+            ></input>
+            <label htmlFor="pwdChk">비밀번호 재확인</label>
+            <input
+              id="pwdChk"
+              type="password"
+              onChange={handleChange}
+              value={pwdChk || ""}
+            ></input>
           </div>
-          <Button url="/login" bigRound>
-            다음
-          </Button>
+          <Button onClick={handleSubmit}>완료</Button>
         </section>
       </main>
     </>

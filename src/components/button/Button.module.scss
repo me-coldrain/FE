@@ -11,7 +11,8 @@
   text-align: center;
   padding: var(--content-padding) 0;
 
-  a {
+  a,
+  p {
     @include button.default;
     --button-text-color: #f2f2f7;
     --button-font-weight: 600;

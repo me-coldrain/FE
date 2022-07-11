@@ -10,14 +10,15 @@ type ButtonProps = {
   children?: string;
   bigRound?: boolean;
   bigSquare?: boolean;
+  onClick?: any;
 };
 
 export default function Button(props: ButtonProps): JSX.Element {
-  const { url = "", children = "", bigRound, bigSquare } = props;
+  const { url = "", children = "", bigRound, bigSquare, onClick } = props;
 
   if (bigRound) {
     return (
-      <div className={button}>
+      <div className={button} onClick={onClick}>
         <Link href={url}>
           <a>{children}</a>
         </Link>
@@ -26,12 +27,17 @@ export default function Button(props: ButtonProps): JSX.Element {
   }
   if (bigSquare) {
     return (
-      <div className={login}>
+      <div className={login} onClick={onClick}>
         <Link href={url}>
           <a>{children}</a>
         </Link>
       </div>
     );
+  } else {
+    return (
+      <div className={button} onClick={onClick}>
+        <p>{children}</p>
+      </div>
+    );
   }
-  return <></>;
 }

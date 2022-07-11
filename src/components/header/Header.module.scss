@@ -1,5 +1,5 @@
-@use 'styles/variables/media';
-@use 'styles/variables/theme';
+@use "styles/variables/media";
+@use "styles/variables/theme";
 
 .header {
   --header-color: var(--primary-block-color);
@@ -14,7 +14,8 @@
   padding: env(safe-area-inset-top) 0 0;
   position: fixed;
   top: 0;
-  width: 100vw;
+  // width: 100vw;
+  max-width: 768px;
   z-index: 10;
 
   @include media.after-mobile {
@@ -24,7 +25,7 @@
     box-sizing: border-box;
     left: 50%;
     margin: 0 auto;
-    max-width: var(--content-max-width);
+    max-width: 768px;
     padding: 0 var(--content-padding);
 
     top: calc(var(--header-spacing) / 2 + var(--offline-notification-height));
@@ -43,6 +44,7 @@
     max-width: var(--content-max-width);
     padding: 0 var(--content-padding);
     width: 100%;
+    max-width: 768px;
 
     @include media.after-mobile {
       display: grid;
@@ -74,6 +76,7 @@
   position: fixed;
   top: 0;
   width: 100%;
+  max-width: 768px;
   z-index: 10;
 
   @include media.mobile {

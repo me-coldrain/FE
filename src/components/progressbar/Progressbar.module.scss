@@ -1,0 +1,16 @@
+@use "styles/variables/media";
+
+.progressbar {
+  position: relative;
+  margin: 0 auto 10px;
+  height: 7px;
+  max-width: 390px;
+  width: 390px;
+  background-color: rgb(206, 206, 206);
+}
+
+.percent {
+  position: absolute;
+  background-color: black;
+  height: 7px;
+}
