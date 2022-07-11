@@ -110,7 +110,7 @@
     // "semi": ["error", "always"],
     "indent": ["warn", 2],
     // "comma-dangle": ["error", "never"],
-    "eqeqeq": [1, "always"],
-    "arrow-parens": [2, "as-needed"]
+    "eqeqeq": [1, "always"]
+    // "arrow-parens": [2, "as-needed"]
   }
 }

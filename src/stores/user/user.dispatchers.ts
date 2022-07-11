@@ -10,6 +10,5 @@ export const getUser =
   (username: string): AppThunk =>
   async (dispatch) => {
     const user = await executeGet(`https://api.github.com/users/${username}`);
-
     dispatch(updateUser(user));
   };

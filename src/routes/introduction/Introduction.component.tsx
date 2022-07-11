@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { usePageData, usePageDetails } from "hooks/page";
-import Button from "components/button";
+import RouterButton from "components/RouterButton";
 import styles from "./Introduction.module.scss";
 
 export const addTitleTags = (title: string): JSX.Element => {
@@ -47,9 +47,9 @@ export default function Introduction(): JSX.Element {
             <br />팀 전략/ 개인 전략을 기록해보세요
           </p>
         </section>
-        <Button url="/user" bigRound>
+        <RouterButton url="/user" bigRound>
           시작하기
-        </Button>
+        </RouterButton>
       </main>
     </>
   );

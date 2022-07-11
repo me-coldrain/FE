@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Head from "next/head";
 import { usePageDetails } from "hooks/page";
-import Button from "components/button";
+import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 import styles from "./signup.module.scss";
+
+interface IInputs {
+  email: string;
+  pwd: string;
+  pwdChk: string;
+}
 
 export const addTitleTags = (title: string): JSX.Element => {
   if (!title) {
@@ -31,20 +37,24 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 };
 
 export default function User(): JSX.Element {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { user, inputBox } = styles;
   const { title = "", description = "" } = usePageDetails();
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState<IInputs>({
+    email: "",
+    pwd: "",
+    pwdChk: "",
+  });
   const { email, pwd, pwdChk } = inputs;
 
-  const handleChange = (e) => {
+  const handleChange = (e: any): any => {
     const { id } = e.target;
     const { value } = e.target;
-    setInputs((values = String) => ({ ...values, [id]: value }));
+    setInputs((values: IInputs) => ({ ...values, [id]: value }));
   };
 
-  const handleSubmit = () => {
-    const idCheck = (email) => {
+  const handleSubmit = (): any => {
+    const idCheck = (email: string): boolean => {
       const _reg =
         // 임시, 바꿔야 함
         /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
@@ -52,7 +62,7 @@ export default function User(): JSX.Element {
       return _reg.test(email);
     };
 
-    const pwdCheck = (pwd) => {
+    const pwdCheck = (pwd: string): boolean => {
       //임시, 바꿔야함
       const _reg = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,20}$/;
 
@@ -120,7 +130,7 @@ export default function User(): JSX.Element {
               value={pwdChk || ""}
             ></input>
           </div>
-          <Button onClick={handleSubmit}>완료</Button>
+          <RouterButton onClick={handleSubmit}>완료</RouterButton>
         </section>
       </main>
     </>
