@@ -1,11 +1,14 @@
-import { AppThunk } from 'stores';
-import { executeGet } from 'utils/request';
-import { updateUser } from './user.actions';
+import { AppThunk } from "stores";
+import { executeGet } from "utils/request";
+import { updateUser } from "./user.actions";
 
-export const getUser = (username: string): AppThunk => (
-  async dispatch => {
+// export const signup = (inputs: object): AppThunk => (
+
+// );
+
+export const getUser =
+  (username: string): AppThunk =>
+  async (dispatch) => {
     const user = await executeGet(`https://api.github.com/users/${username}`);
-
     dispatch(updateUser(user));
-  }
-);
+  };

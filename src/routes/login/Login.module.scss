@@ -1,0 +1,56 @@
+@use "styles/variables/placeholder" as animations;
+@use "styles/variables/media";
+
+.user {
+  & section {
+    width: 100%;
+    height: 100%;
+    > h1,
+    h2 {
+      font-size: 36px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    > p {
+      font-size: 18px;
+      margin: 0;
+      white-space: pre-line;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.placeholder {
+  margin: 0 0 15px;
+  padding-bottom: 20%;
+  @include animations.placeholder;
+
+  &:nth-child(n + 2) {
+    padding-bottom: 40%;
+  }
+
+  &:nth-child(n + 3) {
+    padding-bottom: 30%;
+  }
+}

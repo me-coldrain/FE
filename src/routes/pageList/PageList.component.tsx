@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Head from "next/head";
 import Pages from "components/pages";
 import Placeholder from "components/placeholder";
-import { executeGet } from "utils/request";
-import { useRouter } from "next/router";
 import styles from "./PageList.module.scss";
 
 const { pageList, pageListContainer } = styles;
@@ -15,14 +13,14 @@ export default function PageList(): JSX.Element {
         <title>Soccer Teams</title>
       </Head>
       <main className={pageList}>
-        <div>
-          <h1>팀 이름</h1>
-        </div>
+        <h1>Pages</h1>
         <p>
+          Do you also think this lack of content looks sad?
           <br />
-          안녕하세요 강북구에서 활동하고 있는 000 팀입니다.
+          Feel free to contribute by going to our GitHub repo and creating a
+          pull-request,
           <br />
-          새로운 분들과 많은 경기하고 싶습니다.
+          we would greatly appreciate it!
         </p>
         <Pages className={pageListContainer}>
           <li>
