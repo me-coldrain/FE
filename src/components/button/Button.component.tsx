@@ -12,7 +12,7 @@ const { button } = styles;
 
 export default function Button(props: ButtonProps): JSX.Element {
   const { handleClick, content, length } = props;
-  const injectedClassName = injectClassNames(button, length);
+  const injectedClassName = injectClassNames(button, styles[length]);
   return (
     <button onClick={handleClick} className={injectedClassName}>
       {content}

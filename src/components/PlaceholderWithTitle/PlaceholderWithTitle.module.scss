@@ -1,0 +1,35 @@
+@use "styles/variables/placeholder" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-block-end: 0;
+    margin-block-start: 0;
+  }
+  &Icon {
+    --icon-size: 20px;
+
+    margin: 0 5px;
+  }
+}
+
+.contentBox {
+  justify-content: center;
+  align-items: center;
+  h3 {
+    text-align: center;
+  }
+  @include placeholder;
+}
+
+.short {
+  width: 12rem;
+}
+
+.long {
+  width: 95%;
+}

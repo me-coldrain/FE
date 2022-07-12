@@ -1,11 +1,6 @@
-import React, { memo, useState } from "react";
-import { Schema } from "stores/pages";
-import { useSchema, usePageId } from "hooks/page";
-import Link from "next/link";
+import React, { useState } from "react";
 // style
-import styled from "styled-components";
 import { injectClassNames } from "utils/css";
-import styles from "./Icon.module.scss";
 
 type InputItemProps = {
   label: string;
@@ -22,15 +17,13 @@ export const Input = (props: InputItemProps): JSX.Element => {
   const handleInputBlur = () => {
     setIsFocus(false);
   };
-  const className = injectClassNames([activeClass, isFocus]);
+  const className = injectClassNames();
 
   return (
-    <InputBox className={className}>
+    <div className={className}>
       <label htmlFor={label}>{label}</label>
       <br />
       <input type={type} onFocus={handleInputFocus} onBlur={handleInputBlur} />
-    </InputBox>
+    </div>
   );
 };
-
-const InputBox = styled.div``;

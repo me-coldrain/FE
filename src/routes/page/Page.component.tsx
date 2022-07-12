@@ -6,8 +6,8 @@ import Sidebar from "components/sidebar";
 import Html from "components/html";
 import { usePageData, usePageDetails } from "hooks/page";
 import { injectClassNames } from "utils/css";
-import styles from "./Page.module.scss";
 import Link from "next/link";
+import styles from "./Page.module.scss";
 
 const { page, pageLanding, pageContent, placeholder } = styles;
 
@@ -45,7 +45,7 @@ export default function Page(props: PageProps): JSX.Element {
 
   const classNames = injectClassNames(page, [pageLanding, isLanding]);
 
-  const name = "teamName";
+  const name = 30;
 
   return (
     <>
@@ -72,7 +72,7 @@ export default function Page(props: PageProps): JSX.Element {
             </div>
           </div>
           <Sidebar />
-          <Link href={{ pathname: "/team/[name]", query: { name: name } }}>
+          <Link href={{ pathname: "/team/[name]", query: { name: 30 } }}>
             팀 상세
           </Link>
         </section>
