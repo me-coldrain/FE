@@ -1,0 +1,13 @@
+.normal {
+  width: 160px;
+  height: 60px;
+  background-color: #d9d9d9;
+  margin: 7px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.normal:hover {
+  background-color: #bdb9b9;
+}
