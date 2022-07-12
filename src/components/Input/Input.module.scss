@@ -1,0 +1,24 @@
+@use "styles/variables/media";
+@use "styles/variables/button";
+@use "styles/variables/theme";
+
+.login {
+  width: 100%;
+  max-width: 390px;
+  padding: 20px 6px;
+  box-sizing: border-box;
+  margin: 6px 0;
+  border: 0;
+}
+
+.nametag {
+  text-align: start;
+}
+.sign {
+  width: 100%;
+  max-width: 390px;
+  padding: 20px 6px;
+  box-sizing: border-box;
+  margin: 10px 0;
+  border: 0;
+}

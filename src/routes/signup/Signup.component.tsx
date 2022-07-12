@@ -5,6 +5,7 @@ import { usePageDetails } from "hooks/page";
 import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
+import Input from "components/Input";
 import styles from "./signup.module.scss";
 
 interface IInputs {
@@ -105,30 +106,33 @@ export default function User(): JSX.Element {
         <section>
           <Progressbar size="100%"></Progressbar>
           <Back></Back>
-          <h1>회원가입</h1>
+          <h2>회원가입</h2>
         </section>
         <section>
-          <div className={inputBox}>
-            <label htmlFor="email">아이디</label>
-            <input
+          <div>
+            <Input
               id="email"
               onChange={handleChange}
               value={email || ""}
-            ></input>
-            <label htmlFor="pwd">비밀번호</label>
-            <input
+              label="아이디"
+              signup
+            ></Input>
+            <Input
               id="pwd"
               type="password"
               onChange={handleChange}
               value={pwd || ""}
-            ></input>
-            <label htmlFor="pwdChk">비밀번호 재확인</label>
-            <input
+              label="비밀번호"
+              signup
+            ></Input>
+            <Input
               id="pwdChk"
               type="password"
               onChange={handleChange}
               value={pwdChk || ""}
-            ></input>
+              label="비밀번호 재확인"
+              signup
+            ></Input>
           </div>
           <RouterButton onClick={handleSubmit}>완료</RouterButton>
         </section>

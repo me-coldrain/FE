@@ -1,4 +1,5 @@
 @use "styles/variables/placeholder" as animations;
+@use "styles/variables/button";
 @use "styles/variables/media";
 
 .user {
@@ -52,5 +53,23 @@
 
   &:nth-child(n + 3) {
     padding-bottom: 30%;
+  }
+}
+
+.kakao {
+  position: absolute;
+  bottom: 5%;
+  max-width: 390px;
+  p {
+    text-align: center;
+  }
+  a {
+    @include button.default;
+    --button-text-color: #000;
+    --button-font-weight: 600;
+    --button-background: rgb(204, 204, 204);
+    --button-hover: rgb(167, 167, 167);
+    --button-padding: 20px 154px;
+    text-align: center;
   }
 }

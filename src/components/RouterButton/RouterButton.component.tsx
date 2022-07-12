@@ -3,7 +3,7 @@ import React from "react";
 import { injectClassNames } from "utils/css";
 import styles from "./RouterButton.module.scss";
 
-const { button, login, placeholder, navigationWrapper } = styles;
+const { round, login, normal } = styles;
 
 type ButtonProps = {
   url?: string;
@@ -18,7 +18,7 @@ export default function Button(props: ButtonProps): JSX.Element {
 
   if (bigRound) {
     return (
-      <div className={button} onClick={onClick}>
+      <div className={round} onClick={onClick}>
         <Link href={url}>
           <a>{children}</a>
         </Link>
@@ -35,7 +35,7 @@ export default function Button(props: ButtonProps): JSX.Element {
     );
   } else {
     return (
-      <div className={button} onClick={onClick}>
+      <div className={normal} onClick={onClick}>
         <p>{children}</p>
       </div>
     );
