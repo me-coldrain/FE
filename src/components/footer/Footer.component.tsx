@@ -1,18 +1,29 @@
+import Button from "@components/button";
 import Link from "next/link";
 import React from "react";
 import styles from "./Footer.module.scss";
 
-const { footer } = styles;
+const { footer, footerButtonLink } = styles;
+
+export const RegisterFooter = (): JSX.Element => {
+  return (
+    <footer className={footer}>
+      <Link href="">
+        <div className={footerButtonLink}>
+          <p>신청하기</p>
+        </div>
+      </Link>
+    </footer>
+  );
+};
 
 export default function Footer(): JSX.Element {
   const id = 1;
   return (
     <footer className={footer}>
-      <p>© PWA Boilerplate</p>
       <p>
-        View source code on{" "}
-        <Link href="/why-pwa/{id}">
-          <a>Go to pages/post/{id}.js</a>
+        <Link href="https://github.com/me-coldrain/FE">
+          <a>Go to github</a>
         </Link>
       </p>
     </footer>

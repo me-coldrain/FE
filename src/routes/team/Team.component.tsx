@@ -6,8 +6,9 @@ import Image, { ImageWithHeader } from "@components/image";
 import Icon from "@components/icon";
 import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
 // style
-import styled from "styled-components";
 import styles from "./Team.module.scss";
+import Link from "next/link";
+import Footer, { RegisterFooter } from "@components/footer";
 
 const {
   aboutTeam,
@@ -24,6 +25,10 @@ const {
   matchHistoryContainerWin,
   matchHistoryContainerLose,
   matchHistoryContainerResult,
+  matchHistoryContainerWinner,
+  matchHistoryContainerLoser,
+  tabs,
+  tabsIcon,
 } = styles;
 
 export default function Team(): JSX.Element {
@@ -35,6 +40,29 @@ export default function Team(): JSX.Element {
   const [possible, setPossible] = useState<boolean>();
   const [recruitMember, setRecruitMember] = useState<boolean>();
 
+  const matchContainer = (
+    <div className={matchHistoryContainer}>
+      <div className={matchHistoryContainerWin}>
+        <div className={matchHistoryContainerWinner}>
+          <p>승리</p>
+        </div>
+        <p>A팀</p>
+      </div>
+      <div className={matchHistoryContainerResult}>
+        <div className={matchHistoryContainerResult}>
+          <p>2022.03.04</p>
+        </div>
+        <p>4:2</p>
+      </div>
+      <div className={matchHistoryContainerLose}>
+        <div className={matchHistoryContainerLoser}>
+          <p>패배</p>
+        </div>
+        <p>B팀</p>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <main className={aboutTeam}>
@@ -45,6 +73,7 @@ export default function Team(): JSX.Element {
           width="100%"
           height="220px"
         />
+
         <div className={scoreBoard}>
           <div className={scoreBoardContentName}>
             <h5>승점</h5>
@@ -63,6 +92,7 @@ export default function Team(): JSX.Element {
             </div>
           </div>
         </div>
+
         <div className={matchInfo}>
           <h3>대결 정보</h3>
           <div className={matchInfoContainer}>
@@ -86,23 +116,25 @@ export default function Team(): JSX.Element {
             <h5>오전, 오후</h5>
           </div>
         </div>
-        <div>
+
+        <div style={{ display: "flex", width: "100%" }}>
           <div className={rowDiv}>
             <PlaceholderWithJSX
               label="경기 히스토리"
-              content={
-                <div className={matchHistoryContainer}>
-                  <div className={matchHistoryContainerWin}>
-                    <WinOrLose>승리</WinOrLose>
-                  </div>
-                  <div className={matchHistoryContainerResult}></div>
-                  <div className={matchHistoryContainerLose}></div>
-                </div>
-              }
+              content={matchContainer}
               length="long"
               linkType={false}
             />
           </div>
+        </div>
+
+        <div className={tabs}>
+          <p>멤버 소개(22)</p>
+          <Icon asset="Right-Arrow" className={tabsIcon} />
+        </div>
+        <div className={tabs}>
+          <p>예정된 경기 일정</p>
+          <Icon asset="Right-Arrow" className={tabsIcon} />
         </div>
         {/* <div style={{ width: "100%" }}>
             <div className={rowDiv}>
@@ -140,6 +172,7 @@ export default function Team(): JSX.Element {
           ximus est vitae, semper erat. Pellentesque dictum in nunc eu
           porttitor. Integer vitae justo sit amet metus malesuada eleifend.
         </p>
+        <RegisterFooter />
       </main>
     </>
   );
@@ -150,19 +183,3 @@ export default function Team(): JSX.Element {
  * params: teamname, 팀 소개, 팀 이미지
  *
  */
-
-const WinOrLose = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 1px 11px;
-  gap: 10px;
-  width: 43px;
-  height: 20px;
-
-  border-radius: 21px;
-  border: 1px solid if (win, #19c649, #c72525);
-  p {
-    color: if (win, #19c649, #c72525);
-  }
-`;

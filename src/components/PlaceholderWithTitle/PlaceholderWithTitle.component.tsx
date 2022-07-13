@@ -1,10 +1,10 @@
+import { ParsedUrlQuery } from "querystring";
 import React from "react";
 import { injectClassNames } from "utils/css";
 import Icon from "@components/icon";
 import Link from "next/link";
 
 import styles from "./PlaceholderWithTitle.module.scss";
-import { ParsedUrlQuery } from "querystring";
 
 type IProps = {
   label?: string;
@@ -35,7 +35,7 @@ export const PlaceholderWithJSX = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: "2rem",
+          marginBottom: "1rem",
         }}
       >
         <h3>{label}</h3>

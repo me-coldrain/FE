@@ -17,7 +17,9 @@
     padding: 2rem;
     border: 1px solid;
     @include media.mobile {
+      display: flex;
       grid-template-columns: 2fr;
+      justify-content: center;
     }
   }
 
@@ -86,7 +88,8 @@
 
 .rowDiv {
   display: flex;
-  width: 95%;
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
 .followers {
@@ -114,7 +117,11 @@
   width: 100%;
   justify-content: space-around;
   flex-direction: row;
-
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  // margin-right: 2rem;
   &img {
     width: 500px;
     height: 500px;
@@ -127,23 +134,42 @@
     align-items: center;
   }
   &Lose {
+    @extend .matchHistoryContainerWin;
   }
   &Result {
+    @extend .matchHistoryContainerWin;
+    // p {
+    //   margin: 0;
+    //   font-size: 35px;
+    //   font-weight: 600;
+    // }
+    // p:first-child {
+    //   margin: 0;
+    //   font-size: 15px;
+    //   font-weight: 400;
+    //   color: #878080;
+    // }
   }
 
-  &WinOrLose {
+  &Winner {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    padding: 1px 11px;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
     width: 43px;
     height: 20px;
-
     border-radius: 21px;
-    border: 1px solid if (win, #19c649, #c72525);
+    border: 1px solid #19c649;
     p {
-      color: if (win, #19c649, #c72525);
+      color: #19c649;
+    }
+  }
+
+  &Loser {
+    @extend .matchHistoryContainerWinner;
+    border: 1px solid #c72525;
+    p {
+      color: #c72525;
     }
   }
 }
@@ -160,7 +186,7 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: #fff;
-  width: 95%;
+  width: 100%;
   height: fit-content;
 
   margin-bottom: 2rem;
@@ -209,7 +235,7 @@
 }
 
 .matchInfo {
-  width: 95%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
@@ -241,5 +267,25 @@
 
       margin: 1.5rem;
     }
+  }
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+  justify-content: space-between;
+  p {
+    margin-left: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+  &Icon {
+    --icon-size: 20px;
+
+    margin: 1.5rem;
   }
 }
