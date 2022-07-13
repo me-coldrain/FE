@@ -68,7 +68,6 @@ export default memo(function Header({ backBtn }: IHeader): JSX.Element {
         <nav>
           <div className={headerControls}>
             <Logo />
-            {/* <ThemeToggler /> */}
           </div>
           <Items />
         </nav>

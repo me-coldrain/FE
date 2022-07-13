@@ -2,16 +2,16 @@
 @use "styles/variables/theme";
 
 .header {
+  --primary-text-color: #f2f2f7;
   --header-color: var(--primary-block-color);
-  background-color: var(--header-color);
   box-shadow: var(--shadow);
   color: var(--primary-text-color);
-
   display: flex;
+  justify-content: flex-start;
   flex-flow: column;
   height: var(--header-navigation-height);
   left: 0;
-  padding: env(safe-area-inset-top) 0 0;
+  padding: calc(env(safe-area-inset-top) + 3vw) 0 0;
   position: fixed;
   top: 0;
   width: 100vw;
@@ -58,16 +58,12 @@
     display: flex;
     height: 100%;
     width: 100%;
-
-    @include media.mobile {
-      justify-content: center;
-    }
   }
 }
 
 .offline {
   align-items: center;
-  background-color: #edde5d;
+  background-color: #4b72f1;
   box-shadow: var(--shadow);
   color: #000;
   display: none;
