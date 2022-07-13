@@ -1,13 +1,14 @@
 @use "styles/variables/media";
 
 .footer {
-  background-color: var(--primary-block-color);
+  // background-color: var(--primary-block-color);
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   font-size: 16px;
   font-weight: 500;
   justify-content: center;
+  margin-top: 2rem;
   padding: var(--content-padding) var(--content-padding);
   // calc(var(--header-items-height) + var(--content-padding));
   max-width: 768px;
@@ -15,6 +16,7 @@
   p {
     display: inline-block;
     margin: 0 10px;
+    color: #fff;
   }
 
   a {

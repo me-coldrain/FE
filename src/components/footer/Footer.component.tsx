@@ -22,7 +22,7 @@ export default function Footer(): JSX.Element {
   return (
     <footer className={footer}>
       <p>
-        <Link href="https://github.com/me-coldrain/FE">
+        <Link href="https://github.com/me-coldrain">
           <a>Go to github</a>
         </Link>
       </p>

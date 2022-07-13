@@ -278,14 +278,16 @@
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
   justify-content: space-between;
+  padding: 1rem 0px;
   p {
+    font-size: medium;
+    font-weight: 400;
     margin-left: 1rem;
     align-items: center;
     justify-content: center;
   }
   &Icon {
     --icon-size: 20px;
-
     margin: 1.5rem;
   }
 }

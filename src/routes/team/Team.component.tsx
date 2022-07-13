@@ -136,42 +136,7 @@ export default function Team(): JSX.Element {
           <p>예정된 경기 일정</p>
           <Icon asset="Right-Arrow" className={tabsIcon} />
         </div>
-        {/* <div style={{ width: "100%" }}>
-            <div className={rowDiv}>
-              <PlaceholderWithTitle
-                length="short"
-                label="팀 승점"
-                content="900점"
-              />
-              <PlaceholderWithTitle
-                length="short"
-                label="팀 승점"
-                content="900점"
-              />
-            </div>
-            <div className={rowDiv}>
-              <PlaceholderWithTitle
-                label="팀 소개"
-                content="팀에서 하는 한줄 / 시작 년도팀에서 하는 한줄 / 시작 년도팀에서 하는 한줄 / 시작 년도팀에서 하는 한줄 / 시작 년도팀에서 하는 한줄 / 시작 년도팀에서 하는 한줄 / 시작 년도팀에서 하는 한줄 / 시작 년도팀에서 하는 한줄 / 시작 년도"
-                length="long"
-              />
-            </div>
-            <div className={rowDiv}>
-              <PlaceholderWithJSX
-                arrowLink={{
-                  pathname: `/team/${teamId}/members}`,
-                  query: { id: teamId },
-                }}
-                label="멤버 소개(22)"
-                content={mostValuableMember}
-                length="long"
-              />
-            </div>
-          </div> */}
-        <p>
-          ximus est vitae, semper erat. Pellentesque dictum in nunc eu
-          porttitor. Integer vitae justo sit amet metus malesuada eleifend.
-        </p>
+
         <RegisterFooter />
       </main>
     </>
