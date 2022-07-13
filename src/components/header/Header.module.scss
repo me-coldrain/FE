@@ -14,8 +14,8 @@
   padding: env(safe-area-inset-top) 0 0;
   position: fixed;
   top: 0;
-  // width: 100vw;
-  max-width: 768px;
+  width: 100vw;
+  max-width: 767px;
   z-index: 10;
 
   @include media.after-mobile {
@@ -57,6 +57,7 @@
     align-items: center;
     display: flex;
     height: 100%;
+    width: 100%;
 
     @include media.mobile {
       justify-content: center;
