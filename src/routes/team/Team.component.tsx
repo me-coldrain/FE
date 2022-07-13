@@ -33,8 +33,8 @@ const {
 
 export default function Team(): JSX.Element {
   const router = useRouter();
-  const { teamId } = router.query;
-  console.log("fetch with teamId", teamId);
+  const { teamId, teamName } = router.query;
+  console.log("fetch with teamId =", teamId, teamName);
 
   //state
   const [possible, setPossible] = useState<boolean>();
@@ -134,14 +134,28 @@ export default function Team(): JSX.Element {
           </div>
         </div>
 
-        <div className={tabs}>
-          <p>멤버 소개(22)</p>
-          <Icon asset="Right-Arrow" className={tabsIcon} />
-        </div>
-        <div className={tabs}>
-          <p>예정된 경기 일정</p>
-          <Icon asset="Right-Arrow" className={tabsIcon} />
-        </div>
+        <Link
+          href={{
+            pathname: "/team/[teamName]/members",
+            query: { teamId: 30, teamName: teamName },
+          }}
+        >
+          <div className={tabs}>
+            <p>멤버 소개(22)</p>
+            <Icon asset="Right-Arrow" className={tabsIcon} />
+          </div>
+        </Link>
+        <Link
+          href={{
+            pathname: "/team/[teamName]/matches",
+            query: { teamId: teamId, teamName: teamName },
+          }}
+        >
+          <div className={tabs}>
+            <p>예정된 경기 일정</p>
+            <Icon asset="Right-Arrow" className={tabsIcon} />
+          </div>
+        </Link>
 
         <RegisterFooter />
       </main>
