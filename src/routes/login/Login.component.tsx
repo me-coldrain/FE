@@ -46,7 +46,7 @@ export default function User(): JSX.Element {
           <div className={inputBox}>
             <Input placeholder="아이디" type="id" normal></Input>
             <Input placeholder="비밀번호" type="password" normal></Input>
-            <RouterButton url="/" bigSquare>
+            <RouterButton url="/" bigSquare bgc="#4B72F1">
               로그인
             </RouterButton>
           </div>

@@ -7,8 +7,8 @@ import { updateUser } from "./user.actions";
 // );
 
 export const getUser =
-  (username: string): AppThunk =>
+  (userInfo: any): AppThunk =>
   async (dispatch) => {
-    const user = await executeGet(`https://api.github.com/users/${username}`);
-    dispatch(updateUser(user));
+    // const user = await executeGet(`https://api.github.com/users/${username}`);
+    dispatch(updateUser(userInfo));
   };

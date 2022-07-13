@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { getUser } from "stores/user";
 import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 
 export default function contact(): JSX.Element {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  console.log(router);
+  const [selectSNS, setSelectSNS] = useState("kakao");
+  const [sns, setSns] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+
+  const handleSns = (e) => {
+    setSns(e.target.value);
+  };
+  const handlePhone = (e) => {
+    setPhoneNumber(e.target.value);
+  };
+  const handleState = () => {
+    const nickname = router.query.nickname;
+    const position = router.query.position;
+    const userInfo = {
+      nickname: nickname,
+      position: position,
+      snsId: sns,
+      phone: phoneNumber,
+    };
+    dispatch(getUser(userInfo));
+  };
+
   return (
     <>
       <main>
@@ -17,17 +45,21 @@ export default function contact(): JSX.Element {
             <p>이메일 혹은 카톡 아이디를 필수로 기입해주세요.</p>
           </div>
           <div className="circleBox">
-            <div className="circle">
-              <label htmlFor="kakao">
-                카톡
-                <input id="kakao" type="radio" name="sns" value="kakao"></input>
-              </label>
+            <div
+              className={selectSNS === "kakao" ? "circle active" : "circle"}
+              onClick={() => {
+                setSelectSNS("kakao");
+              }}
+            >
+              카톡
             </div>
-            <div className="circle">
-              <label htmlFor="email">
-                이메일
-                <input id="email" type="radio" name="sns" value="email"></input>
-              </label>
+            <div
+              className={selectSNS === "email" ? "circle active" : "circle"}
+              onClick={() => {
+                setSelectSNS("email");
+              }}
+            >
+              이메일
             </div>
           </div>
           <div>
@@ -35,8 +67,15 @@ export default function contact(): JSX.Element {
               SNS 아이디
               <input
                 id="sns"
-                placeholder="카카오톡 아이디를 적어주세요"
+                placeholder={
+                  selectSNS === "kakao"
+                    ? "카카오톡 아이디를 적어주세요"
+                    : "이메일을 적어주세요"
+                }
                 type="text"
+                onChange={(e) => {
+                  handleSns(e);
+                }}
               ></input>
             </label>
           </div>
@@ -47,11 +86,24 @@ export default function contact(): JSX.Element {
           <div>
             <label htmlFor="phone">
               핸드폰 번호
-              <input id="phone" placeholder="01012345678" type="text"></input>
+              <input
+                id="phone"
+                placeholder="01012345678"
+                type="text"
+                onChange={(e) => {
+                  handlePhone(e);
+                }}
+              ></input>
             </label>
           </div>
         </section>
-        <RouterButton url="/" bigRound>
+        <RouterButton
+          // url="/"
+          bigRound
+          onClick={() => {
+            handleState();
+          }}
+        >
           입력완료
         </RouterButton>
         <style jsx>{`
@@ -74,10 +126,11 @@ export default function contact(): JSX.Element {
             margin: 10px;
             cursor: pointer;
           }
-
-          input[type="radio"] {
-            position: absolute;
-            opacity: 0;
+          .active {
+            background-color: yellow;
+          }
+          .circletag {
+            cursor: pointer;
           }
           input[type="text"] {
             max-width: 390px;

@@ -134,7 +134,9 @@ export default function User(): JSX.Element {
               signup
             ></Input>
           </div>
-          <RouterButton onClick={handleSubmit}>완료</RouterButton>
+          <RouterButton onClick={handleSubmit} bgc="#4B72F1">
+            완료
+          </RouterButton>
         </section>
       </main>
     </>

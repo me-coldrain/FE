@@ -11,3 +11,16 @@
 .normal:hover {
   background-color: #bdb9b9;
 }
+.select {
+  width: 160px;
+  height: 60px;
+  background-color: #9b9b9b;
+  margin: 7px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.select:hover {
+  background-color: #bdb9b9;
+}

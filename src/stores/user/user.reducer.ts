@@ -3,10 +3,11 @@ import { User, UserActions, UPDATE_USER } from "./user.actions";
 type UserState = User;
 
 const initialState: UserState = {
-  name: "",
-  avatar_url: "",
-  bio: "",
-  followers: null,
+  nickname: "",
+  teamImg: {},
+  position: "",
+  snsId: "",
+  phone: 0,
 };
 
 export default (
@@ -16,14 +17,15 @@ export default (
   switch (action.type) {
     case UPDATE_USER: {
       const {
-        user: { name, avatar_url, bio, followers },
+        user: { nickname, teamImg, position, snsId, phone },
       } = action;
 
       return {
-        name,
-        avatar_url,
-        bio,
-        followers,
+        nickname,
+        teamImg,
+        position,
+        snsId,
+        phone,
       };
     }
 

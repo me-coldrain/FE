@@ -11,16 +11,35 @@ type ButtonProps = {
   bigRound?: boolean;
   bigSquare?: boolean;
   onClick?: any;
+  bgc?: string;
+  nickname?: any;
+  preferedPosition?: any;
 };
 
 export default function Button(props: ButtonProps): JSX.Element {
-  const { url = "", children = "", bigRound, bigSquare, onClick } = props;
+  const {
+    url = "",
+    children = "",
+    bigRound,
+    bigSquare,
+    onClick,
+    bgc = "",
+    nickname = "",
+    preferedPosition = "",
+  } = props;
 
   if (bigRound) {
     return (
       <div className={round} onClick={onClick}>
-        <Link href={url}>
-          <a>{children}</a>
+        <Link
+          href={{
+            pathname: url,
+            query: { nickname: nickname, position: preferedPosition },
+          }}
+          prefetch={true}
+          as={url}
+        >
+          <a style={{ backgroundColor: bgc }}>{children}</a>
         </Link>
       </div>
     );
@@ -28,15 +47,22 @@ export default function Button(props: ButtonProps): JSX.Element {
   if (bigSquare) {
     return (
       <div className={login} onClick={onClick}>
-        <Link href={url}>
-          <a>{children}</a>
+        <Link
+          href={{
+            pathname: url,
+            query: { nickname: nickname, position: preferedPosition },
+          }}
+          prefetch={true}
+          as={url}
+        >
+          <a style={{ backgroundColor: bgc }}>{children}</a>
         </Link>
       </div>
     );
   } else {
     return (
       <div className={normal} onClick={onClick}>
-        <p>{children}</p>
+        <p style={{ backgroundColor: bgc }}>{children}</p>
       </div>
     );
   }

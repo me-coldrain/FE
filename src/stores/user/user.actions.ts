@@ -2,10 +2,11 @@
 export const UPDATE_USER = "UPDATE_USER";
 
 export interface User {
-  name: string;
-  avatar_url: string;
-  bio: string;
-  followers: number | null;
+  nickname: string | null;
+  teamImg: any;
+  position: string | null;
+  snsId: string | null;
+  phone: number | null;
 }
 
 export interface UpdateUserAction {
