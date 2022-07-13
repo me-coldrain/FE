@@ -96,3 +96,15 @@
     display: flex;
   }
 }
+
+.backBtnStyle {
+  position: absolute;
+  top: 3.5vw;
+  left: 5vw;
+  z-index: 20;
+
+  &Icon {
+    --icon-size: 30px;
+    size: var(--icon-size);
+  }
+}
