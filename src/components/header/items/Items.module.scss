@@ -1,5 +1,5 @@
-@use 'styles/variables/media';
-@use 'styles/variables/theme';
+@use "styles/variables/media";
+@use "styles/variables/theme";
 
 .items {
   align-items: center;
@@ -23,11 +23,33 @@
   }
 
   a {
-    color: var(--primary-text-color);
+    font-size: small;
+    color: #c5c5c5;
     font-weight: 500;
   }
 
+  div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   > li {
+    border-radius: 20px;
+    font-size: 18px;
+    margin: 0 5px;
+    padding: 10px 20px;
+    transition: background-color 200ms;
+
+    &:last-child {
+      @include media.after-mobile {
+        margin: 0 0 0 5px;
+      }
+    }
+  }
+
+  > div {
     border-radius: 20px;
     font-size: 18px;
     margin: 0 5px;
@@ -45,13 +67,21 @@
 .active {
   --background-color: rgba(0, 0, 0, 0.05);
 
-  background-color: var(--background-color);
+  // background-color: var(--background-color);
 
   @include theme.dark-mode {
     --background-color: rgba(255, 255, 255, 0.05);
   }
 
-  > a {
+  a {
+    font-size: small;
     color: var(--highlight-color);
+  }
+
+  &Icon {
+    filter: invert(51%) sepia(96%) saturate(5726%) hue-rotate(200deg)
+      brightness(103%) contrast(104%);
+    color: var(--highlight-color);
+    --icon-size: 30px;
   }
 }
