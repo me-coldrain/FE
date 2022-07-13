@@ -19,25 +19,24 @@ type BaseRouter = {
   query: ParsedUrlQuery;
 };
 
-const { container, title, contentBox, containerIcon, containerJSX } = styles;
+const {
+  container,
+  title,
+  contentBox,
+  containerIcon,
+  containerJSX,
+  containerEntire,
+} = styles;
 
 export const PlaceholderWithJSX = ({
   label,
   content,
-  arrowLink = "/team/[name]/members",
+  arrowLink = "/team/seoulFC/members",
   linkType = true,
 }: IProps): JSX.Element => {
   return (
     <div className={container}>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "1rem",
-        }}
-      >
+      <div className={containerEntire}>
         <h3>{label}</h3>
         {linkType ? (
           <Link href={arrowLink}>
@@ -45,7 +44,7 @@ export const PlaceholderWithJSX = ({
           </Link>
         ) : (
           <Link href={arrowLink}>
-            <p>전체보기</p>
+            <p style={{ color: "#868686", fontSize: "18px" }}>전체보기</p>
           </Link>
         )}
       </div>

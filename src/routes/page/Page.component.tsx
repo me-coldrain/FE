@@ -72,7 +72,12 @@ export default function Page(props: PageProps): JSX.Element {
             </div>
           </div>
           <Sidebar />
-          <Link href={{ pathname: "/team/[name]", query: { name: 30 } }}>
+          <Link
+            href={{
+              pathname: "/team/[teamName]",
+              query: { teamId: 30, teamName: "SeoulFC" },
+            }}
+          >
             팀 상세
           </Link>
         </section>

@@ -49,10 +49,16 @@ export default function Team(): JSX.Element {
         <p>A팀</p>
       </div>
       <div className={matchHistoryContainerResult}>
-        <div className={matchHistoryContainerResult}>
-          <p>2022.03.04</p>
-        </div>
-        <p>4:2</p>
+        <p>2022.03.04</p>
+        <p
+          style={{
+            fontWeight: "bold",
+            fontSize: "30px",
+            margin: "0.5rem",
+          }}
+        >
+          4:2
+        </p>
       </div>
       <div className={matchHistoryContainerLose}>
         <div className={matchHistoryContainerLoser}>
