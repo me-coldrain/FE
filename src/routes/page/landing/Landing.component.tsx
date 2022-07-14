@@ -13,6 +13,8 @@ const {
   active,
   searchBar,
   searchBarIcon,
+  filters,
+  filtersIcon,
 } = styles;
 
 export default function Landing(): JSX.Element {
@@ -52,13 +54,28 @@ export default function Landing(): JSX.Element {
           <Icon asset={"Calendar"} className={searchBarIcon} />
         </div>
 
-        <Image
+        <div className={filters}>
+          <div>
+            <p>지역</p>
+            <Icon asset={"Down-Arrow"} className={filtersIcon} />
+          </div>
+          <div>
+            <p>지역</p>
+          </div>
+          <div>
+            <p>지역</p>
+          </div>
+          <div>
+            <p>지역</p>
+          </div>
+        </div>
+        {/* <Image
           className={landingImage}
           src="/assets/landing.png"
           alt="Desktop & Mobile PWA Application"
           width="450px"
           height="310px"
-        />
+        /> */}
       </div>
     </div>
   );
