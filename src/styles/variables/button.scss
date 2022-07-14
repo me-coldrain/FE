@@ -7,8 +7,7 @@
   font-size: var(--button-font-size);
   font-weight: var(--button-font-weight);
   padding: var(--button-padding);
-  width: auto;
-
+  // width: auto;
   &:hover {
     border: 1px solid var(--button-hover);
   }

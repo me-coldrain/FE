@@ -27,8 +27,12 @@ html {
   --primary-block-color: #fff;
   --secondary-block-color: #fff;
 
+  --primary-background-color: #4b72f1;
+  --secondary-background-color: #3960dd;
+
   --primary-text-color: #000;
   --secondary-text-color: #3a3a3c;
+  --contrast-text-color: #fff;
 
   --button-text-color: var(--primary-text-color);
   --button-background: #e5e5ea;
@@ -104,7 +108,8 @@ body {
 
 main {
   margin: 0 auto;
-  max-width: 768px;
+  max-width: var(--content-max-width);
+  // max-width: 768px;
   min-height: calc(
     100vh - var(--header-items-height) - var(--header-height) -
       var(--footer-height) - 2 * var(--content-padding)

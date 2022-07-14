@@ -1,0 +1,14 @@
+@use "styles/variables/media";
+@use "styles/variables/button" as *;
+
+.button {
+  @include default;
+}
+
+.short {
+  width: 8rem;
+}
+
+.long {
+  width: 100%;
+}

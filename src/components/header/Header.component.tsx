@@ -2,11 +2,25 @@ import React, { memo, useEffect } from "react";
 import Icon from "components/icon";
 import Items from "components/header/items";
 import Logo from "components/header/logo";
+import router, { useRouter } from "next/router";
 import styles from "./Header.module.scss";
+
+type IHeader = {
+  backBtn: boolean;
+};
 
 const OFFLINE = "offline";
 
-const { header, headerControls, offline, offlineIcon } = styles;
+const STACKS = ["/", "/teams"];
+
+const {
+  header,
+  headerControls,
+  offline,
+  offlineIcon,
+  backBtnStyle,
+  backBtnStyleIcon,
+} = styles;
 
 const handleNetworkChange = (): void => {
   const {
@@ -22,7 +36,9 @@ const handleNetworkChange = (): void => {
   classList.remove(OFFLINE);
 };
 
-export default memo(function Header(): JSX.Element {
+export default memo(function Header({ backBtn }: IHeader): JSX.Element {
+  const { pathname, back } = useRouter();
+
   useEffect(() => {
     if (typeof window !== undefined) {
       handleNetworkChange();
@@ -43,11 +59,15 @@ export default memo(function Header(): JSX.Element {
         <Icon asset="Cloud-Slash" className={offlineIcon} />
         You are currently browsing in offline mode.
       </div>
+      {backBtn && !STACKS.includes(pathname) && (
+        <div onClick={back} className={backBtnStyle}>
+          <Icon asset="Left-Arrow" className={backBtnStyleIcon} />
+        </div>
+      )}
       <header className={header}>
         <nav>
           <div className={headerControls}>
             <Logo />
-            {/* <ThemeToggler /> */}
           </div>
           <Items />
         </nav>

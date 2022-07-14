@@ -14,13 +14,11 @@ const serviceWorkerUrl = `/_next/${serviceWorkerPath}`;
 const serviceWorkerDest = `.next/${serviceWorkerPath}`;
 
 module.exports = {
+  ignoreBuildErrors: true,
   webpack5: true,
   reactStrictMode: true,
   env: {
     serviceWorkerUrl,
-  },
-  images: {
-    disableStaticImages: true,
   },
   pageExtensions: ["ts", "tsx"],
   excludeFile: (str) => /\/src\/sw\/.*/.test(str),

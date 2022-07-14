@@ -18,8 +18,8 @@ export default function time(): JSX.Element {
     sun: false,
   });
   const handleDays = (text: string) => {
-    const { mykey } = text;
-    setpreferedDays(!preferedDays[mykey]);
+    // const { mykey } = text;
+    // setpreferedDays(!preferedDays[mykey]);
   };
   return (
     <>

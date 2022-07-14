@@ -1,1 +1,1 @@
-export { default } from './Footer.component';
+export { default, RegisterFooter } from "./Footer.component";

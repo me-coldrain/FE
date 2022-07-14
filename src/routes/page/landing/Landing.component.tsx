@@ -1,44 +1,81 @@
-import React from 'react';
-import Image from 'components/image';
-import styles from './Landing.module.scss';
+import React, { useState } from "react";
+import Image from "components/image";
+// style
+import { injectClassNames } from "utils/css";
+import Icon from "@components/icon";
+import styles from "./Landing.module.scss";
 
 const {
   wrapper,
   landing,
   landingText,
   landingImage,
-  landingNavigationWrapper
+  active,
+  searchBar,
+  searchBarIcon,
+  filters,
+  filtersIcon,
 } = styles;
 
 export default function Landing(): JSX.Element {
+  const [homePage, setHomePage] = useState<boolean>(true);
+
+  const fetchMatches = () => {
+    console.log("fetchMatches :");
+    setHomePage(true);
+  };
+
+  const fetchRecruit = () => {
+    console.log("fetchRecruit :");
+    setHomePage(false);
+  };
+
   return (
-    <div className={ wrapper }>
-      <div className={ landing }>
-        <div className={ landingText }>
-          <h1>PWA Boilerplate</h1>
-          <p>
-            Designed to help you kick-start your next project.<br />
-            This boilerplate is production ready and comes with 
-            a service worker, redux store, dark-mode, router, and plenty other useful features.
+    <div className={wrapper}>
+      <div className={landing}>
+        <div className={homePage ? landingText : landingText}>
+          <p
+            onClick={fetchMatches}
+            className={injectClassNames([active, homePage === true])}
+            style={{ marginRight: "3rem" }}
+          >
+            대결
+          </p>
+          <p
+            onClick={fetchRecruit}
+            className={injectClassNames([active, homePage === false])}
+          >
+            팀원 모집
           </p>
         </div>
-        <div className={ landingNavigationWrapper }>
-          <a
-            href="https://github.com/tomburgs/pwa-boilerplate"
-            target="_blank"
-            rel="noreferrer"
-          >
-          View source code on GitHub
-          </a>
-          <p>Available under MIT license</p>
+
+        <div className={searchBar}>
+          <input placeholder="팀 이름을 검색해주세요." />
+          <Icon asset={"Calendar"} className={searchBarIcon} />
         </div>
-        <Image
-          className={ landingImage }
+
+        <div className={filters}>
+          <div>
+            <p>지역</p>
+            <Icon asset={"Down-Arrow"} className={filtersIcon} />
+          </div>
+          <div>
+            <p>지역</p>
+          </div>
+          <div>
+            <p>지역</p>
+          </div>
+          <div>
+            <p>지역</p>
+          </div>
+        </div>
+        {/* <Image
+          className={landingImage}
           src="/assets/landing.png"
           alt="Desktop & Mobile PWA Application"
           width="450px"
           height="310px"
-        />
+        /> */}
       </div>
     </div>
   );
