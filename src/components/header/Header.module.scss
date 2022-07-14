@@ -2,20 +2,20 @@
 @use "styles/variables/theme";
 
 .header {
+  --primary-text-color: #f2f2f7;
   --header-color: var(--primary-block-color);
-  background-color: var(--header-color);
   box-shadow: var(--shadow);
   color: var(--primary-text-color);
-
   display: flex;
+  justify-content: flex-start;
   flex-flow: column;
   height: var(--header-navigation-height);
   left: 0;
-  padding: env(safe-area-inset-top) 0 0;
+  padding: calc(env(safe-area-inset-top) + 3vw) 0 0;
   position: fixed;
   top: 0;
-  // width: 100vw;
-  max-width: 768px;
+  width: 100vw;
+  max-width: 767px;
   z-index: 10;
 
   @include media.after-mobile {
@@ -57,16 +57,13 @@
     align-items: center;
     display: flex;
     height: 100%;
-
-    @include media.mobile {
-      justify-content: center;
-    }
+    width: 100%;
   }
 }
 
 .offline {
   align-items: center;
-  background-color: #edde5d;
+  background-color: #4b72f1;
   box-shadow: var(--shadow);
   color: #000;
   display: none;
@@ -93,5 +90,17 @@
 @at-root html:global(.offline) {
   .offline {
     display: flex;
+  }
+}
+
+.backBtnStyle {
+  position: absolute;
+  top: 3.5vw;
+  left: 5vw;
+  z-index: 20;
+
+  &Icon {
+    --icon-size: 30px;
+    size: var(--icon-size);
   }
 }

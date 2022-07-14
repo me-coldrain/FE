@@ -62,6 +62,34 @@ https://github.com/saseungmin/yarn-berry-example/blob/main/.eslintrc.js
 
 ## Next.js
 
-[https://nextjs.org/](https://nextjs.org/)
+[Next.js](https://nextjs.org/)
 
 ---
+
+---
+
+errors
+
+if not found module error,
+
+try
+
+yarn install --check-files
+
+try
+
+yarn cache clean
+
+### header 관리
+
+Header.component.tsx에서 backBtn 을 원치 않는 url path name을 추가하시면 됩니다.
+
+ex) "/login" 에서는 backBtn이 없었으면 한다. STACKS에 추가
+
+~~showHeader도 마찬가지로 같은 방식으로 적용됩니다.~~
+
+~~Header의 스타일이나 컨텐츠를 바꾸고 싶을 때에는 \_app.tsx에서 제거하고 사용~~
+
+### svg 색 변경 모듈
+
+[svg 색 변경](https://codepen.io/sosuke/pen/Pjoqqp)
