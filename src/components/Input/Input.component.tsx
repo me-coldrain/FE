@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Input.module.scss";
 
-const { login, sign, nametag } = styles;
+const { login, sign, nametag, signupBox } = styles;
 
 type InputProps = {
   placeholder?: string;
@@ -34,7 +34,7 @@ export default function Input(props: InputProps): JSX.Element {
 
   if (signup) {
     return (
-      <>
+      <div className={signupBox}>
         <label htmlFor={id} className={nametag}>
           {label}
         </label>
@@ -46,7 +46,7 @@ export default function Input(props: InputProps): JSX.Element {
           onChange={onChange}
           value={value}
         ></input>
-      </>
+      </div>
     );
   }
   return <></>;

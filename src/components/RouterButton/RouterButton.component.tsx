@@ -3,7 +3,7 @@ import React from "react";
 import { injectClassNames } from "utils/css";
 import styles from "./RouterButton.module.scss";
 
-const { round, login, normal } = styles;
+const { round, login, normal, shares } = styles;
 
 type ButtonProps = {
   url?: string;
@@ -11,9 +11,9 @@ type ButtonProps = {
   bigRound?: boolean;
   bigSquare?: boolean;
   onClick?: any;
-  bgc?: string;
   nickname?: any;
   preferedPosition?: any;
+  share?: boolean;
 };
 
 export default function Button(props: ButtonProps): JSX.Element {
@@ -23,9 +23,9 @@ export default function Button(props: ButtonProps): JSX.Element {
     bigRound,
     bigSquare,
     onClick,
-    bgc = "",
     nickname = "",
     preferedPosition = "",
+    share,
   } = props;
 
   if (bigRound) {
@@ -39,7 +39,7 @@ export default function Button(props: ButtonProps): JSX.Element {
           prefetch={true}
           as={url}
         >
-          <a style={{ backgroundColor: bgc }}>{children}</a>
+          <a>{children}</a>
         </Link>
       </div>
     );
@@ -55,14 +55,21 @@ export default function Button(props: ButtonProps): JSX.Element {
           prefetch={true}
           as={url}
         >
-          <a style={{ backgroundColor: bgc }}>{children}</a>
+          <a>{children}</a>
         </Link>
+      </div>
+    );
+  }
+  if (share) {
+    return (
+      <div className={shares} onClick={onClick}>
+        <p>{children}</p>
       </div>
     );
   } else {
     return (
       <div className={normal} onClick={onClick}>
-        <p style={{ backgroundColor: bgc }}>{children}</p>
+        <p>{children}</p>
       </div>
     );
   }

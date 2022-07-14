@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./SelectButton.module.scss";
 
-const { normal, select, stadiumSelect, stadiumNormal } = styles;
+const { normal, select, stadiumSelect, stadiumNormal, timeSelect, timeNormal } =
+  styles;
 
 type ButtonProps = {
   children?: string;
@@ -69,13 +70,13 @@ export default function Button(props: ButtonProps): JSX.Element {
   if (time) {
     if (active) {
       return (
-        <div className={stadiumSelect} onClick={onClick}>
+        <div className={timeSelect} onClick={onClick}>
           <p>{children}</p>
         </div>
       );
     }
     return (
-      <div className={stadiumNormal} onClick={onClick}>
+      <div className={timeNormal} onClick={onClick}>
         <p>{children}</p>
       </div>
     );

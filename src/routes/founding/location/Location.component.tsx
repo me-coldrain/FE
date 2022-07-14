@@ -4,6 +4,9 @@ import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 import SelectButton from "components/SelectButton";
+import styles from "./Location.module.scss";
+
+const { selectBox } = styles;
 
 export default function location(): JSX.Element {
   const router = useRouter();
@@ -21,7 +24,7 @@ export default function location(): JSX.Element {
         </section>
         <h3>주 활동 지역</h3>
         <p>1개만 선택 가능합니다.</p>
-        <div className="selectBox">
+        <div className={selectBox}>
           <SelectButton
             location
             onClick={() => handleLocation("seoul")}
@@ -143,22 +146,6 @@ export default function location(): JSX.Element {
         >
           다음
         </RouterButton>
-        <style jsx>{`
-          .selectBox {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            overflow: auto;
-            max-height: 50vh;
-            height: 50vh;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-          }
-          .selectBox::-webkit-scrollbar {
-            display: none;
-          }
-        `}</style>
       </main>
     </>
   );

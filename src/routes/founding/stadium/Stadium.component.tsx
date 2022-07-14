@@ -4,6 +4,9 @@ import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 import SelectButton from "components/SelectButton";
+import styles from "./Stadium.module.scss";
+
+const { selectBox } = styles;
 
 export default function stadium(): JSX.Element {
   const router = useRouter();
@@ -21,7 +24,7 @@ export default function stadium(): JSX.Element {
         </section>
         <h3>선호지역</h3>
         <p>1개만 선택 가능합니다.</p>
-        <div className="selectBox">
+        <div className={selectBox}>
           <SelectButton
             stadium
             onClick={() => handleStadium("home")}
@@ -52,14 +55,7 @@ export default function stadium(): JSX.Element {
         >
           다음
         </RouterButton>
-        <style jsx>{`
-          .selectBox {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-          }
-        `}</style>
+        <style jsx>{``}</style>
       </main>
     </>
   );
