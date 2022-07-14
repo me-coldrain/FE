@@ -1,5 +1,5 @@
-@use 'styles/variables/placeholder' as animations;
-@use 'styles/variables/media';
+@use "styles/variables/placeholder" as animations;
+@use "styles/variables/media";
 
 .page {
   > section {
@@ -52,5 +52,57 @@
 
   &:nth-child(n + 3) {
     padding-bottom: 30%;
+  }
+}
+
+.teamCard {
+  border: 1px solid #e8e8e8;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem;
+  h2 {
+    font-size: x-large;
+    margin: 0;
+    margin-right: 5px;
+  }
+  h3 {
+    font-size: large;
+    margin-right: 5px;
+  }
+  p {
+    font-size: medium;
+    color: var(--gray-text-color);
+    margin: 0;
+  }
+
+  &WinRate {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &Info {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-right: 0.3rem;
+    padding: 2px 1px;
+    background-color: #e0dada;
+    border-radius: 4px;
+  }
+
+  &Icon {
+    --icon-size: 15px;
+    fill: gray;
+    margin-right: 5px;
+    // position: absolute;
+  }
+
+  &Flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
