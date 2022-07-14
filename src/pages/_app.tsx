@@ -52,6 +52,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
           <NotificationList />
           <Header backBtn={true} />
           <Component {...pageProps} />
+          <div id="modal-element"></div>
           <Footer />
         </ThemeProvider>
       </Provider>

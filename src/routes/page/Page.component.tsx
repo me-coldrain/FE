@@ -1,18 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Landing from "routes/page/landing";
-import A2HS from "components/a2hs";
-import Sidebar from "components/sidebar";
-import Html from "components/html";
+// component
+import Icon from "@components/icon";
+// hooks
 import { usePageData, usePageDetails } from "hooks/page";
 import { injectClassNames } from "utils/css";
+
 import Link from "next/link";
 import styles from "./Page.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "stores";
 
-const { page, pageLanding, pageContent, placeholder } = styles;
+const {
+  page,
+  pageLanding,
+  pageContent,
+  placeholder,
+  teamCard,
+  teamCardFlex,
+  teamCardWinRate,
+  teamCardInfo,
+  teamCardIcon,
+} = styles;
 
 type PageProps = {
   isLanding?: boolean;
+};
+
+type Teams = {
+  id: number;
+  name: string;
+  winRate: number;
+  games: number;
+  win: number;
+  draw: number;
+  lose: number;
+  location: string;
+  where: boolean;
+  weekday: string[];
+  time: string;
 };
 
 export const addTitleTags = (title: string): JSX.Element => {
@@ -43,9 +70,17 @@ export default function Page(props: PageProps): JSX.Element {
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
 
+  // const [teams, setTeams] = useState<Teams[]>();
+
+  const teams = useSelector((state: RootState) => state.teams);
+
   const classNames = injectClassNames(page, [pageLanding, isLanding]);
 
-  const name = 30;
+  const teamUseEffectHandler = () => {
+    console.log("fetch team data,");
+  };
+
+  useEffect(teamUseEffectHandler, []);
 
   return (
     <>
@@ -57,31 +92,57 @@ export default function Page(props: PageProps): JSX.Element {
       <main className={classNames}>
         {isLanding && <Landing />}
         <section>
-          <div className={pageContent}>
-            <A2HS />
-            <div className={pageContent}>
-              {content ? (
-                <Html content={content} />
-              ) : (
-                <>
-                  <figure className={placeholder} />
-                  <figure className={placeholder} />
-                  <figure className={placeholder} />
-                </>
-              )}
-            </div>
-          </div>
-          <Sidebar />
-          <Link
-            href={{
-              pathname: "/team/[teamName]",
-              query: { teamId: 30, teamName: "SeoulFC" },
-            }}
-          >
-            팀 상세
-          </Link>
+          {teams?.map((item, index) => {
+            return (
+              <Link
+                key={`teamCard-${index}`}
+                href={{
+                  pathname: "/team/[teamName]",
+                  query: { teamId: item.id, teamName: item.name },
+                }}
+              >
+                <div className={teamCard}>
+                  <div className={teamCardFlex}>
+                    <h2>{item.name}</h2>
+                  </div>
+                  <div className={teamCardWinRate}>
+                    <p>승률</p>
+                    <h3>{item.winRate}%</h3>
+                    <h3>|</h3>
+                    <h3>
+                      {item.games}전 {item.win}승 {item.draw}무 {item.lose}패
+                    </h3>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <div className={teamCardInfo}>
+                      <Icon asset="Location" className={teamCardIcon} />
+                      <p>서울특별시</p>
+                    </div>
+                    <div className={teamCardInfo}>
+                      <Icon asset="Location" className={teamCardIcon} />
+                      <p>홈구장 선호</p>
+                    </div>
+                    <div className={teamCardInfo}>
+                      <Icon asset="Calendar" className={teamCardIcon} />
+                      <p>월.화.수.목.금 - 오전</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </section>
       </main>
     </>
   );
 }
+
+/**
+ *
+ * @ToDo 무한 스크롤 적용
+ */

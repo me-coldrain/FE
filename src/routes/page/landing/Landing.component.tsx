@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "components/image";
 // style
 import { injectClassNames } from "utils/css";
 import Icon from "@components/icon";
 import styles from "./Landing.module.scss";
+import Modal from "@components/modal";
 
 const {
   wrapper,
@@ -19,9 +20,14 @@ const {
 
 export default function Landing(): JSX.Element {
   const [homePage, setHomePage] = useState<boolean>(true);
+  // modal state
+  const [locationModal, setLocationModal] = useState<boolean>(false);
+  const [daysModal, setDaysModal] = useState<boolean>(false);
+  const [timeModal, setTimeModal] = useState<boolean>(false);
+  const [winRateModal, setWinRateModal] = useState<boolean>(false);
 
   const fetchMatches = () => {
-    console.log("fetchMatches :");
+    console.log("fetchMatches : with dispatch");
     setHomePage(true);
   };
 
@@ -32,6 +38,26 @@ export default function Landing(): JSX.Element {
 
   return (
     <div className={wrapper}>
+      <Modal
+        title="지역"
+        show={locationModal}
+        onClose={() => setLocationModal(false)}
+      >
+        지역모달
+      </Modal>
+      <Modal title="요일" show={daysModal} onClose={() => setDaysModal(false)}>
+        지역모달
+      </Modal>
+      <Modal title="시간" show={timeModal} onClose={() => setTimeModal(false)}>
+        지역모달
+      </Modal>
+      <Modal
+        title="지역"
+        show={winRateModal}
+        onClose={() => setWinRateModal(false)}
+      >
+        지역모달
+      </Modal>
       <div className={landing}>
         <div className={homePage ? landingText : landingText}>
           <p
@@ -55,27 +81,19 @@ export default function Landing(): JSX.Element {
         </div>
 
         <div className={filters}>
-          <div>
-            <p>지역</p>
-            <Icon asset={"Down-Arrow"} className={filtersIcon} />
-          </div>
-          <div>
+          <div onClick={() => setLocationModal(!locationModal)}>
             <p>지역</p>
           </div>
-          <div>
-            <p>지역</p>
+          <div onClick={() => setDaysModal(!daysModal)}>
+            <p>요일</p>
           </div>
-          <div>
-            <p>지역</p>
+          <div onClick={() => setTimeModal(!timeModal)}>
+            <p>시간</p>
+          </div>
+          <div onClick={() => setWinRateModal(!winRateModal)}>
+            <p>승률</p>
           </div>
         </div>
-        {/* <Image
-          className={landingImage}
-          src="/assets/landing.png"
-          alt="Desktop & Mobile PWA Application"
-          width="450px"
-          height="310px"
-        /> */}
       </div>
     </div>
   );
