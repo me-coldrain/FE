@@ -1,29 +1,53 @@
-import React, { useState } from "react";
-// style
-import { injectClassNames } from "utils/css";
+import React from "react";
+import styles from "./Input.module.scss";
 
-type InputItemProps = {
-  label: string;
-  type: string;
-  activeClass?: string;
+const { login, sign, nametag } = styles;
+
+type InputProps = {
+  placeholder?: string;
+  type?: string;
+  normal?: boolean;
+  label?: string;
+  id?: string;
+  onChange?: any;
+  value?: string;
+  signup?: boolean;
 };
 
-export const Input = (props: InputItemProps): JSX.Element => {
-  const { label, type, activeClass = "" } = props;
-  const [isFocus, setIsFocus] = useState<boolean>(false);
-  const handleInputFocus = () => {
-    setIsFocus(true);
-  };
-  const handleInputBlur = () => {
-    setIsFocus(false);
-  };
-  const className = injectClassNames();
+export default function Input(props: InputProps): JSX.Element {
+  const {
+    placeholder = "",
+    type = "",
+    normal,
+    label = "",
+    id = "",
+    onChange,
+    value = "",
+    signup,
+  } = props;
 
-  return (
-    <div className={className}>
-      <label htmlFor={label}>{label}</label>
-      <br />
-      <input type={type} onFocus={handleInputFocus} onBlur={handleInputBlur} />
-    </div>
-  );
-};
+  if (normal) {
+    return (
+      <input className={login} placeholder={placeholder} type={type}></input>
+    );
+  }
+
+  if (signup) {
+    return (
+      <>
+        <label htmlFor={id} className={nametag}>
+          {label}
+        </label>
+        <input
+          className={sign}
+          id={id}
+          placeholder={placeholder}
+          type={type}
+          onChange={onChange}
+          value={value}
+        ></input>
+      </>
+    );
+  }
+  return <></>;
+}

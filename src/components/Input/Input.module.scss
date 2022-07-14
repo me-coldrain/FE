@@ -1,17 +1,24 @@
-@use "styles/variables/placeholder" as *;
+@use "styles/variables/media";
+@use "styles/variables/button";
+@use "styles/variables/theme";
 
-.input {
-  display: inline-block;
-  height: var(--icon-size);
-  width: var();
+.login {
+  width: 100%;
+  max-width: 390px;
+  padding: 20px 6px;
+  box-sizing: border-box;
+  margin: 6px 0;
+  border: 0;
 }
 
-.long {
-  width: 15rem;
+.nametag {
+  text-align: start;
 }
-
-.loader {
-  border-radius: 50%;
-
-  @include placeholder;
+.sign {
+  width: 100%;
+  max-width: 390px;
+  padding: 20px 6px;
+  box-sizing: border-box;
+  margin: 10px 0;
+  border: 0;
 }

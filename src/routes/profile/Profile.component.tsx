@@ -17,11 +17,11 @@ const {
 } = styles;
 
 export default function Profile(): JSX.Element {
-  const { name, bio, avatar_url, followers } = useUser();
+  // const { name, bio, avatar_url, followers } = useUser();
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>Profile</title>
         <meta name="robots" content="noindex" />
       </Head>
@@ -52,7 +52,7 @@ export default function Profile(): JSX.Element {
             porttitor. Integer vitae justo sit amet metus malesuada eleifend.
           </p>
         </div>
-      </main>
+      </main> */}
     </>
   );
 }

@@ -2,10 +2,32 @@
 @use "styles/variables/button";
 @use "styles/variables/theme";
 
-.button {
+.round {
+  box-sizing: border-box;
   position: absolute;
   bottom: 5%;
-  width: 100%;
+  max-width: 390px;
+  margin: 0 auto;
+  text-align: center;
+  padding: var(--content-padding) 0;
+
+  a,
+  p {
+    @include button.default;
+    --button-text-color: #f2f2f7;
+    --button-font-weight: 600;
+    --button-background: #000;
+    --button-hover: none;
+    --button-radius: 30px;
+    --button-padding: 20px 160px;
+    text-align: center;
+    border: none;
+  }
+}
+
+.login {
+  box-sizing: border-box;
+  max-width: 390px;
   display: block;
   margin: 0 auto;
   text-align: center;
@@ -17,27 +39,33 @@
     --button-text-color: #f2f2f7;
     --button-font-weight: 600;
     --button-background: #000;
-    --button-hover: #000;
-    --button-radius: 30px;
-    --button-padding: 20px 160px;
+    --button-hover: none;
+    --button-padding: 20px 154px;
     text-align: center;
+    border: none;
   }
 }
 
-.login {
-  width: 100%;
+.normal {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 5%;
+  max-width: 390px;
   display: block;
   margin: 0 auto;
   text-align: center;
   padding: var(--content-padding) 0;
 
-  a {
+  a,
+  p {
     @include button.default;
     --button-text-color: #f2f2f7;
     --button-font-weight: 600;
     --button-background: #000;
-    --button-hover: #000;
+    --button-hover: none;
+    --button-radius: 30px;
     --button-padding: 20px 160px;
     text-align: center;
+    border: none;
   }
 }

@@ -1,1 +1,1 @@
-export { Input as InputBox } from "./Input.component";
+export { default } from "./Input.component";

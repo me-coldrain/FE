@@ -1,7 +1,7 @@
 @use "styles/variables/placeholder" as animations;
 @use "styles/variables/media";
 
-.user {
+.initialLogin {
   & section {
     width: 100%;
     height: 100%;
@@ -11,7 +11,7 @@
       font-weight: 500;
       display: flex;
       align-items: center;
-      justify-content: start;
+      justify-content: center;
     }
 
     > p {
@@ -24,14 +24,6 @@
       justify-content: center;
     }
   }
-}
-
-.signup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
 }
 
 .placeholder {

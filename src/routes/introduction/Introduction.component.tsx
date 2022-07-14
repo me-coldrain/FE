@@ -30,7 +30,6 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 export default function Introduction(): JSX.Element {
   const { introduction } = styles;
   const { title = "", description = "" } = usePageDetails();
-  const { content = "" } = usePageData();
 
   return (
     <>
@@ -47,7 +46,7 @@ export default function Introduction(): JSX.Element {
             <br />팀 전략/ 개인 전략을 기록해보세요
           </p>
         </section>
-        <RouterButton url="/user" bigRound>
+        <RouterButton url="/login" bigRound>
           시작하기
         </RouterButton>
       </main>

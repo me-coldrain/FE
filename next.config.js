@@ -17,6 +17,9 @@ module.exports = {
   ignoreBuildErrors: true,
   webpack5: true,
   reactStrictMode: true,
+  images: {
+    disableStaticImages: true,
+  },
   env: {
     serviceWorkerUrl,
   },

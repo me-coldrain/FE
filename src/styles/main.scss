@@ -96,8 +96,8 @@ body {
   font-size: 12px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin: 0;
-  max-width: 768px;
+  margin: auto;
+  max-width: 390px;
 
   @include font-family("Raleway", sans-serif);
 }
