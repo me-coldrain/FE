@@ -14,10 +14,10 @@ export default function contact(): JSX.Element {
   const [sns, setSns] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
 
-  const handleSns = (e) => {
+  const handleSns = (e: any) => {
     setSns(e.target.value);
   };
-  const handlePhone = (e) => {
+  const handlePhone = (e: any) => {
     setPhoneNumber(e.target.value);
   };
   const handleState = () => {
@@ -29,7 +29,7 @@ export default function contact(): JSX.Element {
       snsId: sns,
       phone: phoneNumber,
     };
-    dispatch(getUser(userInfo));
+    dispatch<any>(getUser(userInfo));
   };
 
   return (

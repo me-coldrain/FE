@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { handleFile } from "@hooks/events";
 import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
@@ -8,18 +9,6 @@ export default function success(): JSX.Element {
   // const dispatch = useDispatch();
   const [previewURL, setPreviewURL] = useState("");
   const [nickname, setNickname] = useState();
-
-  const handleFile = (e: any): any => {
-    e.preventDefault();
-    const reader = new FileReader();
-    const formData = new FormData();
-    const file = e.target.files[0];
-    reader.onloadend = () => {
-      setPreviewURL(reader.result);
-    };
-    formData.append("photoFile", file);
-    reader.readAsDataURL(file);
-  };
 
   const handleName = (e: any) => {
     setNickname(e.target.value);
@@ -58,7 +47,7 @@ export default function success(): JSX.Element {
               type="file"
               id="ex_file"
               accept="image/jpg,impge/png,image/jpeg,image/gif"
-              onChange={(e) => handleFile(e)}
+              onChange={(e) => handleFile(e, setPreviewURL)}
             />
           </div>
         )}
