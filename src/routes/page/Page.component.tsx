@@ -96,6 +96,7 @@ export default function Page(props: PageProps): JSX.Element {
                     pathname: "/team/[teamName]",
                     query: { teamId: item.id, teamName: item.name },
                   }}
+                  as="/team/[teamName]"
                 >
                   <div className={teamCard}>
                     <div className={teamCardFlex}>

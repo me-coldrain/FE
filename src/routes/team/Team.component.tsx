@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // hooks
 import { useRouter } from "next/router";
 // component
@@ -9,6 +9,7 @@ import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
 import Link from "next/link";
 import Footer, { RegisterFooter } from "@components/footer";
 import styles from "./Team.module.scss";
+import { user } from "stores/user";
 
 const {
   aboutTeam,
@@ -39,6 +40,7 @@ export default function Team(): JSX.Element {
   //state
   const [possible, setPossible] = useState<boolean>();
   const [recruitMember, setRecruitMember] = useState<boolean>();
+  const [isCaptain, setIsCaptain] = useState<boolean>(true);
 
   //hooks
   const link = {
@@ -46,6 +48,12 @@ export default function Team(): JSX.Element {
     query: { teamId: teamId, teamName: teamName },
     as: "/team/[teamName]/matches",
   };
+
+  const captainHandler = () => {
+    console.log("if this team's captain");
+  };
+
+  useEffect(captainHandler, []);
 
   const matchContainer = (
     <div className={matchHistoryContainer}>
@@ -138,6 +146,7 @@ export default function Team(): JSX.Element {
               length="long"
               linkType={false}
               arrowLink={link}
+              arrowLinkAs={link.as}
             />
           </div>
         </div>
@@ -147,6 +156,7 @@ export default function Team(): JSX.Element {
             pathname: "/team/[teamName]/members",
             query: { teamId: 30, teamName: teamName },
           }}
+          as="/team/[teamName]/members"
         >
           <div className={tabs}>
             <p>멤버 소개(22)</p>
@@ -155,9 +165,10 @@ export default function Team(): JSX.Element {
         </Link>
         <Link
           href={{
-            pathname: "/team/[teamName]/matches",
+            pathname: "/team/[teamName]/schedule",
             query: { teamId: teamId, teamName: teamName },
           }}
+          as="/team/[teamName]/schedule"
         >
           <div className={tabs}>
             <p>예정된 경기 일정</p>

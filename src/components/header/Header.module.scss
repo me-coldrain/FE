@@ -20,8 +20,6 @@
   z-index: 10;
 
   @include media.after-mobile {
-    --header-color: transparent;
-    backdrop-filter: saturate(50%) blur(20px);
     border-radius: calc(var(--header-navigation-height) / 2);
     box-sizing: border-box;
     left: 50%;
@@ -48,6 +46,7 @@
     max-width: 768px;
 
     @include media.after-mobile {
+      backdrop-filter: saturate(200%) blur(10px);
       display: grid;
       grid-column-gap: 50px;
       grid-template-columns: 1fr 1fr;
@@ -100,7 +99,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid;
   top: 3.5vw;
   left: 5vw;
   z-index: 20;
