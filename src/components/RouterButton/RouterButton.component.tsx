@@ -3,7 +3,7 @@ import React from "react";
 import { injectClassNames } from "utils/css";
 import styles from "./RouterButton.module.scss";
 
-const { round, login, normal } = styles;
+const { round, login, normal, shares } = styles;
 
 type ButtonProps = {
   url?: string;
@@ -11,9 +11,13 @@ type ButtonProps = {
   bigRound?: boolean;
   bigSquare?: boolean;
   onClick?: any;
-  bgc?: string;
   nickname?: any;
   preferedPosition?: any;
+  share?: boolean;
+  teamName?: string;
+  teamInfo?: string;
+  location?: string;
+  stadium?: string;
 };
 
 export default function Button(props: ButtonProps): JSX.Element {
@@ -23,23 +27,48 @@ export default function Button(props: ButtonProps): JSX.Element {
     bigRound,
     bigSquare,
     onClick,
-    bgc = "",
     nickname = "",
     preferedPosition = "",
+    share,
+    teamName = "",
+    teamInfo = "",
+    location = "",
+    stadium = "",
   } = props;
 
   if (bigRound) {
+    if (nickname) {
+      return (
+        <div className={round} onClick={onClick}>
+          <Link
+            href={{
+              pathname: url,
+              query: { nickname: nickname, position: preferedPosition },
+            }}
+            prefetch={true}
+            as={url}
+          >
+            <a>{children}</a>
+          </Link>
+        </div>
+      );
+    }
     return (
       <div className={round} onClick={onClick}>
         <Link
           href={{
             pathname: url,
-            query: { nickname: nickname, position: preferedPosition },
+            query: {
+              teamName: teamName,
+              teamInfo: teamInfo,
+              location: location,
+              stadium: stadium,
+            },
           }}
           prefetch={true}
           as={url}
         >
-          <a style={{ backgroundColor: bgc }}>{children}</a>
+          <a>{children}</a>
         </Link>
       </div>
     );
@@ -55,14 +84,21 @@ export default function Button(props: ButtonProps): JSX.Element {
           prefetch={true}
           as={url}
         >
-          <a style={{ backgroundColor: bgc }}>{children}</a>
+          <a>{children}</a>
         </Link>
+      </div>
+    );
+  }
+  if (share) {
+    return (
+      <div className={shares} onClick={onClick}>
+        <p>{children}</p>
       </div>
     );
   } else {
     return (
       <div className={normal} onClick={onClick}>
-        <p style={{ backgroundColor: bgc }}>{children}</p>
+        <p>{children}</p>
       </div>
     );
   }

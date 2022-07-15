@@ -20,10 +20,6 @@
   z-index: 10;
 
   @include media.after-mobile {
-    // --header-color: transparent;
-
-    -webkit-backdrop-filter: saturate(200%) blur(10px);
-    backdrop-filter: saturate(200%) blur(10px);
     border-radius: calc(var(--header-navigation-height) / 2);
     box-sizing: border-box;
     left: 50%;
