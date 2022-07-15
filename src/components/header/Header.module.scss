@@ -18,11 +18,12 @@
   width: 100vw;
   max-width: 767px;
   z-index: 10;
-  background-color: #fff;
 
   @include media.after-mobile {
-    --header-color: transparent;
-    backdrop-filter: saturate(50%) blur(20px);
+    // --header-color: transparent;
+
+    -webkit-backdrop-filter: saturate(200%) blur(10px);
+    backdrop-filter: saturate(200%) blur(10px);
     border-radius: calc(var(--header-navigation-height) / 2);
     box-sizing: border-box;
     left: 50%;
@@ -49,6 +50,7 @@
     max-width: 768px;
 
     @include media.after-mobile {
+      backdrop-filter: saturate(200%) blur(10px);
       display: grid;
       grid-column-gap: 50px;
       grid-template-columns: 1fr 1fr;
