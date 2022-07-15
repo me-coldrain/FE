@@ -11,13 +11,13 @@ type IProps = {
   content: string | JSX.Element;
   length: string;
   arrowLink: BaseRouter;
+  arrowLinkAs: string;
   linkType?: boolean;
 };
 
 type BaseRouter = {
   pathname: string;
   query: any;
-  as: string;
 };
 
 const {
@@ -34,6 +34,7 @@ export const PlaceholderWithJSX = ({
   content,
   arrowLink,
   linkType = true,
+  arrowLinkAs,
 }: IProps): JSX.Element => {
   return (
     <div className={container}>
@@ -44,7 +45,7 @@ export const PlaceholderWithJSX = ({
             <Icon asset="Right-Arrow" className={containerIcon} />
           </Link>
         ) : (
-          <Link href={arrowLink}>
+          <Link href={arrowLink} as={arrowLinkAs}>
             <p style={{ color: "#868686", fontSize: "18px" }}>전체보기</p>
           </Link>
         )}

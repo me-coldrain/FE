@@ -18,6 +18,7 @@
   width: 100vw;
   max-width: 767px;
   z-index: 10;
+  background-color: #fff;
 
   @include media.after-mobile {
     --header-color: transparent;

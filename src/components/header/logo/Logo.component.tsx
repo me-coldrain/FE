@@ -27,12 +27,16 @@ export default function Logo(): JSX.Element {
     if (pathname === "/") {
       setContent("구십분");
     }
-    if (pathname === "/team/[teamName]/members") {
+    if (pathname === "/team/[teamName]/matches") {
       setContent("경기 히스토리");
+    }
+    if (pathname === "/team/[teamName]/members") {
+      setContent("멤버 소개");
     }
     if (pathname === "/team/[teamName]/schedule") {
       setContent("예정된 경기");
     }
+    return () => setContent("구십분");
   }, [pathname]);
 
   return (

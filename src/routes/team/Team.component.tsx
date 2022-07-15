@@ -138,6 +138,7 @@ export default function Team(): JSX.Element {
               length="long"
               linkType={false}
               arrowLink={link}
+              arrowLinkAs={link.as}
             />
           </div>
         </div>
