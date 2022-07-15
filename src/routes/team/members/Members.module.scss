@@ -1,0 +1,45 @@
+.title {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid;
+  //   margin: 0px 1rem;
+  p {
+    font-weight: 600;
+    size: 15px;
+    color: #868686;
+  }
+}
+
+.category {
+  padding: 0px 1rem;
+  p {
+    margin-bottom: 2rem;
+  }
+}
+
+.memberCard {
+  display: flex;
+  width: 60%;
+  //   margin-bottom: 2rem;
+  &Image {
+    width: 42px;
+    height: 42px;
+    margin-right: 2rem;
+  }
+}
+
+.mvpPoint {
+  width: 20%;
+  p {
+    font-weight: 600;
+    size: 15px;
+  }
+}
+
+.personalPoint {
+  width: 20%;
+  p {
+    font-weight: 600;
+    size: 15px;
+  }
+}
