@@ -10,13 +10,14 @@ type IProps = {
   label?: string;
   content: string | JSX.Element;
   length: string;
-  arrowLink?: string | BaseRouter;
+  arrowLink: BaseRouter;
   linkType?: boolean;
 };
 
 type BaseRouter = {
   pathname: string;
-  query: ParsedUrlQuery;
+  query: any;
+  as: string;
 };
 
 const {
@@ -31,7 +32,7 @@ const {
 export const PlaceholderWithJSX = ({
   label,
   content,
-  arrowLink = "/team/seoulFC/members",
+  arrowLink,
   linkType = true,
 }: IProps): JSX.Element => {
   return (

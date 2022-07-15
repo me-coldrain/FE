@@ -27,7 +27,7 @@ export default function Landing(): JSX.Element {
   const [winRateModal, setWinRateModal] = useState<boolean>(false);
 
   const fetchMatches = () => {
-    console.log("fetchMatches : with dispatch");
+    console.log("fetchMatches : with");
     setHomePage(true);
   };
 

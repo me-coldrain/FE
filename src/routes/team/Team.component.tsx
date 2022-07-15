@@ -6,9 +6,9 @@ import Image, { ImageWithHeader } from "@components/image";
 import Icon from "@components/icon";
 import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
 // style
-import styles from "./Team.module.scss";
 import Link from "next/link";
 import Footer, { RegisterFooter } from "@components/footer";
+import styles from "./Team.module.scss";
 
 const {
   aboutTeam,
@@ -39,6 +39,13 @@ export default function Team(): JSX.Element {
   //state
   const [possible, setPossible] = useState<boolean>();
   const [recruitMember, setRecruitMember] = useState<boolean>();
+
+  //hooks
+  const link = {
+    pathname: "/team/[teamName]/matches",
+    query: { teamId: teamId, teamName: teamName },
+    as: "/team/[teamName]/matches",
+  };
 
   const matchContainer = (
     <div className={matchHistoryContainer}>
@@ -130,6 +137,7 @@ export default function Team(): JSX.Element {
               content={matchContainer}
               length="long"
               linkType={false}
+              arrowLink={link}
             />
           </div>
         </div>

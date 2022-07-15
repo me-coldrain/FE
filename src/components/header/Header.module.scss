@@ -8,6 +8,7 @@
   color: var(--primary-text-color);
   display: flex;
   justify-content: flex-start;
+  flex-direction: row;
   flex-flow: column;
   height: var(--header-navigation-height);
   left: 0;
@@ -19,7 +20,7 @@
   z-index: 10;
 
   @include media.after-mobile {
-    --header-color: rgba(255, 255, 255, 0.8);
+    --header-color: transparent;
     backdrop-filter: saturate(50%) blur(20px);
     border-radius: calc(var(--header-navigation-height) / 2);
     box-sizing: border-box;
@@ -54,8 +55,10 @@
   }
 
   &Controls {
-    align-items: center;
     display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
     height: 100%;
     width: 100%;
   }
@@ -94,13 +97,17 @@
 }
 
 .backBtnStyle {
-  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
   top: 3.5vw;
   left: 5vw;
   z-index: 20;
 
   &Icon {
     --icon-size: 30px;
-    size: var(--icon-size);
+
+    margin-right: 10px;
   }
 }
