@@ -15,7 +15,7 @@ export default function contact(): JSX.Element {
   console.log(router);
   const [selectSNS, setSelectSNS] = useState("kakao");
   const [sns, setSns] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState<number>();
 
   const handleSns = (e: any) => {
     setSns(e.target.value);
@@ -33,6 +33,20 @@ export default function contact(): JSX.Element {
       phone: phoneNumber,
     };
     dispatch<any>(getUser(userInfo));
+  };
+
+  const handleSubmit = (): any => {
+    const phoneNumberCheck = (phoneNumber: any): boolean => {
+      const _reg = /^\d+$/;
+
+      //정규식에는 string만 들어갈 수 있어 임시로 any 처리
+      return _reg.test(phoneNumber);
+    };
+
+    if (!phoneNumberCheck(phoneNumber as number)) {
+      alert("숫자만 가능합니다.");
+      return;
+    }
   };
 
   return (
@@ -101,6 +115,7 @@ export default function contact(): JSX.Element {
           bigRound
           onClick={() => {
             handleState();
+            handleSubmit();
           }}
         >
           입력완료

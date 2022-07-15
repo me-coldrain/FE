@@ -57,15 +57,13 @@ export default function User(): JSX.Element {
   const handleSubmit = (): any => {
     const idCheck = (email: string): boolean => {
       const _reg =
-        // 임시, 바꿔야 함
-        /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
       return _reg.test(email);
     };
 
     const pwdCheck = (pwd: string): boolean => {
-      //임시, 바꿔야함
-      const _reg = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,20}$/;
+      const _reg = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,20}$/;
 
       return _reg.test(pwd);
     };
@@ -87,7 +85,7 @@ export default function User(): JSX.Element {
 
     if (!pwdCheck(pwd)) {
       alert(
-        "비밀번호는 8~20 영문 대소문자, 최소 1개의 숫자 혹은 특수 문자를 포함해야합니다."
+        "비밀번호는 최소 1개의 영문 대소문자+숫자+특수문자를 포함하여 8~20자리이어야 합니다."
       );
       return;
     }
