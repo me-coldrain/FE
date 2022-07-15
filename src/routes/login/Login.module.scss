@@ -59,10 +59,13 @@
 .kakao {
   position: absolute;
   bottom: 5%;
+  left: 0;
+  right: 0;
   max-width: 390px;
-  p {
-    text-align: center;
-  }
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--content-padding) 0;
+  text-align: center;
   a {
     @include button.default;
     --button-text-color: #000;

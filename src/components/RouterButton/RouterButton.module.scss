@@ -3,10 +3,12 @@
 @use "styles/variables/theme";
 
 .round {
-  box-sizing: border-box;
   position: absolute;
-  bottom: 5%;
+  bottom: 10%;
+  left: 0;
+  right: 0;
   max-width: 390px;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
   padding: var(--content-padding) 0;
@@ -16,18 +18,18 @@
     @include button.default;
     --button-text-color: #f2f2f7;
     --button-font-weight: 600;
-    --button-background: #000;
-    --button-hover: none;
+    --button-background: #4b72f1;
+    --button-hover: #3763f2;
     --button-radius: 30px;
     --button-padding: 20px 160px;
     text-align: center;
-    border: none;
+    --border: none;
   }
 }
 
 .login {
-  box-sizing: border-box;
   max-width: 390px;
+  width: 100%;
   display: block;
   margin: 0 auto;
   text-align: center;
@@ -38,20 +40,21 @@
     @include button.default;
     --button-text-color: #f2f2f7;
     --button-font-weight: 600;
-    --button-background: #000;
-    --button-hover: none;
+    --button-background: #4b72f1;
+    --button-hover: #3763f2;
     --button-padding: 20px 154px;
     text-align: center;
-    border: none;
+    --border: none;
   }
 }
 
 .normal {
-  box-sizing: border-box;
   position: absolute;
   bottom: 5%;
+  left: 0;
+  right: 0;
   max-width: 390px;
-  display: block;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
   padding: var(--content-padding) 0;
@@ -61,11 +64,36 @@
     @include button.default;
     --button-text-color: #f2f2f7;
     --button-font-weight: 600;
-    --button-background: #000;
-    --button-hover: none;
+    --button-background: #4b72f1;
+    --button-hover: #3763f2;
     --button-radius: 30px;
     --button-padding: 20px 160px;
     text-align: center;
-    border: none;
+    --border: none;
+  }
+}
+
+.shares {
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  right: 0;
+  max-width: 390px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: var(--content-padding) 0;
+
+  a,
+  p {
+    @include button.default;
+    --button-text-color: #f2f2f7;
+    --button-font-weight: 600;
+    --button-background: #4b72f1;
+    --button-hover: #3763f2;
+    --button-radius: 0;
+    --button-padding: 20px 120px;
+    text-align: center;
+    --border: none;
   }
 }

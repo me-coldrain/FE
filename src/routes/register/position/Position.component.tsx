@@ -4,6 +4,9 @@ import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 import SelectButton from "components/SelectButton";
+import styles from "./Position.module.scss";
+
+const { selectBox } = styles;
 
 export default function position(): JSX.Element {
   const router = useRouter();
@@ -25,7 +28,7 @@ export default function position(): JSX.Element {
           선택해주세요
         </h3>
         <p>1개의 포지션만 선택 가능합니다.</p>
-        <div className="selectBox">
+        <div className={selectBox}>
           <SelectButton
             position
             onClick={() => handlePosition("fwd")}
@@ -63,14 +66,6 @@ export default function position(): JSX.Element {
         >
           다음
         </RouterButton>
-        <style jsx>{`
-          .selectBox {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-          }
-        `}</style>
       </main>
     </>
   );

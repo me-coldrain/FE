@@ -1,0 +1,14 @@
+.selectBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: auto;
+  max-height: 50vh;
+  height: 50vh;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.selectBox::-webkit-scrollbar {
+  display: none;
+}

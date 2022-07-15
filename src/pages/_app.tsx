@@ -4,13 +4,17 @@ import { ThemeProvider } from "contexts/theme";
 import Header from "components/header";
 import Footer from "components/footer";
 import NotificationList from "components/notificationList";
-// 기존 스토어, 추후 지워야 함
-// import store from "stores";
 import store from "stores";
 import { Provider } from "react-redux";
 import { statusBarStyle } from "config";
 import { AppProps } from "next/app";
 import "styles/main.scss";
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   useEffect(() => {

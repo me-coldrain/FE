@@ -4,8 +4,11 @@ import { handleFile } from "@hooks/events";
 import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
+import styles from "./Nickname.module.scss";
 
-export default function success(): JSX.Element {
+const { filebox, image, close, textBox } = styles;
+
+export default function nickname(): JSX.Element {
   // const dispatch = useDispatch();
   const [previewURL, setPreviewURL] = useState("");
   const [nickname, setNickname] = useState();
@@ -23,16 +26,17 @@ export default function success(): JSX.Element {
         </section>
         <h3>닉네임</h3>
         <input
+          className={textBox}
           type="text"
           placeholder="사용하실 닉네임을 적어주세요"
           onChange={(e) => handleName(e)}
         ></input>
         <h3>프로필 사진을 지정해주세요.</h3>
         {previewURL !== "" ? (
-          <div className="image">
+          <div className={image}>
             <img src={previewURL}></img>
             <span
-              className="close"
+              className={close}
               onClick={() => {
                 setPreviewURL("");
               }}
@@ -41,7 +45,7 @@ export default function success(): JSX.Element {
             </span>
           </div>
         ) : (
-          <div className="filebox">
+          <div className={filebox}>
             <label htmlFor="ex_file">+</label>
             <input
               type="file"
@@ -55,60 +59,6 @@ export default function success(): JSX.Element {
           다음
         </RouterButton>
       </main>
-      <style jsx>{`
-        input[type="text"] {
-          max-width: 390px;
-          width: 100%;
-          border: none;
-          border-bottom: 1px solid black;
-          background-color: transparent;
-          padding: 4px 0;
-          margin-bottom: 52px;
-          font-size: 8px;
-        }
-        .filebox label {
-          display: flex;
-          width: 170px;
-          height: 170px;
-          align-items: center;
-          justify-content: center;
-          font-size: 30px;
-          color: #000;
-          line-height: normal;
-          vertical-align: middle;
-          background-color: #dddbdb;
-          cursor: pointer;
-          border: 1px solid #ebebeb;
-          border-bottom-color: #e2e2e2;
-          border-radius: 0.25em;
-        }
-
-        .filebox input[type="file"] {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          padding: 0;
-          margin: -1px;
-          overflow: hidden;
-          clip: rect(0, 0, 0, 0);
-          border: 0;
-        }
-
-        .image {
-          position: relative;
-        }
-        img {
-          width: 170px;
-          height: 170px;
-          object-fit: cover;
-        }
-        .close {
-          position: absolute;
-          top: 5px;
-          left: 155px;
-          cursor: pointer;
-        }
-      `}</style>
     </>
   );
 }
