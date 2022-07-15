@@ -147,6 +147,7 @@ export default function Team(): JSX.Element {
             pathname: "/team/[teamName]/members",
             query: { teamId: 30, teamName: teamName },
           }}
+          as="/team/[teamName]/members"
         >
           <div className={tabs}>
             <p>멤버 소개(22)</p>
@@ -155,9 +156,10 @@ export default function Team(): JSX.Element {
         </Link>
         <Link
           href={{
-            pathname: "/team/[teamName]/matches",
+            pathname: "/team/[teamName]/schedule",
             query: { teamId: teamId, teamName: teamName },
           }}
+          as="/team/[teamName]/schedule"
         >
           <div className={tabs}>
             <p>예정된 경기 일정</p>
