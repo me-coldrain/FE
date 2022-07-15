@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
-import SelectButton from "components/SelectButton";
+import SelectButton from "components/selectButton";
 import { useDispatch } from "react-redux";
 import styles from "./Time.module.scss";
 
