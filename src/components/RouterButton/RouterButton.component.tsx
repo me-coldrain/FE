@@ -14,6 +14,10 @@ type ButtonProps = {
   nickname?: any;
   preferedPosition?: any;
   share?: boolean;
+  teamName?: string;
+  teamInfo?: string;
+  location?: string;
+  stadium?: string;
 };
 
 export default function Button(props: ButtonProps): JSX.Element {
@@ -26,15 +30,40 @@ export default function Button(props: ButtonProps): JSX.Element {
     nickname = "",
     preferedPosition = "",
     share,
+    teamName = "",
+    teamInfo = "",
+    location = "",
+    stadium = "",
   } = props;
 
   if (bigRound) {
+    if (nickname) {
+      return (
+        <div className={round} onClick={onClick}>
+          <Link
+            href={{
+              pathname: url,
+              query: { nickname: nickname, position: preferedPosition },
+            }}
+            prefetch={true}
+            as={url}
+          >
+            <a>{children}</a>
+          </Link>
+        </div>
+      );
+    }
     return (
       <div className={round} onClick={onClick}>
         <Link
           href={{
             pathname: url,
-            query: { nickname: nickname, position: preferedPosition },
+            query: {
+              teamName: teamName,
+              teamInfo: teamInfo,
+              location: location,
+              stadium: stadium,
+            },
           }}
           prefetch={true}
           as={url}

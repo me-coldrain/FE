@@ -29,6 +29,23 @@ export default function time(): JSX.Element {
       setpreferedTime([...preferedTime, text]);
     }
   };
+  const handleSubmit = () => {
+    const teamName = router.query.teamName as string;
+    const teamInfo = router.query.teamInfo as string;
+    const location = router.query.location as string;
+    const stadium = router.query.stadium as string;
+
+    const totalTeamInfo = {
+      teamName,
+      teamInfo,
+      location,
+      stadium,
+      preferedDays,
+      preferedTime,
+    };
+    // dispatch(actionName(totalTeamInfo))
+  };
+
   return (
     <>
       <main>
@@ -113,9 +130,7 @@ export default function time(): JSX.Element {
         <RouterButton
           url="/founding/success"
           bigRound
-          nickname={router.query.nickname}
-          // preferedPosition={preferedPosition}
-          // onClick={() => {dispatch(actionname(preferedDays, preferedTime))}}
+          // onClick={() => {handleSubmit()}}
         >
           다음
         </RouterButton>

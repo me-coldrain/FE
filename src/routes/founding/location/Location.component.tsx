@@ -141,8 +141,9 @@ export default function location(): JSX.Element {
         <RouterButton
           url="/founding/stadium"
           bigRound
-          nickname={router.query.nickname}
-          preferedPosition={location}
+          teamName={router.query.teamName as string}
+          teamInfo={router.query.teamInfo as string}
+          location={location}
         >
           다음
         </RouterButton>

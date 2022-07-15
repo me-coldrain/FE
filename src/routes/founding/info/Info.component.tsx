@@ -90,7 +90,12 @@ export default function info(): JSX.Element {
             </div>
           </div>
         )}
-        <RouterButton url="/founding/location" bigRound nickname={teamName}>
+        <RouterButton
+          url="/founding/location"
+          bigRound
+          teamName={teamName}
+          teamInfo={teamInfo}
+        >
           다음
         </RouterButton>
       </main>

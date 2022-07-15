@@ -50,8 +50,10 @@ export default function stadium(): JSX.Element {
         <RouterButton
           url="/founding/time"
           bigRound
-          nickname={router.query.nickname}
-          preferedPosition={stadium}
+          teamName={router.query.teamName as string}
+          teamInfo={router.query.teamInfo as string}
+          location={router.query.location as string}
+          stadium={stadium}
         >
           다음
         </RouterButton>
