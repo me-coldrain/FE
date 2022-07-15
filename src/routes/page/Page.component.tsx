@@ -22,6 +22,7 @@ const {
   teamCardWinRate,
   teamCardInfo,
   teamCardIcon,
+  safeArea,
 } = styles;
 
 type PageProps = {
@@ -76,12 +77,6 @@ export default function Page(props: PageProps): JSX.Element {
 
   const classNames = injectClassNames(page, [pageLanding, isLanding]);
 
-  const teamUseEffectHandler = () => {
-    console.log("fetch team data,");
-  };
-
-  useEffect(teamUseEffectHandler, []);
-
   return (
     <>
       <Head>
@@ -92,50 +87,52 @@ export default function Page(props: PageProps): JSX.Element {
       <main className={classNames}>
         {isLanding && <Landing />}
         <section>
-          {teams?.map((item, index) => {
-            return (
-              <Link
-                key={`teamCard-${index}`}
-                href={{
-                  pathname: "/team/[teamName]",
-                  query: { teamId: item.id, teamName: item.name },
-                }}
-              >
-                <div className={teamCard}>
-                  <div className={teamCardFlex}>
-                    <h2>{item.name}</h2>
-                  </div>
-                  <div className={teamCardWinRate}>
-                    <p>승률</p>
-                    <h3>{item.winRate}%</h3>
-                    <h3>|</h3>
-                    <h3>
-                      {item.games}전 {item.win}승 {item.draw}무 {item.lose}패
-                    </h3>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div className={teamCardInfo}>
-                      <Icon asset="Location" className={teamCardIcon} />
-                      <p>서울특별시</p>
+          <div className={safeArea}>
+            {teams?.map((item, index) => {
+              return (
+                <Link
+                  key={`teamCard-${index}`}
+                  href={{
+                    pathname: "/team/[teamName]",
+                    query: { teamId: item.id, teamName: item.name },
+                  }}
+                >
+                  <div className={teamCard}>
+                    <div className={teamCardFlex}>
+                      <h2>{item.name}</h2>
                     </div>
-                    <div className={teamCardInfo}>
-                      <Icon asset="Location" className={teamCardIcon} />
-                      <p>홈구장 선호</p>
+                    <div className={teamCardWinRate}>
+                      <p>승률</p>
+                      <h3>{item.winRate}%</h3>
+                      <h3>|</h3>
+                      <h3>
+                        {item.games}전 {item.win}승 {item.draw}무 {item.lose}패
+                      </h3>
                     </div>
-                    <div className={teamCardInfo}>
-                      <Icon asset="Calendar" className={teamCardIcon} />
-                      <p>월.화.수.목.금 - 오전</p>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div className={teamCardInfo}>
+                        <Icon asset="Location" className={teamCardIcon} />
+                        <p>서울특별시</p>
+                      </div>
+                      <div className={teamCardInfo}>
+                        <Icon asset="Location" className={teamCardIcon} />
+                        <p>홈구장 선호</p>
+                      </div>
+                      <div className={teamCardInfo}>
+                        <Icon asset="Calendar" className={teamCardIcon} />
+                        <p>월.화.수.목.금 - 오전</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            );
-          })}
+                </Link>
+              );
+            })}
+          </div>
         </section>
       </main>
     </>
