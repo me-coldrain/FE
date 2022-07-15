@@ -59,14 +59,14 @@ export default memo(function Header({ backBtn }: IHeader): JSX.Element {
         <Icon asset="Cloud-Slash" className={offlineIcon} />
         You are currently browsing in offline mode.
       </div>
-      {backBtn && !STACKS.includes(pathname) && (
-        <div onClick={back} className={backBtnStyle}>
-          <Icon asset="Left-Arrow" className={backBtnStyleIcon} />
-        </div>
-      )}
       <header className={header}>
         <nav>
           <div className={headerControls}>
+            {backBtn && !STACKS.includes(pathname) && (
+              <div onClick={back} className={backBtnStyle}>
+                <Icon asset="Left-Arrow" className={backBtnStyleIcon} />
+              </div>
+            )}
             <Logo />
           </div>
           <Items />
