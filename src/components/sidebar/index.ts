@@ -1,1 +1,1 @@
-export { default } from "./StatusButton.component";
+export { default } from "./Sidebar.component";
