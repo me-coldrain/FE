@@ -5,12 +5,16 @@ import styles from "./Footer.module.scss";
 
 const { footer, footerButtonLink } = styles;
 
-export const RegisterFooter = (): JSX.Element => {
+type IProps = {
+  content: string;
+};
+
+export const RegisterFooter = ({ content }: IProps): JSX.Element => {
   return (
     <footer className={footer}>
       <Link href="">
         <div className={footerButtonLink}>
-          <p>신청하기</p>
+          <p>{content}</p>
         </div>
       </Link>
     </footer>

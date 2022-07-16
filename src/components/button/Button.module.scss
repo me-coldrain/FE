@@ -5,6 +5,17 @@
   @include default;
 }
 
+.coloredButton {
+  @include default;
+  background-color: var(--primary-background-color);
+  color: #fff;
+  &:hover {
+    opacity: 0.9;
+    background-color: var(--primary-background-color);
+    // border: 1px solid var(--colored-button-hover);
+  }
+}
+
 .short {
   width: 8rem;
 }

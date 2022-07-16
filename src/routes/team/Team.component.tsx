@@ -8,8 +8,9 @@ import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
 // style
 import Link from "next/link";
 import Footer, { RegisterFooter } from "@components/footer";
-import styles from "./Team.module.scss";
 import { user } from "stores/user";
+import Reddot from "@components/reddot";
+import styles from "./Team.module.scss";
 
 const {
   aboutTeam,
@@ -175,8 +176,39 @@ export default function Team(): JSX.Element {
             <Icon asset="Right-Arrow" className={tabsIcon} />
           </div>
         </Link>
+        {isCaptain && (
+          <>
+            <Link
+              href={{
+                pathname: "/team/[teamName]/challenges",
+                query: { teamId: teamId, teamName: teamName },
+              }}
+              as="/team/[teamName]/challenges"
+            >
+              <div className={tabs}>
+                <p>대결 요청</p>
+                <Icon asset="Right-Arrow" className={tabsIcon} />
+              </div>
+            </Link>
+            <Link
+              href={{
+                pathname: "/team/[teamName]/accept",
+                query: { teamId: teamId, teamName: teamName },
+              }}
+              as="/team/[teamName]/accept"
+            >
+              <div className={tabs}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <p>팀원 수락</p>
+                  <Reddot />
+                </div>
+                <Icon asset="Right-Arrow" className={tabsIcon} />
+              </div>
+            </Link>
+          </>
+        )}
 
-        <RegisterFooter />
+        <RegisterFooter content="신청하기" />
       </main>
     </>
   );
@@ -185,5 +217,7 @@ export default function Team(): JSX.Element {
  *
  * @ToDo fetch with team id
  * params: teamname, 팀 소개, 팀 이미지
+ *
+ * 팀원 수락할 때 신규 요청이 있는지
  *
  */
