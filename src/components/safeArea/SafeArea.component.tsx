@@ -1,5 +1,9 @@
 import React from "react";
 
-export default function (): JSX.Element {
-  return <div style={{ margin: "8rem" }} />;
+type IProps = {
+  color?: string;
+};
+
+export default function ({ color }: IProps): JSX.Element {
+  return <div style={{ margin: "8rem", background: color }} />;
 }
