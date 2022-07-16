@@ -40,6 +40,7 @@ export default function Team(): JSX.Element {
 
   //state
   const [possible, setPossible] = useState<boolean>();
+  const [goMatches, setGoMatches] = useState<boolean>();
   const [recruitMember, setRecruitMember] = useState<boolean>();
   const [isCaptain, setIsCaptain] = useState<boolean>(true);
 
@@ -208,7 +209,36 @@ export default function Team(): JSX.Element {
           </>
         )}
 
-        <RegisterFooter content="신청하기" />
+        {isCaptain ? (
+          <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", width: "50%" }}>
+              <RegisterFooter
+                content={goMatches ? "대결등록 취소" : "대결등록"}
+                handleClick={() => {
+                  setGoMatches(!goMatches);
+                }}
+                activeStyle={!!goMatches}
+              />
+            </div>
+            <div style={{ display: "flex", width: "50%" }}>
+              <RegisterFooter
+                handleClick={() => {
+                  setRecruitMember(!recruitMember);
+                }}
+                content={recruitMember ? "팀원 모집 취소" : "팀원모집"}
+                activeStyle={!!recruitMember}
+              />
+            </div>
+          </div>
+        ) : (
+          <RegisterFooter
+            handleClick={() => {
+              setGoMatches(!goMatches);
+            }}
+            content={"신청하기"}
+            activeStyle={!!recruitMember}
+          />
+        )}
       </main>
     </>
   );

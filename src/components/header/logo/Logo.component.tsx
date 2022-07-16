@@ -39,6 +39,9 @@ export default function Logo(): JSX.Element {
     if (pathname === "/team/[teamName]/accept") {
       setContent("팀원 수락");
     }
+    if (pathname === "/team/[teamName]/challenges") {
+      setContent("대결 요청");
+    }
     return () => setContent("구십분");
   }, [pathname]);
 

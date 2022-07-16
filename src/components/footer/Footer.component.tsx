@@ -3,20 +3,27 @@ import Link from "next/link";
 import React from "react";
 import styles from "./Footer.module.scss";
 
-const { footer, footerButtonLink } = styles;
+const { footer, footerButtonLink, footerActiveButton } = styles;
 
 type IProps = {
   content: string;
+  handleClick: () => void;
+  activeStyle: boolean;
 };
 
-export const RegisterFooter = ({ content }: IProps): JSX.Element => {
+export const RegisterFooter = ({
+  content,
+  handleClick,
+  activeStyle,
+}: IProps): JSX.Element => {
   return (
     <footer className={footer}>
-      <Link href="">
-        <div className={footerButtonLink}>
-          <p>{content}</p>
-        </div>
-      </Link>
+      <div
+        className={activeStyle ? footerActiveButton : footerButtonLink}
+        onClick={handleClick}
+      >
+        <p>{content}</p>
+      </div>
     </footer>
   );
 };
