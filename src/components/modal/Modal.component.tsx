@@ -1,3 +1,4 @@
+import Button from "@components/button";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
@@ -6,7 +7,7 @@ type ModalProps = {
   show: boolean;
   onClose: () => void;
   children: string | JSX.Element;
-  title: string;
+  title: string | JSX.Element;
 };
 
 const Modal = ({ show, onClose, children, title }: ModalProps): JSX.Element => {
@@ -29,7 +30,7 @@ const Modal = ({ show, onClose, children, title }: ModalProps): JSX.Element => {
             x
           </a>
         </StyledModalHeader>
-        {/* {title && <StyledModalTitle>{title}</StyledModalTitle>} */}
+        {title && <StyledModalTitle>{title}</StyledModalTitle>}
         <StyledModalBody>{children}</StyledModalBody>
       </StyledModal>
     </StyledModalOverlay>
@@ -43,8 +44,74 @@ const Modal = ({ show, onClose, children, title }: ModalProps): JSX.Element => {
   }
 };
 
+export const CenterModal = ({
+  show,
+  onClose,
+  children,
+  title,
+}: ModalProps): JSX.Element => {
+  const [isBrowser, setIsBrowser] = useState(false);
+
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
+
+  const handleCloseClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    onClose();
+  };
+
+  const modalContent = show ? (
+    <StyledModalOverlay>
+      <StyledCenterModalBody>
+        <StyledModalHeader>
+          <a href="#" onClick={handleCloseClick}>
+            x
+          </a>
+        </StyledModalHeader>
+        <StyledCenterBody>
+          {title && <StyledModalTitle>{title}</StyledModalTitle>}
+          <StyledModalBody>{children}</StyledModalBody>
+        </StyledCenterBody>
+      </StyledCenterModalBody>
+    </StyledModalOverlay>
+  ) : null;
+
+  if (isBrowser) {
+    const portalDiv = document.getElementById("modal-element")!;
+    return ReactDOM.createPortal(modalContent, portalDiv);
+  } else {
+    return <></>;
+  }
+};
+
 const StyledModalBody = styled.div`
   padding-top: 10px;
+  width: 400px;
+`;
+
+const StyledModalTitle = styled.p`
+  text-align: center;
+  font-size: 33px;
+  font-weight: 700;
+`;
+
+const StyledCenterBody = styled.div`
+  display: flex;
+  height: 600px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const StyledCenterModalBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  background: white;
+  width: 80%;
+  height: 50%;
+  border-radius: 15px;
+  padding: 15px;
 `;
 
 const StyledModalHeader = styled.div`
@@ -70,6 +137,7 @@ const StyledModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
 `;
 
 export default Modal;

@@ -1,1 +1,1 @@
-export { default } from "./Modal.component";
+export { default, CenterModal } from "./Modal.component";
