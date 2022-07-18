@@ -11,6 +11,19 @@ type ButtonProps = {
 
 const { button, coloredButton } = styles;
 
+export function ButtonRound(props: ButtonProps): JSX.Element {
+  const { handleClick, content, length, color = true } = props;
+  const coloredInjectedClassName = injectClassNames(
+    coloredButton,
+    styles[length]
+  );
+  return (
+    <button onClick={handleClick} className={coloredInjectedClassName}>
+      <p>{content}</p>
+    </button>
+  );
+}
+
 export default function Button(props: ButtonProps): JSX.Element {
   const { handleClick, content, length, color = false } = props;
   const injectedClassName = injectClassNames(button, styles[length]);
