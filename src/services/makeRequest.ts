@@ -67,6 +67,9 @@ export const makeRequest: any = async ({
       if (res.status === 201) {
         const json = await res.json();
         console.log("json =", json);
+
+        Config.setToken("token", json?.accesstoken, 30);
+
         return json;
       }
 
