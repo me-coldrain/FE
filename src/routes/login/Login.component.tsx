@@ -1,52 +1,65 @@
-import React from "react";
-import Head from "next/head";
-import { usePageData, usePageDetails } from "hooks/page";
+import React, { useState } from "react";
 import Input from "components/Input";
 import RouterButton from "components/RouterButton";
 import Link from "next/link";
+
+import { makeRequest } from "services/makeRequest";
 import styles from "./Login.module.scss";
 
-export const addTitleTags = (title: string): JSX.Element => {
-  if (!title) {
-    return <></>;
-  }
-
-  return (
-    <>
-      <title>{title}</title>
-      <meta name="og:title" content={title} />
-    </>
-  );
-};
-
-export const addDescriptionTag = (description: string): JSX.Element => {
-  if (!description) {
-    return <></>;
-  }
-
-  return (
-    <meta name="description" property="og:description" content={description} />
-  );
-};
+interface IInputs {
+  email: string;
+  password: string;
+}
 
 export default function User(): JSX.Element {
   const { user, inputBox, signup, kakao } = styles;
-  const { title = "", description = "" } = usePageDetails();
+  const [inputs, setInputs] = useState<IInputs>({
+    email: "",
+    password: "",
+  });
+  const { email, password } = inputs;
+
+  const handleChange = (e: any): any => {
+    const { id } = e.target;
+    const { value } = e.target;
+    setInputs((values: IInputs) => ({ ...values, [id]: value }));
+    console.log(inputs);
+  };
+
+  const handleLogin = () => {
+    const params = inputs;
+    console.log(params);
+    makeRequest({
+      endpoint: "members/login",
+      method: "POST",
+      params,
+      auth: false,
+    });
+  };
 
   return (
     <>
-      <Head>
-        {addTitleTags(title)}
-        {addDescriptionTag(description)}
-        <meta name="robots" content="INDEX,FOLLOW" />
-      </Head>
       <main className={user}>
         <section>
           <h1>로고</h1>
           <div className={inputBox}>
-            <Input placeholder="아이디" type="id" normal></Input>
-            <Input placeholder="비밀번호" type="password" normal></Input>
-            <RouterButton url="/" bigSquare>
+            <Input
+              id="email"
+              type="id"
+              placeholder="아이디"
+              onChange={handleChange}
+              value={email || ""}
+              normal
+            ></Input>
+            <Input
+              id="password"
+              type="password"
+              placeholder="비밀번호"
+              onChange={handleChange}
+              value={password || ""}
+              normal
+            ></Input>
+            <RouterButton bigSquareLogin onClick={handleLogin}>
               로그인
             </RouterButton>
           </div>
