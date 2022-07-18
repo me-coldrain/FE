@@ -11,6 +11,9 @@ import Link from "next/link";
 import styles from "./Page.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "stores";
+import { ButtonRound } from "@components/button";
+import router from "next/router";
+import { browserStorage } from "utils/browser";
 
 const {
   page,
@@ -23,6 +26,7 @@ const {
   teamCardInfo,
   teamCardIcon,
   safeArea,
+  gettingMembers,
 } = styles;
 
 type PageProps = {
@@ -70,6 +74,14 @@ export default function Page(props: PageProps): JSX.Element {
   const { isLanding } = props;
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
+
+  //temp code ---------------------
+  browserStorage.setCookie(
+    "token",
+    "eyJ0eXBlIjoidG9rZW4iLCJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiVVNFUiIsInN1YiI6ImFkbWluQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjpudWxsLCJleHAiOjE2NjA3MDg2MzEsImlhdCI6MTY1ODExNjYzMSwibWVtYmVySWQiOjEyfQ.Fh58ow2E1n7QrG8UMBmtUu4axmrRtPQ_LevxW9XUKj4",
+    3
+  );
+  //-------------------------------
 
   // const [teams, setTeams] = useState<Teams[]>();
 
@@ -133,6 +145,15 @@ export default function Page(props: PageProps): JSX.Element {
                 </Link>
               );
             })}
+          </div>
+          <div className={gettingMembers}>
+            <ButtonRound
+              handleClick={() => {
+                router.push("/create");
+              }}
+              content="+"
+              length="round"
+            />
           </div>
         </section>
       </main>
