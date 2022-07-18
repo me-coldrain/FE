@@ -10,6 +10,7 @@ type ButtonProps = {
   children?: string;
   bigRound?: boolean;
   bigSquare?: boolean;
+  bigSquareLogin?: boolean;
   onClick?: any;
   nickname?: any;
   preferedPosition?: any;
@@ -26,6 +27,7 @@ export default function Button(props: ButtonProps): JSX.Element {
     children = "",
     bigRound,
     bigSquare,
+    bigSquareLogin,
     onClick,
     nickname = "",
     preferedPosition = "",
@@ -86,6 +88,13 @@ export default function Button(props: ButtonProps): JSX.Element {
         >
           <a>{children}</a>
         </Link>
+      </div>
+    );
+  }
+  if (bigSquareLogin) {
+    return (
+      <div className={login} onClick={onClick}>
+        <a>{children}</a>
       </div>
     );
   }
