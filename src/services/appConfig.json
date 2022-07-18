@@ -1,0 +1,10 @@
+{
+  "LOG_LEVEL": "DEBUG",
+  "ENV": "PROD",
+  "LANG": "ko",
+  "SERVER_URL": {
+    "LOCAL": "http://localhost:3000/api/v1",
+    "DEV": "",
+    "PROD": "http://ec2-52-78-86-217.ap-northeast-2.compute.amazonaws.com:3000/api/v1"
+  }
+}

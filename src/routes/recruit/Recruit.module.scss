@@ -1,0 +1,28 @@
+.getQuestion {
+  margin: 1rem;
+  h1 {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--gray-text-color);
+  }
+}
+
+.questionInput {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.buttonBottom {
+  justify-content: flex-end;
+  bottom: 6rem;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
