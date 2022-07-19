@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Radar } from "react-chartjs-2";
 // hooks
 import { useRouter } from "next/router";
+import { handleFile } from "@hooks/events";
 // component
 import Image, { ImageWithHeader } from "@components/image";
 import Icon from "@components/icon";
@@ -12,8 +13,22 @@ import Link from "next/link";
 import Footer, { RegisterFooter } from "@components/footer";
 import styles from "./Mypage.module.scss";
 import { user } from "stores/user";
+import UserProfile from "@components/userProfile";
+import RouterButton from "@components/RouterButton";
 
 const {
+  upperBox,
+  leftBox,
+  leftBoxName,
+  leftBoxNameBox,
+  leftBoxNamePosition,
+  leftBoxContact,
+  leftBoxContactBox,
+  rightBox,
+  myImage,
+  myInfo,
+  defaultProfile,
+  preview,
   aboutTeam,
   aboutTeamImage,
   scoreBoard,
@@ -32,12 +47,14 @@ const {
   matchHistoryContainerLoser,
   tabs,
   tabsIcon,
+  secession,
 } = styles;
 
 export default function Team(): JSX.Element {
   const router = useRouter();
   const { teamId, teamName } = router.query;
   const [data, setData] = useState([25, 50, 75, 91, 100]);
+  const [previewURL, setPreviewURL] = useState("");
   console.log("fetch with teamId =", teamId, teamName);
 
   const getChartData = (canvas: any) => {
@@ -59,6 +76,16 @@ export default function Team(): JSX.Element {
         {
           label: "포지션 점수",
           data: data,
+          borderWidth: 1,
+          backgroundColor: gradient,
+          borderColor: "#4B71EF",
+          //라인 스무스하게 바꿔주는 속성
+          lineTension: 0,
+          pointBackgroundColor: "#4B72F1",
+          pointBorderWidth: "2",
+        },
+        {
+          data: [0],
           borderWidth: 1,
           backgroundColor: gradient,
           borderColor: "#4B71EF",
@@ -92,12 +119,9 @@ export default function Team(): JSX.Element {
         maxTicksLimit: 100,
         display: false,
       },
-    },
-    options: {
-      plugins: {
-        legend: {
-          display: false,
-        },
+      pointLabels: {
+        fontSize: 12,
+        fontColor: "#4B72F1",
       },
     },
   };
@@ -120,76 +144,79 @@ export default function Team(): JSX.Element {
 
   useEffect(captainHandler, []);
 
-  const matchContainer = (
-    <div className={matchHistoryContainer}>
-      <div className={matchHistoryContainerWin}>
-        <div className={matchHistoryContainerWinner}>
-          <p>승리</p>
-        </div>
-        <p>A팀</p>
-      </div>
-      <div className={matchHistoryContainerResult}>
-        <p>2022.03.04</p>
-        <p
-          style={{
-            fontWeight: "bold",
-            fontSize: "30px",
-            margin: "0.5rem",
-          }}
-        >
-          4:2
-        </p>
-      </div>
-      <div className={matchHistoryContainerLose}>
-        <div className={matchHistoryContainerLoser}>
-          <p>패배</p>
-        </div>
-        <p>B팀</p>
-      </div>
-    </div>
-  );
-
   return (
     <>
       <main className={aboutTeam}>
-        <ImageWithHeader
-          className={aboutTeamImage}
-          src="/assets/landing.png"
-          alt="Desktop & Mobile PWA Application"
-          width="100%"
-          height="220px"
-        />
-
-        <div className={scoreBoard}>
-          <div className={scoreBoardContentName}>
-            <h5>MVP</h5>
-            <h5>팀 우승</h5>
-            <h5>경기 참여</h5>
+        <div className={upperBox}>
+          <div className={myInfo}>
+            <div className={leftBox}>
+              <div className={leftBoxName}>
+                <div className={leftBoxNameBox}>닉네임</div>
+                <div className={leftBoxNamePosition}>#미드필더</div>
+              </div>
+              <div className={leftBoxContact}>
+                <div className={leftBoxContactBox}>
+                  <Icon asset="Chat"></Icon>kakaotalk
+                </div>
+                <hr></hr>
+                <div className={leftBoxContactBox}>
+                  <Icon asset="Device"></Icon>01012345678
+                </div>
+              </div>
+            </div>
+            <div className={rightBox}>
+              <div className={myImage}>
+                <label htmlFor="ex_file">
+                  <Icon asset="Pen"></Icon>
+                </label>
+                {previewURL !== "" ? (
+                  <img className={preview} src={previewURL}></img>
+                ) : (
+                  <div className={defaultProfile}>
+                    <Icon asset="Person"></Icon>
+                  </div>
+                )}
+                <input
+                  type="file"
+                  id="ex_file"
+                  accept="image/jpg,impge/png,image/jpeg,image/gif"
+                  onChange={(e) => handleFile(e, setPreviewURL)}
+                />
+              </div>
+            </div>
           </div>
-          <div className={scoreBoardDetail}>
-            <div
-              className={scoreBoardDetailBox}
-              style={{ borderRight: "1px solid" }}
-            >
-              <Icon asset="Crown"></Icon>
-              <p>7회</p>
+          <div className={scoreBoard}>
+            <div className={scoreBoardContentName}>
+              <h5>MVP</h5>
+              <h5>팀 우승</h5>
+              <h5>경기 참여</h5>
             </div>
-            <div
-              className={scoreBoardDetailBox}
-              style={{ borderRight: "1px solid" }}
-            >
-              <Icon asset="Crown"></Icon>
-              <p>28회</p>
-            </div>
-            <div className={scoreBoardDetailBox}>
-              <Icon asset="Crown"></Icon>
-              <p>90회</p>
+            <div className={scoreBoardDetail}>
+              <div
+                className={scoreBoardDetailBox}
+                style={{ borderRight: "1px solid" }}
+              >
+                <Icon asset="Crown"></Icon>
+                <p>7회</p>
+              </div>
+              <div
+                className={scoreBoardDetailBox}
+                style={{ borderRight: "1px solid" }}
+              >
+                <Icon asset="Crown"></Icon>
+                <p>28회</p>
+              </div>
+              <div className={scoreBoardDetailBox}>
+                <Icon asset="Crown"></Icon>
+                <p>90회</p>
+              </div>
             </div>
           </div>
         </div>
 
         <div className={matchInfo}>
           <h3>포지션 점수</h3>
+          <hr />
           <div>
             <Radar
               data={(canvas: any) => getChartData(canvas)}
@@ -227,7 +254,13 @@ export default function Team(): JSX.Element {
           </div>
         </Link>
 
-        {/* <RegisterFooter></RegisterFooter> */}
+        <RouterButton bigRound mine>
+          수정하기
+        </RouterButton>
+
+        <div className={secession}>
+          <p>회원 탈퇴하기</p>
+        </div>
       </main>
     </>
   );

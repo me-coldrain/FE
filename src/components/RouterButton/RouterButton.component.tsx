@@ -3,7 +3,7 @@ import React from "react";
 import { injectClassNames } from "utils/css";
 import styles from "./RouterButton.module.scss";
 
-const { round, login, normal, shares } = styles;
+const { round, login, normal, shares, editButton } = styles;
 
 type ButtonProps = {
   url?: string;
@@ -19,6 +19,7 @@ type ButtonProps = {
   teamInfo?: string;
   location?: string;
   stadium?: string;
+  mine?: boolean;
 };
 
 export default function Button(props: ButtonProps): JSX.Element {
@@ -36,6 +37,7 @@ export default function Button(props: ButtonProps): JSX.Element {
     teamInfo = "",
     location = "",
     stadium = "",
+    mine,
   } = props;
 
   if (bigRound) {
@@ -46,6 +48,22 @@ export default function Button(props: ButtonProps): JSX.Element {
             href={{
               pathname: url,
               query: { nickname: nickname, position: preferedPosition },
+            }}
+            prefetch={true}
+            as={url}
+          >
+            <a>{children}</a>
+          </Link>
+        </div>
+      );
+    }
+    if (mine) {
+      return (
+        <div className={editButton} onClick={onClick}>
+          <Link
+            href={{
+              pathname: url,
+              // query: { nickname: nickname, position: preferedPosition },
             }}
             prefetch={true}
             as={url}
