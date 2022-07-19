@@ -34,44 +34,73 @@ const {
   tabsIcon,
 } = styles;
 
-const data = {
-  labels: [
-    "Eating",
-    "Drinking",
-    "Sleeping",
-    "Designing",
-    "Coding",
-    "Cycling",
-    "Running",
-  ],
-  datasets: [
-    {
-      label: "My First dataset",
-      backgroundColor: "rgba(179,181,198,0.2)",
-      borderColor: "rgba(179,181,198,1)",
-      pointBackgroundColor: "rgba(179,181,198,1)",
-      pointBorderColor: "#fff",
-      pointHoverBackgroundColor: "#fff",
-      pointHoverBorderColor: "rgba(179,181,198,1)",
-      data: [65, 59, 90, 81, 56, 55, 40],
-    },
-    {
-      label: "My Second dataset",
-      backgroundColor: "rgba(255,99,132,0.2)",
-      borderColor: "rgba(255,99,132,1)",
-      pointBackgroundColor: "rgba(255,99,132,1)",
-      pointBorderColor: "#fff",
-      pointHoverBackgroundColor: "#fff",
-      pointHoverBorderColor: "rgba(255,99,132,1)",
-      data: [28, 48, 40, 19, 96, 27, 100],
-    },
-  ],
-};
-
 export default function Team(): JSX.Element {
   const router = useRouter();
   const { teamId, teamName } = router.query;
+  const [data, setData] = useState([25, 50, 75, 91, 100]);
   console.log("fetch with teamId =", teamId, teamName);
+
+  const getChartData = (canvas: any) => {
+    const ctx = canvas.getContext("2d");
+
+    const x = canvas.height * 0.65;
+    const y = canvas.width * 0.25;
+    const outerRadius = canvas.width / 3.2;
+
+    const x1 = x * 1.49;
+    const y1 = y * 0.87;
+
+    const gradient = ctx.createRadialGradient(x, y, outerRadius, x1, y1, 1);
+    gradient.addColorStop(1, "rgba(176, 193, 249, 0.2)");
+    gradient.addColorStop(0, "rgba(75, 114, 241, 0.8)");
+    return {
+      labels: ["분위기 메이커", "미드필더", "골키퍼", "수비수", "공격수"],
+      datasets: [
+        {
+          label: "포지션 점수",
+          data: data,
+          borderWidth: 1,
+          backgroundColor: gradient,
+          borderColor: "#4B71EF",
+          //라인 스무스하게 바꿔주는 속성
+          lineTension: 0,
+          pointBackgroundColor: "#4B72F1",
+          pointBorderWidth: "2",
+        },
+      ],
+    };
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: true,
+    layout: {
+      beginAtZero: true,
+      padding: {
+        right: 35,
+        bottom: 60,
+      },
+    },
+    scale: {
+      gridLines: {
+        circular: true,
+      },
+      ticks: {
+        suggestedMin: 0,
+        suggestedMax: 100,
+        stepSize: 10,
+        maxTicksLimit: 100,
+        display: false,
+      },
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+    },
+  };
 
   //state
   const [possible, setPossible] = useState<boolean>();
@@ -133,19 +162,28 @@ export default function Team(): JSX.Element {
 
         <div className={scoreBoard}>
           <div className={scoreBoardContentName}>
-            <h5>승점</h5>
-            <h5>승률</h5>
+            <h5>MVP</h5>
+            <h5>팀 우승</h5>
+            <h5>경기 참여</h5>
           </div>
           <div className={scoreBoardDetail}>
             <div
               className={scoreBoardDetailBox}
               style={{ borderRight: "1px solid" }}
             >
-              <p>900점</p>
+              <Icon asset="Crown"></Icon>
+              <p>7회</p>
+            </div>
+            <div
+              className={scoreBoardDetailBox}
+              style={{ borderRight: "1px solid" }}
+            >
+              <Icon asset="Crown"></Icon>
+              <p>28회</p>
             </div>
             <div className={scoreBoardDetailBox}>
-              <p>20%</p>
-              <p>12전 10승 2무 3패</p>
+              <Icon asset="Crown"></Icon>
+              <p>90회</p>
             </div>
           </div>
         </div>
@@ -153,7 +191,10 @@ export default function Team(): JSX.Element {
         <div className={matchInfo}>
           <h3>포지션 점수</h3>
           <div>
-            <Radar data={data} width={400} height={400} />
+            <Radar
+              data={(canvas: any) => getChartData(canvas)}
+              options={options}
+            />
           </div>
         </div>
 

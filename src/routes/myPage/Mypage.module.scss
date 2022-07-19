@@ -204,11 +204,16 @@
 
     &Box {
       display: flex;
-      flex-direction: column;
-      width: 100%;
       justify-content: center;
       align-items: center;
+      width: 100%;
       margin: 2%;
+      color: #4b72f1;
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 0.5rem;
+      }
 
       p:first-child {
         font-size: 24px;
