@@ -1,18 +1,24 @@
 // 액션
 export const SET_TEAMS = "SET_TEAMS";
 
+type ITime = string[];
 export interface Teams {
-  id: number;
-  name: string;
+  createdDate: string;
+  drawCount: number;
+  headCount: number;
+  loseCount: number;
+  mainArea: string;
+  match: boolean;
+  modifiedDate: string;
+  preferredArea: string;
+  recruit: boolean;
+  teamId: number;
+  teamName: string;
+  time: string[];
+  totalGameCount: number;
+  weekdays: string[];
+  winCount: number;
   winRate: number;
-  games: number;
-  win: number;
-  draw: number;
-  lose: number;
-  location: string;
-  where: boolean;
-  weekday: string[];
-  time: string;
 }
 
 export interface SetTeamsAction {

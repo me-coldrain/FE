@@ -19,6 +19,8 @@ type ImageProps = {
   width?: string;
   loading?: "lazy" | "eager";
   className?: string;
+  title?: string | string[] | undefined;
+  content?: string;
 };
 
 type UseImageState = () => [(img: HTMLImageElement | null) => void, ImageState];
@@ -72,6 +74,8 @@ export function ImageWithHeader(props: ImageProps): JSX.Element {
     loading = "lazy",
     className = "",
     isPlaceholder = false,
+    title,
+    content,
   } = props;
   const [imageRef, imageState] = useImageState();
 
@@ -94,10 +98,8 @@ export function ImageWithHeader(props: ImageProps): JSX.Element {
         />
       )}
       <div className={absoluteText}>
-        <h3>팀이름</h3>
-        <h4>
-          팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.팀소개입니다.
-        </h4>
+        <h3>{title}</h3>
+        <h4>{content}</h4>
       </div>
     </div>
   );
