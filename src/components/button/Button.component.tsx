@@ -1,3 +1,4 @@
+import { Checkbox } from "@mui/material";
 import React from "react";
 import { injectClassNames } from "utils/css";
 import styles from "./Button.module.scss";
@@ -8,8 +9,14 @@ type ButtonProps = {
   length: string;
   color?: boolean;
 };
+type CheckBoxProps = {
+  checked: boolean;
+  handleClick: () => void;
+  content: string | JSX.Element;
+  color?: boolean;
+};
 
-const { button, coloredButton } = styles;
+const { button, coloredButton, checkBox } = styles;
 
 export function ButtonRound(props: ButtonProps): JSX.Element {
   const { handleClick, content, length, color = true } = props;
@@ -20,6 +27,18 @@ export function ButtonRound(props: ButtonProps): JSX.Element {
   return (
     <button onClick={handleClick} className={coloredInjectedClassName}>
       <p>{content}</p>
+    </button>
+  );
+}
+
+export function CheckBox(props: CheckBoxProps): JSX.Element {
+  const { checked, handleClick, content, ...rest } = props;
+  const coloredInjectedClassName = injectClassNames(checkBox, styles["long"]);
+
+  return (
+    <button onClick={handleClick} className={coloredInjectedClassName}>
+      <p>{content}</p>
+      <Checkbox checked={checked} />
     </button>
   );
 }

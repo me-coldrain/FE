@@ -35,3 +35,15 @@
     font-size: 30px;
   }
 }
+
+.checkBox {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--light-background-color);
+  &:hover {
+    opacity: 0.9;
+    background-color: var(--light-background-color);
+  }
+}

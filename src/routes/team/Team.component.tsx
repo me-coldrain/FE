@@ -12,12 +12,7 @@ import { user } from "stores/user";
 import Reddot from "@components/reddot";
 import styles from "./Team.module.scss";
 import { makeRequest } from "services/makeRequest";
-import { Teams } from "stores/teams";
-import {
-  GetServerSideProps,
-  GetStaticProps,
-  InferGetServerSidePropsType,
-} from "next";
+import { GetStaticProps, InferGetServerSidePropsType } from "next";
 
 type ITeam = {
   drawCount: number;
@@ -89,7 +84,7 @@ export default function Team({
 
   const teamDetailMakeRequest = async () => {
     await makeRequest({
-      endpoint: `home/teams/8`,
+      endpoint: `home/teams/${teamId}`,
       method: "GET",
       auth: true,
     })
@@ -194,17 +189,15 @@ export default function Team({
   return (
     <>
       <main className={aboutTeam}>
-        {/* <Suspense fallback={<p>Loading...</p>}>
-          <ImageWithHeader
-            className={aboutTeamImage}
-            src={teamData?.teamImageFileUrl}
-            alt="Desktop & Mobile PWA Application"
-            width="100%"
-            height="220px"
-            title={teamName as string}
-            content={teamData?.introduce}
-          />
-        </Suspense>
+        <ImageWithHeader
+          className={aboutTeamImage}
+          src={teamData?.teamImageFileUrl}
+          alt="Desktop & Mobile PWA Application"
+          width="100%"
+          height="220px"
+          title={teamName as string}
+          content={teamData?.introduce}
+        />
         <div className={scoreBoard}>
           <div className={scoreBoardContentName}>
             <h5>승점</h5>
@@ -348,12 +341,12 @@ export default function Team({
         ) : (
           <RegisterFooter
             handleClick={() => {
-              setGoMatches(!goMatches);
+              router.push(`${teamName}/apply/rules`);
             }}
             content={"신청하기"}
             activeStyle={!!recruitMember}
           />
-        )} */}
+        )}
       </main>
     </>
   );
