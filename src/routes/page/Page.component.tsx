@@ -9,15 +9,9 @@ import { injectClassNames } from "utils/css";
 
 import Link from "next/link";
 import styles from "./Page.module.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "stores";
 import { ButtonRound } from "@components/button";
 import router from "next/router";
-import { browserStorage } from "utils/browser";
-import { useDispatch } from "react-redux";
-import { makeRequest } from "services/makeRequest";
-import { setTeams, Teams } from "stores/teams";
-import { GetServerSideProps, NextPageContext } from "next";
+import { Teams } from "stores/teams";
 
 const {
   page,
