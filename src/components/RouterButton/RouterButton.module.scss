@@ -3,8 +3,8 @@
 @use "styles/variables/theme";
 
 .round {
-  position: absolute;
-  bottom: 10%;
+  position: fixed;
+  bottom: 7%;
   left: 0;
   right: 0;
   max-width: 390px;

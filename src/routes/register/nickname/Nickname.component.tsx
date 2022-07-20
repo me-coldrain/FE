@@ -11,10 +11,23 @@ const { filebox, image, close, textBox } = styles;
 export default function nickname(): JSX.Element {
   // const dispatch = useDispatch();
   const [previewURL, setPreviewURL] = useState("");
-  const [nickname, setNickname] = useState();
+  const [nickname, setNickname] = useState<string>();
 
   const handleName = (e: any) => {
     setNickname(e.target.value);
+  };
+
+  const handleSubmit = (): any => {
+    const nicknameCheck = (nickname: string): boolean => {
+      const _reg = /^[가-힣a-zA-Z0-9]{2,8}$/;
+
+      return _reg.test(nickname as string);
+    };
+
+    if (!nicknameCheck(nickname as string)) {
+      alert("영어,한글을 포함해 2~8자리이어야 합니다");
+      return;
+    }
   };
 
   return (
@@ -55,7 +68,14 @@ export default function nickname(): JSX.Element {
             />
           </div>
         )}
-        <RouterButton url="/register/position" bigRound nickname={nickname}>
+        <RouterButton
+          url="/register/position"
+          bigRound
+          nickname={nickname}
+          onClick={() => {
+            handleSubmit();
+          }}
+        >
           다음
         </RouterButton>
       </main>

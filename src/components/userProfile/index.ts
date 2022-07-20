@@ -1,1 +1,1 @@
-export { default, ImageWithHeader } from "./UserProfile.component";
+export { default } from "./UserProfile.component";

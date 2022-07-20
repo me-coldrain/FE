@@ -27,6 +27,18 @@ class Config {
   }
   // ---------------------------------------------------------------------------
 
+  // token data setting --------------------------------------------------------
+  public setToken(name: string, value: string, days: number) {
+    try {
+      const token = browserStorage.setCookie(name, value, days);
+      return token;
+    } catch (error) {
+      console.log("getting token: services: ", error);
+      return false;
+    }
+  }
+  // ---------------------------------------------------------------------------
+
   // token data from browserStorage --------------------------------------------
   public getToken() {
     try {

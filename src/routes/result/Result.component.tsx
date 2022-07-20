@@ -6,9 +6,9 @@ import RouterButton from "@components/RouterButton";
 import { usePageData, usePageDetails } from "hooks/page";
 import { injectClassNames } from "utils/css";
 import Link from "next/link";
-import styles from "./Formation.module.scss";
+import styles from "./Result.module.scss";
 
-const { profiles } = styles;
+const { profiles, selected, selectedMember } = styles;
 
 export const addTitleTags = (title: string): JSX.Element => {
   if (!title) {
@@ -45,36 +45,32 @@ export default function Page(): JSX.Element {
         <meta name="robots" content="INDEX,FOLLOW" />
       </Head>
       <main>
-        <Landing />
         <section>
           <article>
-            <h3>공격수</h3>
-            <hr />
+            <h2>교체자 명단을 선택해주세요</h2>
+            <p>
+              미리 지정한 포메이션에서 교체된 선수를 선택해주세요.
+              <br />
+              개인 점수가 부여됩니다.
+            </p>
+            <div className={selected}>
+              <div className={selectedMember}>
+                <p>x</p>
+                <UserProfile></UserProfile>
+              </div>
+              <UserProfile></UserProfile>
+              <UserProfile></UserProfile>
+              <UserProfile></UserProfile>
+              <UserProfile></UserProfile>
+              <UserProfile></UserProfile>
+              <UserProfile></UserProfile>
+            </div>
+          </article>
+          <article>
             <div className={profiles}>
               <UserProfile></UserProfile>
               <UserProfile></UserProfile>
               <UserProfile></UserProfile>
-              <UserProfile></UserProfile>
-            </div>
-          </article>
-          <article>
-            <h3>미드필더</h3>
-            <hr />
-            <div>
-              <UserProfile></UserProfile>
-            </div>
-          </article>
-          <article>
-            <h3>수비수</h3>
-            <hr />
-            <div>
-              <UserProfile></UserProfile>
-            </div>
-          </article>
-          <article>
-            <h3>골키퍼</h3>
-            <hr />
-            <div>
               <UserProfile></UserProfile>
             </div>
           </article>

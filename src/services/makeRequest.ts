@@ -62,6 +62,17 @@ export const makeRequest: any = async ({
         console.log("json =", json);
         return json;
       }
+
+      // 회원가입 성공시 로그인 페이지로 넘어갈 수 있또록 해야함
+      if (res.status === 201) {
+        const json = await res.json();
+        console.log("json =", json);
+
+        Config.setToken("token", json?.accesstoken, 30);
+
+        return json;
+      }
+
       // throw {
       //   message: "Fetch failed",
       //   status: res.status,

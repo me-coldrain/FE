@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import { usePageDetails } from "hooks/page";
 import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 import Input from "components/Input";
+
+import { makeRequest } from "services/makeRequest";
 import styles from "./signup.module.scss";
 
 interface IInputs {
   email: string;
-  pwd: string;
-  pwdChk: string;
+  password: string;
+  confirmpassword: string;
 }
 
 export const addTitleTags = (title: string): JSX.Element => {
@@ -38,44 +40,43 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 };
 
 export default function User(): JSX.Element {
-  // const dispatch = useDispatch();
+  const router = useRouter();
   const { user, inputBox } = styles;
   const { title = "", description = "" } = usePageDetails();
   const [inputs, setInputs] = useState<IInputs>({
     email: "",
-    pwd: "",
-    pwdChk: "",
+    password: "",
+    confirmpassword: "",
   });
-  const { email, pwd, pwdChk } = inputs;
+  const { email, password, confirmpassword } = inputs;
 
   const handleChange = (e: any): any => {
     const { id } = e.target;
     const { value } = e.target;
     setInputs((values: IInputs) => ({ ...values, [id]: value }));
+    console.log(inputs);
   };
 
   const handleSubmit = (): any => {
     const idCheck = (email: string): boolean => {
       const _reg =
-        // 임시, 바꿔야 함
-        /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
       return _reg.test(email);
     };
 
-    const pwdCheck = (pwd: string): boolean => {
-      //임시, 바꿔야함
-      const _reg = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,20}$/;
+    const pwdCheck = (password: string): boolean => {
+      const _reg = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,20}$/;
 
-      return _reg.test(pwd);
+      return _reg.test(password);
     };
 
-    if (!email || !pwd) {
+    if (!email || !password) {
       alert("빈값이 있습니다.");
       return;
     }
 
-    if (pwd !== pwdChk) {
+    if (password !== confirmpassword) {
       alert("비밀번호와 비밀번호확인 값이 다릅니다.");
       return;
     }
@@ -85,14 +86,22 @@ export default function User(): JSX.Element {
       return;
     }
 
-    if (!pwdCheck(pwd)) {
+    if (!pwdCheck(password)) {
       alert(
-        "비밀번호는 8~20 영문 대소문자, 최소 1개의 숫자 혹은 특수 문자를 포함해야합니다."
+        "비밀번호는 최소 1개의 영문 대소문자+숫자+특수문자를 포함하여 8~20자리이어야 합니다."
       );
       return;
     }
-
-    // dispatch(userActions.signUpDB(inputs));
+    const params = inputs;
+    console.log(params);
+    makeRequest({
+      endpoint: "members/signup",
+      method: "POST",
+      params,
+      auth: false,
+    });
+    // 회원가입 성공 후 넘어갈 수 있도록 해야함, 추후 삭제해야하는 코드
+    router.push("/login");
   };
 
   return (
@@ -118,18 +127,18 @@ export default function User(): JSX.Element {
               signup
             ></Input>
             <Input
-              id="pwd"
+              id="password"
               type="password"
               onChange={handleChange}
-              value={pwd || ""}
+              value={password || ""}
               label="비밀번호"
               signup
             ></Input>
             <Input
-              id="pwdChk"
+              id="confirmpassword"
               type="password"
               onChange={handleChange}
-              value={pwdChk || ""}
+              value={confirmpassword || ""}
               label="비밀번호 재확인"
               signup
             ></Input>

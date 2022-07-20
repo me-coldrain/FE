@@ -96,7 +96,14 @@ export default function Input(props: InputProps): JSX.Element {
 
   if (normal) {
     return (
-      <input className={login} placeholder={placeholder} type={type}></input>
+      <input
+        className={login}
+        placeholder={placeholder}
+        type={type}
+        id={id}
+        value={value}
+        onChange={onChange}
+      ></input>
     );
   }
 

@@ -2,7 +2,8 @@ import React, { useCallback, useState } from "react";
 import { injectClassNames } from "utils/css";
 import styles from "./Image.module.scss";
 
-const { image, placeholder, absoluteText } = styles;
+const { image, placeholder, absoluteText, expectedMatch, matchingTeam, title } =
+  styles;
 
 enum ImageState {
   Loading = "IMAGE_LOADING",
@@ -19,8 +20,9 @@ type ImageProps = {
   width?: string;
   loading?: "lazy" | "eager";
   className?: string;
-  title?: string | string[] | undefined;
+  title?: string;
   content?: string;
+  expected?: boolean;
 };
 
 type UseImageState = () => [(img: HTMLImageElement | null) => void, ImageState];
@@ -76,11 +78,22 @@ export function ImageWithHeader(props: ImageProps): JSX.Element {
     isPlaceholder = false,
     title,
     content,
+    expected,
   } = props;
   const [imageRef, imageState] = useImageState();
 
   const imageStyle = isPlaceholder ? placeholder : styles[imageState];
 
+  if (expected) {
+    return (
+      <div className={expectedMatch}>
+        <div className={title}>
+          <div className={matchingTeam}>대결팀</div>
+          <h1>서울FC</h1>
+        </div>
+      </div>
+    );
+  }
   return (
     <div
       role="img"
