@@ -4,7 +4,7 @@ const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 
-const baseUrl = "https://pwa-boilerplate.com";
+const baseUrl = "https://fe-git-develope-90bun.vercel.app";
 
 const sitemapDest = path.resolve(".next/static");
 const skipIndex = ["/profile"];

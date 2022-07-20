@@ -13,7 +13,11 @@ import Reddot from "@components/reddot";
 import styles from "./Team.module.scss";
 import { makeRequest } from "services/makeRequest";
 import { Teams } from "stores/teams";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import {
+  GetServerSideProps,
+  GetStaticProps,
+  InferGetServerSidePropsType,
+} from "next";
 
 type ITeam = {
   drawCount: number;
@@ -59,7 +63,7 @@ const {
   tabsIcon,
 } = styles;
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const data = await makeRequest({
     endpoint: `home/teams/8`,
     method: "GET",
@@ -189,8 +193,8 @@ export default function Team({
 
   return (
     <>
-      {/* <main className={aboutTeam}>
-        <Suspense fallback={<p>Loading...</p>}>
+      <main className={aboutTeam}>
+        {/* <Suspense fallback={<p>Loading...</p>}>
           <ImageWithHeader
             className={aboutTeamImage}
             src={teamData?.teamImageFileUrl}
@@ -349,8 +353,8 @@ export default function Team({
             content={"신청하기"}
             activeStyle={!!recruitMember}
           />
-        )}
-      </main> */}
+        )} */}
+      </main>
     </>
   );
 }
