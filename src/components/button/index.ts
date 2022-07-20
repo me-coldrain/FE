@@ -1,1 +1,1 @@
-export { default, ButtonRound } from "./Button.component";
+export { default, ButtonRound, CheckBox } from "./Button.component";

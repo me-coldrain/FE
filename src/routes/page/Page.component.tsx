@@ -17,6 +17,7 @@ import { browserStorage } from "utils/browser";
 import { useDispatch } from "react-redux";
 import { makeRequest } from "services/makeRequest";
 import { setTeams, Teams } from "stores/teams";
+import { GetServerSideProps, NextPageContext } from "next";
 
 const {
   page,
@@ -34,6 +35,7 @@ const {
 
 type PageProps = {
   isLanding?: boolean;
+  data?: any;
 };
 
 export const addTitleTags = (title: string): JSX.Element => {
@@ -60,7 +62,8 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 };
 
 export default function Page(props: PageProps): JSX.Element {
-  const { isLanding } = props;
+  const { isLanding, data } = props;
+  console.log("data =", data);
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
 
@@ -168,6 +171,15 @@ export default function Page(props: PageProps): JSX.Element {
     </>
   );
 }
+
+Page.getInitialProps = async (ctx: any) => {
+  const data = makeRequest({
+    endpoint: "home/teams",
+    method: "GET",
+    auth: true,
+  });
+  return { data: data };
+};
 
 /**
  *
