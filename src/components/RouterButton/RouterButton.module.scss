@@ -27,6 +27,30 @@
   }
 }
 
+.editButton {
+  bottom: 7%;
+  left: 0;
+  right: 0;
+  max-width: 390px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: var(--content-padding) 0;
+
+  a,
+  p {
+    @include button.default;
+    --button-text-color: #000;
+    --button-font-weight: 600;
+    --button-background: #fff;
+    --button-hover: #3763f2;
+    --button-radius: 1rem;
+    --button-padding: 20px 160px;
+    text-align: center;
+    --border: 1px solid #bebebe;
+  }
+}
+
 .login {
   max-width: 390px;
   width: 100%;
