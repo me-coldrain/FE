@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
-import SelectButton from "components/selectButton";
+import SelectButton from "@components/buttonForSelect";
 import styles from "./Stadium.module.scss";
 
 const { selectBox } = styles;
