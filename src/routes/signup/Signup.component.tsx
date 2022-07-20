@@ -8,7 +8,7 @@ import Progressbar from "components/progressbar";
 import Input from "components/Input";
 
 import { makeRequest } from "services/makeRequest";
-import styles from "./signup.module.scss";
+import styles from "./Signup.module.scss";
 
 interface IInputs {
   email: string;
