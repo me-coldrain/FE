@@ -13,7 +13,7 @@ import Reddot from "@components/reddot";
 import styles from "./Team.module.scss";
 import { makeRequest } from "services/makeRequest";
 import { Teams } from "stores/teams";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
 type ITeam = {
   drawCount: number;
@@ -59,11 +59,24 @@ const {
   tabsIcon,
 } = styles;
 
-export default function Team(): JSX.Element {
+export const getStaticProps = async () => {
+  const data = await makeRequest({
+    endpoint: `home/teams/8`,
+    method: "GET",
+    auth: true,
+  });
+  return {
+    props: { data },
+  };
+};
+
+export default function Team({
+  data,
+}: InferGetServerSidePropsType<typeof getStaticProps>): JSX.Element {
+  console.log(data);
   const router = useRouter();
   const { teamId, teamName } = router.query;
   console.log("fetch with teamId =", teamId, teamName);
-
   //state
   const [goMatches, setGoMatches] = useState<boolean>();
   const [recruitMember, setRecruitMember] = useState<boolean>();
@@ -176,15 +189,15 @@ export default function Team(): JSX.Element {
 
   return (
     <>
-      <main className={aboutTeam}>
-        {/* <Suspense fallback={<p>Loading...</p>}>
+      {/* <main className={aboutTeam}>
+        <Suspense fallback={<p>Loading...</p>}>
           <ImageWithHeader
             className={aboutTeamImage}
             src={teamData?.teamImageFileUrl}
             alt="Desktop & Mobile PWA Application"
             width="100%"
             height="220px"
-            title={teamName}
+            title={teamName as string}
             content={teamData?.introduce}
           />
         </Suspense>
@@ -336,8 +349,8 @@ export default function Team(): JSX.Element {
             content={"신청하기"}
             activeStyle={!!recruitMember}
           />
-        )} */}
-      </main>
+        )}
+      </main> */}
     </>
   );
 }

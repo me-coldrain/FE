@@ -110,7 +110,7 @@ export default function Page(props: PageProps): JSX.Element {
                     pathname: "/team/[teamName]",
                     query: { teamId: item.teamId, teamName: item.teamName },
                   }}
-                  as="/team/[teamName]"
+                  // as={`/team/${item.teamName}`}
                 >
                   <div className={teamCard}>
                     <div className={teamCardFlex}>
