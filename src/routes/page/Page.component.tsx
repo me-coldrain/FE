@@ -3,15 +3,33 @@ import Head from "next/head";
 import Landing from "routes/page/landing";
 // component
 import Icon from "@components/icon";
+import { ButtonRound } from "@components/button";
 // hooks
 import { usePageData, usePageDetails } from "hooks/page";
 import { injectClassNames } from "utils/css";
-
-import Link from "next/link";
-import styles from "./Page.module.scss";
-import { ButtonRound } from "@components/button";
 import router from "next/router";
-import { Teams } from "stores/teams";
+import Link from "next/link";
+
+import styles from "./Page.module.scss";
+
+interface Teams {
+  createdDate: string;
+  drawCount: number;
+  headCount: number;
+  loseCount: number;
+  mainArea: string;
+  match: boolean;
+  modifiedDate: string;
+  preferredArea: string;
+  recruit: boolean;
+  teamId: number;
+  teamName: string;
+  time: string[];
+  totalGameCount: number;
+  weekdays: string[];
+  winCount: number;
+  winRate: number;
+}
 
 const {
   page,
@@ -60,7 +78,7 @@ const Page = (props: PageProps): JSX.Element => {
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
 
-  const teams: Teams[] = data.content;
+  const teams: Teams[] = data?.content;
 
   const classNames = injectClassNames(page, [pageLanding, isLanding]);
 
@@ -106,19 +124,24 @@ const Page = (props: PageProps): JSX.Element => {
                     >
                       <div className={teamCardInfo}>
                         <Icon asset="Location" className={teamCardIcon} />
-                        <p>서울특별시</p>
+                        <p>{item.mainArea}</p>
                       </div>
                       <div className={teamCardInfo}>
                         <Icon asset="Location" className={teamCardIcon} />
-                        <p>홈구장 선호</p>
+
+                        <p>
+                          {item.preferredArea === "home"
+                            ? "홈구장 선호"
+                            : "어웨이 가능"}
+                        </p>
                       </div>
                       <div className={teamCardInfo}>
                         <Icon asset="Calendar" className={teamCardIcon} />
                         {item.weekdays.map((weekday, index) => (
-                          <p key={`weekday=${index}`}>{weekday + "."}</p>
+                          <p key={`weekday=${index}`}>{weekday + "."} </p>
                         ))}
                         {item.time.map((times, index) => (
-                          <p key={`time-${index}`}>{times}</p>
+                          <p key={`time-${index}`}>{times + "/"}</p>
                         ))}
                       </div>
                     </div>

@@ -10,7 +10,6 @@ const Home = (props: any): JSX.Element => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(context.req.cookies);
   const data = await makeRequest({
     endpoint: `home/teams`,
     method: "GET",

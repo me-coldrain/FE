@@ -78,7 +78,7 @@
 
   &WinRate {
     display: flex;
-    width: 60%;
+    width: fit-content;
     justify-content: space-between;
     align-items: center;
   }
@@ -91,6 +91,9 @@
     padding: 2px 1px;
     background-color: #e0dada;
     border-radius: 4px;
+    p {
+      width: fit-content;
+    }
   }
 
   &Icon {
@@ -104,6 +107,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  @include media.mobile {
+    --footer-content-height: 40px;
+    p {
+      font-size: small;
+    }
   }
 }
 

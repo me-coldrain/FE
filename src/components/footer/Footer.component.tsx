@@ -11,6 +11,10 @@ type IProps = {
   activeStyle: boolean;
 };
 
+type Content = {
+  content: string;
+};
+
 export const RegisterFooter = ({
   content,
   handleClick,
@@ -19,7 +23,7 @@ export const RegisterFooter = ({
   return (
     <footer className={footer}>
       <div
-        className={activeStyle ? footerActiveButton : footerButtonLink}
+        className={activeStyle ? footerButtonLink : footerActiveButton}
         onClick={handleClick}
       >
         <p>{content}</p>
@@ -27,6 +31,16 @@ export const RegisterFooter = ({
     </footer>
   );
 };
+
+export function InfoFooter({ content }: Content): JSX.Element {
+  return (
+    <footer className={footer}>
+      <p>
+        <a>{content}</a>
+      </p>
+    </footer>
+  );
+}
 
 export default function Footer(): JSX.Element {
   const id = 1;
