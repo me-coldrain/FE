@@ -10,13 +10,14 @@ type IProps = {
   label?: string;
   content: string | JSX.Element;
   length: string;
-  arrowLink?: string | BaseRouter;
+  arrowLink: BaseRouter;
+  arrowLinkAs: string;
   linkType?: boolean;
 };
 
 type BaseRouter = {
   pathname: string;
-  query: ParsedUrlQuery;
+  query: any;
 };
 
 const {
@@ -31,8 +32,9 @@ const {
 export const PlaceholderWithJSX = ({
   label,
   content,
-  arrowLink = "/team/seoulFC/members",
+  arrowLink,
   linkType = true,
+  arrowLinkAs,
 }: IProps): JSX.Element => {
   return (
     <div className={container}>
@@ -43,7 +45,7 @@ export const PlaceholderWithJSX = ({
             <Icon asset="Right-Arrow" className={containerIcon} />
           </Link>
         ) : (
-          <Link href={arrowLink}>
+          <Link href={arrowLink} as={arrowLinkAs}>
             <p style={{ color: "#868686", fontSize: "18px" }}>전체보기</p>
           </Link>
         )}

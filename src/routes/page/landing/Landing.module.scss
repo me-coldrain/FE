@@ -15,6 +15,7 @@
 
     background-color: #2e3191;
   }
+  width: 100%;
 }
 
 .landing {
@@ -108,7 +109,7 @@
     max-width: var(--content-max-width);
     background-color: var(--secondary-background-color);
     border-radius: 30px;
-    padding: var(--padding-view);
+    padding: 3vw var(--padding-view);
     color: #fff;
     font-size: large;
     outline: none;

@@ -1,0 +1,26 @@
+@use "styles/variables/media";
+
+.wait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 94px;
+  max-height: 37px;
+  padding: 0.1rem 1rem;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #f14b4b;
+  cursor: pointer;
+}
+.cancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 94px;
+  max-height: 37px;
+  padding: 0.1rem 1rem;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #c2c2c2;
+  cursor: pointer;
+}

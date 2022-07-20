@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./SelectButton.module.scss";
 
-const { normal, select, stadiumSelect, stadiumNormal } = styles;
+const { normal, select, stadiumSelect, stadiumNormal, timeSelect, timeNormal } =
+  styles;
 
 type ButtonProps = {
   children?: string;
@@ -31,12 +32,13 @@ export default function Button(props: ButtonProps): JSX.Element {
           <p>{children}</p>
         </div>
       );
+    } else {
+      return (
+        <div className={normal} onClick={onClick}>
+          <p>{children}</p>
+        </div>
+      );
     }
-    return (
-      <div className={normal} onClick={onClick}>
-        <p>{children}</p>
-      </div>
-    );
   }
   if (location) {
     if (active) {
@@ -45,12 +47,13 @@ export default function Button(props: ButtonProps): JSX.Element {
           <p>{children}</p>
         </div>
       );
+    } else {
+      return (
+        <div className={normal} onClick={onClick}>
+          <p>{children}</p>
+        </div>
+      );
     }
-    return (
-      <div className={normal} onClick={onClick}>
-        <p>{children}</p>
-      </div>
-    );
   }
   if (stadium) {
     if (active) {
@@ -59,26 +62,28 @@ export default function Button(props: ButtonProps): JSX.Element {
           <p>{children}</p>
         </div>
       );
-    }
-    return (
-      <div className={stadiumNormal} onClick={onClick}>
-        <p>{children}</p>
-      </div>
-    );
-  }
-  if (time) {
-    if (active) {
+    } else {
       return (
-        <div className={stadiumSelect} onClick={onClick}>
+        <div className={stadiumNormal} onClick={onClick}>
           <p>{children}</p>
         </div>
       );
     }
-    return (
-      <div className={stadiumNormal} onClick={onClick}>
-        <p>{children}</p>
-      </div>
-    );
+  }
+  if (time) {
+    if (active) {
+      return (
+        <div className={timeSelect} onClick={onClick}>
+          <p>{children}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className={timeNormal} onClick={onClick}>
+          <p>{children}</p>
+        </div>
+      );
+    }
   } else {
     return <></>;
   }

@@ -1,0 +1,11 @@
+@use "styles/variables/placeholder" as animations;
+@use "styles/variables/media";
+
+main {
+  .profiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    grid-auto-rows: minmax(100px, auto);
+  }
+}

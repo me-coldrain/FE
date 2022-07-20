@@ -3,8 +3,8 @@ export const handleFile = (e: any, setting: any): any => {
   const reader = new FileReader();
   const formData = new FormData();
   const file = e.target.files[0];
-  const source: string = reader.result as string;
   reader.onloadend = () => {
+    const source = reader.result as string;
     setting(source);
   };
   formData.append("photoFile", file);

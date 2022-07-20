@@ -1,0 +1,60 @@
+.container {
+  margin: 0px 2rem;
+}
+
+.matchHistoryContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: row;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin: 2rem 0px;
+  &img {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+  }
+  &Win {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+      font-weight: 400;
+      font-size: 18px;
+    }
+  }
+  &Lose {
+    @extend .matchHistoryContainerWin;
+  }
+  &Result {
+    @extend .matchHistoryContainerWin;
+  }
+
+  &Winner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 43px;
+    height: 20px;
+    border-radius: 21px;
+    border: 1px solid #19c649;
+    p {
+      color: #19c649;
+      font-weight: 400;
+      font-size: 15px;
+    }
+  }
+
+  &Loser {
+    @extend .matchHistoryContainerWinner;
+    border: 1px solid #c72525;
+    p {
+      color: #c72525;
+    }
+  }
+}

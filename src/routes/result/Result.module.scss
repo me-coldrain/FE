@@ -1,0 +1,24 @@
+@use "styles/variables/placeholder" as animations;
+@use "styles/variables/media";
+
+main {
+  .selected {
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    gap: 1rem;
+    grid-auto-rows: minmax(100px, auto);
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .selected::-webkit-scrollbar {
+    display: none;
+  }
+  .profiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    grid-auto-rows: minmax(100px, auto);
+  }
+}

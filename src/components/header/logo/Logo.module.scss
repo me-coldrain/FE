@@ -1,5 +1,13 @@
 .logo a {
   align-items: center;
+  color: #000;
+  display: flex;
+  font-size: 44px;
+  font-weight: 500;
+}
+
+.textWhite a {
+  align-items: center;
   color: var(--primary-text-color);
   display: flex;
   font-size: 44px;

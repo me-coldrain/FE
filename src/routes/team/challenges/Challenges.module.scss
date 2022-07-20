@@ -1,0 +1,50 @@
+.question {
+  padding: 2rem 1rem;
+  background-color: var(--primary-background-color);
+  p {
+    color: #fff;
+  }
+  &Box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem;
+    p {
+      color: #183db5;
+    }
+  }
+}
+
+.proposal {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid var(--gray-text-color);
+  padding: 1rem;
+
+  &Image {
+    width: 44px;
+    margin-right: 1rem;
+  }
+
+  &Content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p {
+      font-size: large;
+      font-weight: 700;
+    }
+  }
+
+  &Answer {
+    margin-top: 1rem;
+    display: inline-block;
+    width: 100%;
+    word-wrap: break-word;
+    p {
+      color: var(--gray-text-color);
+    }
+  }
+}
