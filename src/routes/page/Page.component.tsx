@@ -61,36 +61,12 @@ export const addDescriptionTag = (description: string): JSX.Element => {
   );
 };
 
-export default function Page(props: PageProps): JSX.Element {
+const Page = (props: PageProps): JSX.Element => {
   const { isLanding, data } = props;
-  console.log("data =", data);
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
 
-  // hooks
-  const dispatch = useDispatch();
-
-  const gettingTeamData = async () => {
-    await makeRequest({
-      endpoint: "home/teams",
-      method: "GET",
-      auth: true,
-    }).then((res: any) => dispatch(setTeams(res.content)));
-  };
-
-  useEffect(() => {
-    gettingTeamData();
-  }, []);
-
-  //temp code ---------------------
-  // browserStorage.setCookie(
-  //   "token",
-  //   "eyJ0eXBlIjoidG9rZW4iLCJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiVVNFUiIsInN1YiI6ImFkbWluQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjpudWxsLCJleHAiOjE2NjA3MDg2MzEsImlhdCI6MTY1ODExNjYzMSwibWVtYmVySWQiOjEyfQ.Fh58ow2E1n7QrG8UMBmtUu4axmrRtPQ_LevxW9XUKj4",
-  //   3
-  // );
-  //-------------------------------
-
-  const teams = useSelector((state: RootState) => state.teams);
+  const teams: Teams[] = data.content;
 
   const classNames = injectClassNames(page, [pageLanding, isLanding]);
 
@@ -170,18 +146,11 @@ export default function Page(props: PageProps): JSX.Element {
       </main>
     </>
   );
-}
-
-Page.getInitialProps = async (ctx: any) => {
-  const data = makeRequest({
-    endpoint: "home/teams",
-    method: "GET",
-    auth: true,
-  });
-  return { data: data };
 };
 
 /**
  *
  * @ToDo 무한 스크롤 적용
  */
+
+export default Page;

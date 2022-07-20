@@ -66,10 +66,11 @@
   "scripts": {
     "dev": "set NODE_ENV=development & next dev",
     "start": "set NODE_ENV=production & next start",
-    "build": "next build && next export",
+    "build": "next build ",
     "eslint": "eslint ./src",
     "stylelint": "stylelint ./src",
-    "test": "jest"
+    "test": "jest",
+    "export": "next export"
   },
   "browserslist": {
     "production": [
