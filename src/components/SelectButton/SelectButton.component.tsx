@@ -32,12 +32,13 @@ export default function Button(props: ButtonProps): JSX.Element {
           <p>{children}</p>
         </div>
       );
+    } else {
+      return (
+        <div className={normal} onClick={onClick}>
+          <p>{children}</p>
+        </div>
+      );
     }
-    return (
-      <div className={normal} onClick={onClick}>
-        <p>{children}</p>
-      </div>
-    );
   }
   if (location) {
     if (active) {
@@ -46,12 +47,13 @@ export default function Button(props: ButtonProps): JSX.Element {
           <p>{children}</p>
         </div>
       );
+    } else {
+      return (
+        <div className={normal} onClick={onClick}>
+          <p>{children}</p>
+        </div>
+      );
     }
-    return (
-      <div className={normal} onClick={onClick}>
-        <p>{children}</p>
-      </div>
-    );
   }
   if (stadium) {
     if (active) {
@@ -60,12 +62,13 @@ export default function Button(props: ButtonProps): JSX.Element {
           <p>{children}</p>
         </div>
       );
+    } else {
+      return (
+        <div className={stadiumNormal} onClick={onClick}>
+          <p>{children}</p>
+        </div>
+      );
     }
-    return (
-      <div className={stadiumNormal} onClick={onClick}>
-        <p>{children}</p>
-      </div>
-    );
   }
   if (time) {
     if (active) {
@@ -74,12 +77,13 @@ export default function Button(props: ButtonProps): JSX.Element {
           <p>{children}</p>
         </div>
       );
+    } else {
+      return (
+        <div className={timeNormal} onClick={onClick}>
+          <p>{children}</p>
+        </div>
+      );
     }
-    return (
-      <div className={timeNormal} onClick={onClick}>
-        <p>{children}</p>
-      </div>
-    );
   } else {
     return <></>;
   }
