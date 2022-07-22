@@ -8,7 +8,6 @@ import router, { useRouter } from "next/router";
 function Apply(): JSX.Element {
   const router = useRouter();
   const { teamId, teamName } = router.query;
-  console.log(teamId, teamName);
   const [checked, setChecked] = useState<boolean>(false);
   return (
     <main>

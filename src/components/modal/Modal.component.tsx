@@ -70,8 +70,13 @@ export const CenterModal = ({
           </a>
         </StyledModalHeader>
         <StyledCenterBody>
-          {title && <StyledModalTitle>{title}</StyledModalTitle>}
-          <StyledModalBody>{children}</StyledModalBody>
+          {title && (
+            <StyledModalTitle>
+              <h1>{title}</h1>
+              <p>{children}</p>
+            </StyledModalTitle>
+          )}
+          {/* <StyledModalBody>{children}</StyledModalBody> */}
         </StyledCenterBody>
       </StyledCenterModalBody>
     </StyledModalOverlay>
@@ -104,6 +109,9 @@ const StyledCenterBody = styled.div`
   align-items: center;
 `;
 
+/**
+ * @ToDo style modal size
+ */
 const StyledCenterModalBody = styled.div`
   display: flex;
   flex-direction: column;
@@ -112,6 +120,13 @@ const StyledCenterModalBody = styled.div`
   height: 50%;
   border-radius: 15px;
   padding: 15px;
+  h1 {
+    font-size: 24px;
+    color: #2f4eb4;
+  }
+  p {
+    color: #a3a3a3;
+  }
 `;
 
 const StyledModalHeader = styled.div`
@@ -122,8 +137,8 @@ const StyledModalHeader = styled.div`
 
 const StyledModal = styled.div`
   background: white;
-  width: 500px;
-  height: 600px;
+  width: 80vw;
+  height: 80vh;
   border-radius: 15px;
   padding: 15px;
 `;
