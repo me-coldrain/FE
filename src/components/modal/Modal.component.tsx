@@ -1,4 +1,4 @@
-import Button from "@components/button";
+import Button, { CheckBox } from "@components/button";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
@@ -8,6 +8,11 @@ type ModalProps = {
   onClose: () => void;
   children: string | JSX.Element;
   title: string | JSX.Element;
+  verify?: boolean;
+  verifyContent?: string;
+  checked?: boolean;
+  setChecked?: React.Dispatch<React.SetStateAction<boolean>>;
+  handleVerified?: () => void;
 };
 
 const Modal = ({ show, onClose, children, title }: ModalProps): JSX.Element => {
@@ -49,6 +54,11 @@ export const CenterModal = ({
   onClose,
   children,
   title,
+  verify = false,
+  checked = false,
+  setChecked = () => console.log("clicked"),
+  verifyContent = "확인했습니다.",
+  handleVerified = () => console.log("clicked"),
 }: ModalProps): JSX.Element => {
   const [isBrowser, setIsBrowser] = useState(false);
 
@@ -78,6 +88,24 @@ export const CenterModal = ({
           )}
           {/* <StyledModalBody>{children}</StyledModalBody> */}
         </StyledCenterBody>
+        {verify && (
+          <StyleVerifyContent>
+            <div style={{ marginBottom: "1rem" }}>
+              <CheckBox
+                checked={checked}
+                content={verifyContent}
+                /** @ts-ignore */
+                handleClick={setChecked}
+              />
+            </div>
+            <Button
+              length="long"
+              content="신청하기"
+              color={checked ? true : false}
+              handleClick={handleVerified}
+            />
+          </StyleVerifyContent>
+        )}
       </StyledCenterModalBody>
     </StyledModalOverlay>
   ) : null;
@@ -89,6 +117,8 @@ export const CenterModal = ({
     return <></>;
   }
 };
+
+const StyleVerifyContent = styled.div``;
 
 const StyledModalBody = styled.div`
   padding-top: 10px;

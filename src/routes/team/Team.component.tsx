@@ -125,7 +125,7 @@ export default function Team(props: PageProps): JSX.Element {
   };
 
   const recruitMembers = async () => {
-    if (goMatches) {
+    if (recruitMember) {
       await makeRequest({
         endpoint: `home/teams/${teamId}/recruit/end`,
         method: "POST",
@@ -284,7 +284,6 @@ export default function Team(props: PageProps): JSX.Element {
             pathname: "/team/[teamName]/members",
             query: { teamId: teamId, teamName: teamName },
           }}
-          as="/team/[teamName]/members"
         >
           <div className={tabs}>
             <p>멤버 소개({teamData.headCount})</p>
@@ -296,7 +295,6 @@ export default function Team(props: PageProps): JSX.Element {
             pathname: "/team/[teamName]/schedule",
             query: { teamId: teamId, teamName: teamName },
           }}
-          as="/team/[teamName]/schedule"
         >
           <div className={tabs}>
             <p>예정된 경기 일정</p>
@@ -339,7 +337,7 @@ export default function Team(props: PageProps): JSX.Element {
           <div style={{ display: "flex" }}>
             <div style={{ display: "flex", width: "50%" }}>
               <RegisterFooter
-                content={goMatches ? "대결등록 취소" : "대결등록"}
+                content={goMatches ? "대결등록 중" : "대결등록하기"}
                 handleClick={goMatchesApi}
                 activeStyle={!!goMatches}
               />
@@ -347,7 +345,7 @@ export default function Team(props: PageProps): JSX.Element {
             <div style={{ display: "flex", width: "50%" }}>
               <RegisterFooter
                 handleClick={recruitMembers}
-                content={recruitMember ? "팀원 모집 취소" : "팀원모집"}
+                content={recruitMember ? "팀원 모집 중" : "팀원모집하기"}
                 activeStyle={!!recruitMember}
               />
             </div>

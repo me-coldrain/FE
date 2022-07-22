@@ -11,6 +11,7 @@ import router from "next/router";
 import Link from "next/link";
 
 import styles from "./Page.module.scss";
+import { browserStorage } from "utils/browser";
 
 interface Teams {
   createdDate: string;
@@ -84,6 +85,19 @@ const Page = (props: PageProps): JSX.Element => {
 
   const [homePage, setHomePage] = useState<boolean>(true);
 
+  //temp code --------------
+  // browserStorage.setCookie(
+  //   "token",
+  //   "eyJ0eXBlIjoidG9rZW4iLCJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiVVNFUiIsInN1YiI6ImFkbWluQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjpudWxsLCJleHAiOjE2NjA3MDg2MzEsImlhdCI6MTY1ODExNjYzMSwibWVtYmVySWQiOjEyfQ.Fh58ow2E1n7QrG8UMBmtUu4axmrRtPQ_LevxW9XUKj4",
+  //   3
+  // );
+  // browserStorage.setCookie(
+  //   "token",
+  //   "eyJ0eXBlIjoidG9rZW4iLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBuYXZlci5jb20iLCJvcGVuVGVhbUlkIjo4LCJyb2xlIjoiVVNFUiIsIm5pY2tuYW1lIjoi6rSA66as7J6QIiwiZXhwIjoxNjYxMDY0ODQyLCJpYXQiOjE2NTg0NzI4NDIsIm1lbWJlcklkIjoxMn0._dicdwpYs8mk87WhWI66iTzauTZgQKKmLBjW9Xzsjj4",
+  //   3
+  // );
+  // -----------------------
+
   return (
     <>
       <Head>
@@ -107,7 +121,6 @@ const Page = (props: PageProps): JSX.Element => {
                       status: homePage,
                     },
                   }}
-                  // as={`/team/${item.teamName}`}
                 >
                   <div className={teamCard}>
                     <div className={teamCardFlex}>
