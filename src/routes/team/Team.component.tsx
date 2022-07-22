@@ -12,7 +12,11 @@ import { user } from "stores/user";
 import Reddot from "@components/reddot";
 import styles from "./Team.module.scss";
 import { makeRequest } from "services/makeRequest";
-import { GetStaticProps, InferGetServerSidePropsType } from "next";
+import {
+  GetServerSideProps,
+  GetStaticProps,
+  InferGetServerSidePropsType,
+} from "next";
 
 type ITeam = {
   drawCount: number;
@@ -58,24 +62,23 @@ const {
   tabsIcon,
 } = styles;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await makeRequest({
-    endpoint: `home/teams/8`,
-    method: "GET",
-    auth: true,
-  });
-  return {
-    props: { data },
-  };
-};
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const data = await makeRequest({
+//     endpoint: `home/teams/8`,
+//     method: "GET",
+//     auth: true,
+//   });
+//   return {
+//     props: { data },
+//   };
+// };
 
-export default function Team({
-  data,
-}: InferGetServerSidePropsType<typeof getStaticProps>): JSX.Element {
-  console.log(data);
+export default function Team({ json }: any): JSX.Element {
   const router = useRouter();
+
   const { teamId, teamName } = router.query;
   console.log("fetch with teamId =", teamId, teamName);
+  console.log("data", json);
   //state
   const [goMatches, setGoMatches] = useState<boolean>();
   const [recruitMember, setRecruitMember] = useState<boolean>();
@@ -83,13 +86,13 @@ export default function Team({
   const [teamData, setTeamData] = useState<ITeam>();
 
   const teamDetailMakeRequest = async () => {
-    await makeRequest({
-      endpoint: `home/teams/${teamId}`,
-      method: "GET",
-      auth: true,
-    })
-      .then((res: ITeam) => setTeamData(res))
-      .catch((error: any) => console.log(error));
+    // await makeRequest({
+    //   endpoint: `home/teams/${teamId}`,
+    //   method: "GET",
+    //   auth: true,
+    // })
+    //   .then((res: ITeam) => setTeamData(res))
+    //   .catch((error: any) => console.log(error));
   };
 
   useEffect(() => {
@@ -189,7 +192,7 @@ export default function Team({
   return (
     <>
       <main className={aboutTeam}>
-        <ImageWithHeader
+        {/* <ImageWithHeader
           className={aboutTeamImage}
           src={teamData?.teamImageFileUrl}
           alt="Desktop & Mobile PWA Application"
@@ -346,7 +349,7 @@ export default function Team({
             content={"신청하기"}
             activeStyle={!!recruitMember}
           />
-        )}
+        )} */}
       </main>
     </>
   );

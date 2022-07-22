@@ -7,6 +7,7 @@ type RequestParams = {
   retries?: number;
   params?: any;
   auth?: boolean;
+  token: string;
 };
 
 const baseUrl = "http://13.125.255.206/api/";
@@ -17,6 +18,7 @@ export const makeRequest: any = async ({
   retries = 3,
   params = null,
   auth = true,
+  token,
 }: RequestParams) => {
   const options: {
     method: "POST" | "GET" | "PUT" | "DELETE";
@@ -33,7 +35,7 @@ export const makeRequest: any = async ({
   const apiUri = baseUrl + endpoint;
   try {
     if (auth) {
-      const userTokens = Config.getToken();
+      const userTokens = Config.getToken() || token;
       if (!userTokens)
         throw {
           message: "NO TOKENS",
