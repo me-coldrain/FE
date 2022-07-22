@@ -85,8 +85,8 @@ export default function Team(props: PageProps): JSX.Element {
   //hooks
   const link = {
     pathname: "/team/[teamName]/matches",
-    query: { teamId: teamId, teamName: teamName as string },
-    as: "/team/[teamName]/matches",
+    query: { teamId: teamId as string, teamName: teamName as string },
+    as: `/team/${teamName}/matches`,
   };
 
   // match, recruit 전송 -----------
