@@ -11,7 +11,7 @@ type ButtonProps = {
 };
 type CheckBoxProps = {
   checked: boolean;
-  handleClick: () => void | undefined;
+  handleClick: () => void | React.Dispatch<React.SetStateAction<boolean>>;
   content: string | JSX.Element;
   color?: boolean;
 };

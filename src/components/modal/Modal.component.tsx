@@ -15,6 +15,18 @@ type ModalProps = {
   handleVerified?: () => void;
 };
 
+type VerifyModal = {
+  show: boolean;
+  onClose: () => void;
+  children: string | JSX.Element;
+  title: string | JSX.Element;
+  verify?: boolean;
+  verifyContent?: string;
+  checked?: boolean;
+  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
+  handleVerified?: () => void;
+};
+
 const Modal = ({ show, onClose, children, title }: ModalProps): JSX.Element => {
   const [isBrowser, setIsBrowser] = useState(false);
 
@@ -56,10 +68,10 @@ export const CenterModal = ({
   title,
   verify = false,
   checked = false,
-  setChecked = () => console.log("clicked"),
+  setChecked,
   verifyContent = "확인했습니다.",
   handleVerified = () => console.log("clicked"),
-}: ModalProps): JSX.Element => {
+}: VerifyModal): JSX.Element => {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
@@ -94,7 +106,6 @@ export const CenterModal = ({
               <CheckBox
                 checked={checked}
                 content={verifyContent}
-                /** @ts-ignore */
                 handleClick={setChecked}
               />
             </div>
