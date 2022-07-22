@@ -282,7 +282,7 @@ export default function Team(props: PageProps): JSX.Element {
         <Link
           href={{
             pathname: "/team/[teamName]/members",
-            query: { teamId: 30, teamName: teamName },
+            query: { teamId: teamId, teamName: teamName },
           }}
           as="/team/[teamName]/members"
         >

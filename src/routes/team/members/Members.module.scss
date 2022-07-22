@@ -22,13 +22,14 @@
   width: 60%;
   //   margin-bottom: 2rem;
   &Image {
+    border-radius: 30px;
     width: 42px;
     height: 42px;
     margin-right: 2rem;
   }
 }
 
-.mvpPoint {
+.mvpPointContainer {
   width: 20%;
   p {
     font-weight: 600;
