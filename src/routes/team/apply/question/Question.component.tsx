@@ -1,39 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // hooks
-import { useRouter } from "next/router";
-import { makeRequest } from "services/makeRequest";
 //components
 import SafeArea from "@components/safeArea";
 import styles from "./Question.module.scss";
+import { TextArea } from "@components/Input";
+import { RegisterFooter } from "@components/footer";
+import { makeRequest } from "services/makeRequest";
 
-const { question, questionBox } = styles;
+const { question, questionBox, container } = styles;
 
-function Question(): JSX.Element {
-  const router = useRouter();
-  const { teamId } = router.query;
-  console.log(teamId);
+type PageProps = {
+  data?: any;
+};
 
-  const fetchQuestion = () => {
-    makeRequest({
-      endpoint: `teams/${teamId}/questions`,
-      method: "GET",
-      auth: true,
-    }).then((res: any) => console.log(res));
+function Question(props: PageProps): JSX.Element {
+  const { data } = props;
+  const [value, setValue] = useState<string>("");
+
+  const register = async () => {
+    console.log("clicked");
   };
-
-  useEffect(fetchQuestion, []);
 
   return (
     <>
-      <SafeArea />
       <div className={question}>
+        <SafeArea />
         <h1>팀원이 되기 위해 답변을 작성해주세요.</h1>
         <p>Q. 사전 질문</p>
         <p>팀 리더에게만 공개됩니다.</p>
         <div className={questionBox}>
-          <p></p>
+          <p>{data?.question}</p>
         </div>
       </div>
+      <div className={container}>
+        <TextArea
+          label="팀 신청"
+          value={value}
+          onChange={(e: React.FormEvent<HTMLInputElement>) => {
+            if (value.length <= 200) setValue(e.currentTarget.value);
+          }}
+          placeholder="10글자 이상 작성해주세요 (200)"
+        />
+      </div>
+      <RegisterFooter
+        content="신청하기"
+        activeStyle={true}
+        handleClick={register}
+      />
     </>
   );
 }
@@ -42,5 +55,5 @@ export default Question;
 
 /**
  *
- * @ToDo can be static page
+ * @ToDo make request
  */

@@ -234,7 +234,7 @@ export default function Team(props: PageProps): JSX.Element {
           <div className={matchInfoContainer}>
             <Icon asset="Alarm" className={matchInfoContainerIcon} />
             <h4>가능 시간</h4>
-            {teamData?.time.map((times, index) => (
+            {teamData?.time?.map((times, index) => (
               <h5 key={`times-${index}`}>{times}. </h5>
             ))}
           </div>
@@ -330,18 +330,21 @@ export default function Team(props: PageProps): JSX.Element {
           <RegisterFooter
             handleClick={() => {
               if (teamData.recruit) {
-                router.push(`${teamName}/apply/rules`);
+                router.push({
+                  pathname: `${teamName}/apply/rules`,
+                  query: { teamId: teamId },
+                });
               } else {
                 setError("신청 기간이 아닙니다.");
               }
             }}
-            content={teamData.participate ? "탈퇴하기" : "신청하기"}
-            activeStyle={!!teamData.recruit}
+            content={teamData?.participate ? "탈퇴하기" : "신청하기"}
+            activeStyle={!!teamData?.recruit}
           />
         )}
         {error && <p style={{ color: "red" }}>{error}</p>}
         <InfoFooter
-          content={`창단 일자: ${teamData.createdDate.split("T")[0]}`}
+          content={`창단 일자: ${teamData?.createdDate?.split("T")[0]}`}
         />
       </main>
     </>

@@ -7,8 +7,8 @@ import router, { useRouter } from "next/router";
 
 function Apply(): JSX.Element {
   const router = useRouter();
-  const { teamName } = router.query;
-  console.log(teamName);
+  const { teamId, teamName } = router.query;
+  console.log(teamId, teamName);
   const [checked, setChecked] = useState<boolean>(false);
   return (
     <main>
@@ -43,7 +43,10 @@ function Apply(): JSX.Element {
         content="신청하기"
         color={checked ? true : false}
         handleClick={() => {
-          router.push(`/team/${teamName}/apply/question`);
+          router.push({
+            pathname: `/team/${teamName}/apply/question`,
+            query: { teamId: teamId },
+          });
         }}
       />
     </main>

@@ -18,3 +18,11 @@
     }
   }
 }
+
+.container {
+  margin: 0 auto;
+  max-width: var(--content-max-width);
+  // max-width: 768px;
+  padding: calc(var(--header-height) + var(--content-padding))
+    var(--content-padding) var(--content-padding) var(--content-padding);
+}
