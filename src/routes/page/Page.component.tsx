@@ -82,6 +82,8 @@ const Page = (props: PageProps): JSX.Element => {
 
   const classNames = injectClassNames(page, [pageLanding, isLanding]);
 
+  const [homePage, setHomePage] = useState<boolean>(true);
+
   return (
     <>
       <Head>
@@ -90,7 +92,7 @@ const Page = (props: PageProps): JSX.Element => {
         <meta name="robots" content="INDEX,FOLLOW" />
       </Head>
       <main className={classNames}>
-        {isLanding && <Landing />}
+        {isLanding && <Landing homePage={homePage} setHomePage={setHomePage} />}
         <section>
           <div className={safeArea}>
             {teams?.map((item, index) => {
@@ -99,7 +101,11 @@ const Page = (props: PageProps): JSX.Element => {
                   key={`teamCard-${index}`}
                   href={{
                     pathname: "/team/[teamName]",
-                    query: { teamId: item.teamId, teamName: item.teamName },
+                    query: {
+                      teamId: item.teamId,
+                      teamName: item.teamName,
+                      status: homePage,
+                    },
                   }}
                   // as={`/team/${item.teamName}`}
                 >

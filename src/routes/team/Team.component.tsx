@@ -75,7 +75,7 @@ export default function Team(props: PageProps): JSX.Element {
 
   const teamData: ITeam = props?.data;
 
-  const { teamId, teamName } = router.query;
+  const { teamId, teamName, status } = router.query;
   console.log("fetch with teamId =", typeof teamId, teamName);
   //state
   const [goMatches, setGoMatches] = useState<boolean>();
@@ -144,6 +144,32 @@ export default function Team(props: PageProps): JSX.Element {
     }
   };
   // ---------------------
+
+  const handleClickFooter = () => {
+    if (status) {
+      router.push({
+        pathname: `/team/${teamName}/match`,
+        query: { teamId: teamId },
+      });
+    } else {
+      if (teamData.recruit) {
+        if (teamData?.participate) {
+          router.push({
+            pathname: `${teamName}/apply/rules`,
+            query: { teamId: teamId },
+          });
+        } else {
+          makeRequest({
+            endpoint: `home/teams/${teamId}/leave`,
+            method: "DELETE",
+            auth: true,
+          }).then(() => router.push("/"));
+        }
+      } else {
+        setError("신청 기간이 아닙니다.");
+      }
+    }
+  };
 
   const matchContainer = (
     <div className={matchHistoryContainer}>
@@ -328,17 +354,14 @@ export default function Team(props: PageProps): JSX.Element {
           </div>
         ) : (
           <RegisterFooter
-            handleClick={() => {
-              if (teamData.recruit) {
-                router.push({
-                  pathname: `${teamName}/apply/rules`,
-                  query: { teamId: teamId },
-                });
-              } else {
-                setError("신청 기간이 아닙니다.");
-              }
-            }}
-            content={teamData?.participate ? "탈퇴하기" : "신청하기"}
+            handleClick={handleClickFooter}
+            content={
+              teamData?.participate
+                ? "탈퇴하기"
+                : status
+                ? "대결하기"
+                : "신청하기"
+            }
             activeStyle={!!teamData?.recruit}
           />
         )}
