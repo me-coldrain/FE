@@ -7,7 +7,7 @@ import Icon from "@components/icon";
 import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
 // style
 import Link from "next/link";
-import Footer, { RegisterFooter } from "@components/footer";
+import Footer, { InfoFooter, RegisterFooter } from "@components/footer";
 import { user } from "stores/user";
 import Reddot from "@components/reddot";
 import styles from "./Team.module.scss";
@@ -18,23 +18,30 @@ import {
   InferGetServerSidePropsType,
 } from "next";
 
+type PageProps = {
+  data?: any;
+};
+
 type ITeam = {
+  createdDate: string;
   drawCount: number;
   headCount: number;
   introduce: string;
   loseCount: number;
   mainArea: string;
   match: boolean;
-  otherCaptain: boolean;
-  participate: boolean;
+  modifiedDate: string;
+  otherCaptain: true;
+  participate: false;
   preferredArea: string;
-  recentMatchHistory: null;
+  recentMatchHistory: any;
   recruit: boolean;
   teamCaptain: boolean;
+  teamId: number;
   teamImageFileUrl: string;
   teamName: string;
   time: string[];
-  totalGameCount: boolean;
+  totalGameCount: number;
   weekdays: string[];
   winCount: number;
   winPoint: number;
@@ -62,61 +69,40 @@ const {
   tabsIcon,
 } = styles;
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const data = await makeRequest({
-//     endpoint: `home/teams/8`,
-//     method: "GET",
-//     auth: true,
-//   });
-//   return {
-//     props: { data },
-//   };
-// };
-
-export default function Team({ json }: any): JSX.Element {
+export default function Team(props: PageProps): JSX.Element {
+  console.log(props);
   const router = useRouter();
 
-  const { teamId, teamName } = router.query;
-  console.log("fetch with teamId =", teamId, teamName);
-  console.log("data", json);
+  const teamData: ITeam = props?.data;
+
+  const { teamId, teamName, status } = router.query;
+  console.log("fetch with teamId =", typeof teamId, teamName);
   //state
   const [goMatches, setGoMatches] = useState<boolean>();
   const [recruitMember, setRecruitMember] = useState<boolean>();
-  const [isCaptain, setIsCaptain] = useState<boolean>(true);
-  const [teamData, setTeamData] = useState<ITeam>();
-
-  const teamDetailMakeRequest = async () => {
-    // await makeRequest({
-    //   endpoint: `home/teams/${teamId}`,
-    //   method: "GET",
-    //   auth: true,
-    // })
-    //   .then((res: ITeam) => setTeamData(res))
-    //   .catch((error: any) => console.log(error));
-  };
-
-  useEffect(() => {
-    teamDetailMakeRequest();
-  }, []);
+  const [error, setError] = useState<string>();
 
   //hooks
   const link = {
     pathname: "/team/[teamName]/matches",
-    query: { teamId: teamId, teamName: teamName as string },
-    as: "/team/[teamName]/matches",
+    query: { teamId: teamId as string, teamName: teamName as string },
+    as: `/team/${teamName}/matches`,
   };
-
-  const captainHandler = () => {
-    if (teamData?.teamCaptain) {
-      setIsCaptain(true);
-    } else {
-      setIsCaptain(false);
-    }
-  };
-
-  useEffect(captainHandler, []);
 
   // match, recruit 전송 -----------
+  useEffect(() => {
+    if (teamData?.match) {
+      setGoMatches(true);
+    } else {
+      setGoMatches(false);
+    }
+
+    if (teamData?.recruit) {
+      setRecruitMember(true);
+    } else {
+      setRecruitMember(false);
+    }
+  }, []);
 
   const goMatchesApi = async () => {
     if (goMatches) {
@@ -139,7 +125,7 @@ export default function Team({ json }: any): JSX.Element {
   };
 
   const recruitMembers = async () => {
-    if (goMatches) {
+    if (recruitMember) {
       await makeRequest({
         endpoint: `home/teams/${teamId}/recruit/end`,
         method: "POST",
@@ -157,8 +143,33 @@ export default function Team({ json }: any): JSX.Element {
         .catch((error: any) => console.log(error));
     }
   };
-
   // ---------------------
+
+  const handleClickFooter = () => {
+    if (status) {
+      router.push({
+        pathname: `/team/${teamName}/match`,
+        query: { teamId: teamId },
+      });
+    } else {
+      if (teamData.recruit) {
+        if (teamData?.participate) {
+          router.push({
+            pathname: `${teamName}/apply/rules`,
+            query: { teamId: teamId },
+          });
+        } else {
+          makeRequest({
+            endpoint: `home/teams/${teamId}/leave`,
+            method: "DELETE",
+            auth: true,
+          }).then(() => router.push("/"));
+        }
+      } else {
+        setError("신청 기간이 아닙니다.");
+      }
+    }
+  };
 
   const matchContainer = (
     <div className={matchHistoryContainer}>
@@ -192,7 +203,7 @@ export default function Team({ json }: any): JSX.Element {
   return (
     <>
       <main className={aboutTeam}>
-        {/* <ImageWithHeader
+        <ImageWithHeader
           className={aboutTeamImage}
           src={teamData?.teamImageFileUrl}
           alt="Desktop & Mobile PWA Application"
@@ -249,7 +260,7 @@ export default function Team({ json }: any): JSX.Element {
           <div className={matchInfoContainer}>
             <Icon asset="Alarm" className={matchInfoContainerIcon} />
             <h4>가능 시간</h4>
-            {teamData?.time.map((times, index) => (
+            {teamData?.time?.map((times, index) => (
               <h5 key={`times-${index}`}>{times}. </h5>
             ))}
           </div>
@@ -271,12 +282,11 @@ export default function Team({ json }: any): JSX.Element {
         <Link
           href={{
             pathname: "/team/[teamName]/members",
-            query: { teamId: 30, teamName: teamName },
+            query: { teamId: teamId, teamName: teamName },
           }}
-          as="/team/[teamName]/members"
         >
           <div className={tabs}>
-            <p>멤버 소개(22)</p>
+            <p>멤버 소개({teamData.headCount})</p>
             <Icon asset="Right-Arrow" className={tabsIcon} />
           </div>
         </Link>
@@ -285,14 +295,13 @@ export default function Team({ json }: any): JSX.Element {
             pathname: "/team/[teamName]/schedule",
             query: { teamId: teamId, teamName: teamName },
           }}
-          as="/team/[teamName]/schedule"
         >
           <div className={tabs}>
             <p>예정된 경기 일정</p>
             <Icon asset="Right-Arrow" className={tabsIcon} />
           </div>
         </Link>
-        {isCaptain && (
+        {teamData.teamCaptain && (
           <>
             <Link
               href={{
@@ -324,11 +333,11 @@ export default function Team({ json }: any): JSX.Element {
           </>
         )}
 
-        {isCaptain ? (
+        {teamData.teamCaptain ? (
           <div style={{ display: "flex" }}>
             <div style={{ display: "flex", width: "50%" }}>
               <RegisterFooter
-                content={goMatches ? "대결등록 취소" : "대결등록"}
+                content={goMatches ? "대결등록 중" : "대결등록하기"}
                 handleClick={goMatchesApi}
                 activeStyle={!!goMatches}
               />
@@ -336,20 +345,28 @@ export default function Team({ json }: any): JSX.Element {
             <div style={{ display: "flex", width: "50%" }}>
               <RegisterFooter
                 handleClick={recruitMembers}
-                content={recruitMember ? "팀원 모집 취소" : "팀원모집"}
+                content={recruitMember ? "팀원 모집 중" : "팀원모집하기"}
                 activeStyle={!!recruitMember}
               />
             </div>
           </div>
         ) : (
           <RegisterFooter
-            handleClick={() => {
-              router.push(`${teamName}/apply/rules`);
-            }}
-            content={"신청하기"}
-            activeStyle={!!recruitMember}
+            handleClick={handleClickFooter}
+            content={
+              teamData?.participate
+                ? "탈퇴하기"
+                : status
+                ? "대결하기"
+                : "신청하기"
+            }
+            activeStyle={!!teamData?.recruit}
           />
-        )} */}
+        )}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <InfoFooter
+          content={`창단 일자: ${teamData?.createdDate?.split("T")[0]}`}
+        />
       </main>
     </>
   );

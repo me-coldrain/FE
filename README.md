@@ -93,3 +93,15 @@ ex) "/login" 에서는 backBtn이 없었으면 한다. STACKS에 추가
 ### svg 색 변경 모듈
 
 [svg 색 변경](https://codepen.io/sosuke/pen/Pjoqqp)
+
+### question.component.tsx
+
+기본 레이아웃 참고하시면 됩니다.
+
+### 글자 레이아웃
+
+main.scss 참고
+
+title 메인 파란글씨 <h1> 태그 사용
+
+주석 비슷한 grey <h5> 태그 사용

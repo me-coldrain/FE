@@ -1,4 +1,5 @@
 import SafeArea from "@components/safeArea";
+import { useRouter } from "next/router";
 import React from "react";
 
 import styles from "./Matches.module.scss";
@@ -13,8 +14,14 @@ const {
   matchHistoryContainerLoser,
 } = styles;
 
-export default function Matches(): JSX.Element {
-  console.log("fetch with teamId");
+type IMatches = {
+  data: any;
+};
+
+export default function Matches({ data }: IMatches): JSX.Element {
+  const router = useRouter();
+  console.log(router);
+  console.log("data=", data);
 
   return (
     <div className={container}>

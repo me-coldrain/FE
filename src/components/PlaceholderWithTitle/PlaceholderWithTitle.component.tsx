@@ -45,7 +45,10 @@ export const PlaceholderWithJSX = ({
             <Icon asset="Right-Arrow" className={containerIcon} />
           </Link>
         ) : (
-          <Link href={arrowLink} as={arrowLinkAs}>
+          <Link
+            href={{ pathname: arrowLink.pathname, query: arrowLink.query }}
+            // as={arrowLinkAs}
+          >
             <p style={{ color: "#868686", fontSize: "18px" }}>전체보기</p>
           </Link>
         )}

@@ -16,6 +16,7 @@ type InputProps = {
   signup?: boolean;
   error?: boolean;
   success?: boolean;
+  multiLine?: number;
 };
 
 export function TextArea(props: InputProps): JSX.Element {
@@ -29,6 +30,7 @@ export function TextArea(props: InputProps): JSX.Element {
     signup,
     error = true,
     success,
+    multiLine = 5,
   } = props;
 
   const errorStyles = () => ({
@@ -75,7 +77,7 @@ export function TextArea(props: InputProps): JSX.Element {
       label={label}
       multiline
       fullWidth
-      rows={4}
+      rows={multiLine}
       placeholder={placeholder}
       sx={(error ? errorStyles() : successStyles(), { maxWidth: "100%" })}
     />
