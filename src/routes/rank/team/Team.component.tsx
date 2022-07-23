@@ -16,10 +16,10 @@ import { GetStaticProps, InferGetServerSidePropsType } from "next";
 
 type ITeam = [
   {
-    mainArea?: string;
     rank?: number;
     teamId?: number;
     teamName?: string;
+    teamProfileUrl: string;
     winPoint?: number;
   }
 ];
@@ -108,7 +108,10 @@ export default function Rank({
           />
           <div className={top3Teams}>
             <div className={top3TeamsNum2}>
-              <img src="/img/flag1.png" className={top3TeamsProfile}></img>
+              <img
+                src={number2?.teamProfileUrl}
+                className={top3TeamsProfile}
+              ></img>
               <div className={top3TeamsName}>{number2?.teamName}</div>
               <div className={top3TeamsRecord}>
                 <div className={top3TeamsRecordScore}>
@@ -118,7 +121,10 @@ export default function Rank({
               </div>
             </div>
             <div className={top3TeamsNum1}>
-              <img src="/img/flag1.png" className={top3TeamsProfile}></img>
+              <img
+                src={number1?.teamProfileUrl}
+                className={top3TeamsProfile}
+              ></img>
               <div className={top3TeamsName}>{number1?.teamName}</div>
               <div className={top3TeamsRecord}>
                 <div className={top3TeamsRecordScore}>
@@ -128,7 +134,10 @@ export default function Rank({
               </div>
             </div>
             <div className={top3TeamsNum3}>
-              <img src="/img/flag1.png" className={top3TeamsProfile}></img>
+              <img
+                src={number3?.teamProfileUrl}
+                className={top3TeamsProfile}
+              ></img>
               <div className={top3TeamsName}>{number3?.teamName}</div>
               <div className={top3TeamsRecord}>
                 <div className={top3TeamsRecordScore}>

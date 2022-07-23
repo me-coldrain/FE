@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+// library
+import jwtDecode from "jwt-decode";
+// hooks
+import Link from "next/link";
+import router from "next/router";
+import { browserStorage } from "utils/browser";
+import { makeRequest } from "services/makeRequest";
+// components
 import Input from "components/Input";
 import RouterButton from "components/RouterButton";
-import Link from "next/link";
-
-import { makeRequest } from "services/makeRequest";
+// scss
 import styles from "./Login.module.scss";
 
 interface IInputs {
@@ -11,7 +17,13 @@ interface IInputs {
   password: string;
 }
 
-export default function User(): JSX.Element {
+type PageProps = {
+  data?: any;
+  decodedData?: any;
+};
+
+export default function User(props: PageProps): JSX.Element {
+  console.log(props);
   const { user, inputBox, signup, kakao } = styles;
   const [inputs, setInputs] = useState<IInputs>({
     email: "",
@@ -34,7 +46,7 @@ export default function User(): JSX.Element {
       method: "POST",
       params,
       auth: false,
-    });
+    }).then(router.replace("/"));
   };
 
   return (
@@ -70,7 +82,7 @@ export default function User(): JSX.Element {
           </div>
           <div className={kakao}>
             <p>SNS계정으로 간편 로그인</p>
-            <a href="/">kakao</a>
+            <a href="/">KAKAO</a>
           </div>
         </section>
       </main>

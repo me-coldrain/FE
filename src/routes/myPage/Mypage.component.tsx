@@ -2,19 +2,36 @@ import React, { useEffect, useState } from "react";
 // library
 import { Radar } from "react-chartjs-2";
 // hooks
-import { useRouter } from "next/router";
 import { handleFile } from "@hooks/events";
+import { makeRequest } from "services/makeRequest";
 // component
-import Image, { ImageWithHeader } from "@components/image";
 import Icon from "@components/icon";
-import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
 // style
 import Link from "next/link";
-import Footer, { RegisterFooter } from "@components/footer";
-import styles from "./Mypage.module.scss";
 import { user } from "stores/user";
-import UserProfile from "@components/userProfile";
 import RouterButton from "@components/RouterButton";
+import styles from "./Mypage.module.scss";
+
+type PageProps = {
+  data?: any;
+  decodedData?: any;
+};
+
+type IInfo = {
+  nickname: string;
+  profileImageUrl: string;
+  contact: string;
+  phone: number;
+  position: string;
+  mvpPoint: number;
+  totalMyTeamWinCount: number;
+  totalMyTeamGameCount: number;
+  strikerPoint: number;
+  midfielderPoint: number;
+  defenderPoint: number;
+  goalkeeperPoint: number;
+  charmingPoint: number;
+};
 
 const {
   upperBox,
@@ -30,32 +47,36 @@ const {
   defaultProfile,
   preview,
   aboutTeam,
-  aboutTeamImage,
   scoreBoard,
   scoreBoardDetail,
   scoreBoardDetailBox,
   scoreBoardContentName,
   matchInfo,
-  matchInfoContainer,
-  matchInfoContainerIcon,
-  rowDiv,
-  matchHistoryContainer,
-  matchHistoryContainerWin,
-  matchHistoryContainerLose,
-  matchHistoryContainerResult,
-  matchHistoryContainerWinner,
-  matchHistoryContainerLoser,
   tabs,
   tabsIcon,
   secession,
 } = styles;
 
-export default function Team(): JSX.Element {
-  const router = useRouter();
-  const { teamId, teamName } = router.query;
+export default function MyPage(props: PageProps): JSX.Element {
+  console.log(props);
+  const [personalInfo, setPersonalInfo] = useState({
+    nickname: "",
+    profileImageUrl: "",
+    contact: "",
+    phone: 0,
+    position: "",
+    mvpPoint: 0,
+    totalMyTeamWinCount: 0,
+    totalMyTeamGameCount: 0,
+    strikerPoint: 0,
+    midfielderPoint: 0,
+    defenderPoint: 0,
+    goalkeeperPoint: 0,
+    charmingPoint: 0,
+  });
+
   const [data, setData] = useState([25, 50, 75, 91, 100]);
-  const [previewURL, setPreviewURL] = useState("");
-  console.log("fetch with teamId =", teamId, teamName);
+  const [previewURL, setPreviewURL] = useState(personalInfo?.profileImageUrl);
 
   const getChartData = (canvas: any) => {
     const ctx = canvas.getContext("2d");
@@ -104,8 +125,8 @@ export default function Team(): JSX.Element {
     layout: {
       beginAtZero: true,
       padding: {
-        right: 35,
-        bottom: 60,
+        top: 5,
+        bottom: 10,
       },
     },
     scale: {
@@ -114,35 +135,52 @@ export default function Team(): JSX.Element {
       },
       ticks: {
         suggestedMin: 0,
-        suggestedMax: 100,
-        stepSize: 10,
-        maxTicksLimit: 100,
+        suggestedMax: 20,
+        stepSize: 2,
+        maxTicksLimit: 20,
         display: false,
       },
       pointLabels: {
         fontSize: 12,
         fontColor: "#4B72F1",
       },
+      scaleLabel: {
+        display: true,
+      },
+    },
+    legend: {
+      display: false,
+    },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem: any) {
+          return tooltipItem.Label;
+        },
+      },
     },
   };
 
-  //state
-  const [possible, setPossible] = useState<boolean>();
-  const [recruitMember, setRecruitMember] = useState<boolean>();
-  const [isCaptain, setIsCaptain] = useState<boolean>(true);
-
-  //hooks
-  const link = {
-    pathname: "/team/[teamName]/matches",
-    query: { teamId: teamId, teamName: teamName },
-    as: "/team/[teamName]/matches",
-  };
-
-  const captainHandler = () => {
-    console.log("if this team's captain");
-  };
-
-  useEffect(captainHandler, []);
+  const myId = props.data.decodedData.memberId;
+  useEffect(() => {
+    makeRequest({
+      // endpoint: `home/members/${myId}`,
+      endpoint: `home/members/12`,
+      method: "GET",
+      auth: true,
+    })
+      .then((res: IInfo) => {
+        setData([
+          res?.charmingPoint,
+          res?.midfielderPoint,
+          res?.goalkeeperPoint,
+          res?.defenderPoint,
+          res?.strikerPoint,
+        ]),
+          setPersonalInfo(res),
+          console.log(res);
+      })
+      .catch((error: any) => console.log(error));
+  }, []);
 
   return (
     <>
@@ -151,16 +189,20 @@ export default function Team(): JSX.Element {
           <div className={myInfo}>
             <div className={leftBox}>
               <div className={leftBoxName}>
-                <div className={leftBoxNameBox}>닉네임</div>
-                <div className={leftBoxNamePosition}>#미드필더</div>
+                <div className={leftBoxNameBox}>{personalInfo?.nickname}</div>
+                <div className={leftBoxNamePosition}>
+                  #{personalInfo?.position}
+                </div>
               </div>
               <div className={leftBoxContact}>
                 <div className={leftBoxContactBox}>
-                  <Icon asset="Chat"></Icon>kakaotalk
+                  <Icon asset="Chat"></Icon>
+                  {personalInfo?.contact}
                 </div>
                 <hr></hr>
                 <div className={leftBoxContactBox}>
-                  <Icon asset="Device"></Icon>01012345678
+                  <Icon asset="Device"></Icon>
+                  {personalInfo?.phone}
                 </div>
               </div>
             </div>
@@ -197,18 +239,18 @@ export default function Team(): JSX.Element {
                 style={{ borderRight: "1px solid" }}
               >
                 <Icon asset="Crown"></Icon>
-                <p>7회</p>
+                <p>{personalInfo?.mvpPoint}회</p>
               </div>
               <div
                 className={scoreBoardDetailBox}
                 style={{ borderRight: "1px solid" }}
               >
                 <Icon asset="Crown"></Icon>
-                <p>28회</p>
+                <p>{personalInfo?.totalMyTeamWinCount}회</p>
               </div>
               <div className={scoreBoardDetailBox}>
                 <Icon asset="Crown"></Icon>
-                <p>90회</p>
+                <p>{personalInfo?.totalMyTeamGameCount}회</p>
               </div>
             </div>
           </div>
@@ -225,34 +267,34 @@ export default function Team(): JSX.Element {
           </div>
         </div>
 
-        <Link
+        {/* <Link
           href={
             {
-              // pathname: "/team/[teamName]/members",
-              // query: { teamId: 30, teamName: teamName },
+              pathname: "/team/[teamName]/members",
+              query: { teamId: 30, teamName: teamName },
             }
           }
-          // as="/team/[teamName]/members"
-        >
-          <div className={tabs}>
-            <p>경기 히스토리</p>
-            <Icon asset="Right-Arrow" className={tabsIcon} />
-          </div>
-        </Link>
-        <Link
+          as="/team/[teamName]/members"
+        > */}
+        <div className={tabs}>
+          <p>경기 히스토리</p>
+          <Icon asset="Right-Arrow" className={tabsIcon} />
+        </div>
+        {/* </Link> */}
+        {/* <Link
           href={
             {
-              // pathname: "/team/[teamName]/schedule",
-              // query: { teamId: teamId, teamName: teamName },
+              pathname: "/team/[teamName]/schedule",
+              query: { teamId: teamId, teamName: teamName },
             }
           }
-          // as="/team/[teamName]/schedule"
-        >
-          <div className={tabs}>
-            <p>소속&신청한 팀</p>
-            <Icon asset="Right-Arrow" className={tabsIcon} />
-          </div>
-        </Link>
+          as="/team/[teamName]/schedule"
+        > */}
+        <div className={tabs}>
+          <p>소속&신청한 팀</p>
+          <Icon asset="Right-Arrow" className={tabsIcon} />
+        </div>
+        {/* </Link> */}
 
         <RouterButton bigRound mine>
           수정하기

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "components/image";
 // style
 import { injectClassNames } from "utils/css";
@@ -18,8 +18,13 @@ const {
   filtersIcon,
 } = styles;
 
-export default function Landing(): JSX.Element {
-  const [homePage, setHomePage] = useState<boolean>(true);
+type ILandingProps = {
+  homePage: boolean;
+  setHomePage: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function Landing(props: ILandingProps): JSX.Element {
+  const { homePage, setHomePage } = props;
   // modal state
   const [locationModal, setLocationModal] = useState<boolean>(false);
   const [daysModal, setDaysModal] = useState<boolean>(false);

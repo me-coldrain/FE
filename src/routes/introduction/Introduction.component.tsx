@@ -1,7 +1,8 @@
 import React from "react";
 import Head from "next/head";
-import { usePageData, usePageDetails } from "hooks/page";
-import RouterButton from "components/RouterButton";
+import { usePageDetails } from "hooks/page";
+import { useRouter } from "next/router";
+import { RegisterFooter } from "@components/footer";
 import styles from "./Introduction.module.scss";
 
 export const addTitleTags = (title: string): JSX.Element => {
@@ -28,8 +29,12 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 };
 
 export default function Introduction(): JSX.Element {
-  const { introduction } = styles;
+  const router = useRouter();
+  const { introduction, logo, footerBox } = styles;
   const { title = "", description = "" } = usePageDetails();
+  const handleLink = () => {
+    router.push("/login");
+  };
 
   return (
     <>
@@ -39,16 +44,30 @@ export default function Introduction(): JSX.Element {
         <meta name="robots" content="INDEX,FOLLOW" />
       </Head>
       <main className={introduction}>
+        <div className={logo}>로고</div>
         <section>
-          <h1>서비스 소개</h1>
+          <h1>
+            함께할수록
+            <br />
+            더욱 즐거워질
+            <br />
+            90분
+          </h1>
           <p>
-            팀매칭/ 팀원 모집 어려우셨죠?
-            <br />팀 전략/ 개인 전략을 기록해보세요
+            함께 할 팀원이나 대결상대를 찾고
+            <br />
+            경기 후 경기결과를 기록해보세요.
           </p>
         </section>
-        <RouterButton url="/login" bigRound>
-          시작하기
-        </RouterButton>
+        <div className={footerBox}>
+          <RegisterFooter
+            content="시작하기"
+            handleClick={() => {
+              handleLink();
+            }}
+            activeStyle={false}
+          ></RegisterFooter>
+        </div>
       </main>
     </>
   );

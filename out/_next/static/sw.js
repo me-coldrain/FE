@@ -26,7 +26,7 @@
           }
           try {
             c({}, "");
-          } catch (q) {
+          } catch (E) {
             c = function (e, t, r) {
               return (e[t] = r);
             };
@@ -42,7 +42,7 @@
                   if (n === p) throw new Error("Generator is already running");
                   if (n === d) {
                     if ("throw" === a) throw i;
-                    return U();
+                    return q();
                   }
                   for (r.method = a, r.arg = i; ; ) {
                     var o = r.delegate;
@@ -75,8 +75,8 @@
           function h(e, t, r) {
             try {
               return { type: "normal", arg: e.call(t, r) };
-            } catch (q) {
-              return { type: "throw", arg: q };
+            } catch (E) {
+              return { type: "throw", arg: E };
             }
           }
           e.wrap = u;
@@ -93,7 +93,7 @@
             return this;
           });
           var b = Object.getPrototypeOf,
-            _ = b && b(b(E([])));
+            _ = b && b(b(U([])));
           _ && _ !== r && n.call(_, i) && (v = _);
           var R = (m.prototype = g.prototype = Object.create(v));
           function x(e) {
@@ -192,7 +192,7 @@
               e.forEach(O, this),
               this.reset(!0);
           }
-          function E(e) {
+          function U(e) {
             if (e) {
               var r = e[i];
               if (r) return r.call(e);
@@ -208,9 +208,9 @@
                 return (o.next = o);
               }
             }
-            return { next: U };
+            return { next: q };
           }
-          function U() {
+          function q() {
             return { value: t, done: !0 };
           }
           return (
@@ -273,7 +273,7 @@
                 }
               );
             }),
-            (e.values = E),
+            (e.values = U),
             (P.prototype = {
               constructor: P,
               reset: function (e) {
@@ -397,7 +397,7 @@
               delegateYield: function (e, r, n) {
                 return (
                   (this.delegate = {
-                    iterator: E(e),
+                    iterator: U(e),
                     resultName: r,
                     nextLoc: n,
                   }),
@@ -936,12 +936,12 @@
             (this._precacheController = e);
         }
       }
-      class E extends k {
+      class U extends k {
         constructor(e = {}) {
           (e.cacheName = l(e.cacheName)),
             super(e),
             (this._fallbackToNetwork = !1 !== e.fallbackToNetwork),
-            this.plugins.push(E.copyRedirectedCacheableResponsesPlugin);
+            this.plugins.push(U.copyRedirectedCacheableResponsesPlugin);
         }
         async _handle(e, t) {
           const r = await t.cacheMatch(e);
@@ -990,23 +990,23 @@
           let e = null,
             t = 0;
           for (const [r, n] of this.plugins.entries())
-            n !== E.copyRedirectedCacheableResponsesPlugin &&
-              (n === E.defaultPrecacheCacheabilityPlugin && (e = r),
+            n !== U.copyRedirectedCacheableResponsesPlugin &&
+              (n === U.defaultPrecacheCacheabilityPlugin && (e = r),
               n.cacheWillUpdate && t++);
           0 === t
-            ? this.plugins.push(E.defaultPrecacheCacheabilityPlugin)
+            ? this.plugins.push(U.defaultPrecacheCacheabilityPlugin)
             : t > 1 && null !== e && this.plugins.splice(e, 1);
         }
       }
-      (E.defaultPrecacheCacheabilityPlugin = {
+      (U.defaultPrecacheCacheabilityPlugin = {
         cacheWillUpdate: async ({ response: e }) =>
           !e || e.status >= 400 ? null : e,
       }),
-        (E.copyRedirectedCacheableResponsesPlugin = {
+        (U.copyRedirectedCacheableResponsesPlugin = {
           cacheWillUpdate: async ({ response: e }) =>
             e.redirected ? await _(e) : e,
         });
-      class U {
+      class q {
         constructor({
           cacheName: e,
           plugins: t = [],
@@ -1015,7 +1015,7 @@
           (this._urlsToCacheKeys = new Map()),
             (this._urlsToCacheModes = new Map()),
             (this._cacheKeysToIntegrities = new Map()),
-            (this._strategy = new E({
+            (this._strategy = new U({
               cacheName: l(e),
               plugins: [...t, new P({ precacheController: this })],
               fallbackToNetwork: r,
@@ -1136,8 +1136,8 @@
           );
         }
       }
-      let q;
-      const j = () => (q || (q = new U()), q);
+      let E;
+      const j = () => (E || (E = new q()), E);
       r(80);
       const T = (e) => (e && "object" === typeof e ? e : { handle: e });
       class S {
@@ -1161,7 +1161,7 @@
           );
         }
       }
-      class A {
+      class K {
         constructor() {
           (this._routes = new Map()), (this._defaultHandlerMap = new Map());
         }
@@ -1285,8 +1285,8 @@
           this._routes.get(e.method).splice(t, 1);
         }
       }
-      let K;
-      class M extends S {
+      let A;
+      class I extends S {
         constructor(e, t) {
           super(({ request: r }) => {
             const n = e.getURLsToCacheKeys();
@@ -1327,7 +1327,7 @@
           }, e.strategy);
         }
       }
-      function I(e) {
+      function M(e) {
         const t = j();
         !(function (e, t, r) {
           let n;
@@ -1345,12 +1345,12 @@
               });
             n = e;
           }
-          (K || ((K = new A()), K.addFetchListener(), K.addCacheListener()),
-          K).registerRoute(n);
-        })(new M(t, e));
+          (A || ((A = new K()), A.addFetchListener(), A.addCacheListener()),
+          A).registerRoute(n);
+        })(new I(t, e));
       }
-      var W = r(809),
-        D = r.n(W);
+      var D = r(809),
+        W = r.n(D);
       function F(e, t, r, n, a, i, o) {
         try {
           var s = e[i](o),
@@ -1445,9 +1445,9 @@
       }
       var $ = function (e) {
         return H(
-          D().mark(function t() {
+          W().mark(function t() {
             var r, n, a, i, o;
-            return D().wrap(
+            return W().wrap(
               function (t) {
                 for (;;)
                   switch ((t.prev = t.next)) {
@@ -1485,7 +1485,7 @@
           })
         );
       };
-      function z(e, t, r) {
+      function V(e, t, r) {
         return (
           t in e
             ? Object.defineProperty(e, t, {
@@ -1498,7 +1498,7 @@
           e
         );
       }
-      function V(e, r) {
+      function Y(e, r) {
         return (
           (function (e) {
             if (Array.isArray(e)) return e;
@@ -1536,7 +1536,7 @@
           })()
         );
       }
-      function Y(e, t) {
+      function z(e, t) {
         if (null == e) return {};
         var r,
           n,
@@ -1577,7 +1577,7 @@
           var r = null != arguments[t] ? arguments[t] : {};
           t % 2
             ? J(Object(r), !0).forEach(function (t) {
-                z(e, t, r[t]);
+                V(e, t, r[t]);
               })
             : Object.getOwnPropertyDescriptors
             ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(r))
@@ -1596,15 +1596,15 @@
             t =
               (e.__rewrites,
               e.sortedPages,
-              Y(e, ["__rewrites", "sortedPages"]));
+              z(e, ["__rewrites", "sortedPages"]));
           return Object.entries(t).reduce(function (e, t) {
-            var r = V(t, 2),
+            var r = Y(t, 2),
               n = r[0],
               a = r[1];
             return Q(
               Q({}, e),
               {},
-              z(
+              V(
                 {},
                 n,
                 a.map(function (e) {
@@ -1619,7 +1619,7 @@
             t =
               (e.sortedPages,
               e.__rewrites,
-              Y(e, ["sortedPages", "__rewrites"]));
+              z(e, ["sortedPages", "__rewrites"]));
           return Object.keys(t).filter(function (e) {
             return !e.includes("/_");
           });
@@ -1687,17 +1687,17 @@
               if (!(e instanceof t))
                 throw new TypeError("Cannot call a class as a function");
             })(this, e),
-              z(this, "_cacheName", void 0),
-              z(this, "_ignoredRoutes", void 0),
-              z(this, "_workboxRouter", void 0),
-              z(
+              V(this, "_cacheName", void 0),
+              V(this, "_ignoredRoutes", void 0),
+              V(this, "_workboxRouter", void 0),
+              V(
                 this,
                 "handleOfflineDocumentFetch",
                 (function () {
                   var e = H(
-                    D().mark(function e(t) {
+                    W().mark(function e(t) {
                       var r, n, a, i;
-                      return D().wrap(function (e) {
+                      return W().wrap(function (e) {
                         for (;;)
                           switch ((e.prev = e.next)) {
                             case 0:
@@ -1734,14 +1734,14 @@
                   };
                 })()
               ),
-              z(
+              V(
                 this,
                 "handleFetch",
                 (function () {
                   var e = H(
-                    D().mark(function e(t) {
+                    W().mark(function e(t) {
                       var n, a, i, o;
-                      return D().wrap(function (e) {
+                      return W().wrap(function (e) {
                         for (;;)
                           switch ((e.prev = e.next)) {
                             case 0:
@@ -1790,7 +1790,7 @@
                 })()
               ),
               (this._cacheName = t),
-              (this._workboxRouter = new A()),
+              (this._workboxRouter = new K()),
               this._init();
           }
           var t, r, n;
@@ -1845,7 +1845,7 @@
           );
         })();
       importScripts(
-        "/_next/static/".concat("tGOxvxczAa60EwzpkgM1T", "/_buildManifest.js")
+        "/_next/static/".concat("0Gq_bPIDCDnObg1zw9iPp", "/_buildManifest.js")
       ),
         u({
           prefix: "app",
@@ -1874,6 +1874,14 @@
         [].concat(
           n(
             [
+              {
+                revision: null,
+                url: "/_next/static/0Gq_bPIDCDnObg1zw9iPp/_buildManifest.js",
+              },
+              {
+                revision: null,
+                url: "/_next/static/0Gq_bPIDCDnObg1zw9iPp/_ssgManifest.js",
+              },
               {
                 revision: null,
                 url: "/_next/static/chunks/1774.20989dbd01ecdaeaf7f6.js",
@@ -1944,11 +1952,7 @@
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/6588-2e3e39c93ce1b63bcc78.js",
-              },
-              {
-                revision: null,
-                url: "/_next/static/chunks/7433-e6f43bc30d3c6aef50d3.js",
+                url: "/_next/static/chunks/6588-af9ac2d4396900a5de69.js",
               },
               {
                 revision: null,
@@ -1992,11 +1996,7 @@
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/[page]-542ac55405b6143c18cd.js",
-              },
-              {
-                revision: null,
-                url: "/_next/static/chunks/pages/_app-8e62d32c8f7eecbf299b.js",
+                url: "/_next/static/chunks/pages/_app-d6fdfc9a1adcbdf01821.js",
               },
               {
                 revision: null,
@@ -2048,7 +2048,7 @@
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/index-f25ea6f9957348abc114.js",
+                url: "/_next/static/chunks/pages/index-b1a5c103f2ed6e6ebae2.js",
               },
               {
                 revision: null,
@@ -2056,7 +2056,7 @@
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/login-963ff7ce2634afe464c5.js",
+                url: "/_next/static/chunks/pages/login-34b206d34c2cc9c886de.js",
               },
               {
                 revision: null,
@@ -2080,7 +2080,7 @@
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/recruit-732a11d6eaa06e151d63.js",
+                url: "/_next/static/chunks/pages/recruit-94ad107c80172bc25792.js",
               },
               {
                 revision: null,
@@ -2104,39 +2104,43 @@
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/signup-bc562e05e32ec68d006f.js",
+                url: "/_next/static/chunks/pages/signup-fb6135ca5ebdd51f3b11.js",
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/team/[teamName]-c44a6b6c02f4c9042d3c.js",
+                url: "/_next/static/chunks/pages/team/[teamName]-97342d65798df4a2c584.js",
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/team/[teamName]/accept-a7f100ec3bf88e6a23bd.js",
+                url: "/_next/static/chunks/pages/team/[teamName]/accept-5775973b101d7c77a384.js",
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/team/[teamName]/apply/question-2ae2dc943755ba8cdfc0.js",
+                url: "/_next/static/chunks/pages/team/[teamName]/apply/question-72f76585a9f4eebfe5db.js",
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/team/[teamName]/apply/rules-ee49df8d948d5e15392b.js",
+                url: "/_next/static/chunks/pages/team/[teamName]/apply/rules-c7e4c920e3ff57d16944.js",
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/team/[teamName]/challenges-27a58f496e1771f7edb8.js",
+                url: "/_next/static/chunks/pages/team/[teamName]/challenges-f4d0f6485cf8c30afbca.js",
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/team/[teamName]/matches-199c9abcf66fee0dc84b.js",
+                url: "/_next/static/chunks/pages/team/[teamName]/match-4ab9975130691cce6517.js",
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/team/[teamName]/members-78149e1c22fddeec1458.js",
+                url: "/_next/static/chunks/pages/team/[teamName]/matches-28adaee1491a291e8fb6.js",
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/pages/team/[teamName]/schedule-448d1178a686e71906de.js",
+                url: "/_next/static/chunks/pages/team/[teamName]/members-08e30a89191cf041204e.js",
+              },
+              {
+                revision: null,
+                url: "/_next/static/chunks/pages/team/[teamName]/schedule-3540e785fb2d83554e87.js",
               },
               {
                 revision: null,
@@ -2144,7 +2148,7 @@
               },
               {
                 revision: null,
-                url: "/_next/static/chunks/webpack-92adf647e6ec9669bb95.js",
+                url: "/_next/static/chunks/webpack-bdbe6ec8f6e22c988df4.js",
               },
               {
                 revision: null,
@@ -2164,7 +2168,15 @@
               },
               {
                 revision: null,
-                url: "/_next/static/css/17598400864b5a103933.css",
+                url: "/_next/static/css/1024ebf76e809a190a36.css",
+              },
+              {
+                revision: null,
+                url: "/_next/static/css/17ad1b6f4abc9df41222.css",
+              },
+              {
+                revision: null,
+                url: "/_next/static/css/2017ba51e09269902785.css",
               },
               {
                 revision: null,
@@ -2180,15 +2192,7 @@
               },
               {
                 revision: null,
-                url: "/_next/static/css/2d81cb0c28f497654807.css",
-              },
-              {
-                revision: null,
                 url: "/_next/static/css/30cb13c9d2f81aec3aa8.css",
-              },
-              {
-                revision: null,
-                url: "/_next/static/css/33a368e9ed82486eb8b7.css",
               },
               {
                 revision: null,
@@ -2204,15 +2208,11 @@
               },
               {
                 revision: null,
-                url: "/_next/static/css/591dd4249c45179b0f38.css",
+                url: "/_next/static/css/4974a24de24759ef936d.css",
               },
               {
                 revision: null,
                 url: "/_next/static/css/597ceb19f508728f8b77.css",
-              },
-              {
-                revision: null,
-                url: "/_next/static/css/62b32321258dd6a9da9c.css",
               },
               {
                 revision: null,
@@ -2224,11 +2224,19 @@
               },
               {
                 revision: null,
-                url: "/_next/static/css/a41aab04c8dce6d9c86d.css",
+                url: "/_next/static/css/a0223e6d47ded11d0c25.css",
               },
               {
                 revision: null,
-                url: "/_next/static/css/a84756323ad0b5dd1e45.css",
+                url: "/_next/static/css/a650fbe827421db4fdfa.css",
+              },
+              {
+                revision: null,
+                url: "/_next/static/css/aee6731118f8f0a72bdb.css",
+              },
+              {
+                revision: null,
+                url: "/_next/static/css/b2ccbeff715d4df0f1ad.css",
               },
               {
                 revision: null,
@@ -2236,7 +2244,7 @@
               },
               {
                 revision: null,
-                url: "/_next/static/css/b9e7309fde6963b79071.css",
+                url: "/_next/static/css/b6cd71b3ada76c164f5b.css",
               },
               {
                 revision: null,
@@ -2245,6 +2253,10 @@
               {
                 revision: null,
                 url: "/_next/static/css/bbf238354263523b16d4.css",
+              },
+              {
+                revision: null,
+                url: "/_next/static/css/d55614d763740f3dbd1f.css",
               },
               {
                 revision: null,
@@ -2264,23 +2276,11 @@
               },
               {
                 revision: null,
-                url: "/_next/static/css/ef4f0c71a86c7cfefffb.css",
-              },
-              {
-                revision: null,
                 url: "/_next/static/css/fb1310bb57f28b11f7da.css",
               },
               {
                 revision: null,
                 url: "/_next/static/css/fd1a0a8ebd9ed493c359.css",
-              },
-              {
-                revision: null,
-                url: "/_next/static/tGOxvxczAa60EwzpkgM1T/_buildManifest.js",
-              },
-              {
-                revision: null,
-                url: "/_next/static/tGOxvxczAa60EwzpkgM1T/_ssgManifest.js",
               },
               {
                 revision: "88d3f4a4c9b12343322b7ee2ba6651fa",
@@ -2308,7 +2308,7 @@
           n(fe)
         )
       ),
-        I(oe),
+        M(oe),
         self.addEventListener("activate", function (e) {
           e.waitUntil($(se));
         }),

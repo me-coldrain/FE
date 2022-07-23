@@ -99,9 +99,7 @@ export default function User(): JSX.Element {
       method: "POST",
       params,
       auth: false,
-    });
-    // 회원가입 성공 후 넘어갈 수 있도록 해야함, 추후 삭제해야하는 코드
-    router.push("/login");
+    }).then(router.replace("/login"));
   };
 
   return (

@@ -1,4 +1,4 @@
-import Button from "@components/button";
+import Button, { CheckBox } from "@components/button";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
@@ -8,6 +8,23 @@ type ModalProps = {
   onClose: () => void;
   children: string | JSX.Element;
   title: string | JSX.Element;
+  verify?: boolean;
+  verifyContent?: string;
+  checked?: boolean;
+  setChecked?: React.Dispatch<React.SetStateAction<boolean>>;
+  handleVerified?: () => void;
+};
+
+type VerifyModal = {
+  show: boolean;
+  onClose: () => void;
+  children: string | JSX.Element;
+  title: string | JSX.Element;
+  verify?: boolean;
+  verifyContent?: string;
+  checked?: boolean;
+  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
+  handleVerified?: () => void;
 };
 
 const Modal = ({ show, onClose, children, title }: ModalProps): JSX.Element => {
@@ -49,7 +66,12 @@ export const CenterModal = ({
   onClose,
   children,
   title,
-}: ModalProps): JSX.Element => {
+  verify = false,
+  checked = false,
+  setChecked,
+  verifyContent = "확인했습니다.",
+  handleVerified = () => console.log("clicked"),
+}: VerifyModal): JSX.Element => {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
@@ -70,9 +92,31 @@ export const CenterModal = ({
           </a>
         </StyledModalHeader>
         <StyledCenterBody>
-          {title && <StyledModalTitle>{title}</StyledModalTitle>}
-          <StyledModalBody>{children}</StyledModalBody>
+          {title && (
+            <StyledModalTitle>
+              <h1>{title}</h1>
+              <p>{children}</p>
+            </StyledModalTitle>
+          )}
+          {/* <StyledModalBody>{children}</StyledModalBody> */}
         </StyledCenterBody>
+        {verify && (
+          <StyleVerifyContent>
+            <div style={{ marginBottom: "1rem" }}>
+              <CheckBox
+                checked={checked}
+                content={verifyContent}
+                handleClick={setChecked}
+              />
+            </div>
+            <Button
+              length="long"
+              content="신청하기"
+              color={checked ? true : false}
+              handleClick={handleVerified}
+            />
+          </StyleVerifyContent>
+        )}
       </StyledCenterModalBody>
     </StyledModalOverlay>
   ) : null;
@@ -84,6 +128,8 @@ export const CenterModal = ({
     return <></>;
   }
 };
+
+const StyleVerifyContent = styled.div``;
 
 const StyledModalBody = styled.div`
   padding-top: 10px;
@@ -104,6 +150,9 @@ const StyledCenterBody = styled.div`
   align-items: center;
 `;
 
+/**
+ * @ToDo style modal size
+ */
 const StyledCenterModalBody = styled.div`
   display: flex;
   flex-direction: column;
@@ -112,6 +161,13 @@ const StyledCenterModalBody = styled.div`
   height: 50%;
   border-radius: 15px;
   padding: 15px;
+  h1 {
+    font-size: 24px;
+    color: #2f4eb4;
+  }
+  p {
+    color: #a3a3a3;
+  }
 `;
 
 const StyledModalHeader = styled.div`
@@ -122,8 +178,8 @@ const StyledModalHeader = styled.div`
 
 const StyledModal = styled.div`
   background: white;
-  width: 500px;
-  height: 600px;
+  width: 80vw;
+  height: 80vh;
   border-radius: 15px;
   padding: 15px;
 `;

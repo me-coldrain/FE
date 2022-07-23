@@ -1,11 +1,13 @@
 @mixin desktop {
   @media (min-width: 1024px) {
+    max-width: 768px;
     @content;
   }
 }
 
 @mixin before-desktop {
   @media (max-width: 1023px) {
+    max-width: 768px;
     @content;
   }
 }
@@ -13,6 +15,7 @@
 @mixin tablet {
   @media (max-width: 1023px) and (min-width: 768px) {
     @content;
+    max-width: 768px;
   }
 }
 
@@ -25,5 +28,9 @@
 @mixin mobile {
   @media (max-width: 767px) {
     @content;
+    p {
+      font-size: small;
+      width: fit-content;
+    }
   }
 }

@@ -17,8 +17,8 @@ import { GetStaticProps, InferGetServerSidePropsType } from "next";
 type IPlayer = [
   {
     memberId?: number;
-    profileImageUrl?: string;
-    nickName?: string;
+    profileImagerUrl?: string;
+    nickname?: string;
     position?: string;
     mvpPoint?: number;
     abilityPoint?: number;
@@ -47,11 +47,12 @@ const {
   tabsContentPos,
   tabsContentTeam,
   tabsContentScore,
+  active,
 } = styles;
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await makeRequest({
-    endpoint: `home/rank/members`,
+    endpoint: `home/rank/members?ability=mvp`,
     method: "GET",
     auth: true,
     // params: "MVP",
@@ -70,16 +71,14 @@ export default function Rank({
   const { teamId, teamName } = router.query;
   console.log("fetch with teamId =", teamId, teamName);
   //state
-  const [found, setFound] = useState<string>("mvp");
   const [playerData, setPlayerData] = useState<IPlayer>();
+  const [found, setFound] = useState<string>("mvp");
 
   const playerRanking = async () => {
     await makeRequest({
-      endpoint: `home/rank/members`,
+      endpoint: `home/rank/members?ability=${found}`,
       method: "GET",
       auth: true,
-      // params: found,
-      // "?ability=MVP" 이게 쿼리로 들어가야 정상작동함
     })
       .then((res: IPlayer) => {
         setPlayerData(res), console.log(res);
@@ -89,7 +88,7 @@ export default function Rank({
 
   useEffect(() => {
     playerRanking();
-  }, []);
+  }, [found]);
 
   //hooks
   const link = {
@@ -112,28 +111,37 @@ export default function Rank({
           />
           <div className={top3Teams}>
             <div className={top3TeamsNum2}>
-              <img src="/img/flag1.png" className={top3TeamsProfile}></img>
-              <div className={top3TeamsName}>{number2?.nickName}</div>
+              <img
+                src={number2?.profileImagerUrl}
+                className={top3TeamsProfile}
+              ></img>
+              <div className={top3TeamsName}>{number2?.nickname}</div>
               <div className={top3TeamsRecord}>
                 <div className={top3TeamsRecordScore}>
-                  <div>{number1?.abilityPoint}</div>
+                  <div>{number2?.abilityPoint}</div>
                 </div>
                 <img src="/img/top2.png"></img>
               </div>
             </div>
             <div className={top3TeamsNum1}>
-              <img src="/img/flag1.png" className={top3TeamsProfile}></img>
-              <div className={top3TeamsName}>{number1?.nickName}</div>
+              <img
+                src={number1?.profileImagerUrl}
+                className={top3TeamsProfile}
+              ></img>
+              <div className={top3TeamsName}>{number1?.nickname}</div>
               <div className={top3TeamsRecord}>
                 <div className={top3TeamsRecordScore}>
-                  <div>{number2?.abilityPoint}</div>
+                  <div>{number1?.abilityPoint}</div>
                 </div>
                 <img src="/img/top1.png"></img>
               </div>
             </div>
             <div className={top3TeamsNum3}>
-              <img src="/img/flag1.png" className={top3TeamsProfile}></img>
-              <div className={top3TeamsName}>{number3?.nickName}</div>
+              <img
+                src={number3?.profileImagerUrl}
+                className={top3TeamsProfile}
+              ></img>
+              <div className={top3TeamsName}>{number3?.nickname}</div>
               <div className={top3TeamsRecord}>
                 <div className={top3TeamsRecordScore}>
                   <div>{number3?.abilityPoint}</div>
@@ -145,6 +153,56 @@ export default function Rank({
         </div>
         <section>
           <h2>Top10 Rank</h2>
+          <article>
+            <div
+              onClick={() => {
+                setFound("mvp");
+              }}
+              className={found === "mvp" ? active : ""}
+            >
+              MVP
+            </div>
+            <div
+              onClick={() => {
+                setFound("charming");
+              }}
+              className={found === "charming" ? active : ""}
+            >
+              분위기 메이커
+            </div>
+            <div
+              onClick={() => {
+                setFound("striker");
+              }}
+              className={found === "striker" ? active : ""}
+            >
+              공격수
+            </div>
+            <div
+              onClick={() => {
+                setFound("midfielder");
+              }}
+              className={found === "midfielder" ? active : ""}
+            >
+              미드필더
+            </div>
+            <div
+              onClick={() => {
+                setFound("defender");
+              }}
+              className={found === "defender" ? active : ""}
+            >
+              수비수
+            </div>
+            <div
+              onClick={() => {
+                setFound("goalkeeper");
+              }}
+              className={found === "goalkeeper" ? active : ""}
+            >
+              골키퍼
+            </div>
+          </article>
           <div className={tabs}>
             <div className={tabsTitle}>
               <div className={tabsTitlePos}>Pos</div>
@@ -153,7 +211,7 @@ export default function Rank({
             </div>
             {playerData?.map((playerData: any) => (
               <Link
-                key={playerData?.teamId}
+                key={playerData?.memberId}
                 href={{
                   pathname: "/team/[teamName]/members",
                   query: { teamId: 30, teamName: teamName },
@@ -175,7 +233,7 @@ export default function Rank({
                     <span>{playerData?.rank}</span>
                   </div>
                   <div className={tabsContentTeam}>
-                    {playerData?.teamName}
+                    {playerData?.nickname}
                     {playerData?.rank === 1 ? (
                       <span>
                         {" "}
@@ -193,7 +251,9 @@ export default function Rank({
                       </span>
                     ) : null}
                   </div>
-                  <div className={tabsContentScore}>{playerData?.winPoint}</div>
+                  <div className={tabsContentScore}>
+                    {playerData?.abilityPoint}
+                  </div>
                 </div>
               </Link>
             ))}

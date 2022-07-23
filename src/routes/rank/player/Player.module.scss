@@ -144,6 +144,36 @@
   p {
     font-size: 20px;
   }
+  article {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0.5rem;
+      height: 1rem;
+      min-width: fit-content;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid #acacac;
+      border-radius: 5rem;
+      color: #08184f;
+      cursor: pointer;
+    }
+    .active {
+      background-color: #192554;
+      border: 1px solid #192554;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+  article::-webkit-scrollbar {
+    display: none;
+  }
   &Image {
     display: block;
     margin: 0 auto;

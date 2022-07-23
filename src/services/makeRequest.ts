@@ -10,7 +10,7 @@ type RequestParams = {
   token: string;
 };
 
-const baseUrl = "http://13.125.255.206/api/";
+const baseUrl = "http://43.200.163.208/api/";
 
 export const makeRequest: any = async ({
   endpoint,
@@ -65,11 +65,9 @@ export const makeRequest: any = async ({
         return json;
       }
 
-      // 회원가입 성공시 로그인 페이지로 넘어갈 수 있또록 해야함
       if (res.status === 201) {
         const json = await res.json();
         console.log("json =", json);
-
         Config.setToken("token", json?.accesstoken, 30);
 
         return json;
