@@ -11,7 +11,7 @@ type ModalProps = {
   verify?: boolean;
   verifyContent?: string;
   checked?: boolean;
-  setChecked?: React.Dispatch<React.SetStateAction<boolean>>;
+  setChecked?: (checked: boolean) => void;
   handleVerified?: () => void;
 };
 
@@ -23,7 +23,7 @@ type VerifyModal = {
   verify?: boolean;
   verifyContent?: string;
   checked?: boolean;
-  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
+  setChecked?: React.Dispatch<React.SetStateAction<boolean>>;
   handleVerified?: () => void;
 };
 
@@ -197,3 +197,8 @@ const StyledModalOverlay = styled.div`
 `;
 
 export default Modal;
+
+/**
+ *
+ * @TypeError
+ */
