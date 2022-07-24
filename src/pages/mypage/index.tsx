@@ -1,7 +1,6 @@
 import { GetServerSideProps } from "next";
 import React from "react";
 import Page from "routes/myPage";
-import router from "next/router";
 import { getCookie } from "cookies-next";
 import jwtDecode from "jwt-decode";
 

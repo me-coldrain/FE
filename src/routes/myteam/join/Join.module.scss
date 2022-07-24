@@ -2,7 +2,7 @@
 @use "styles/variables/placeholder" as *;
 
 .teams {
-  margin: 1rem;
+  margin: 0.5rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -47,11 +47,70 @@
       justify-content: center;
       color: #fff;
       background-color: #000;
-      div {
-        width: 50%;
+      &Left {
+        width: 35%;
         display: flex;
         align-items: center;
         justify-content: space-around;
+        border-right: 1px solid #fff;
+      }
+      &Right {
+        width: 65%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        &Content {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          &Percent {
+            margin-right: 1rem;
+          }
+          &Total {
+            width: 1rem;
+            height: 1rem;
+            text-align: center;
+            vertical-align: middle;
+            padding: auto;
+            color: #fff;
+            border: 1px solid #fff;
+            margin-right: 0.3rem;
+          }
+          &Win {
+            width: 1rem;
+            height: 1rem;
+            text-align: center;
+            vertical-align: middle;
+            padding: auto;
+            color: rgba(38, 255, 151, 1);
+            border: 1px solid rgba(38, 255, 151, 1);
+            margin-right: 0.3rem;
+          }
+          &Draw {
+            width: 1rem;
+            height: 1rem;
+            text-align: center;
+            vertical-align: middle;
+            padding: auto;
+            color: rgba(192, 192, 192, 1);
+            border: 1px solid rgba(192, 192, 192, 1);
+            margin-right: 0.3rem;
+          }
+          &Lose {
+            width: 1rem;
+            height: 1rem;
+            text-align: center;
+            vertical-align: middle;
+            padding: auto;
+            color: rgba(241, 75, 75, 1);
+            border: 1px solid rgba(241, 75, 75, 1);
+          }
+        }
       }
     }
   }

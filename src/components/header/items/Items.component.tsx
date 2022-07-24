@@ -9,9 +9,9 @@ const { items, active, activeIcon } = styles;
 
 const links = [
   { name: "홈", url: "/", alias: [], asset: "nav/Home" },
-  { name: "랭킹", url: "/teams/[teamName]", alias: [], asset: "nav/Rank" },
-  { name: "팀", url: "/pages", alias: ["/[page]"], asset: "nav/Teams" },
-  { name: "팀", url: "/profile", alias: [], asset: "nav/Profile" },
+  { name: "랭킹", url: "/rank/team", alias: [], asset: "nav/Rank" },
+  { name: "팀", url: "/myteam", alias: [], asset: "nav/Teams" },
+  { name: "마이페이지", url: "/mypage", alias: [], asset: "nav/Profile" },
 ];
 
 export default function Items(): JSX.Element {

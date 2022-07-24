@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // hooks
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { makeRequest } from "services/makeRequest";
 // component
 import Apply from "./apply";
 import Join from "./join";
@@ -12,9 +13,36 @@ import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
 import Footer, { RegisterFooter } from "@components/footer";
 import styles from "./MyTeam.module.scss";
 
+type PageProps = {
+  data?: any;
+  decodedData?: any;
+};
+
+type IInfo = {
+  captain: boolean;
+  teamId: number;
+  teamName: string;
+  headCount: number;
+  mainArea: string;
+  preferredArea: string;
+  weekdays: Array<string>;
+  time: Array<string>;
+  winPoint: number;
+  winRate: number;
+  recruit: boolean;
+  match: boolean;
+  totalGameCount: number;
+  winCount: number;
+  drawCount: number;
+  loseCount: number;
+  createdDate: string;
+  modifiedDate: string;
+};
+
 const { myTeam, team, activeTeam } = styles;
 
-export default function MyTeam(): JSX.Element {
+export default function MyTeam(props: PageProps): JSX.Element {
+  console.log(props);
   const router = useRouter();
 
   //state
@@ -22,6 +50,20 @@ export default function MyTeam(): JSX.Element {
   const handleActive = () => {
     setActive(!active);
   };
+
+  const myId = props?.data?.decodedData?.memberId;
+  useEffect(() => {
+    makeRequest({
+      // endpoint: `home/members/${myId}/teams`,
+      endpoint: `home/members/12/teams`,
+      method: "GET",
+      auth: true,
+    })
+      .then((res: IInfo) => {
+        console.log(res);
+      })
+      .catch((error: any) => console.log(error));
+  }, []);
 
   return (
     <main className={myTeam}>

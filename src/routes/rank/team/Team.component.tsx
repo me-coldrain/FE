@@ -28,6 +28,8 @@ const {
   aboutTeam,
   aboutTeamImage,
   upperBox,
+  upperBoxTitle,
+  uppberBoxTitleSelected,
   top3Teams,
   top3TeamsProfile,
   top3TeamsNum1,
@@ -49,7 +51,7 @@ const {
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await makeRequest({
-    endpoint: `home/teams/8`,
+    endpoint: `home/rank/teams`,
     method: "GET",
     auth: true,
   });
@@ -66,9 +68,6 @@ export default function Rank({
   const { teamId, teamName } = router.query;
   console.log("fetch with teamId =", teamId, teamName);
   //state
-  const [goMatches, setGoMatches] = useState<boolean>();
-  const [recruitMember, setRecruitMember] = useState<boolean>();
-  const [isCaptain, setIsCaptain] = useState<boolean>(true);
   const [teamData, setTeamData] = useState<ITeam>();
 
   const teamsRanking = async () => {
@@ -87,13 +86,6 @@ export default function Rank({
     teamsRanking();
   }, []);
 
-  //hooks
-  const link = {
-    pathname: "/team/[teamName]/matches",
-    query: { teamId: teamId, teamName: teamName as string },
-    as: "/team/[teamName]/matches",
-  };
-
   const number1 = teamData?.find((x) => (x.rank as number) === 1);
   const number2 = teamData?.find((x) => (x.rank as number) === 2);
   const number3 = teamData?.find((x) => (x.rank as number) === 3);
@@ -102,6 +94,17 @@ export default function Rank({
     <>
       <main className={aboutTeam}>
         <div className={upperBox}>
+          <div className={upperBoxTitle}>
+            <div className={uppberBoxTitleSelected}>팀랭킹</div>
+            <div
+              onClick={() => {
+                router.push("/rank/player");
+              }}
+            >
+              개인랭킹
+            </div>
+            {/* <div>마이랭킹</div> */}
+          </div>
           <ImageWithHeader
             className={aboutTeamImage}
             src="/img/RealStadium.png"
