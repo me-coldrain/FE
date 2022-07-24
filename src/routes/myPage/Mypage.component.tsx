@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 // library
 import { Radar } from "react-chartjs-2";
 // hooks
+import Link from "next/link";
+import router from "next/router";
 import { handleFile } from "@hooks/events";
 import { makeRequest } from "services/makeRequest";
 // component
 import Icon from "@components/icon";
-// style
-import Link from "next/link";
-import { user } from "stores/user";
 import RouterButton from "@components/RouterButton";
+import { RegisterFooter } from "@components/footer";
+// style
 import styles from "./Mypage.module.scss";
 
 type PageProps = {
@@ -55,10 +56,12 @@ const {
   tabs,
   tabsIcon,
   secession,
+  buttonBox,
 } = styles;
 
 export default function MyPage(props: PageProps): JSX.Element {
   console.log(props);
+  const [file, setFile] = useState({});
   const [personalInfo, setPersonalInfo] = useState({
     nickname: "",
     profileImageUrl: "",
@@ -160,11 +163,11 @@ export default function MyPage(props: PageProps): JSX.Element {
     },
   };
 
-  const myId = props.data.decodedData.memberId;
+  const myId = props?.data?.decodedData?.memberId;
   useEffect(() => {
     makeRequest({
-      // endpoint: `home/members/${myId}`,
-      endpoint: `home/members/12`,
+      endpoint: `home/members/${myId}`,
+      // endpoint: `home/members/12`,
       method: "GET",
       auth: true,
     })
@@ -211,8 +214,11 @@ export default function MyPage(props: PageProps): JSX.Element {
                 <label htmlFor="ex_file">
                   <Icon asset="Pen"></Icon>
                 </label>
-                {previewURL !== "" ? (
-                  <img className={preview} src={previewURL}></img>
+                {personalInfo?.profileImageUrl !== "" ? (
+                  <img
+                    className={preview}
+                    src={personalInfo?.profileImageUrl}
+                  ></img>
                 ) : (
                   <div className={defaultProfile}>
                     <Icon asset="Person"></Icon>
@@ -222,7 +228,29 @@ export default function MyPage(props: PageProps): JSX.Element {
                   type="file"
                   id="ex_file"
                   accept="image/jpg,impge/png,image/jpeg,image/gif"
-                  onChange={(e) => handleFile(e, setPreviewURL)}
+                  onChange={(e) =>
+                    handleFile(e, setPreviewURL).then((res: any) => {
+                      const formData = new FormData();
+                      formData.append("profileImageFile", res);
+                      setFile(formData);
+                      makeRequest({
+                        endpoint: "home/members/information/profileimage",
+                        method: "PATCH",
+                        params: formData,
+                        auth: true,
+                        isFile: true,
+                      }).then((res: any) => {
+                        res.status === 200
+                          ? (window.alert(
+                              "프로필 이미지 수정이 완료되었습니다."
+                            ),
+                            router.reload())
+                          : window.alert(
+                              "이미지 등록에 실패했습니다. 잠시 후 다시 시도해주세요."
+                            );
+                      });
+                    })
+                  }
                 />
               </div>
             </div>
@@ -296,9 +324,15 @@ export default function MyPage(props: PageProps): JSX.Element {
         </div>
         {/* </Link> */}
 
-        <RouterButton bigRound mine>
-          수정하기
-        </RouterButton>
+        <div className={buttonBox}>
+          <RegisterFooter
+            content="수정하기"
+            handleClick={() => {
+              // router.push('/mypage/edit')
+            }}
+            activeStyle
+          ></RegisterFooter>
+        </div>
 
         <div className={secession}>
           <p>회원 탈퇴하기</p>

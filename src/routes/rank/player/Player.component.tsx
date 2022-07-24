@@ -30,6 +30,8 @@ const {
   aboutTeam,
   aboutTeamImage,
   upperBox,
+  upperBoxTitle,
+  uppberBoxTitleSelected,
   top3Teams,
   top3TeamsProfile,
   top3TeamsNum1,
@@ -37,6 +39,7 @@ const {
   top3TeamsNum3,
   top3TeamsName,
   top3TeamsRecord,
+  top3TeamsRecordImg,
   top3TeamsRecordScore,
   tabs,
   tabsTitle,
@@ -55,8 +58,6 @@ export const getStaticProps: GetStaticProps = async () => {
     endpoint: `home/rank/members?ability=mvp`,
     method: "GET",
     auth: true,
-    // params: "MVP",
-    // "?ability=MVP" 이게 쿼리로 들어가야 정상작동함
   });
   return {
     props: { data },
@@ -90,13 +91,6 @@ export default function Rank({
     playerRanking();
   }, [found]);
 
-  //hooks
-  const link = {
-    pathname: "/team/[teamName]/matches",
-    query: { teamId: teamId, teamName: teamName as string },
-    as: "/team/[teamName]/matches",
-  };
-
   const number1 = playerData?.find((x) => (x.rank as number) === 1);
   const number2 = playerData?.find((x) => (x.rank as number) === 2);
   const number3 = playerData?.find((x) => (x.rank as number) === 3);
@@ -105,6 +99,17 @@ export default function Rank({
     <>
       <main className={aboutTeam}>
         <div className={upperBox}>
+          <div className={upperBoxTitle}>
+            <div
+              onClick={() => {
+                router.push("/rank/team");
+              }}
+            >
+              팀랭킹
+            </div>
+            <div className={uppberBoxTitleSelected}>개인랭킹</div>
+            {/* <div>마이랭킹</div> */}
+          </div>
           <ImageWithHeader
             className={aboutTeamImage}
             src="/img/RealStadium.png"
@@ -120,7 +125,7 @@ export default function Rank({
                 <div className={top3TeamsRecordScore}>
                   <div>{number2?.abilityPoint}</div>
                 </div>
-                <img src="/img/top2.png"></img>
+                <img className={top3TeamsRecordImg} src="/img/top2.png"></img>
               </div>
             </div>
             <div className={top3TeamsNum1}>
@@ -133,7 +138,7 @@ export default function Rank({
                 <div className={top3TeamsRecordScore}>
                   <div>{number1?.abilityPoint}</div>
                 </div>
-                <img src="/img/top1.png"></img>
+                <img className={top3TeamsRecordImg} src="/img/top1.png"></img>
               </div>
             </div>
             <div className={top3TeamsNum3}>
@@ -146,7 +151,7 @@ export default function Rank({
                 <div className={top3TeamsRecordScore}>
                   <div>{number3?.abilityPoint}</div>
                 </div>
-                <img src="/img/top3.png"></img>
+                <img className={top3TeamsRecordImg} src="/img/top3.png"></img>
               </div>
             </div>
           </div>

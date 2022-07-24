@@ -5,6 +5,39 @@
   --profile-picture-size: 200px;
   .upperBox {
     position: relative;
+    background-color: rgb(8, 24, 79);
+    &Title {
+      position: absolute;
+      top: 0;
+      margin-top: 7rem;
+      margin-left: 1rem;
+      width: fit-content;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 2px solid transparent;
+        margin-right: 1rem;
+        padding-bottom: 0.3rem;
+        color: rgba(194, 194, 194, 1);
+        cursor: pointer;
+      }
+      .uppberBoxTitleSelected {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 2px solid #fff;
+        margin-right: 1rem;
+        padding-bottom: 0.3rem;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    }
   }
   .top3Teams {
     position: absolute;
@@ -12,7 +45,6 @@
     bottom: 0;
     width: 100%;
     justify-content: center;
-    background: linear-gradient(180deg, #08184f 0%, rgba(8, 24, 79, 0) 100%);
     transform: rotate(-180deg);
 
     &Name {
@@ -31,9 +63,9 @@
       right: 0;
       margin: auto;
       width: 3rem;
-      height: 2rem;
+      height: 3rem;
       border: 1px solid #fff;
-      border-radius: 5%;
+      border-radius: 50%;
       object-fit: cover;
       transform: rotate(-180deg);
     }
@@ -46,10 +78,6 @@
       position: relative;
       width: 100px;
       border-radius: 2.5px 2.5px 0.5rem 0.5rem;
-      img {
-        position: absolute;
-        bottom: -1rem;
-      }
     }
 
     &Num1:before {
@@ -72,10 +100,6 @@
       position: relative;
       width: 100px;
       border-radius: 2.5px 2.5px 0.5rem 0.5rem;
-      img {
-        position: absolute;
-        bottom: -1rem;
-      }
     }
 
     &Num2:before {
@@ -98,10 +122,6 @@
       position: relative;
       width: 100px;
       border-radius: 2.5px 2.5px 0.5rem 0.5rem;
-      img {
-        position: absolute;
-        bottom: -1rem;
-      }
     }
 
     &Num3:before {
@@ -125,6 +145,10 @@
       align-items: center;
       justify-content: space-around;
       transform: rotate(-180deg);
+      &Img {
+        position: absolute;
+        bottom: -1rem;
+      }
       &Score {
         position: absolute;
         top: 3.5rem;
@@ -178,7 +202,6 @@
     display: block;
     margin: 0 auto;
     height: 50vh;
-    background: linear-gradient(180deg, #08184f 0%, rgba(8, 24, 79, 0) 100%);
 
     @include media.desktop {
       margin: 4rem 0 0;
