@@ -98,6 +98,13 @@ const Page = (props: PageProps): JSX.Element => {
   // );
   // -----------------------
 
+  // 로그인 되어있지 않을 시 온보딩페이지로 이동시킴
+  useEffect(() => {
+    if (data === false) {
+      router.replace("/introduction");
+    }
+  }, []);
+
   return (
     <>
       <Head>

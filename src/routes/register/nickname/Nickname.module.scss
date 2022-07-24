@@ -1,3 +1,9 @@
+.container {
+  h2 {
+    margin-bottom: 3rem;
+  }
+}
+
 .textBox {
   max-width: 390px;
   width: 100%;
@@ -8,20 +14,27 @@
   margin-bottom: 52px;
   font-size: 8px;
 }
+.profileBox {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.filebox {
+}
 .filebox label {
   display: flex;
-  width: 170px;
-  height: 170px;
+  width: 5rem;
+  height: 5rem;
   align-items: center;
   justify-content: center;
   font-size: 30px;
-  color: #000;
+  color: rgba(134, 134, 134, 1);
   line-height: normal;
   vertical-align: middle;
-  background-color: #dddbdb;
+  background-color: #fff;
   cursor: pointer;
-  border: 1px solid #ebebeb;
-  border-bottom-color: #e2e2e2;
+  border: 1px solid rgba(233, 233, 233, 1);
   border-radius: 0.25em;
 }
 
@@ -39,14 +52,14 @@
 .image {
   position: relative;
   img {
-    width: 170px;
-    height: 170px;
+    width: 5rem;
+    height: 5rem;
     object-fit: cover;
   }
 }
 .close {
   position: absolute;
   top: 5px;
-  left: 155px;
+  right: 5px;
   cursor: pointer;
 }
