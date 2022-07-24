@@ -65,7 +65,7 @@ export default function Introduction(): JSX.Element {
             handleClick={() => {
               handleLink();
             }}
-            activeStyle={false}
+            activeStyle={true}
           ></RegisterFooter>
         </div>
       </main>

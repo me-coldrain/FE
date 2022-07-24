@@ -8,6 +8,7 @@ type RequestParams = {
   params?: any;
   auth?: boolean;
   token: string;
+  isFile: boolean;
 };
 
 const baseUrl = "http://43.200.163.208/api/";
@@ -18,19 +19,24 @@ export const makeRequest: any = async ({
   retries = 3,
   params = null,
   auth = true,
+  isFile = false,
   token,
 }: RequestParams) => {
   const options: {
-    method: "POST" | "GET" | "PUT" | "DELETE";
+    method: "POST" | "GET" | "PUT" | "PATCH" | "DELETE";
     headers: any;
     body?: any;
   } = {
     method,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    ...(params && { body: JSON.stringify(params) }),
+    headers:
+      isFile === true
+        ? {}
+        : {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+    ...(params && isFile === true && { body: params }),
+    ...(params && isFile === false && { body: JSON.stringify(params) }),
   };
   const apiUri = baseUrl + endpoint;
   try {
@@ -46,13 +52,16 @@ export const makeRequest: any = async ({
       const res = await fetch(apiUri, options);
       console.log("makeRequest: res =", res);
 
-      if (res.status === 200) {
+      if (isFile === false && res.status === 200) {
         const json = await res.json();
         console.log("makeRequest: json =", json);
         return json;
       }
+      if (isFile === true && res.status === 200) {
+        return res;
+      }
       throw {
-        message: res.json(),
+        message: await res.json(),
         status: res.status,
       };
     } else {

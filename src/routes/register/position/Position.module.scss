@@ -1,6 +1,6 @@
 .selectBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  grid-auto-rows: minmax(2rem, auto);
 }

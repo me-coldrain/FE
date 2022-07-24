@@ -4,6 +4,10 @@
 }
 .circleBox {
   display: flex;
+  div {
+    margin: 0 0.5rem;
+    height: 3.5rem;
+  }
 }
 .circle {
   position: relative;
@@ -33,19 +37,20 @@
   cursor: pointer;
 }
 .input {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: start;
-  margin: 2rem 0;
-  input[type="text"] {
-    max-width: 390px;
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid black;
-    background-color: transparent;
-    padding: 4px 0;
-    font-size: 8px;
-    margin-top: 1rem;
+  margin-top: 3rem;
+  .inputBox {
+    margin-bottom: 3rem;
+    input {
+      margin-top: 1rem;
+    }
+  }
+}
+.completeButton {
+}
+.disabledButton {
+  div {
+    background-color: rgba(233, 233, 233, 1);
+    // cursor: inherit;
+    pointer-events: none;
   }
 }

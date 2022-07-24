@@ -1,10 +1,7 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
-// library
-import jwtDecode from "jwt-decode";
+import React, { useState } from "react";
 // hooks
 import Link from "next/link";
 import router from "next/router";
-import { browserStorage } from "utils/browser";
 import { makeRequest } from "services/makeRequest";
 // components
 import Input from "components/Input";
@@ -17,13 +14,7 @@ interface IInputs {
   password: string;
 }
 
-type PageProps = {
-  data?: any;
-  decodedData?: any;
-};
-
-export default function User(props: PageProps): JSX.Element {
-  console.log(props);
+export default function User(): JSX.Element {
   const { user, inputBox, signup, kakao } = styles;
   const [inputs, setInputs] = useState<IInputs>({
     email: "",
@@ -35,7 +26,6 @@ export default function User(props: PageProps): JSX.Element {
     const { id } = e.target;
     const { value } = e.target;
     setInputs((values: IInputs) => ({ ...values, [id]: value }));
-    console.log(inputs);
   };
 
   const handleLogin = () => {
@@ -46,7 +36,13 @@ export default function User(props: PageProps): JSX.Element {
       method: "POST",
       params,
       auth: false,
-    }).then(router.replace("/"));
+    }).then((res: any) => {
+      if (res.first) {
+        router.replace("/register/nickname");
+      } else {
+        router.replace("/");
+      }
+    });
   };
 
   return (

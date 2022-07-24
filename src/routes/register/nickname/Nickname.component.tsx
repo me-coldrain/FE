@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { handleFile } from "@hooks/events";
+import router from "next/router";
 import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 import Input from "@components/Input";
-import styles from "./Nickname.module.scss";
 import { makeRequest } from "services/makeRequest";
+import { RegisterFooter } from "@components/footer";
+import styles from "./Nickname.module.scss";
 
 const { filebox, image, close, container, profileBox } = styles;
 
 export default function nickname(): JSX.Element {
-  // const dispatch = useDispatch();
+  const [file, setFile] = useState({});
   const [previewURL, setPreviewURL] = useState("");
   const [nickname, setNickname] = useState<string>();
 
@@ -30,7 +31,27 @@ export default function nickname(): JSX.Element {
       alert("영어,한글을 포함해 2~8자리이어야 합니다");
       return;
     }
-    makeRequest();
+    makeRequest({
+      endpoint: "home/members/information/profileimage",
+      method: "PATCH",
+      params: file,
+      auth: true,
+      isFile: true,
+    }).then((res: any) => {
+      res.status === 200
+        ? router.push(
+            {
+              pathname: "/register/position",
+              query: {
+                nickname: nickname,
+              },
+            },
+            "/register/position"
+          )
+        : window.alert(
+            "이미지 등록에 실패했습니다. 잠시 후 다시 시도해주세요."
+          );
+    });
   };
 
   return (
@@ -70,12 +91,18 @@ export default function nickname(): JSX.Element {
                 type="file"
                 id="ex_file"
                 accept="image/jpg,impge/png,image/jpeg,image/gif"
-                onChange={(e) => handleFile(e, setPreviewURL)}
+                onChange={(e) =>
+                  handleFile(e, setPreviewURL).then((res: any) => {
+                    const formData = new FormData();
+                    formData.append("profileImageFile", res);
+                    setFile(formData);
+                  })
+                }
               />
             </div>
           )}
         </div>
-        <RouterButton
+        {/* <RouterButton
           url="/register/position"
           bigRound
           nickname={nickname}
@@ -84,7 +111,14 @@ export default function nickname(): JSX.Element {
           }}
         >
           다음
-        </RouterButton>
+        </RouterButton> */}
+        <RegisterFooter
+          content="다음"
+          activeStyle={true}
+          handleClick={() => {
+            handleSubmit();
+          }}
+        ></RegisterFooter>
       </main>
     </>
   );
