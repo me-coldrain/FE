@@ -1,19 +1,27 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
-import RouterButton from "components/RouterButton";
+import router from "next/router";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
-// import SelectButton from "components/selectButton";
+import SelectButton from "components/buttonForSelect";
+import { RegisterFooter } from "@components/footer";
 import styles from "./Location.module.scss";
 
 const { selectBox } = styles;
 
 export default function location(): JSX.Element {
-  const router = useRouter();
   console.log(router);
   const [location, setLocation] = useState("seoul");
   const handleLocation = (text: string) => {
     setLocation(text);
+  };
+  const handleRouter = () => {
+    router.push({
+      pathname: "/founding/stadium",
+      query: {
+        ...router.query,
+        location: location,
+      },
+    });
   };
   return (
     <>
@@ -25,7 +33,7 @@ export default function location(): JSX.Element {
         <h3>주 활동 지역</h3>
         <p>1개만 선택 가능합니다.</p>
         <div className={selectBox}>
-          {/* <SelectButton
+          <SelectButton
             location
             onClick={() => handleLocation("seoul")}
             active={location === "seoul" ? true : false}
@@ -136,17 +144,15 @@ export default function location(): JSX.Element {
             active={location === "jeju" ? true : false}
           >
             제주특별자치도
-          </SelectButton> */}
+          </SelectButton>
         </div>
-        <RouterButton
-          url="/founding/stadium"
-          bigRound
-          teamName={router.query.teamName as string}
-          teamInfo={router.query.teamInfo as string}
-          location={location}
-        >
-          다음
-        </RouterButton>
+        <RegisterFooter
+          content="다음"
+          activeStyle
+          handleClick={() => {
+            handleRouter();
+          }}
+        ></RegisterFooter>
       </main>
     </>
   );

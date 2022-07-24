@@ -1,6 +1,12 @@
 .selectBox {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0.7em;
+  grid-auto-rows: minmax(1rem, auto);
+}
+.buttonBox {
+  height: 40vh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  flex-wrap: wrap;
 }
