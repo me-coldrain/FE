@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+// hook
+import router from "next/router";
+
 // component
 import StatusButton from "@components/statusButton";
 import Icon from "@components/icon";
@@ -32,7 +35,12 @@ export default function MyTeam(): JSX.Element {
 
   return (
     <>
-      <main className={teams}>
+      <main
+        className={teams}
+        onClick={() => {
+          router.push("/myteam/match");
+        }}
+      >
         <div className={team}>
           <div className={upperBox}>
             <div>
