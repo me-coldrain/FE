@@ -10,7 +10,7 @@ type RequestParams = {
   token: string;
 };
 
-const baseUrl = "http://13.125.255.206/api/";
+const baseUrl = "http://43.200.163.208/api/";
 
 export const makeRequest: any = async ({
   endpoint,

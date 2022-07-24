@@ -1,0 +1,88 @@
+.scorers {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: black;
+
+  &Box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  p {
+    color: #fff;
+  }
+
+  &Icon {
+    --icon-size: 20px;
+
+    margin: 0 5px;
+  }
+}
+
+.formation {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 90vw;
+  height: 100%;
+  &Field {
+    --icon-size: 90vw;
+    margin: 0 5px;
+  }
+  &Striker {
+    height: 25%;
+    display: flex;
+    // justify-content: space-between;
+    position: absolute;
+  }
+  &MidFielder {
+    top: 25%;
+    height: 25%;
+    display: flex;
+    // justify-content: space-between;
+    position: absolute;
+  }
+  &Defender {
+    top: 50%;
+    height: 25%;
+    display: flex;
+    // justify-content: space-between;
+    position: absolute;
+  }
+  &GoalKeeper {
+    top: 75%;
+    height: 25%;
+    display: flex;
+    // justify-content: space-between;
+    position: absolute;
+  }
+}
+
+.substitute {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  margin: 1rem;
+  width: fit-content;
+
+  h3 {
+    margin: 0 0 0 0.2rem;
+    display: inline-block;
+    width: fit-content;
+  }
+}
+
+.substituteBox {
+  display: flex;
+  overflow: clip;
+  flex-wrap: wrap;
+  // width: 80%;
+}
+
+.horizontalContainer {
+  width: 100%;
+  height: 100%;
+}
