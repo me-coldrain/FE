@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+// hooks
+import Link from "next/link";
+import router from "next/router";
+import { makeRequest } from "services/makeRequest";
+// components
 import Input from "components/Input";
 import RouterButton from "components/RouterButton";
-import Link from "next/link";
-
-import { makeRequest } from "services/makeRequest";
+// scss
 import styles from "./Login.module.scss";
 
 interface IInputs {
@@ -23,7 +26,6 @@ export default function User(): JSX.Element {
     const { id } = e.target;
     const { value } = e.target;
     setInputs((values: IInputs) => ({ ...values, [id]: value }));
-    console.log(inputs);
   };
 
   const handleLogin = () => {
@@ -34,6 +36,12 @@ export default function User(): JSX.Element {
       method: "POST",
       params,
       auth: false,
+    }).then((res: any) => {
+      if (res.first) {
+        router.replace("/register/nickname");
+      } else {
+        router.replace("/");
+      }
     });
   };
 
@@ -70,7 +78,7 @@ export default function User(): JSX.Element {
           </div>
           <div className={kakao}>
             <p>SNS계정으로 간편 로그인</p>
-            <a href="/">kakao</a>
+            <a href="/">KAKAO</a>
           </div>
         </section>
       </main>

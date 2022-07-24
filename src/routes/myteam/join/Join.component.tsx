@@ -7,7 +7,21 @@ import Icon from "@components/icon";
 // style
 import styles from "./Join.module.scss";
 
-const { teams, team, upperBox, lowerBox, location } = styles;
+const {
+  teams,
+  team,
+  upperBox,
+  lowerBox,
+  location,
+  lowerBoxLeft,
+  lowerBoxRight,
+  lowerBoxRightContent,
+  lowerBoxRightContentPercent,
+  lowerBoxRightContentTotal,
+  lowerBoxRightContentWin,
+  lowerBoxRightContentDraw,
+  lowerBoxRightContentLose,
+} = styles;
 
 export default function MyTeam(): JSX.Element {
   //state
@@ -39,15 +53,22 @@ export default function MyTeam(): JSX.Element {
             </div>
           </div>
           <div className={lowerBox}>
-            <div>
+            <div className={lowerBoxLeft}>
               <p>승점</p>
               <p>230</p>
             </div>
-            <div>
+            <div className={lowerBoxRight}>
               <p>승률</p>
-              <div>
-                <p>10전 3승 5무 2패</p>
-                <p>40%</p>
+              <div className={lowerBoxRightContent}>
+                <div className={lowerBoxRightContentPercent}>
+                  <p>40%</p>
+                </div>
+                <div>
+                  <div className={lowerBoxRightContentTotal}>10</div>
+                  <div className={lowerBoxRightContentWin}>3</div>
+                  <div className={lowerBoxRightContentDraw}>5</div>
+                  <div className={lowerBoxRightContentLose}>2</div>
+                </div>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./Input.module.scss";
 import TextField from "@mui/material/TextField";
 import pxToRem from "utils/css/pxToRem";
+import styles from "./Input.module.scss";
 
 const { login, sign, nametag, signupBox } = styles;
 
@@ -12,7 +12,7 @@ type InputProps = {
   label?: string;
   id?: string;
   onChange?: any;
-  value?: string;
+  value?: string | number | undefined;
   signup?: boolean;
   error?: boolean;
   success?: boolean;
@@ -92,7 +92,7 @@ export default function Input(props: InputProps): JSX.Element {
     label = "",
     id = "",
     onChange,
-    value = "",
+    value = "" || 0 || undefined,
     signup,
   } = props;
 
