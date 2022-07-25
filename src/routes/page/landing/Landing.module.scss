@@ -102,7 +102,7 @@
 .searchBar {
   position: relative;
   display: inline-block;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   input {
     --padding-view: 2vw;
     width: 97%;
@@ -124,11 +124,9 @@
   }
   &Icon {
     position: absolute;
-    top: 1vw;
+    top: 2vw;
     right: 1.5vw;
-    transition: all 0.05s ease-in-out;
-    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(290deg)
-      brightness(102%) contrast(106%);
+    fill: #fff;
   }
 }
 
@@ -139,11 +137,12 @@
   flex-direction: row;
   margin-bottom: 1rem;
   div {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    width: 80px;
+    width: 5.5rem;
     height: 34px;
     background: #2f4eb4;
     border-radius: 34px;

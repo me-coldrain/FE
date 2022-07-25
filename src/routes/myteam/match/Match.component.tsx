@@ -14,7 +14,7 @@ import { user } from "stores/user";
 
 const {
   aboutTeam,
-  aboutTeamImage,
+  aboutTeamTitleBox,
   scoreBoard,
   scoreBoardDetail,
   scoreBoardDetailBox,
@@ -33,6 +33,18 @@ const {
   matchHistoryContainerLoser,
   tabs,
   tabsIcon,
+  team,
+  upperBox,
+  lowerBox,
+  location,
+  lowerBoxLeft,
+  lowerBoxRight,
+  lowerBoxRightContent,
+  lowerBoxRightContentPercent,
+  lowerBoxRightContentTotal,
+  lowerBoxRightContentWin,
+  lowerBoxRightContentDraw,
+  lowerBoxRightContentLose,
 } = styles;
 
 export default function Team(): JSX.Element {
@@ -90,36 +102,49 @@ export default function Team(): JSX.Element {
   return (
     <>
       <main className={aboutTeam}>
-        <ImageWithHeader
-          className={aboutTeamImage}
-          src="/assets/landing.png"
-          alt="Desktop & Mobile PWA Application"
-          width="100%"
-          height="220px"
-          expected
-        />
-
-        <div className={scoreBoard}>
-          <div className={scoreBoardContentName}>
-            <h5>승점</h5>
-            <h5>승률</h5>
-          </div>
-          <div className={scoreBoardDetail}>
-            <div
-              className={scoreBoardDetailBox}
-              style={{ borderRight: "1px solid" }}
-            >
-              <p>900점</p>
+        <p>상대팀</p>
+        <div className={aboutTeamTitleBox}>
+          <div className={team}>
+            <div className={upperBox}>
+              <div>
+                <p>서울FC</p>
+                <div className={location}>
+                  <div>
+                    <Icon asset="Location"></Icon>
+                    <p>서울특별시</p>
+                  </div>
+                  <div>
+                    <Icon asset="People"></Icon>
+                    <p>42명</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className={scoreBoardDetailBox}>
-              <p>20%</p>
-              <p>12전 10승 2무 3패</p>
+            <div className={lowerBox}>
+              <div className={lowerBoxLeft}>
+                <p>승점</p>
+                <p>230</p>
+              </div>
+              <div className={lowerBoxRight}>
+                <p>승률</p>
+                <div className={lowerBoxRightContent}>
+                  <div className={lowerBoxRightContentPercent}>
+                    <p>40%</p>
+                  </div>
+                  <div>
+                    <div className={lowerBoxRightContentTotal}>10</div>
+                    <div className={lowerBoxRightContentWin}>3</div>
+                    <div className={lowerBoxRightContentDraw}>5</div>
+                    <div className={lowerBoxRightContentLose}>2</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div className={matchInfo}>
-          <h3>대결 정보</h3>
+          <p>대결 정보</p>
           <div className={matchInfoContainer}>
             <div>
               <Icon asset="Location" className={matchInfoContainerIcon} />
@@ -158,7 +183,11 @@ export default function Team(): JSX.Element {
             </div>
           </div>
         </Link>
-        <RouterButton bigRound>경기취소</RouterButton>
+        <RegisterFooter
+          content="경기취소"
+          activeStyle={false}
+          handleClick={() => {}}
+        ></RegisterFooter>
       </main>
     </>
   );

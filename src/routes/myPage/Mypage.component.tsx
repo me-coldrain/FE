@@ -12,6 +12,7 @@ import RouterButton from "@components/RouterButton";
 import { RegisterFooter } from "@components/footer";
 // style
 import styles from "./Mypage.module.scss";
+import { browserStorage } from "utils/browser";
 
 type PageProps = {
   data?: any;
@@ -51,6 +52,8 @@ const {
   scoreBoard,
   scoreBoardDetail,
   scoreBoardDetailBox,
+  scoreBoardDetailBoxTitle,
+  scoreBoardDetailBoxContent,
   scoreBoardContentName,
   matchInfo,
   tabs,
@@ -84,8 +87,8 @@ export default function MyPage(props: PageProps): JSX.Element {
   const getChartData = (canvas: any) => {
     const ctx = canvas.getContext("2d");
 
-    const x = canvas.height * 0.65;
-    const y = canvas.width * 0.25;
+    const x = canvas.height * 1;
+    const y = canvas.width * 1;
     const outerRadius = canvas.width / 3.2;
 
     const x1 = x * 1.49;
@@ -127,10 +130,6 @@ export default function MyPage(props: PageProps): JSX.Element {
     maintainAspectRatio: true,
     layout: {
       beginAtZero: true,
-      padding: {
-        top: 5,
-        bottom: 10,
-      },
     },
     scale: {
       gridLines: {
@@ -256,29 +255,44 @@ export default function MyPage(props: PageProps): JSX.Element {
             </div>
           </div>
           <div className={scoreBoard}>
-            <div className={scoreBoardContentName}>
-              <h5>MVP</h5>
-              <h5>팀 우승</h5>
-              <h5>경기 참여</h5>
-            </div>
             <div className={scoreBoardDetail}>
               <div
                 className={scoreBoardDetailBox}
-                style={{ borderRight: "1px solid" }}
+                style={{ borderRight: "1px solid rgba(190, 190, 190, 1)" }}
               >
-                <Icon asset="Crown"></Icon>
-                <p>{personalInfo?.mvpPoint}회</p>
+                <div className={scoreBoardDetailBoxTitle}>
+                  <p>MVP</p>
+                </div>
+                <div className={scoreBoardDetailBoxContent}>
+                  <div>
+                    <p>
+                      <strong>{personalInfo?.mvpPoint}</strong>회
+                    </p>
+                  </div>
+                </div>
               </div>
               <div
                 className={scoreBoardDetailBox}
-                style={{ borderRight: "1px solid" }}
+                style={{ borderRight: "1px solid rgba(190, 190, 190, 1)" }}
               >
-                <Icon asset="Crown"></Icon>
-                <p>{personalInfo?.totalMyTeamWinCount}회</p>
+                <div className={scoreBoardDetailBoxTitle}>
+                  <p>팀 우승</p>
+                </div>
+                <div className={scoreBoardDetailBoxContent}>
+                  <p>
+                    <strong>{personalInfo?.totalMyTeamWinCount}</strong>회
+                  </p>
+                </div>
               </div>
               <div className={scoreBoardDetailBox}>
-                <Icon asset="Crown"></Icon>
-                <p>{personalInfo?.totalMyTeamGameCount}회</p>
+                <div className={scoreBoardDetailBoxTitle}>
+                  <p>경기 참여</p>
+                </div>
+                <div className={scoreBoardDetailBoxContent}>
+                  <p>
+                    <strong>{personalInfo?.totalMyTeamGameCount}</strong>회
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -286,7 +300,6 @@ export default function MyPage(props: PageProps): JSX.Element {
 
         <div className={matchInfo}>
           <h3>포지션 점수</h3>
-          <hr />
           <div>
             <Radar
               data={(canvas: any) => getChartData(canvas)}
@@ -309,20 +322,27 @@ export default function MyPage(props: PageProps): JSX.Element {
           <Icon asset="Right-Arrow" className={tabsIcon} />
         </div>
         {/* </Link> */}
-        {/* <Link
-          href={
-            {
-              pathname: "/team/[teamName]/schedule",
-              query: { teamId: teamId, teamName: teamName },
-            }
-          }
-          as="/team/[teamName]/schedule"
-        > */}
-        <div className={tabs}>
-          <p>소속&신청한 팀</p>
-          <Icon asset="Right-Arrow" className={tabsIcon} />
+        <Link
+          href={{
+            pathname: "/myteam",
+          }}
+        >
+          <div className={tabs}>
+            <p>소속&신청한 팀</p>
+            <Icon asset="Right-Arrow" className={tabsIcon} />
+          </div>
+        </Link>
+
+        <div className={buttonBox}>
+          <RegisterFooter
+            content="로그아웃"
+            handleClick={() => {
+              browserStorage.eraseCookie("token"),
+                router.replace("/introduction");
+            }}
+            activeStyle
+          ></RegisterFooter>
         </div>
-        {/* </Link> */}
 
         <div className={buttonBox}>
           <RegisterFooter

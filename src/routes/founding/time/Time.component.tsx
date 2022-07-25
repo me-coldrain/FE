@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 import SelectButton from "@components/buttonForSelect";
-import { useDispatch } from "react-redux";
+import { RegisterFooter } from "@components/footer";
+import { makeRequest } from "services/makeRequest";
 import styles from "./Time.module.scss";
 
-const { container, selectBox, timeBox } = styles;
+const { container, selectBox, timeBox, buttonBox } = styles;
 
 export default function time(): JSX.Element {
   const router = useRouter();
-  const dispatch = useDispatch();
   console.log(router);
   const [preferedDays, setpreferedDays] = useState<string[]>(["sun"]);
   const [preferedTime, setpreferedTime] = useState<string[]>(["am"]);
@@ -29,21 +28,25 @@ export default function time(): JSX.Element {
       setpreferedTime([...preferedTime, text]);
     }
   };
-  const handleSubmit = () => {
-    const teamName = router.query.teamName as string;
-    const teamInfo = router.query.teamInfo as string;
-    const location = router.query.location as string;
-    const stadium = router.query.stadium as string;
 
-    const totalTeamInfo = {
-      teamName,
-      teamInfo,
-      location,
-      stadium,
+  const handleRouter = () => {
+    const params = {
+      ...router.query,
       preferedDays,
       preferedTime,
     };
-    // dispatch(actionName(totalTeamInfo))
+    makeRequest({
+      endpoint: "home/teams",
+      method: "POST",
+      params,
+      auth: true,
+    }).then((res: any) => {
+      if (res.status === 201) {
+        router.replace("/founding/success");
+      } else {
+        window.alert("팀등록에 실패하였습니다. 잠시 후 다시 시도해주세요.");
+      }
+    });
   };
 
   return (
@@ -127,13 +130,15 @@ export default function time(): JSX.Element {
             오후
           </SelectButton>
         </div>
-        <RouterButton
-          url="/founding/success"
-          bigRound
-          // onClick={() => {handleSubmit()}}
-        >
-          다음
-        </RouterButton>
+        <div className={buttonBox}>
+          <RegisterFooter
+            content="다음"
+            activeStyle
+            handleClick={() => {
+              handleRouter();
+            }}
+          ></RegisterFooter>
+        </div>
       </main>
     </>
   );

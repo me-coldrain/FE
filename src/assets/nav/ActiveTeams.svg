@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" width="30" height="30" viewBox="0 -1 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 13C0 9.41015 2.91015 6.5 6.5 6.5C10.0899 6.5 13 9.41015 13 13H0Z" fill="#007bff"/>
+<circle cx="6.50008" cy="4.33333" r="4.33333" fill="white"/>
+<circle cx="6.5" cy="4.3335" r="3.25" fill="#007bff"/>
+<path d="M6.5 13C6.5 9.41015 9.41015 6.5 13 6.5C16.5899 6.5 19.5 9.41015 19.5 13H6.5Z" fill="#007bff"/>
+<circle cx="13.0001" cy="4.33333" r="4.33333" fill="white"/>
+<circle cx="13" cy="4.3335" r="3.25" fill="#007bff"/>
+</svg>

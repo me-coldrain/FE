@@ -1,18 +1,13 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // hooks
 import { useRouter } from "next/router";
+import { GetStaticProps, InferGetServerSidePropsType } from "next";
+import { makeRequest } from "services/makeRequest";
 // component
-import Image, { ImageWithHeader } from "@components/image";
-import Icon from "@components/icon";
-import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
+import { ImageWithHeader } from "@components/image";
 // style
 import Link from "next/link";
-import Footer, { RegisterFooter } from "@components/footer";
-import { user } from "stores/user";
-import Reddot from "@components/reddot";
 import styles from "./Team.module.scss";
-import { makeRequest } from "services/makeRequest";
-import { GetStaticProps, InferGetServerSidePropsType } from "next";
 
 type ITeam = [
   {
@@ -28,6 +23,7 @@ const {
   aboutTeam,
   aboutTeamImage,
   upperBox,
+  logoImg,
   upperBoxTitle,
   uppberBoxTitleSelected,
   top3Teams,
@@ -94,6 +90,7 @@ export default function Rank({
     <>
       <main className={aboutTeam}>
         <div className={upperBox}>
+          <div className={logoImg}></div>
           <div className={upperBoxTitle}>
             <div className={uppberBoxTitleSelected}>팀랭킹</div>
             <div
@@ -178,6 +175,7 @@ export default function Rank({
                         borderBottom: "6em solid #4b72f1",
                         borderLeft: "3.5em solid #4b72f1",
                         borderRight: "3.5em solid transparent",
+                        zIndex: 0,
                       }}
                     ></div>
                     <span>{teamData?.rank}</span>

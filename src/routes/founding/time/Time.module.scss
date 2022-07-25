@@ -1,18 +1,18 @@
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .selectBox {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7em;
+  grid-auto-rows: minmax(1rem, auto);
 }
 .timeBox {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  grid-auto-rows: minmax(1rem, auto);
+}
+.buttonBox {
+  height: 40vh;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
 }

@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { usePageDetails } from "hooks/page";
-import RouterButton from "components/RouterButton";
-import Back from "components/back";
-import Progressbar from "components/progressbar";
-import Input from "components/Input";
-
 import { makeRequest } from "services/makeRequest";
+import Input from "components/Input";
+import { RegisterFooter } from "@components/footer";
+
 import styles from "./Signup.module.scss";
 
 interface IInputs {
@@ -41,7 +39,7 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 
 export default function User(): JSX.Element {
   const router = useRouter();
-  const { user, inputBox } = styles;
+  const { user, ButtonBox } = styles;
   const { title = "", description = "" } = usePageDetails();
   const [inputs, setInputs] = useState<IInputs>({
     email: "",
@@ -99,7 +97,14 @@ export default function User(): JSX.Element {
       method: "POST",
       params,
       auth: false,
-    }).then(router.replace("/login"));
+    }).then((res: any) => {
+      console.log(res);
+      if (res?.status === 200) {
+        window.alert("회원가입이 완료되었습니다."), router.replace("/login");
+      } else {
+        window.alert("회원가입에 실패하였습니다. 잠시후 다시 시도해주세요.");
+      }
+    });
   };
 
   return (
@@ -111,8 +116,6 @@ export default function User(): JSX.Element {
       </Head>
       <main className={user}>
         <section>
-          <Progressbar size="100%"></Progressbar>
-          <Back></Back>
           <h2>회원가입</h2>
         </section>
         <section>
@@ -122,6 +125,7 @@ export default function User(): JSX.Element {
               onChange={handleChange}
               value={email || ""}
               label="아이디"
+              placeholder="admin@gmail.com"
               signup
             ></Input>
             <Input
@@ -130,6 +134,7 @@ export default function User(): JSX.Element {
               onChange={handleChange}
               value={password || ""}
               label="비밀번호"
+              placeholder="영문 대소문자+숫자+특수문자 포함 8~20자리"
               signup
             ></Input>
             <Input
@@ -138,10 +143,17 @@ export default function User(): JSX.Element {
               onChange={handleChange}
               value={confirmpassword || ""}
               label="비밀번호 재확인"
+              placeholder="비밀번호를 다시 한번 입력해주세요."
               signup
             ></Input>
           </div>
-          <RouterButton onClick={handleSubmit}>완료</RouterButton>
+          <div className={ButtonBox}>
+            <RegisterFooter
+              content="회원가입"
+              activeStyle
+              handleClick={handleSubmit}
+            ></RegisterFooter>
+          </div>
         </section>
       </main>
     </>

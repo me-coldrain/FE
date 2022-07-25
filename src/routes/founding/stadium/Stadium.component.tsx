@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 import SelectButton from "@components/buttonForSelect";
+import { RegisterFooter } from "@components/footer";
 import styles from "./Stadium.module.scss";
+import Link from "next/link";
 
-const { selectBox } = styles;
+const { selectBox, buttonBox } = styles;
 
 export default function stadium(): JSX.Element {
   const router = useRouter();
@@ -14,6 +15,15 @@ export default function stadium(): JSX.Element {
   const [stadium, setStadium] = useState("both");
   const handleStadium = (text: string) => {
     setStadium(text);
+  };
+  const handleRouter = () => {
+    router.push({
+      pathname: "/founding/team",
+      query: {
+        ...router.query,
+        stadium: stadium,
+      },
+    });
   };
   return (
     <>
@@ -37,26 +47,25 @@ export default function stadium(): JSX.Element {
             onClick={() => handleStadium("away")}
             active={stadium === "away" ? true : false}
           >
-            상대방에 맞출게요
+            대결 상대에 맞출게요
           </SelectButton>
           <SelectButton
             stadium
             onClick={() => handleStadium("both")}
             active={stadium === "both" ? true : false}
           >
-            다 상관 없습니다
+            모두 상관 없습니다
           </SelectButton>
         </div>
-        <RouterButton
-          url="/founding/time"
-          bigRound
-          teamName={router.query.teamName as string}
-          teamInfo={router.query.teamInfo as string}
-          location={router.query.location as string}
-          stadium={stadium}
-        >
-          다음
-        </RouterButton>
+        <div className={buttonBox}>
+          <RegisterFooter
+            content="다음"
+            activeStyle
+            handleClick={() => {
+              handleRouter();
+            }}
+          ></RegisterFooter>
+        </div>
         <style jsx>{``}</style>
       </main>
     </>
