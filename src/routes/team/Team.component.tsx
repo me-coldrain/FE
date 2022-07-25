@@ -202,38 +202,37 @@ export default function Team(props: PageProps): JSX.Element {
 
   return (
     <>
-      <main className={aboutTeam}>
-        <ImageWithHeader
-          className={aboutTeamImage}
-          src={teamData?.teamImageFileUrl}
-          alt="Desktop & Mobile PWA Application"
-          width="100%"
-          height="220px"
-          title={teamName as string}
-          content={teamData?.introduce}
-        />
-        <div className={scoreBoard}>
-          <div className={scoreBoardContentName}>
-            <h5>승점</h5>
-            <h5>승률</h5>
+      <ImageWithHeader
+        className={aboutTeamImage}
+        src={teamData?.teamImageFileUrl}
+        alt="Desktop & Mobile PWA Application"
+        width="100%"
+        height="220px"
+        title={teamName as string}
+        content={teamData?.introduce}
+      />
+      <div className={scoreBoard}>
+        <div className={scoreBoardContentName}>
+          <h5>승점</h5>
+          <h5>승률</h5>
+        </div>
+        <div className={scoreBoardDetail}>
+          <div
+            className={scoreBoardDetailBox}
+            style={{ borderRight: "1px solid" }}
+          >
+            <p>{teamData?.winPoint}</p>
           </div>
-          <div className={scoreBoardDetail}>
-            <div
-              className={scoreBoardDetailBox}
-              style={{ borderRight: "1px solid" }}
-            >
-              <p>{teamData?.winPoint}</p>
-            </div>
-            <div className={scoreBoardDetailBox}>
-              <p>{teamData?.winRate}%</p>
-              <p>
-                {teamData?.totalGameCount}전 {teamData?.winCount}승{" "}
-                {teamData?.drawCount}무 {teamData?.loseCount}패
-              </p>
-            </div>
+          <div className={scoreBoardDetailBox}>
+            <p>{teamData?.winRate}%</p>
+            <p>
+              {teamData?.totalGameCount}전 {teamData?.winCount}승{" "}
+              {teamData?.drawCount}무 {teamData?.loseCount}패
+            </p>
           </div>
         </div>
-
+      </div>
+      <main className={aboutTeam}>
         <div className={matchInfo}>
           <h3>대결 정보</h3>
           <div className={matchInfoContainer}>
@@ -267,16 +266,23 @@ export default function Team(props: PageProps): JSX.Element {
         </div>
 
         <div style={{ display: "flex", width: "100%" }}>
-          <div className={rowDiv}>
-            <PlaceholderWithJSX
-              label="경기 히스토리"
-              content={matchContainer}
-              length="long"
-              linkType={false}
-              arrowLink={link}
-              arrowLinkAs={link.as}
-            />
-          </div>
+          <Link
+            href={{
+              pathname: "/team/[teamName]/matches",
+              query: { teamId: teamId, teamName: teamName },
+            }}
+          >
+            <div className={rowDiv}>
+              <PlaceholderWithJSX
+                label="경기 히스토리"
+                content={matchContainer}
+                length="long"
+                linkType={false}
+                arrowLink={link}
+                arrowLinkAs={link.as}
+              />
+            </div>
+          </Link>
         </div>
 
         <Link

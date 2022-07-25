@@ -3,9 +3,29 @@ import { GetServerSideProps } from "next";
 import Matches from "routes/team/matches";
 import { makeRequest } from "services/makeRequest";
 
-const MatchHistory = (props: any): JSX.Element => {
-  const { data } = props;
-  return <Matches data={data} />;
+type IGame = {
+  historyId: number;
+  matchDate: string;
+  team: {
+    name: string;
+    record: string;
+    score: number;
+  };
+  opposingTeam: {
+    name: string;
+    record: string;
+    score: number;
+  };
+};
+
+export type IPropsHistories = {
+  query: { teamId: string; teamName: string };
+  data: IGame[];
+};
+
+const MatchHistory = (props: IPropsHistories): JSX.Element => {
+  const { query, data } = props;
+  return <Matches query={query} data={data} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -17,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     token: context.req.cookies.token,
   });
   return {
-    props: { data: data },
+    props: { query: context.query, data: data },
   };
 };
 
