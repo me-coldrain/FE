@@ -12,6 +12,9 @@ import Link from "next/link";
 
 import styles from "./Page.module.scss";
 import { browserStorage } from "utils/browser";
+import { makeRequest } from "services/makeRequest";
+import Modal, { CenterModal } from "@components/modal";
+import ButtonForSelect from "@components/buttonForSelect";
 
 interface Teams {
   createdDate: string;
@@ -48,7 +51,9 @@ const {
 
 type PageProps = {
   isLanding?: boolean;
-  data?: any;
+  data?: {
+    content: Teams[];
+  };
 };
 
 export const addTitleTags = (title: string): JSX.Element => {
@@ -79,31 +84,115 @@ const Page = (props: PageProps): JSX.Element => {
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
 
-  const teams: Teams[] = data?.content;
+  const [teams, setTeams] = useState<Teams[]>([]);
 
   const classNames = injectClassNames(page, [pageLanding, isLanding]);
 
   const [homePage, setHomePage] = useState<boolean>(true);
-
-  //temp code --------------
-  // browserStorage.setCookie(
-  //   "token",
-  //   "eyJ0eXBlIjoidG9rZW4iLCJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiVVNFUiIsInN1YiI6ImFkbWluQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjpudWxsLCJleHAiOjE2NjA3MDg2MzEsImlhdCI6MTY1ODExNjYzMSwibWVtYmVySWQiOjEyfQ.Fh58ow2E1n7QrG8UMBmtUu4axmrRtPQ_LevxW9XUKj4",
-  //   3
-  // );
-  // browserStorage.setCookie(
-  //   "token",
-  //   "eyJ0eXBlIjoidG9rZW4iLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBuYXZlci5jb20iLCJvcGVuVGVhbUlkIjo4LCJyb2xlIjoiVVNFUiIsIm5pY2tuYW1lIjoi6rSA66as7J6QIiwiZXhwIjoxNjYxMDY0ODQyLCJpYXQiOjE2NTg0NzI4NDIsIm1lbWJlcklkIjoxMn0._dicdwpYs8mk87WhWI66iTzauTZgQKKmLBjW9Xzsjj4",
-  //   3
-  // );
-  // -----------------------
+  const [locationModal, setLocationModal] = useState<boolean>(false);
+  const [daysModal, setDaysModal] = useState<boolean>(false);
+  const [timeModal, setTimeModal] = useState<boolean>(false);
+  const [winRateModal, setWinRateModal] = useState<boolean>(false);
+  const [address, setAddress] = useState<string[]>([]);
+  const addressList: string[] = [
+    "서울특별시",
+    "부산광역시",
+    "대구광역시",
+    "대전광역시",
+    "울산광역시",
+    "인천광역시",
+    "강원도",
+    "경기도",
+    "충청북도",
+    "충청남도",
+    "전라북도",
+    "전라남도",
+    "경상북도",
+    "경상남도",
+    "제주시",
+  ];
+  const [weekdays, setWeekdays] = useState<string[]>([]);
+  const weekdaysList: string[] = [
+    "MON",
+    "TUE",
+    "WED",
+    "THU",
+    "FRI",
+    "SAT",
+    "SUN",
+  ];
+  const [time, setTime] = useState<string[]>([]);
+  const ampm: string[] = ["am", "pm"];
+  const [winRate, setWinRate] = useState<string>();
+  const winRatesUp: string[] = [
+    "10",
+    "20",
+    "30",
+    "40",
+    "50",
+    "60",
+    "70",
+    "80",
+    "90",
+  ];
 
   // 로그인 되어있지 않을 시 온보딩페이지로 이동시킴
   useEffect(() => {
-    if (data === false) {
-      router.replace("/introduction");
+    if (data) {
+      setTeams(data?.content);
     }
+    // if (data === false) {
+    //   router.push("/introduction");
+    // }
   }, []);
+
+  const handleLocationClick = (content: string) => {
+    if (address?.includes(content)) {
+      setAddress((prev) => prev?.filter((e) => e !== content));
+      setLocationModal(false);
+    } else {
+      setAddress([content, ...address]);
+      setLocationModal(false);
+    }
+  };
+
+  const handleWeekdayClick = (content: string) => {
+    if (weekdays?.includes(content)) {
+      setWeekdays((prev) => prev?.filter((e) => e !== content));
+      setDaysModal(false);
+    } else {
+      setWeekdays([content, ...weekdays]);
+      setDaysModal(false);
+    }
+  };
+
+  const handleTimeClick = (content: string) => {
+    if (time?.includes(content)) {
+      setTime((prev) => prev?.filter((e) => e !== content));
+      setTimeModal(false);
+    } else {
+      setTime([content, ...weekdays]);
+      setTimeModal(false);
+    }
+  };
+
+  const handleRateClick = (content: string) => {
+    setWinRate(content);
+  };
+
+  const handleDataChange = async () => {
+    await makeRequest({
+      endpoint: `home/teams?address=${address}&weekdays=${weekdays}&time=${time}&winRate=${winRate}`,
+      method: "GET",
+      token: browserStorage.getCookie("token"),
+    })
+      .then((res: any) => setTeams(res.content))
+      .catch((error: any) => console.log(error));
+  };
+
+  useEffect(() => {
+    handleDataChange();
+  }, [address, weekdays, time, winRate]);
 
   return (
     <>
@@ -113,7 +202,84 @@ const Page = (props: PageProps): JSX.Element => {
         <meta name="robots" content="INDEX,FOLLOW" />
       </Head>
       <main className={classNames}>
-        {isLanding && <Landing homePage={homePage} setHomePage={setHomePage} />}
+        <CenterModal
+          title="지역"
+          show={locationModal}
+          onClose={() => setLocationModal(false)}
+        >
+          {addressList.map((location, index) => (
+            <div key={`address-${index}`}>
+              <ButtonForSelect
+                location={true}
+                active={address?.includes(location) ? true : false}
+                onClick={() => handleLocationClick(location)}
+              >
+                {location}
+              </ButtonForSelect>
+            </div>
+          ))}
+        </CenterModal>
+        <CenterModal
+          title="요일"
+          show={daysModal}
+          onClose={() => setDaysModal(false)}
+        >
+          {weekdaysList.map((weekday, index) => (
+            <div key={`weekdays-${index}`}>
+              <ButtonForSelect
+                location={true}
+                active={weekdays?.includes(weekday) ? true : false}
+                onClick={() => handleWeekdayClick(weekday)}
+              >
+                {weekday}
+              </ButtonForSelect>
+            </div>
+          ))}
+        </CenterModal>
+        <CenterModal
+          title="시간"
+          show={timeModal}
+          onClose={() => setTimeModal(false)}
+        >
+          {ampm.map((hours, index) => (
+            <div key={`times-${index}`}>
+              <ButtonForSelect
+                location={true}
+                active={time?.includes(hours) ? true : false}
+                onClick={() => handleTimeClick(hours)}
+              >
+                {hours}
+              </ButtonForSelect>
+            </div>
+          ))}
+        </CenterModal>
+        <CenterModal
+          title="승률"
+          show={winRateModal}
+          onClose={() => setWinRateModal(false)}
+        >
+          {winRatesUp.map((rate, index) => (
+            <div key={`win-rate-${index}`}>
+              <ButtonForSelect
+                location={true}
+                active={winRate === rate ? true : false}
+                onClick={() => handleRateClick(rate)}
+              >
+                {rate + "%"}
+              </ButtonForSelect>
+            </div>
+          ))}
+        </CenterModal>
+        {isLanding && (
+          <Landing
+            homePage={homePage}
+            setHomePage={setHomePage}
+            setLocationModal={setLocationModal}
+            setDaysModal={setDaysModal}
+            setTimeModal={setTimeModal}
+            setWinRateModal={setWinRateModal}
+          />
+        )}
         <section>
           <div className={safeArea}>
             {teams?.map((item, index) => {
@@ -181,7 +347,7 @@ const Page = (props: PageProps): JSX.Element => {
               handleClick={() => {
                 router.push("/create");
               }}
-              content="+"
+              content="팀등록"
               length="round"
             />
           </div>
@@ -194,6 +360,8 @@ const Page = (props: PageProps): JSX.Element => {
 /**
  *
  * @ToDo 무한 스크롤 적용
+ *
+ * 2. what is recruit && match?
  */
 
 export default Page;

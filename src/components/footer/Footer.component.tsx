@@ -48,7 +48,7 @@ export default function Footer(): JSX.Element {
     <footer className={footer}>
       <p>
         <Link href="https://github.com/me-coldrain">
-          <a>Go to github</a>
+          <h5>Go to github</h5>
         </Link>
       </p>
     </footer>

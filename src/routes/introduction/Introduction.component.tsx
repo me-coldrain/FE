@@ -44,7 +44,6 @@ export default function Introduction(): JSX.Element {
         <meta name="robots" content="INDEX,FOLLOW" />
       </Head>
       <main className={introduction}>
-        <div className={logo}>로고</div>
         <section>
           <h1>
             함께할수록

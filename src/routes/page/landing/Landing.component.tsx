@@ -21,15 +21,15 @@ const {
 type ILandingProps = {
   homePage: boolean;
   setHomePage: Dispatch<SetStateAction<boolean>>;
+  setLocationModal: Dispatch<SetStateAction<boolean>>;
+  setDaysModal: Dispatch<SetStateAction<boolean>>;
+  setTimeModal: Dispatch<SetStateAction<boolean>>;
+  setWinRateModal: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function Landing(props: ILandingProps): JSX.Element {
   const { homePage, setHomePage } = props;
   // modal state
-  const [locationModal, setLocationModal] = useState<boolean>(false);
-  const [daysModal, setDaysModal] = useState<boolean>(false);
-  const [timeModal, setTimeModal] = useState<boolean>(false);
-  const [winRateModal, setWinRateModal] = useState<boolean>(false);
 
   const fetchMatches = () => {
     console.log("fetchMatches : with");
@@ -43,26 +43,6 @@ export default function Landing(props: ILandingProps): JSX.Element {
 
   return (
     <div className={wrapper}>
-      <Modal
-        title="지역"
-        show={locationModal}
-        onClose={() => setLocationModal(false)}
-      >
-        지역모달
-      </Modal>
-      <Modal title="요일" show={daysModal} onClose={() => setDaysModal(false)}>
-        지역모달
-      </Modal>
-      <Modal title="시간" show={timeModal} onClose={() => setTimeModal(false)}>
-        지역모달
-      </Modal>
-      <Modal
-        title="지역"
-        show={winRateModal}
-        onClose={() => setWinRateModal(false)}
-      >
-        지역모달
-      </Modal>
       <div className={landing}>
         <div className={homePage ? landingText : landingText}>
           <p
@@ -82,20 +62,20 @@ export default function Landing(props: ILandingProps): JSX.Element {
 
         <div className={searchBar}>
           <input placeholder="팀 이름을 검색해주세요." />
-          <Icon asset={"Calendar"} className={searchBarIcon} />
+          <Icon asset={"Search"} className={searchBarIcon} />
         </div>
 
         <div className={filters}>
-          <div onClick={() => setLocationModal(!locationModal)}>
+          <div onClick={() => props.setLocationModal(true)}>
             <p>지역</p>
           </div>
-          <div onClick={() => setDaysModal(!daysModal)}>
+          <div onClick={() => props.setDaysModal(true)}>
             <p>요일</p>
           </div>
-          <div onClick={() => setTimeModal(!timeModal)}>
+          <div onClick={() => props.setTimeModal(true)}>
             <p>시간</p>
           </div>
-          <div onClick={() => setWinRateModal(!winRateModal)}>
+          <div onClick={() => props.setWinRateModal(true)}>
             <p>승률</p>
           </div>
         </div>
