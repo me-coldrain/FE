@@ -17,6 +17,7 @@ type InputProps = {
   error?: boolean;
   success?: boolean;
   multiLine?: number;
+  max?: number;
 };
 
 export function TextArea(props: InputProps): JSX.Element {
@@ -94,6 +95,7 @@ export default function Input(props: InputProps): JSX.Element {
     onChange,
     value = "" || 0 || undefined,
     signup,
+    max,
   } = props;
 
   if (normal) {
@@ -105,6 +107,7 @@ export default function Input(props: InputProps): JSX.Element {
         id={id}
         value={value}
         onChange={onChange}
+        maxLength={max}
       ></input>
     );
   }
@@ -122,6 +125,7 @@ export default function Input(props: InputProps): JSX.Element {
           type={type}
           onChange={onChange}
           value={value}
+          maxLength={max}
         ></input>
       </div>
     );

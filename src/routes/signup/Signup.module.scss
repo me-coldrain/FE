@@ -5,11 +5,12 @@
   & section {
     > h1,
     h2 {
-      font-size: 36px;
-      font-weight: 500;
+      font-size: 24px;
+      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: start;
+      margin-bottom: 3rem;
     }
 
     > p {
@@ -21,27 +22,25 @@
       text-align: center;
       justify-content: center;
     }
+    input {
+      margin-bottom: 2rem;
+    }
+    label {
+      font-size: 16px;
+      color: #000;
+    }
   }
 }
 
-.signup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.placeholder {
-  margin: 0 0 15px;
-  padding-bottom: 20%;
-  @include animations.placeholder;
-
-  &:nth-child(n + 2) {
-    padding-bottom: 40%;
-  }
-
-  &:nth-child(n + 3) {
-    padding-bottom: 30%;
+.ButtonBox {
+  margin-top: 25vh;
+  width: 100%;
+  footer {
+    margin: 0.5rem 0 2rem;
+    padding: 0;
+    P {
+      font-size: 16px;
+      font-weight: 600;
+    }
   }
 }

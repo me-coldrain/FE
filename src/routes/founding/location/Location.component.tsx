@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import router from "next/router";
+import { useRouter } from "next/router";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 import SelectButton from "components/buttonForSelect";
@@ -9,14 +9,17 @@ import styles from "./Location.module.scss";
 const { selectBox } = styles;
 
 export default function location(): JSX.Element {
+  const router = useRouter();
   console.log(router);
   const [location, setLocation] = useState("seoul");
   const handleLocation = (text: string) => {
     setLocation(text);
   };
-  const handleRouter = () => {
+
+  const handleRouter = (): void => {
     router.push({
       pathname: "/founding/stadium",
+      // as: "/founding/stadium",
       query: {
         ...router.query,
         location: location,

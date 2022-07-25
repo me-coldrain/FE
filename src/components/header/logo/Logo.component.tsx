@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./Logo.module.scss";
 
-const { logo, textWhite } = styles;
+const { logo, logoImg, textWhite } = styles;
 
 export default function Logo(): JSX.Element {
   const { pathname } = useRouter();
@@ -51,7 +51,11 @@ export default function Logo(): JSX.Element {
   return (
     <div className={white ? textWhite : logo}>
       <Link href="/">
-        <a>{content}</a>
+        {content === "구십분" ? (
+          <div className={logoImg}></div>
+        ) : (
+          <a>{content}</a>
+        )}
       </Link>
     </div>
   );

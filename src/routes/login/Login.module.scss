@@ -3,18 +3,17 @@
 @use "styles/variables/media";
 
 .user {
+  .logo {
+    background: center / contain no-repeat url("/img/MainLogoColor.png");
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5rem 0 3rem;
+  }
   & section {
     width: 100%;
     height: 100%;
-    h1,
-    h2 {
-      font-size: 36px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 7rem;
-    }
 
     p {
       width: inherit;
@@ -30,12 +29,23 @@
   align-items: center;
   justify-content: center;
 }
+.buttonBox {
+  width: 100%;
+  footer {
+    margin: 0.5rem 0 2rem;
+    padding: 0;
+    div {
+      border-radius: inherit;
+    }
+  }
+}
 
 .signup {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 14px;
   cursor: pointer;
   a {
     border-bottom: 1px solid #000;
@@ -58,21 +68,23 @@
 
 .kakao {
   position: absolute;
-  bottom: 6rem;
+  bottom: 4rem;
   left: 0;
   right: 0;
-  max-width: 390px;
   width: 100%;
-  margin: 0 auto;
-  padding: var(--content-padding) 0;
   text-align: center;
-  a {
-    @include button.default;
-    --button-text-color: #000;
-    --button-font-weight: 600;
-    --button-background: #fbe600;
-    --button-hover: #fbe600;
-    --button-padding: 20px 154px;
-    text-align: center;
+  .kakaoBox {
+    width: 100%;
+    footer {
+      margin: 0 0 2rem;
+      padding-top: 0;
+      div {
+        border-radius: inherit;
+        background-color: #fbe600;
+        p {
+          color: #000;
+        }
+      }
+    }
   }
 }

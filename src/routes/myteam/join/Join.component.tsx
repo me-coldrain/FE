@@ -35,13 +35,13 @@ export default function MyTeam(): JSX.Element {
 
   return (
     <>
-      <main
-        className={teams}
-        onClick={() => {
-          router.push("/myteam/match");
-        }}
-      >
-        <div className={team}>
+      <main className={teams}>
+        <div
+          className={team}
+          onClick={() => {
+            router.push("/myteam/match");
+          }}
+        >
           <div className={upperBox}>
             <div>
               <p>서울FC</p>

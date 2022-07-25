@@ -68,7 +68,7 @@ export default function Landing(props: ILandingProps): JSX.Element {
           <p
             onClick={fetchMatches}
             className={injectClassNames([active, homePage === true])}
-            style={{ marginRight: "3rem" }}
+            style={{ marginRight: "2rem" }}
           >
             대결
           </p>
@@ -82,7 +82,7 @@ export default function Landing(props: ILandingProps): JSX.Element {
 
         <div className={searchBar}>
           <input placeholder="팀 이름을 검색해주세요." />
-          <Icon asset={"Calendar"} className={searchBarIcon} />
+          <Icon asset={"Search"} className={searchBarIcon} />
         </div>
 
         <div className={filters}>

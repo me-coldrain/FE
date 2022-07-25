@@ -5,6 +5,7 @@ import Progressbar from "components/progressbar";
 import SelectButton from "@components/buttonForSelect";
 import { RegisterFooter } from "@components/footer";
 import styles from "./Stadium.module.scss";
+import Link from "next/link";
 
 const { selectBox, buttonBox } = styles;
 
