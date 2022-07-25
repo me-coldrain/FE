@@ -8,7 +8,7 @@ import styles from "./Items.module.scss";
 const { items, active, activeIcon } = styles;
 
 const links = [
-  { name: "홈", url: "/", alias: [], asset: "nav/Home" },
+  { name: "홈", url: "/", alias: ["/team/[teamName]"], asset: "nav/Home" },
   { name: "랭킹", url: "/rank/team", alias: [], asset: "nav/Rank" },
   { name: "팀", url: "/myteam", alias: [], asset: "nav/Teams" },
   { name: "마이페이지", url: "/mypage", alias: [], asset: "nav/Profile" },

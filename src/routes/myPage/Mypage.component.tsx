@@ -12,6 +12,7 @@ import RouterButton from "@components/RouterButton";
 import { RegisterFooter } from "@components/footer";
 // style
 import styles from "./Mypage.module.scss";
+import SafeArea from "@components/safeArea";
 
 type PageProps = {
   data?: any;
@@ -187,103 +188,101 @@ export default function MyPage(props: PageProps): JSX.Element {
 
   return (
     <>
-      <main className={aboutTeam}>
-        <div className={upperBox}>
-          <div className={myInfo}>
-            <div className={leftBox}>
-              <div className={leftBoxName}>
-                <div className={leftBoxNameBox}>{personalInfo?.nickname}</div>
-                <div className={leftBoxNamePosition}>
-                  #{personalInfo?.position}
-                </div>
-              </div>
-              <div className={leftBoxContact}>
-                <div className={leftBoxContactBox}>
-                  <Icon asset="Chat"></Icon>
-                  {personalInfo?.contact}
-                </div>
-                <hr></hr>
-                <div className={leftBoxContactBox}>
-                  <Icon asset="Device"></Icon>
-                  {personalInfo?.phone}
-                </div>
+      <SafeArea color={"#007bff"} />
+      <div className={upperBox}>
+        <div className={myInfo}>
+          <div className={leftBox}>
+            <div className={leftBoxName}>
+              <div className={leftBoxNameBox}>{personalInfo?.nickname}</div>
+              <div className={leftBoxNamePosition}>
+                #{personalInfo?.position}
               </div>
             </div>
-            <div className={rightBox}>
-              <div className={myImage}>
-                <label htmlFor="ex_file">
-                  <Icon asset="Pen"></Icon>
-                </label>
-                {personalInfo?.profileImageUrl !== "" ? (
-                  <img
-                    className={preview}
-                    src={personalInfo?.profileImageUrl}
-                  ></img>
-                ) : (
-                  <div className={defaultProfile}>
-                    <Icon asset="Person"></Icon>
-                  </div>
-                )}
-                <input
-                  type="file"
-                  id="ex_file"
-                  accept="image/jpg,impge/png,image/jpeg,image/gif"
-                  onChange={(e) =>
-                    handleFile(e, setPreviewURL).then((res: any) => {
-                      const formData = new FormData();
-                      formData.append("profileImageFile", res);
-                      setFile(formData);
-                      makeRequest({
-                        endpoint: "home/members/information/profileimage",
-                        method: "PATCH",
-                        params: formData,
-                        auth: true,
-                        isFile: true,
-                      }).then((res: any) => {
-                        res.status === 200
-                          ? (window.alert(
-                              "프로필 이미지 수정이 완료되었습니다."
-                            ),
-                            router.reload())
-                          : window.alert(
-                              "이미지 등록에 실패했습니다. 잠시 후 다시 시도해주세요."
-                            );
-                      });
-                    })
-                  }
-                />
+            <div className={leftBoxContact}>
+              <div className={leftBoxContactBox}>
+                <Icon asset="Chat"></Icon>
+                {personalInfo?.contact}
+              </div>
+              <hr></hr>
+              <div className={leftBoxContactBox}>
+                <Icon asset="Device"></Icon>
+                {personalInfo?.phone}
               </div>
             </div>
           </div>
-          <div className={scoreBoard}>
-            <div className={scoreBoardContentName}>
-              <h5>MVP</h5>
-              <h5>팀 우승</h5>
-              <h5>경기 참여</h5>
-            </div>
-            <div className={scoreBoardDetail}>
-              <div
-                className={scoreBoardDetailBox}
-                style={{ borderRight: "1px solid" }}
-              >
-                <Icon asset="Crown"></Icon>
-                <p>{personalInfo?.mvpPoint}회</p>
-              </div>
-              <div
-                className={scoreBoardDetailBox}
-                style={{ borderRight: "1px solid" }}
-              >
-                <Icon asset="Crown"></Icon>
-                <p>{personalInfo?.totalMyTeamWinCount}회</p>
-              </div>
-              <div className={scoreBoardDetailBox}>
-                <Icon asset="Crown"></Icon>
-                <p>{personalInfo?.totalMyTeamGameCount}회</p>
-              </div>
+          <div className={rightBox}>
+            <div className={myImage}>
+              <label htmlFor="ex_file">
+                <Icon asset="Pen"></Icon>
+              </label>
+              {personalInfo?.profileImageUrl !== "" ? (
+                <img
+                  className={preview}
+                  src={personalInfo?.profileImageUrl}
+                ></img>
+              ) : (
+                <div className={defaultProfile}>
+                  <Icon asset="Person"></Icon>
+                </div>
+              )}
+              <input
+                type="file"
+                id="ex_file"
+                accept="image/jpg,impge/png,image/jpeg,image/gif"
+                onChange={(e) =>
+                  handleFile(e, setPreviewURL).then((res: any) => {
+                    const formData = new FormData();
+                    formData.append("profileImageFile", res);
+                    setFile(formData);
+                    makeRequest({
+                      endpoint: "home/members/information/profileimage",
+                      method: "PATCH",
+                      params: formData,
+                      auth: true,
+                      isFile: true,
+                    }).then((res: any) => {
+                      res.status === 200
+                        ? (window.alert("프로필 이미지 수정이 완료되었습니다."),
+                          router.reload())
+                        : window.alert(
+                            "이미지 등록에 실패했습니다. 잠시 후 다시 시도해주세요."
+                          );
+                    });
+                  })
+                }
+              />
             </div>
           </div>
         </div>
-
+        <div className={scoreBoard}>
+          <div className={scoreBoardContentName}>
+            <h5>MVP</h5>
+            <h5>팀 우승</h5>
+            <h5>경기 참여</h5>
+          </div>
+          <div className={scoreBoardDetail}>
+            <div
+              className={scoreBoardDetailBox}
+              style={{ borderRight: "1px solid" }}
+            >
+              <Icon asset="Crown"></Icon>
+              <p>{personalInfo?.mvpPoint}회</p>
+            </div>
+            <div
+              className={scoreBoardDetailBox}
+              style={{ borderRight: "1px solid" }}
+            >
+              <Icon asset="Crown"></Icon>
+              <p>{personalInfo?.totalMyTeamWinCount}회</p>
+            </div>
+            <div className={scoreBoardDetailBox}>
+              <Icon asset="Crown"></Icon>
+              <p>{personalInfo?.totalMyTeamGameCount}회</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <main className={aboutTeam}>
         <div className={matchInfo}>
           <h3>포지션 점수</h3>
           <hr />
