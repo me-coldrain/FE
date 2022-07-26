@@ -8,13 +8,13 @@ import styles from "./Footer.module.scss";
 const { footer, footerButtonLink, footerActiveButton } = styles;
 
 type IProps = {
-  content: string;
+  content: string | JSX.Element;
   handleClick: () => void;
   activeStyle: boolean;
 };
 
 type Content = {
-  content: string;
+  content: string | JSX.Element;
 };
 
 export const RegisterFooter = ({
@@ -37,9 +37,7 @@ export const RegisterFooter = ({
 export function InfoFooter({ content }: Content): JSX.Element {
   return (
     <footer className={footer}>
-      <p>
-        <a>{content}</a>
-      </p>
+      <a>{content}</a>
     </footer>
   );
 }
