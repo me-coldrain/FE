@@ -1,4 +1,4 @@
-export const handleFile = async (e: any, setting: any): Promise<any> => {
+export const handleFile = (e: any, setting: any) => {
   e.preventDefault();
   const reader = new FileReader();
   const file = e.target.files[0];

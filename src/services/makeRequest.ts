@@ -52,12 +52,13 @@ export const makeRequest: any = async ({
       const res = await fetch(apiUri, options);
       console.log("makeRequest: res =", res);
 
-      if (isFile === false && res.status === 200) {
+      if (isFile === false && res.status <= 201) {
         const json = await res.json();
         console.log("makeRequest: json =", json);
         return json;
       }
-      if (isFile === true && res.status === 200) {
+      if (isFile === true && res.status <= 201) {
+        console.log(res);
         return res;
       }
       throw {
@@ -72,6 +73,10 @@ export const makeRequest: any = async ({
         const json = await res.json();
         console.log("json =", json);
         return json;
+      }
+
+      if (res.status === 201 && endpoint === "members/signup") {
+        return res;
       }
 
       if (res.status === 201) {

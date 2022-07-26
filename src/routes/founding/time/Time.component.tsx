@@ -9,6 +9,17 @@ import styles from "./Time.module.scss";
 
 const { container, selectBox, timeBox, buttonBox } = styles;
 
+type params = {
+  introduce: string | string[] | undefined;
+  teamName: string | string[] | undefined;
+  mainArea: string | string[] | undefined;
+  preferredArea: string | string[] | undefined;
+  weekdays: string[];
+  time: string[];
+};
+
+type A = keyof params;
+
 export default function time(): JSX.Element {
   const router = useRouter();
   console.log(router);
@@ -29,18 +40,33 @@ export default function time(): JSX.Element {
     }
   };
 
-  const handleRouter = () => {
-    const params = {
-      ...router.query,
-      preferedDays,
-      preferedTime,
+  const handleRouter = async () => {
+    console.log(router.query);
+    const params: params = {
+      introduce: router.query.teamInfo,
+      teamName: router.query.teamName,
+      mainArea: router.query.location,
+      preferredArea: router.query.stadium,
+      weekdays: preferedDays,
+      time: preferedTime,
     };
-    makeRequest({
+
+    const _formData = new FormData();
+    for (const key in params as any) {
+      _formData.append(key as A, params[key]);
+    }
+
+    console.log(_formData);
+
+    console.log("params =", params);
+    await makeRequest({
       endpoint: "home/teams",
       method: "POST",
-      params,
+      params: _formData,
       auth: true,
+      isFile: true,
     }).then((res: any) => {
+      console.log(res);
       if (res.status === 201) {
         router.replace("/founding/success");
       } else {
