@@ -111,7 +111,7 @@
     min-width: 375px;
 
     @include media.after-mobile {
-      backdrop-filter: saturate(200%) blur(10px);
+      // backdrop-filter: saturate(200%) blur(10px);
       display: grid;
       grid-column-gap: 50px;
       grid-template-columns: 1fr 1fr;

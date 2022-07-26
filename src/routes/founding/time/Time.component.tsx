@@ -51,20 +51,20 @@ export default function time(): JSX.Element {
       time: preferedTime,
     };
 
-    const _formData = new FormData();
-    for (const key in params as any) {
-      _formData.append(key as A, params[key]);
-    }
+    // const _formData = new FormData();
+    // for (const key in params as any) {
+    //   _formData.append(key as A, params[key]);
+    // }
 
-    console.log(_formData);
+    // console.log(_formData);
 
     console.log("params =", params);
     await makeRequest({
       endpoint: "home/teams",
       method: "POST",
-      params: _formData,
+      params: params,
       auth: true,
-      isFile: true,
+      // isFile: true,
     }).then((res: any) => {
       console.log(res);
       if (res.status === 201) {
@@ -80,10 +80,13 @@ export default function time(): JSX.Element {
       <main>
         <section>
           <Progressbar size="100%"></Progressbar>
-          <Back></Back>
         </section>
-        <h3>언제 만날까요?</h3>
-        <p>* 다중 선택 가능합니다.</p>
+        <h3 style={{ color: "#2F4EB4", fontWeight: "600", fontSize: "24px" }}>
+          언제 만날까요?
+          <p style={{ color: "rgba(163, 163, 163, 1)" }}>
+            * 다중 선택 가능합니다.
+          </p>
+        </h3>
 
         <p>가능한 요일을 선택해주세요.</p>
         <div className={container}>
@@ -139,7 +142,7 @@ export default function time(): JSX.Element {
             </SelectButton>
           </div>
         </div>
-        <p>가능한 시간대를 선택해주세요.</p>
+        <p style={{ marginTop: "3rem" }}>가능한 시간대를 선택해주세요.</p>
         <div className={timeBox}>
           <SelectButton
             location
@@ -158,7 +161,7 @@ export default function time(): JSX.Element {
         </div>
         <div className={buttonBox}>
           <RegisterFooter
-            content="다음"
+            content="완료"
             activeStyle
             handleClick={() => {
               handleRouter();
