@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import { statusBarStyle } from "config";
 import { AppProps } from "next/app";
 import "styles/main.scss";
+import { makeRequest } from "services/makeRequest";
 
 declare global {
   interface Window {

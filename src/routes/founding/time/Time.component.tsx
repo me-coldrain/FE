@@ -51,20 +51,12 @@ export default function time(): JSX.Element {
       time: preferedTime,
     };
 
-    // const _formData = new FormData();
-    // for (const key in params as any) {
-    //   _formData.append(key as A, params[key]);
-    // }
-
-    // console.log(_formData);
-
     console.log("params =", params);
     await makeRequest({
       endpoint: "home/teams",
       method: "POST",
       params: params,
       auth: true,
-      // isFile: true,
     }).then((res: any) => {
       console.log(res);
       if (res.status === 201) {

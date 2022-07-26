@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 import { ImageWithHeader } from "@components/image";
 import Icon from "@components/icon";
 import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
+import SafeArea from "@components/safeArea";
 // style
 import Link from "next/link";
 import { InfoFooter, RegisterFooter } from "@components/footer";
 import Reddot from "@components/reddot";
 import { makeRequest } from "services/makeRequest";
 import styles from "./Team.module.scss";
-import SafeArea from "@components/safeArea";
 
 type PageProps = {
   data?: any;
@@ -147,13 +147,17 @@ export default function Team(props: PageProps): JSX.Element {
         .then(() => setRecruitMember(false))
         .catch((error: any) => console.log(error));
     } else {
-      await makeRequest({
-        endpoint: `home/teams/${teamId}/recruit/start`,
-        method: "POST",
-        auth: true,
-      })
-        .then(() => setRecruitMember(true))
-        .catch((error: any) => console.log(error));
+      router.push({
+        pathname: `[teamName]/recruit`,
+        query: { teamId: teamId, teamName: teamName },
+      });
+      // await makeRequest({
+      //   endpoint: `home/teams/${teamId}/recruit/start`,
+      //   method: "POST",
+      //   auth: true,
+      // })
+      //   .then(() => setRecruitMember(true))
+      //   .catch((error: any) => console.log(error));
     }
   };
   // ---------------------
@@ -176,7 +180,10 @@ export default function Team(props: PageProps): JSX.Element {
     if (teamDetail?.apply) {
       console.log("매치 취소 api");
     } else {
-      console.log("매치 등록 api");
+      router.push({
+        pathname: `/team/[teamName]/match`,
+        query: { teamId: teamId, teamName: teamName },
+      });
     }
   };
 
@@ -248,38 +255,14 @@ export default function Team(props: PageProps): JSX.Element {
             className={scoreBoardDetailBox}
             style={{ borderRight: "1px solid rgba(200, 200, 200, 1)" }}
           >
-            <div className={scoreBoardContentName}>
-              <p>승점</p>
-            </div>
-            <div>
-              <p>
-                <strong>{teamData?.winPoint}</strong>점
-              </p>
-            </div>
+            <p>{teamDetail?.winPoint}</p>
           </div>
           <div className={scoreBoardDetailBox}>
-            <div className={scoreBoardContentName}>
-              <p>승률</p>
-            </div>
-            <div className={scoreBoardDetailBoxContent}>
-              <p>
-                <strong>{teamData?.winRate}</strong>%
-              </p>
-              <div className={scoreBoardDetailBoxContent}>
-                <div className={scoreBoardDetailBoxContentTotal}>
-                  {teamData?.totalGameCount}
-                </div>
-                <div className={scoreBoardDetailBoxContentWin}>
-                  {teamData?.winCount}
-                </div>
-                <div className={scoreBoardDetailBoxContentDraw}>
-                  {teamData?.drawCount}
-                </div>
-                <div className={scoreBoardDetailBoxContentLose}>
-                  {teamData?.loseCount}
-                </div>
-              </div>
-            </div>
+            <p>{teamDetail?.winRate}%</p>
+            <p>
+              {teamDetail?.totalGameCount}전 {teamDetail?.winCount}승{" "}
+              {teamDetail?.drawCount}무 {teamDetail?.loseCount}패
+            </p>
           </div>
         </div>
       </div>
