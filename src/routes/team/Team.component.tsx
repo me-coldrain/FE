@@ -1,22 +1,17 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // hooks
 import { useRouter } from "next/router";
 // component
-import Image, { ImageWithHeader } from "@components/image";
+import { ImageWithHeader } from "@components/image";
 import Icon from "@components/icon";
 import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
 // style
 import Link from "next/link";
-import Footer, { InfoFooter, RegisterFooter } from "@components/footer";
-import { user } from "stores/user";
+import { InfoFooter, RegisterFooter } from "@components/footer";
 import Reddot from "@components/reddot";
-import styles from "./Team.module.scss";
 import { makeRequest } from "services/makeRequest";
-import {
-  GetServerSideProps,
-  GetStaticProps,
-  InferGetServerSidePropsType,
-} from "next";
+import styles from "./Team.module.scss";
+import SafeArea from "@components/safeArea";
 
 type PageProps = {
   data?: any;
@@ -202,6 +197,7 @@ export default function Team(props: PageProps): JSX.Element {
 
   return (
     <>
+      <SafeArea />
       <ImageWithHeader
         className={aboutTeamImage}
         src={teamData?.teamImageFileUrl}

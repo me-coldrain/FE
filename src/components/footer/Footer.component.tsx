@@ -1,5 +1,7 @@
 import Button from "@components/button";
+import { noFooterRoutes } from "dummy";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import styles from "./Footer.module.scss";
 
@@ -42,13 +44,18 @@ export function InfoFooter({ content }: Content): JSX.Element {
   );
 }
 
-export default function Footer(): JSX.Element {
+export default function Footer(): JSX.Element | null {
+  const router = useRouter();
+  console.log(router.pathname);
+  if (noFooterRoutes.includes(router.pathname)) {
+    return null;
+  }
   const id = 1;
   return (
     <footer className={footer}>
       <p>
         <Link href="https://github.com/me-coldrain">
-          <a>Go to github</a>
+          <h5>Go to github</h5>
         </Link>
       </p>
     </footer>

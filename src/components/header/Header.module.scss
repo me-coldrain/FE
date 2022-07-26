@@ -16,6 +16,7 @@
   top: 0;
   width: 100vw;
   max-width: 767px;
+  min-width: 375px;
   z-index: 10;
   background-color: #fff;
 
@@ -87,6 +88,7 @@
     left: 50%;
     margin: 0 auto;
     max-width: 768px;
+    min-width: 375px;
     padding: 0 var(--content-padding);
 
     top: calc(var(--header-spacing) / 2 + var(--offline-notification-height));
@@ -106,6 +108,7 @@
     padding: 0 var(--content-padding);
     width: 100%;
     max-width: 768px;
+    min-width: 375px;
 
     @include media.after-mobile {
       backdrop-filter: saturate(200%) blur(10px);
@@ -138,6 +141,7 @@
   top: 0;
   width: 100%;
   max-width: 768px;
+  min-width: 375px;
   z-index: 10;
 
   @include media.mobile {

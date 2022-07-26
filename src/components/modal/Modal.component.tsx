@@ -6,7 +6,7 @@ import styled from "styled-components";
 type ModalProps = {
   show: boolean;
   onClose: () => void;
-  children: string | JSX.Element;
+  children: string | JSX.Element | JSX.Element[];
   title: string | JSX.Element;
   verify?: boolean;
   verifyContent?: string;
@@ -18,7 +18,7 @@ type ModalProps = {
 type VerifyModal = {
   show: boolean;
   onClose: () => void;
-  children: string | JSX.Element;
+  children: string | JSX.Element | JSX.Element[];
   title: string | JSX.Element;
   verify?: boolean;
   verifyContent?: string;
@@ -95,7 +95,7 @@ export const CenterModal = ({
           {title && (
             <StyledModalTitle>
               <h1>{title}</h1>
-              <p>{children}</p>
+              <StyledModalContent>{children}</StyledModalContent>
             </StyledModalTitle>
           )}
           {/* <StyledModalBody>{children}</StyledModalBody> */}
@@ -129,6 +129,12 @@ export const CenterModal = ({
   }
 };
 
+const StyledModalContent = styled.div`
+  display: flex;
+  overflow: clip;
+  flex-wrap: wrap;
+`;
+
 const StyleVerifyContent = styled.div``;
 
 const StyledModalBody = styled.div`
@@ -136,7 +142,7 @@ const StyledModalBody = styled.div`
   width: 400px;
 `;
 
-const StyledModalTitle = styled.p`
+const StyledModalTitle = styled.div`
   text-align: center;
   font-size: 33px;
   font-weight: 700;
@@ -158,6 +164,7 @@ const StyledCenterModalBody = styled.div`
   flex-direction: column;
   background: white;
   width: 80%;
+  min-width: 360px;
   height: 50%;
   border-radius: 15px;
   padding: 15px;

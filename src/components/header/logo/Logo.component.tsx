@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./Logo.module.scss";
+import Icon from "@components/icon";
 
-const { logo, logoImg, textWhite } = styles;
+const { logo, textWhite, logoIcon } = styles;
 
 export default function Logo(): JSX.Element {
   const { pathname } = useRouter();
 
   const [white, setWhite] = useState<boolean>();
-  const [content, setContent] = useState<string>();
+  const [content, setContent] = useState<string | JSX.Element>();
 
   const whiteLogo = ["/"];
 
@@ -25,7 +26,7 @@ export default function Logo(): JSX.Element {
 
   useEffect(() => {
     if (pathname === "/") {
-      setContent("구십분");
+      setContent(<Icon asset="Logo" />);
     }
     if (pathname === "/team/[teamName]/matches") {
       setContent("경기 히스토리");
@@ -51,11 +52,8 @@ export default function Logo(): JSX.Element {
   return (
     <div className={white ? textWhite : logo}>
       <Link href="/">
-        {content === "구십분" ? (
-          <div className={logoImg}></div>
-        ) : (
-          <a>{content}</a>
-        )}
+        <Icon asset="Logo" className={logoIcon} />
+        {/* <a>{content}</a> */}
       </Link>
     </div>
   );
