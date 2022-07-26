@@ -42,7 +42,9 @@ export default memo(function Header({ backBtn }: IHeader): JSX.Element {
   const showNav =
     pathname === "/mypage" ||
     pathname === "/rank/team" ||
-    pathname === "/rank/player"
+    pathname === "/rank/player" ||
+    pathname === "/founding/success" ||
+    pathname === "/player/[playerId]"
       ? false
       : true;
   const colorUrl = "/";

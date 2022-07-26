@@ -18,26 +18,28 @@ type PageProps = {
   decodedData?: any;
 };
 
-type IInfo = {
-  captain: boolean;
-  teamId: number;
-  teamName: string;
-  headCount: number;
-  mainArea: string;
-  preferredArea: string;
-  weekdays: Array<string>;
-  time: Array<string>;
-  winPoint: number;
-  winRate: number;
-  recruit: boolean;
-  match: boolean;
-  totalGameCount: number;
-  winCount: number;
-  drawCount: number;
-  loseCount: number;
-  createdDate: string;
-  modifiedDate: string;
-};
+type IInfo = [
+  {
+    captain: boolean;
+    teamId: number;
+    teamName: string;
+    headCount: number;
+    mainArea: string;
+    preferredArea: string;
+    weekdays: Array<string>;
+    time: Array<string>;
+    winPoint: number;
+    winRate: number;
+    recruit: boolean;
+    match: boolean;
+    totalGameCount: number;
+    winCount: number;
+    drawCount: number;
+    loseCount: number;
+    createdDate: string;
+    modifiedDate: string;
+  }
+];
 
 const { myTeam, team, activeTeam } = styles;
 
@@ -47,6 +49,8 @@ export default function MyTeam(props: PageProps): JSX.Element {
 
   //state
   const [active, setActive] = useState(true);
+  const [joinTeamInfo, setJoinTeamInfo] = useState([{}]);
+  const [applyTeamInfo, setApplyTeamInfo] = useState([{}]);
   const handleActive = () => {
     setActive(!active);
   };
@@ -54,13 +58,27 @@ export default function MyTeam(props: PageProps): JSX.Element {
   const myId = props?.data?.decodedData?.memberId;
   useEffect(() => {
     makeRequest({
-      // endpoint: `home/members/${myId}/teams`,
-      endpoint: `home/members/12/teams`,
+      // endpoint: `members/${myId}/matches`,
+      endpoint: `members/12/matches`,
       method: "GET",
       auth: true,
     })
       .then((res: IInfo) => {
         console.log(res);
+        setJoinTeamInfo(res);
+      })
+      .catch((error: any) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    makeRequest({
+      endpoint: `teams/apply`,
+      method: "GET",
+      auth: true,
+    })
+      .then((res: IInfo) => {
+        console.log(res);
+        setApplyTeamInfo(res);
       })
       .catch((error: any) => console.log(error));
   }, []);
@@ -81,7 +99,11 @@ export default function MyTeam(props: PageProps): JSX.Element {
           <p>신청한팀</p>
         </div>
       </section>
-      {active ? <Join></Join> : <Apply></Apply>}
+      {active ? (
+        <Join data={joinTeamInfo}></Join>
+      ) : (
+        <Apply data={applyTeamInfo}></Apply>
+      )}
     </main>
   );
 }

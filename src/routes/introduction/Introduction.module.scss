@@ -11,9 +11,8 @@
 //   var(--content-padding) var(--content-padding) var(--content-padding);
 
 .introduction {
-  height: 100vw;
+  height: 100vh;
   position: relative;
-  border: 1px solid;
 
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     center / cover no-repeat url("/img/Intro.png");
@@ -58,9 +57,13 @@
 
 .footerBox {
   position: fixed;
-  bottom: 40vw;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 1rem;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;

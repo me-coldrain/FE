@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  padding: 2rem;
 }
 .xBox {
   width: 100%;
@@ -25,4 +26,18 @@
   right: 0;
   margin: auto;
   text-align: center;
+}
+
+.successMsgBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.successMsg {
+  color: rgba(47, 78, 180, 1);
+  font-size: 24px;
+  font-weight: 600;
+  margin: inherit;
 }

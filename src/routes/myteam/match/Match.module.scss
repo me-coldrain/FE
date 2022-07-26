@@ -3,6 +3,7 @@
 
 .aboutTeam {
   --profile-picture-size: 200px;
+  background-color: #f7f7f7;
   &TitleBox {
     display: flex;
     align-items: flex-start;
@@ -52,6 +53,7 @@
     align-items: stretch;
     justify-content: center;
     background-color: #fff;
+    margin-bottom: 2rem;
     .upperBox {
       padding: 1rem;
       display: flex;
@@ -397,6 +399,7 @@
       background-size: contain;
       background-repeat: no-repeat;
       margin: auto;
+      margin-bottom: 3rem;
       cursor: pointer;
       &Text {
         margin-top: 4rem;
