@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 import { ImageWithHeader } from "@components/image";
 import Icon from "@components/icon";
 import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
+import SafeArea from "@components/safeArea";
 // style
 import Link from "next/link";
 import { InfoFooter, RegisterFooter } from "@components/footer";
 import Reddot from "@components/reddot";
 import { makeRequest } from "services/makeRequest";
 import styles from "./Team.module.scss";
-import SafeArea from "@components/safeArea";
 
 type PageProps = {
   data?: any;
@@ -142,13 +142,17 @@ export default function Team(props: PageProps): JSX.Element {
         .then(() => setRecruitMember(false))
         .catch((error: any) => console.log(error));
     } else {
-      await makeRequest({
-        endpoint: `home/teams/${teamId}/recruit/start`,
-        method: "POST",
-        auth: true,
-      })
-        .then(() => setRecruitMember(true))
-        .catch((error: any) => console.log(error));
+      router.push({
+        pathname: `[teamName]/recruit`,
+        query: { teamId: teamId, teamName: teamName },
+      });
+      // await makeRequest({
+      //   endpoint: `home/teams/${teamId}/recruit/start`,
+      //   method: "POST",
+      //   auth: true,
+      // })
+      //   .then(() => setRecruitMember(true))
+      //   .catch((error: any) => console.log(error));
     }
   };
   // ---------------------
@@ -171,7 +175,10 @@ export default function Team(props: PageProps): JSX.Element {
     if (teamDetail?.apply) {
       console.log("매치 취소 api");
     } else {
-      console.log("매치 등록 api");
+      router.push({
+        pathname: `/team/[teamName]/match`,
+        query: { teamId: teamId, teamName: teamName },
+      });
     }
   };
 

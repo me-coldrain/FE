@@ -82,7 +82,6 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 const Page = (props: PageProps): JSX.Element => {
   const { isLanding, data } = props;
   const { title = "", description = "" } = usePageDetails();
-  const { content = "" } = usePageData();
 
   const [teams, setTeams] = useState<Teams[]>([]);
 
@@ -138,13 +137,28 @@ const Page = (props: PageProps): JSX.Element => {
 
   // 로그인 되어있지 않을 시 온보딩페이지로 이동시킴
   useEffect(() => {
-    if (data) {
-      setTeams(data?.content);
+    if (homePage === true) {
+      if (data) {
+        const _teams: Teams[] = [];
+        for (let i = 0; i < data.content.length; i++) {
+          if (data?.content[i].match) {
+            _teams.push(data.content[i]);
+          }
+        }
+        setTeams(_teams);
+      }
+    } else {
+      const _teams: Teams[] = [];
+      if (data) {
+        for (let i = 0; i < data.content.length; i++) {
+          if (data?.content[i].recruit) {
+            _teams.push(data.content[i]);
+          }
+        }
+        setTeams(_teams);
+      }
     }
-    // if (data === false) {
-    //   router.push("/introduction");
-    // }
-  }, []);
+  }, [homePage]);
 
   const handleLocationClick = (content: string) => {
     if (address?.includes(content)) {
@@ -155,6 +169,8 @@ const Page = (props: PageProps): JSX.Element => {
       setLocationModal(false);
     }
   };
+
+  console.log(teams);
 
   const handleWeekdayClick = (content: string) => {
     if (weekdays?.includes(content)) {
