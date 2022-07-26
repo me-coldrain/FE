@@ -24,16 +24,27 @@ function Question(props: PageProps): JSX.Element {
   const [modal, setModal] = useState<boolean>(false);
 
   const register = async () => {
-    makeRequest({
+    await makeRequest({
       endpoint: `home/teams/${teamId}/participate`,
       method: "POST",
       params: { answer: value },
       auth: true,
-    }).then(() => setModal(true));
+    })
+      .then((res: any) => {
+        if (res.status <= 201) {
+          setModal(true);
+        }
+      })
+      .catch((error: any) => {
+        window.alert("팀원 신청이 정상적으로 접수되지 않았습니다.");
+      });
   };
 
   const onModalClose = () => {
-    router.push(`/`);
+    router.push({
+      pathname: `/team/[teamName]`,
+      query: { teamId: teamId, teamName: teamName },
+    });
   };
 
   return (
