@@ -17,6 +17,7 @@ type ButtonProps = {
   share?: boolean;
   teamName?: string;
   teamInfo?: string;
+  teamImageFile?: File | null;
   location?: string;
   stadium?: string;
   mine?: boolean;

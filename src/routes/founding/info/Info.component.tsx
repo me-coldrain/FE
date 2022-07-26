@@ -15,6 +15,7 @@ export default function info(): JSX.Element {
   const [previewURL, setPreviewURL] = useState("");
   const [teamName, setTeamName] = useState("");
   const [teamInfo, setTeamInfo] = useState("");
+  const [file, setFile] = useState<File | null>(null);
 
   const handleName = (e: any) => {
     setTeamName(e.target.value);
@@ -74,9 +75,9 @@ export default function info(): JSX.Element {
               </label>
               <input
                 type="file"
-                id="ex_file"
-                accept="image/jpg,impge/png,image/jpeg,image/gif"
-                onChange={(e) => handleFile(e, setPreviewURL)}
+                // id="ex_file"
+                accept="image/jpg, image/png, image/jpeg, image/gif"
+                onChange={(e) => setFile(handleFile(e, setPreviewURL))}
               />
             </div>
             <div className={informationBox}>
@@ -93,6 +94,7 @@ export default function info(): JSX.Element {
           bigRound
           teamName={teamName}
           teamInfo={teamInfo}
+          teamImageFile={file}
         >
           다음
         </RouterButton>
