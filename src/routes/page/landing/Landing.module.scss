@@ -102,12 +102,8 @@
 .searchBar {
   position: relative;
   display: inline-block;
-<<<<<<< HEAD
   margin-bottom: 2rem;
   --padding-view: 2vw;
-=======
-  margin-bottom: 1rem;
->>>>>>> b5c249e7f8e3f7fcf42cf38b24b2e9d28c27cd1f
   input {
     --padding-view: 2vw;
     padding: 12px 20px;
@@ -130,15 +126,9 @@
   }
   &Icon {
     position: absolute;
-<<<<<<< HEAD
     top: 4.5vw;
     right: 5vw;
     transition: all 0.05s ease-in-out;
-=======
-    top: 2vw;
-    right: 1.5vw;
-    fill: #fff;
->>>>>>> b5c249e7f8e3f7fcf42cf38b24b2e9d28c27cd1f
   }
 }
 

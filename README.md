@@ -105,3 +105,16 @@ main.scss 참고
 title 메인 파란글씨 <h1> 태그 사용
 
 주석 비슷한 grey <h5> 태그 사용
+
+## SafeArea component
+
+main 태그 밖에 헤더 부분을 구현할 때에 필요
+
+<>
+<SafeArea />
+{children1} // this will be header
+
+<main>
+{children2}
+</main>
+</>
