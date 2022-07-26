@@ -1,9 +1,12 @@
-@use 'raleway' as raleway;
+@use "raleway" as raleway;
 
-$extension-map: ('ttf': 'truetype', 'otf': 'opentype');
+$extension-map: (
+  "ttf": "truetype",
+  "otf": "opentype",
+);
 
 @function _get-font-path($directory, $name, $ext) {
-  @return $directory + '/' + $name + '.' + $ext;
+  @return $directory + "/" + $name + "." + $ext;
 }
 
 @function _get-format($ext) {
@@ -13,7 +16,7 @@ $extension-map: ('ttf': 'truetype', 'otf': 'opentype');
 }
 
 @function _get-variable-font-name($name) {
-  @return $name + ' VF';
+  @return $name + " VF";
 }
 
 @mixin _include-fonts($name, $vfont, $fonts, $ext) {
@@ -44,18 +47,25 @@ $extension-map: ('ttf': 'truetype', 'otf': 'opentype');
 @mixin font-family($name, $family) {
   font-family: $name, $family;
 
-  @supports(font-variation-settings: normal) {
+  @supports (font-variation-settings: normal) {
     font-family: _get-variable-font-name($name), $family;
   }
 }
 
 @mixin fonts {
   @include _include-fonts(
-    'Raleway',
+    "Raleway",
     raleway.$vfont,
     raleway.$fonts,
     raleway.$ext
   );
 
   // ...other fonts go here.
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+  * {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+      Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+      "Noto Sans KR", "Malgun Gothic", sans-serif;
+  }
 }

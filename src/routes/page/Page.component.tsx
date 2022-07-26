@@ -348,7 +348,7 @@ const Page = (props: PageProps): JSX.Element => {
           <div className={gettingMembers}>
             <ButtonRound
               handleClick={() => {
-                router.push("/create");
+                router.push("/founding/info");
               }}
               content="팀등록"
               length="round"

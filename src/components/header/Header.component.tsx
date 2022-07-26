@@ -14,6 +14,7 @@ const OFFLINE = "offline";
 const STACKS = ["/", "/teams"];
 
 const {
+  ActiveHeader,
   header,
   headerControls,
   offline,
@@ -38,6 +39,13 @@ const handleNetworkChange = (): void => {
 
 export default memo(function Header({ backBtn }: IHeader): JSX.Element {
   const { pathname, back } = useRouter();
+  const showNav =
+    pathname === "/mypage" ||
+    pathname === "/rank/team" ||
+    pathname === "/rank/player"
+      ? false
+      : true;
+  const colorUrl = "/";
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -59,19 +67,22 @@ export default memo(function Header({ backBtn }: IHeader): JSX.Element {
         <Icon asset="Cloud-Slash" className={offlineIcon} />
         You are currently browsing in offline mode.
       </div>
-      <header className={header}>
-        <nav>
-          <div className={headerControls}>
-            {backBtn && !STACKS.includes(pathname) && (
-              <div onClick={back} className={backBtnStyle}>
-                <Icon asset="Left-Arrow" className={backBtnStyleIcon} />
-              </div>
-            )}
-            <Logo />
-          </div>
-          <Items />
-        </nav>
-      </header>
+      {showNav && (
+        <header className={pathname === colorUrl ? ActiveHeader : header}>
+          <nav>
+            <div className={headerControls}>
+              {backBtn && !STACKS.includes(pathname) && (
+                <div onClick={back} className={backBtnStyle}>
+                  <Icon asset="Left-Arrow" className={backBtnStyleIcon} />
+                </div>
+              )}
+              <Logo />
+            </div>
+            <Items />
+          </nav>
+        </header>
+      )}
+      {!showNav && <Items></Items>}
     </>
   );
 });

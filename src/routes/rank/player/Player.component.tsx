@@ -1,18 +1,13 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // hooks
 import { useRouter } from "next/router";
-// component
-import Image, { ImageWithHeader } from "@components/image";
-import Icon from "@components/icon";
-import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
-// style
-import Link from "next/link";
-import Footer, { RegisterFooter } from "@components/footer";
-import { user } from "stores/user";
-import Reddot from "@components/reddot";
-import styles from "./Player.module.scss";
 import { makeRequest } from "services/makeRequest";
 import { GetStaticProps, InferGetServerSidePropsType } from "next";
+// component
+import { ImageWithHeader } from "@components/image";
+// style
+import Link from "next/link";
+import styles from "./Player.module.scss";
 
 type IPlayer = [
   {
@@ -30,6 +25,7 @@ const {
   aboutTeam,
   aboutTeamImage,
   upperBox,
+  logoImg,
   upperBoxTitle,
   uppberBoxTitleSelected,
   top3Teams,
@@ -99,6 +95,7 @@ export default function Rank({
     <>
       <main className={aboutTeam}>
         <div className={upperBox}>
+          <div className={logoImg}></div>
           <div className={upperBoxTitle}>
             <div
               onClick={() => {

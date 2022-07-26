@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { ThemeProvider } from "contexts/theme";
 import Header from "components/header";
 import Footer from "components/footer";
@@ -24,6 +25,11 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
       });
     }
   }, []);
+  const router = useRouter();
+  const showNav =
+    router.pathname === "/login" || router.pathname === "/introduction"
+      ? false
+      : true;
 
   return (
     <>
@@ -54,10 +60,10 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
       <Provider store={store}>
         <ThemeProvider>
           <NotificationList />
-          <Header backBtn={true} />
+          {showNav && <Header backBtn={true} />}
           <Component {...pageProps} />
           <div id="modal-element"></div>
-          <Footer />
+          {showNav && <Footer />}
         </ThemeProvider>
       </Provider>
     </>

@@ -6,6 +6,7 @@ import { makeRequest } from "services/makeRequest";
 // components
 import Input from "components/Input";
 import RouterButton from "components/RouterButton";
+import { RegisterFooter } from "@components/footer";
 // scss
 import styles from "./Login.module.scss";
 
@@ -15,7 +16,7 @@ interface IInputs {
 }
 
 export default function User(): JSX.Element {
-  const { user, inputBox, signup, kakao } = styles;
+  const { logo, user, inputBox, signup, kakao, buttonBox, kakaoBox } = styles;
   const [inputs, setInputs] = useState<IInputs>({
     email: "",
     password: "",
@@ -37,10 +38,15 @@ export default function User(): JSX.Element {
       params,
       auth: false,
     }).then((res: any) => {
-      if (res.first) {
-        router.replace("/register/nickname");
+      console.log(res);
+      if (res !== undefined) {
+        if (res?.first) {
+          router.replace("/register/nickname");
+        } else {
+          router.replace("/");
+        }
       } else {
-        router.replace("/");
+        window.alert("아이디 혹은 비밀번호를 다시 입력해주세요.");
       }
     });
   };
@@ -49,7 +55,7 @@ export default function User(): JSX.Element {
     <>
       <main className={user}>
         <section>
-          <h1>로고</h1>
+          <div className={logo}></div>
           <div className={inputBox}>
             <Input
               id="email"
@@ -67,9 +73,13 @@ export default function User(): JSX.Element {
               value={password || ""}
               normal
             ></Input>
-            <RouterButton bigSquareLogin onClick={handleLogin}>
-              로그인
-            </RouterButton>
+            <div className={buttonBox}>
+              <RegisterFooter
+                content="로그인"
+                activeStyle
+                handleClick={handleLogin}
+              ></RegisterFooter>
+            </div>
           </div>
           <div className={signup}>
             <Link href="/signup">
@@ -78,7 +88,15 @@ export default function User(): JSX.Element {
           </div>
           <div className={kakao}>
             <p>SNS계정으로 간편 로그인</p>
-            <a href="/">KAKAO</a>
+            <div className={kakaoBox}>
+              <RegisterFooter
+                content="KAKAO"
+                activeStyle
+                handleClick={() => {
+                  window.alert("커밍쑨! 기능이 준비중입니다.");
+                }}
+              ></RegisterFooter>
+            </div>
           </div>
         </section>
       </main>

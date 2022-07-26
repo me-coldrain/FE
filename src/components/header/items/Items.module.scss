@@ -8,6 +8,7 @@
   justify-content: flex-end;
   list-style: none;
   padding: 0;
+  z-index: 1;
 
   @include media.mobile {
     background-color: var(--primary-block-color);
@@ -79,9 +80,12 @@
   }
 
   &Icon {
-    filter: invert(51%) sepia(96%) saturate(5726%) hue-rotate(200deg)
-      brightness(103%) contrast(104%);
-    color: var(--highlight-color);
+    path {
+      fill: var(--highlight-color);
+    }
+    circle {
+      fill: var(--highlight-color);
+    }
     --icon-size: 30px;
   }
 }

@@ -6,6 +6,15 @@
   font-weight: 500;
 }
 
+.logoImg {
+  background: center / contain no-repeat url("/img/MainLogoWhite.png");
+  position: absolute;
+  width: 3.5rem;
+  height: 2rem;
+  top: 2rem;
+  left: 1rem;
+}
+
 .textWhite a {
   align-items: center;
   color: var(--primary-text-color);

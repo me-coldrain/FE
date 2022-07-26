@@ -13,6 +13,7 @@ import { RegisterFooter } from "@components/footer";
 // style
 import styles from "./Mypage.module.scss";
 import SafeArea from "@components/safeArea";
+import { browserStorage } from "utils/browser";
 
 type PageProps = {
   data?: any;
@@ -52,6 +53,8 @@ const {
   scoreBoard,
   scoreBoardDetail,
   scoreBoardDetailBox,
+  scoreBoardDetailBoxTitle,
+  scoreBoardDetailBoxContent,
   scoreBoardContentName,
   matchInfo,
   tabs,
@@ -85,8 +88,8 @@ export default function MyPage(props: PageProps): JSX.Element {
   const getChartData = (canvas: any) => {
     const ctx = canvas.getContext("2d");
 
-    const x = canvas.height * 0.65;
-    const y = canvas.width * 0.25;
+    const x = canvas.height * 1;
+    const y = canvas.width * 1;
     const outerRadius = canvas.width / 3.2;
 
     const x1 = x * 1.49;
@@ -128,10 +131,6 @@ export default function MyPage(props: PageProps): JSX.Element {
     maintainAspectRatio: true,
     layout: {
       beginAtZero: true,
-      padding: {
-        top: 5,
-        bottom: 10,
-      },
     },
     scale: {
       gridLines: {
@@ -285,7 +284,6 @@ export default function MyPage(props: PageProps): JSX.Element {
       <main className={aboutTeam}>
         <div className={matchInfo}>
           <h3>포지션 점수</h3>
-          <hr />
           <div>
             <Radar
               data={(canvas: any) => getChartData(canvas)}
@@ -308,20 +306,27 @@ export default function MyPage(props: PageProps): JSX.Element {
           <Icon asset="Right-Arrow" className={tabsIcon} />
         </div>
         {/* </Link> */}
-        {/* <Link
-          href={
-            {
-              pathname: "/team/[teamName]/schedule",
-              query: { teamId: teamId, teamName: teamName },
-            }
-          }
-          as="/team/[teamName]/schedule"
-        > */}
-        <div className={tabs}>
-          <p>소속&신청한 팀</p>
-          <Icon asset="Right-Arrow" className={tabsIcon} />
+        <Link
+          href={{
+            pathname: "/myteam",
+          }}
+        >
+          <div className={tabs}>
+            <p>소속&신청한 팀</p>
+            <Icon asset="Right-Arrow" className={tabsIcon} />
+          </div>
+        </Link>
+
+        <div className={buttonBox}>
+          <RegisterFooter
+            content="로그아웃"
+            handleClick={() => {
+              browserStorage.eraseCookie("token"),
+                router.replace("/introduction");
+            }}
+            activeStyle
+          ></RegisterFooter>
         </div>
-        {/* </Link> */}
 
         <div className={buttonBox}>
           <RegisterFooter

@@ -48,7 +48,7 @@ export default function Landing(props: ILandingProps): JSX.Element {
           <p
             onClick={fetchMatches}
             className={injectClassNames([active, homePage === true])}
-            style={{ marginRight: "3rem" }}
+            style={{ marginRight: "2rem" }}
           >
             대결
           </p>

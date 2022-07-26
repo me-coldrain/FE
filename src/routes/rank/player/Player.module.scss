@@ -2,10 +2,18 @@
 @use "styles/variables/placeholder" as *;
 
 .aboutTeam {
-  --profile-picture-size: 200px;
+  padding: inherit;
   .upperBox {
     position: relative;
     background-color: rgb(8, 24, 79);
+    .logoImg {
+      background: center / contain no-repeat url("/img/MainLogoWhite.png");
+      position: absolute;
+      width: 3.5rem;
+      height: 2rem;
+      top: 2rem;
+      left: 1rem;
+    }
     &Title {
       position: absolute;
       top: 0;
@@ -158,6 +166,7 @@
     }
   }
   section {
+    padding: 1rem;
     h2 {
       font-weight: 600;
       font-size: 24px;
