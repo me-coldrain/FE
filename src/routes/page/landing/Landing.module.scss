@@ -102,16 +102,19 @@
 .searchBar {
   position: relative;
   display: inline-block;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   --padding-view: 2vw;
   input {
     --padding-view: 2vw;
     padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 90%;
     max-width: var(--content-max-width);
     background-color: var(--secondary-background-color);
     border-radius: 30px;
-    padding: 5vw 5vw;
+    padding: 1rem;
     color: #fff;
     font-size: large;
     outline: none;
@@ -126,7 +129,7 @@
   }
   &Icon {
     position: absolute;
-    top: 4.5vw;
+    top: 1.5vh;
     right: 5vw;
     transition: all 0.05s ease-in-out;
   }

@@ -52,6 +52,11 @@ const {
   scoreBoard,
   scoreBoardDetail,
   scoreBoardDetailBox,
+  scoreBoardDetailBoxContent,
+  scoreBoardDetailBoxContentTotal,
+  scoreBoardDetailBoxContentWin,
+  scoreBoardDetailBoxContentDraw,
+  scoreBoardDetailBoxContentLose,
   scoreBoardContentName,
   matchInfo,
   matchInfoContainer,
@@ -245,14 +250,10 @@ export default function Team(props: PageProps): JSX.Element {
         content={teamDetail?.introduce}
       />
       <div className={scoreBoard}>
-        <div className={scoreBoardContentName}>
-          <h5>승점</h5>
-          <h5>승률</h5>
-        </div>
         <div className={scoreBoardDetail}>
           <div
             className={scoreBoardDetailBox}
-            style={{ borderRight: "1px solid" }}
+            style={{ borderRight: "1px solid rgba(200, 200, 200, 1)" }}
           >
             <p>{teamDetail?.winPoint}</p>
           </div>

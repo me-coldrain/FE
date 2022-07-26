@@ -11,12 +11,11 @@ import Icon from "@components/icon";
 import RouterButton from "@components/RouterButton";
 import { RegisterFooter } from "@components/footer";
 // style
-import styles from "./Mypage.module.scss";
+import styles from "./Player.module.scss";
 import { browserStorage } from "utils/browser";
 
 type PageProps = {
   data?: any;
-  decodedData?: any;
 };
 
 type IInfo = {
@@ -162,7 +161,7 @@ export default function MyPage(props: PageProps): JSX.Element {
     },
   };
 
-  const myId = props?.data?.decodedData?.memberId;
+  const myId = props?.data?.memberId;
   useEffect(() => {
     makeRequest({
       endpoint: `home/members/${myId}`,
@@ -210,9 +209,6 @@ export default function MyPage(props: PageProps): JSX.Element {
             </div>
             <div className={rightBox}>
               <div className={myImage}>
-                <label htmlFor="ex_file">
-                  <Icon asset="Pen"></Icon>
-                </label>
                 {personalInfo?.profileImageUrl !== "" ? (
                   <img
                     className={preview}
@@ -223,34 +219,6 @@ export default function MyPage(props: PageProps): JSX.Element {
                     <Icon asset="Person"></Icon>
                   </div>
                 )}
-                <input
-                  type="file"
-                  id="ex_file"
-                  accept="image/jpg,impge/png,image/jpeg,image/gif"
-                  onChange={(e) =>
-                    handleFile(e, setPreviewURL).then((res: any) => {
-                      const formData = new FormData();
-                      formData.append("profileImageFile", res);
-                      setFile(formData);
-                      makeRequest({
-                        endpoint: "home/members/information/profileimage",
-                        method: "PATCH",
-                        params: formData,
-                        auth: true,
-                        isFile: true,
-                      }).then((res: any) => {
-                        res.status === 200
-                          ? (window.alert(
-                              "프로필 이미지 수정이 완료되었습니다."
-                            ),
-                            router.reload())
-                          : window.alert(
-                              "이미지 등록에 실패했습니다. 잠시 후 다시 시도해주세요."
-                            );
-                      });
-                    })
-                  }
-                />
               </div>
             </div>
           </div>
@@ -337,31 +305,6 @@ export default function MyPage(props: PageProps): JSX.Element {
             <Icon asset="Right-Arrow" className={tabsIcon} />
           </div>
         </Link>
-
-        <div className={buttonBox}>
-          <RegisterFooter
-            content="로그아웃"
-            handleClick={() => {
-              browserStorage.eraseCookie("token"),
-                router.replace("/introduction");
-            }}
-            activeStyle
-          ></RegisterFooter>
-        </div>
-
-        <div className={buttonBox}>
-          <RegisterFooter
-            content="수정하기"
-            handleClick={() => {
-              // router.push('/mypage/edit')
-            }}
-            activeStyle
-          ></RegisterFooter>
-        </div>
-
-        <div className={secession}>
-          <p>회원 탈퇴하기</p>
-        </div>
       </main>
     </>
   );
