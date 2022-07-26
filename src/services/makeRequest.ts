@@ -11,7 +11,7 @@ type RequestParams = {
   isFile: boolean;
 };
 
-const baseUrl = "http://43.200.163.208/api/";
+const baseUrl = "https://43.200.163.208/api/";
 
 export const makeRequest: any = async ({
   endpoint,
