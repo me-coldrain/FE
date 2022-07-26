@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Landing from "routes/page/landing";
 // component
-import Icon from "@components/icon";
+import Icon, { IconPng } from "@components/icon";
 import { ButtonRound } from "@components/button";
+import { CenterModal } from "@components/modal";
+import ButtonForSelect from "@components/buttonForSelect";
 // hooks
 import { usePageData, usePageDetails } from "hooks/page";
 import { injectClassNames } from "utils/css";
 import router from "next/router";
 import Link from "next/link";
-
-import styles from "./Page.module.scss";
+// utils
 import { browserStorage } from "utils/browser";
 import { makeRequest } from "services/makeRequest";
-import Modal, { CenterModal } from "@components/modal";
-import ButtonForSelect from "@components/buttonForSelect";
 
+import styles from "./Page.module.scss";
 interface Teams {
   createdDate: string;
   drawCount: number;
@@ -298,6 +298,9 @@ const Page = (props: PageProps): JSX.Element => {
                   <div className={teamCard}>
                     <div className={teamCardFlex}>
                       <h2>{item.teamName}</h2>
+                      {index === 0 && homePage === true ? (
+                        <IconPng asset={"First-place"} />
+                      ) : null}
                     </div>
                     <div className={teamCardWinRate}>
                       <p>승률</p>
