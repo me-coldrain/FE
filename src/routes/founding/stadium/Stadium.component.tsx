@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+// components
 import Back from "components/back";
 import Progressbar from "components/progressbar";
 import SelectButton from "@components/buttonForSelect";
 import { RegisterFooter } from "@components/footer";
+// style
 import styles from "./Stadium.module.scss";
-import Link from "next/link";
 
 const { selectBox, buttonBox } = styles;
 
 export default function stadium(): JSX.Element {
   const router = useRouter();
-  console.log(router);
-  const [stadium, setStadium] = useState("both");
-  const handleStadium = (text: string) => {
+  const [stadium, setStadium] = useState<"home" | "away" | "both">("both");
+  const handleStadium = (text: "home" | "away" | "both") => {
     setStadium(text);
   };
   const handleRouter = () => {
     router.push({
-      pathname: "/founding/team",
+      pathname: "/founding/time",
       query: {
         ...router.query,
         stadium: stadium,

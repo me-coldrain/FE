@@ -8,7 +8,7 @@ type RequestParams = {
   params?: any;
   auth?: boolean;
   token: string;
-  isFile: boolean;
+  isFile?: boolean;
 };
 
 const baseUrl = "http://43.200.163.208/api/";
@@ -30,7 +30,9 @@ export const makeRequest: any = async ({
     method,
     headers:
       isFile === true
-        ? {}
+        ? {
+            "Content-Type": "multipart/form-data",
+          }
         : {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -52,12 +54,12 @@ export const makeRequest: any = async ({
       const res = await fetch(apiUri, options);
       console.log("makeRequest: res =", res);
 
-      if (isFile === false && res.status === 200) {
+      if (isFile === false && res.status <= 201) {
         const json = await res.json();
         console.log("makeRequest: json =", json);
         return json;
       }
-      if (isFile === true && res.status === 200) {
+      if (isFile === true && res.status <= 201) {
         return res;
       }
       throw {
@@ -74,12 +76,16 @@ export const makeRequest: any = async ({
         return json;
       }
 
+      if (res.status === 201 && endpoint === "members/signup") {
+        return res;
+      }
+
       if (res.status === 201) {
-        const json = await res.json();
-        console.log("json =", json);
+        const json = await res?.json();
+        // console.log("json =", json);
         Config.setToken("token", json?.accesstoken, 30);
 
-        return json;
+        return res;
       }
 
       // throw {

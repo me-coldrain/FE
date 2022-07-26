@@ -64,7 +64,7 @@ export default function User(): JSX.Element {
               onChange={handleChange}
               value={email || ""}
               normal
-            ></Input>
+            />
             <Input
               id="password"
               type="password"

@@ -299,7 +299,7 @@ const Page = (props: PageProps): JSX.Element => {
                     <div className={teamCardFlex}>
                       <h2>{item.teamName}</h2>
                       {index === 0 && homePage === true ? (
-                        <IconPng asset={"First-place"} />
+                        <Icon asset={"First-place"} />
                       ) : null}
                     </div>
                     <div className={teamCardWinRate}>

@@ -40,9 +40,10 @@ export default function time(): JSX.Element {
       method: "POST",
       params,
       auth: true,
+      isFile: true,
     }).then((res: any) => {
       if (res.status === 201) {
-        router.replace("/founding/success");
+        router.push("/founding/success");
       } else {
         window.alert("팀등록에 실패하였습니다. 잠시 후 다시 시도해주세요.");
       }
@@ -54,7 +55,6 @@ export default function time(): JSX.Element {
       <main>
         <section>
           <Progressbar size="100%"></Progressbar>
-          <Back></Back>
         </section>
         <h3>언제 만날까요?</h3>
         <p>* 다중 선택 가능합니다.</p>
