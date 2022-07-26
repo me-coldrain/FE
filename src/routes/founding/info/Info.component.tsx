@@ -30,9 +30,10 @@ export default function info(): JSX.Element {
       <main>
         <section>
           <Progressbar size="25%"></Progressbar>
-          <Back></Back>
         </section>
-        <h2>팀 소개</h2>
+        <h3 style={{ color: "#2F4EB4", fontWeight: "600", fontSize: "24px" }}>
+          팀 소개
+        </h3>
         <div className={inputBox}>
           <label htmlFor="name">팀 이름을 적어주세요.(변경불가)</label>
           <Input

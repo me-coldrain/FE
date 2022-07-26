@@ -3,7 +3,7 @@ import Link from "next/link";
 import RouterButton from "components/RouterButton";
 import styles from "./Success.module.scss";
 
-const { successBox, xBox, buttonLabel } = styles;
+const { successBox, xBox, buttonLabel, successMsgBox, successMsg } = styles;
 
 const shareKakao = () => {
   const { Kakao } = window;
@@ -12,8 +12,7 @@ const shareKakao = () => {
     content: {
       title: "90분",
       description: "누구나 쉽고, 재밌게 즐기는 축구 & 풋살",
-      imageUrl:
-        "https://family-8.s3.ap-northeast-2.amazonaws.com/photo/1654063453815blob",
+      imageUrl: "/img/MainLogoColor.png",
       link: {
         mobileWebUrl: "https://www.dorandorans.com/",
         webUrl: "https://www.dorandorans.com/",
@@ -42,8 +41,8 @@ export default function success(): JSX.Element {
             <a>x</a>
           </Link>
         </div>
-        <div>
-          <p>팀이 생성되었습니다!</p>
+        <div className={successMsgBox}>
+          <p className={successMsg}>팀이 생성되었습니다!</p>
           <p>팀 상세페이지에서 수정이 가능합니다.</p>
         </div>
         <div>

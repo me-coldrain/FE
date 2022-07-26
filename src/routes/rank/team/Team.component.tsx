@@ -156,14 +156,17 @@ export default function Rank({
               <div className={tabsTitleTeam}>Team</div>
               <div className={tabsTitleScore}>Score</div>
             </div>
-            {teamData?.map((teamData: any) => (
+            {teamData?.map((teamData: any, index) => (
               <Link
-                key={teamData?.teamId}
+                key={`teamCard-${index}`}
                 href={{
-                  pathname: "/team/[teamName]/members",
-                  query: { teamId: 30, teamName: teamName },
+                  pathname: "/team/[teamName]",
+                  query: {
+                    teamId: teamData?.teamId,
+                    teamName: teamData?.teamName,
+                    // status: homePage,
+                  },
                 }}
-                as="/team/[teamName]/members"
               >
                 <div className={tabsContent}>
                   <div className={tabsContentPos}>

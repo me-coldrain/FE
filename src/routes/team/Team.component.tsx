@@ -49,6 +49,11 @@ const {
   scoreBoard,
   scoreBoardDetail,
   scoreBoardDetailBox,
+  scoreBoardDetailBoxContent,
+  scoreBoardDetailBoxContentTotal,
+  scoreBoardDetailBoxContentWin,
+  scoreBoardDetailBoxContentDraw,
+  scoreBoardDetailBoxContentLose,
   scoreBoardContentName,
   matchInfo,
   matchInfoContainer,
@@ -208,23 +213,43 @@ export default function Team(props: PageProps): JSX.Element {
         content={teamData?.introduce}
       />
       <div className={scoreBoard}>
-        <div className={scoreBoardContentName}>
-          <h5>승점</h5>
-          <h5>승률</h5>
-        </div>
         <div className={scoreBoardDetail}>
           <div
             className={scoreBoardDetailBox}
-            style={{ borderRight: "1px solid" }}
+            style={{ borderRight: "1px solid rgba(200, 200, 200, 1)" }}
           >
-            <p>{teamData?.winPoint}</p>
+            <div className={scoreBoardContentName}>
+              <p>승점</p>
+            </div>
+            <div>
+              <p>
+                <strong>{teamData?.winPoint}</strong>점
+              </p>
+            </div>
           </div>
           <div className={scoreBoardDetailBox}>
-            <p>{teamData?.winRate}%</p>
-            <p>
-              {teamData?.totalGameCount}전 {teamData?.winCount}승{" "}
-              {teamData?.drawCount}무 {teamData?.loseCount}패
-            </p>
+            <div className={scoreBoardContentName}>
+              <p>승률</p>
+            </div>
+            <div className={scoreBoardDetailBoxContent}>
+              <p>
+                <strong>{teamData?.winRate}</strong>%
+              </p>
+              <div className={scoreBoardDetailBoxContent}>
+                <div className={scoreBoardDetailBoxContentTotal}>
+                  {teamData?.totalGameCount}
+                </div>
+                <div className={scoreBoardDetailBoxContentWin}>
+                  {teamData?.winCount}
+                </div>
+                <div className={scoreBoardDetailBoxContentDraw}>
+                  {teamData?.drawCount}
+                </div>
+                <div className={scoreBoardDetailBoxContentLose}>
+                  {teamData?.loseCount}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
