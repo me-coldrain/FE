@@ -9,7 +9,7 @@ import { makeRequest } from "services/makeRequest";
 import { RegisterFooter } from "@components/footer";
 import styles from "./Nickname.module.scss";
 
-const { filebox, image, close, container, profileBox } = styles;
+const { filebox, image, close, container, profileBox, footerBox } = styles;
 
 export default function nickname(): JSX.Element {
   const [file, setFile] = useState({});
@@ -59,49 +59,49 @@ export default function nickname(): JSX.Element {
       <main className={container}>
         <section>
           <Progressbar size="33%"></Progressbar>
-          <Back></Back>
+
+          <h2>프로필을 작성해주세요</h2>
+          <Input
+            type="text"
+            placeholder="최대 12글자까지 가능합니다"
+            onChange={(e: any) => handleName(e)}
+            label="닉네임(필수)"
+            signup
+            value={nickname || ""}
+          ></Input>
+          <div className={profileBox}>
+            <h3>프로필</h3>
+            {previewURL !== "" ? (
+              <div className={image}>
+                <img src={previewURL}></img>
+                <span
+                  className={close}
+                  onClick={() => {
+                    setPreviewURL("");
+                  }}
+                >
+                  x
+                </span>
+              </div>
+            ) : (
+              <div className={filebox}>
+                <label htmlFor="ex_file">+</label>
+                <input
+                  type="file"
+                  id="ex_file"
+                  accept="image/jpg,impge/png,image/jpeg,image/gif"
+                  onChange={(e) =>
+                    handleFile(e, setPreviewURL).then((res: any) => {
+                      const formData = new FormData();
+                      formData.append("profileImageFile", res);
+                      setFile(formData);
+                    })
+                  }
+                />
+              </div>
+            )}
+          </div>
         </section>
-        <h2>프로필을 작성해주세요</h2>
-        <Input
-          type="text"
-          placeholder="최대 12글자까지 가능합니다"
-          onChange={(e: any) => handleName(e)}
-          label="닉네임(필수)"
-          signup
-          value={nickname || ""}
-        ></Input>
-        <div className={profileBox}>
-          <h3>프로필</h3>
-          {previewURL !== "" ? (
-            <div className={image}>
-              <img src={previewURL}></img>
-              <span
-                className={close}
-                onClick={() => {
-                  setPreviewURL("");
-                }}
-              >
-                x
-              </span>
-            </div>
-          ) : (
-            <div className={filebox}>
-              <label htmlFor="ex_file">+</label>
-              <input
-                type="file"
-                id="ex_file"
-                accept="image/jpg,impge/png,image/jpeg,image/gif"
-                onChange={(e) =>
-                  handleFile(e, setPreviewURL).then((res: any) => {
-                    const formData = new FormData();
-                    formData.append("profileImageFile", res);
-                    setFile(formData);
-                  })
-                }
-              />
-            </div>
-          )}
-        </div>
         {/* <RouterButton
           url="/register/position"
           bigRound
@@ -112,13 +112,15 @@ export default function nickname(): JSX.Element {
         >
           다음
         </RouterButton> */}
-        <RegisterFooter
-          content="다음"
-          activeStyle={true}
-          handleClick={() => {
-            handleSubmit();
-          }}
-        ></RegisterFooter>
+        <div className={footerBox}>
+          <RegisterFooter
+            content="다음"
+            activeStyle={true}
+            handleClick={() => {
+              handleSubmit();
+            }}
+          ></RegisterFooter>
+        </div>
       </main>
     </>
   );
