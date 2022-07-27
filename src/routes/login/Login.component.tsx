@@ -16,7 +16,16 @@ interface IInputs {
 }
 
 export default function User(): JSX.Element {
-  const { logo, user, inputBox, signup, kakao, buttonBox, kakaoBox } = styles;
+  const {
+    logo,
+    user,
+    inputBox,
+    signup,
+    kakao,
+    buttonBox,
+    kakaoBox,
+    container,
+  } = styles;
   const [inputs, setInputs] = useState<IInputs>({
     email: "",
     password: "",
@@ -55,36 +64,38 @@ export default function User(): JSX.Element {
     <>
       <main className={user}>
         <section>
-          <div className={logo}></div>
-          <div className={inputBox}>
-            <Input
-              id="email"
-              type="id"
-              placeholder="아이디"
-              onChange={handleChange}
-              value={email || ""}
-              normal
-            ></Input>
-            <Input
-              id="password"
-              type="password"
-              placeholder="비밀번호"
-              onChange={handleChange}
-              value={password || ""}
-              normal
-            ></Input>
-            <div className={buttonBox}>
-              <RegisterFooter
-                content="로그인"
-                activeStyle
-                handleClick={handleLogin}
-              ></RegisterFooter>
+          <div className={container}>
+            <div className={logo}></div>
+            <div className={inputBox}>
+              <Input
+                id="email"
+                type="id"
+                placeholder="아이디"
+                onChange={handleChange}
+                value={email || ""}
+                normal
+              ></Input>
+              <Input
+                id="password"
+                type="password"
+                placeholder="비밀번호"
+                onChange={handleChange}
+                value={password || ""}
+                normal
+              ></Input>
+              <div className={buttonBox}>
+                <RegisterFooter
+                  content="로그인"
+                  activeStyle
+                  handleClick={handleLogin}
+                ></RegisterFooter>
+              </div>
             </div>
-          </div>
-          <div className={signup}>
-            <Link href="/signup">
-              <a>회원가입</a>
-            </Link>
+            <div className={signup}>
+              <Link href="/signup">
+                <a>회원가입</a>
+              </Link>
+            </div>
           </div>
           <div className={kakao}>
             <p>SNS계정으로 간편 로그인</p>
