@@ -58,8 +58,8 @@ export default function MyTeam(props: PageProps): JSX.Element {
   const myId = props?.data?.decodedData?.memberId;
   useEffect(() => {
     makeRequest({
-      // endpoint: `members/${myId}/matches`,
-      endpoint: `members/12/matches`,
+      endpoint: `members/${myId}/matches`,
+      // endpoint: `members/12/matches`,
       method: "GET",
       auth: true,
     })
