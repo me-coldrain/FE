@@ -10,6 +10,7 @@ import Icon from "@components/icon";
 
 // style
 import styles from "./Join.module.scss";
+import Link from "next/link";
 
 type PageProps = {
   data?: any;
@@ -66,7 +67,15 @@ export default function MyTeam(props: PageProps): JSX.Element {
             <div
               className={team}
               onClick={() => {
-                router.push("/myteam/match");
+                router.push(
+                  {
+                    pathname: "/myteam/match",
+                    query: {
+                      teamId: x?.teamId,
+                    },
+                  },
+                  "/myteam/match"
+                );
               }}
             >
               <div className={upperBox}>
