@@ -45,10 +45,10 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
           name="apple-mobile-web-app-status-bar-style"
           content={statusBarStyle}
         />
-        <meta
+        {/* <meta
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
-        />
+        /> */}
         <link
           rel="apple-touch-startup-image"
           sizes="512x512"
