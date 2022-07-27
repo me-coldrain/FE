@@ -1,6 +1,7 @@
+import { InfoFooter } from "@components/footer";
 import Image from "@components/image";
 import SafeArea from "@components/safeArea";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Members.module.scss";
 
@@ -46,6 +47,9 @@ type IMembers = {
 
 export default function Members({ data }: IMembers): JSX.Element {
   const { captain } = data;
+  const [modify, setModify] = useState<boolean>(false);
+
+  console.log(modify);
 
   const MemberCard = ({
     memberId,
@@ -54,28 +58,53 @@ export default function Members({ data }: IMembers): JSX.Element {
     mvpPoint,
     positionPoint,
   }: IMember): JSX.Element => {
-    return (
-      <>
-        <div style={{ display: "flex", width: "100%" }}>
-          <div className={memberCard}>
-            <Image
-              src={
-                profileImageUrl ||
-                "https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=20&m=1223671392&s=612x612&w=0&h=lGpj2vWAI3WUT1JeJWm1PRoHT3V15_1pdcTn2szdwQ0="
-              }
-              className={memberCardImage}
-            />
-            <p>{nickname}</p>
+    if (modify) {
+      return (
+        <>
+          <div style={{ display: "flex", width: "100%" }}>
+            <div className={memberCard}>
+              <Image
+                src={
+                  profileImageUrl ||
+                  "https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=20&m=1223671392&s=612x612&w=0&h=lGpj2vWAI3WUT1JeJWm1PRoHT3V15_1pdcTn2szdwQ0="
+                }
+                className={memberCardImage}
+              />
+              <p>{nickname}</p>
+            </div>
+            {/* <div className={mvpPointContainer}>
+              <p>{mvpPoint}</p>
+            </div> */}
+            <div className={personalPoint}>
+              <p>추방</p>
+            </div>
           </div>
-          <div className={mvpPointContainer}>
-            <p>{mvpPoint}</p>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div style={{ display: "flex", width: "100%" }}>
+            <div className={memberCard}>
+              <Image
+                src={
+                  profileImageUrl ||
+                  "https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=20&m=1223671392&s=612x612&w=0&h=lGpj2vWAI3WUT1JeJWm1PRoHT3V15_1pdcTn2szdwQ0="
+                }
+                className={memberCardImage}
+              />
+              <p>{nickname}</p>
+            </div>
+            <div className={mvpPointContainer}>
+              <p>{mvpPoint}</p>
+            </div>
+            <div className={personalPoint}>
+              <p>{positionPoint}</p>
+            </div>
           </div>
-          <div className={personalPoint}>
-            <p>{positionPoint}</p>
-          </div>
-        </div>
-      </>
-    );
+        </>
+      );
+    }
   };
 
   return (
@@ -143,6 +172,13 @@ export default function Members({ data }: IMembers): JSX.Element {
           ))}
         </div>
       </div>
+      <InfoFooter
+        content={
+          <h5 style={{ cursor: "pointer" }} onClick={() => setModify(!modify)}>
+            수정하기
+          </h5>
+        }
+      />
     </>
   );
 }

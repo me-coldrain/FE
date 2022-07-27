@@ -12,7 +12,6 @@
   padding: var(--content-padding) var(--content-padding);
   // calc(var(--header-items-height) + var(--content-padding));
   max-width: 768px;
-  min-width: 375px;
   width: 100%;
   p {
     display: inline-block;
@@ -36,7 +35,6 @@
     padding: 10px 0px;
     gap: 10px;
     cursor: pointer;
-
     width: 100%;
     height: 50px;
 

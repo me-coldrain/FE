@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import styled from "styled-components";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ThemeProvider } from "contexts/theme";
@@ -10,6 +11,7 @@ import { Provider } from "react-redux";
 import { statusBarStyle } from "config";
 import { AppProps } from "next/app";
 import "styles/main.scss";
+import { makeRequest } from "services/makeRequest";
 
 declare global {
   interface Window {

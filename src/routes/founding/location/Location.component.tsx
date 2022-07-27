@@ -31,10 +31,13 @@ export default function location(): JSX.Element {
       <main>
         <section>
           <Progressbar size="50%"></Progressbar>
-          <Back></Back>
         </section>
-        <h3>주 활동 지역</h3>
-        <p>1개만 선택 가능합니다.</p>
+        <h3 style={{ color: "#2F4EB4", fontWeight: "600", fontSize: "24px" }}>
+          주로 활동하는 지역은?
+          <p style={{ color: "rgba(163, 163, 163, 1)" }}>
+            1개만 선택 가능합니다.
+          </p>
+        </h3>
         <div className={selectBox}>
           <SelectButton
             location

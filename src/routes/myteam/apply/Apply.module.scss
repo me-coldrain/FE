@@ -4,9 +4,15 @@
 .teams {
   margin: 0.5rem;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column;
   padding: 1.5rem 0.5rem 1rem;
+  .teamCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
   .team {
     width: 100%;
     display: flex;

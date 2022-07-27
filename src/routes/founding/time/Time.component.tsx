@@ -9,6 +9,17 @@ import styles from "./Time.module.scss";
 
 const { container, selectBox, timeBox, buttonBox } = styles;
 
+type params = {
+  introduce: string | string[] | undefined;
+  teamName: string | string[] | undefined;
+  mainArea: string | string[] | undefined;
+  preferredArea: string | string[] | undefined;
+  weekdays: string[];
+  time: string[];
+};
+
+type A = keyof params;
+
 export default function time(): JSX.Element {
   const router = useRouter();
   console.log(router);
@@ -29,18 +40,25 @@ export default function time(): JSX.Element {
     }
   };
 
-  const handleRouter = () => {
-    const params = {
-      ...router.query,
-      preferedDays,
-      preferedTime,
+  const handleRouter = async () => {
+    console.log(router.query);
+    const params: params = {
+      introduce: router.query.teamInfo,
+      teamName: router.query.teamName,
+      mainArea: router.query.location,
+      preferredArea: router.query.stadium,
+      weekdays: preferedDays,
+      time: preferedTime,
     };
-    makeRequest({
+
+    console.log("params =", params);
+    await makeRequest({
       endpoint: "home/teams",
       method: "POST",
-      params,
+      params: params,
       auth: true,
     }).then((res: any) => {
+      console.log(res);
       if (res.status === 201) {
         router.replace("/founding/success");
       } else {
@@ -54,10 +72,13 @@ export default function time(): JSX.Element {
       <main>
         <section>
           <Progressbar size="100%"></Progressbar>
-          <Back></Back>
         </section>
-        <h3>언제 만날까요?</h3>
-        <p>* 다중 선택 가능합니다.</p>
+        <h3 style={{ color: "#2F4EB4", fontWeight: "600", fontSize: "24px" }}>
+          언제 만날까요?
+          <p style={{ color: "rgba(163, 163, 163, 1)" }}>
+            * 다중 선택 가능합니다.
+          </p>
+        </h3>
 
         <p>가능한 요일을 선택해주세요.</p>
         <div className={container}>
@@ -113,7 +134,7 @@ export default function time(): JSX.Element {
             </SelectButton>
           </div>
         </div>
-        <p>가능한 시간대를 선택해주세요.</p>
+        <p style={{ marginTop: "3rem" }}>가능한 시간대를 선택해주세요.</p>
         <div className={timeBox}>
           <SelectButton
             location
@@ -132,7 +153,7 @@ export default function time(): JSX.Element {
         </div>
         <div className={buttonBox}>
           <RegisterFooter
-            content="다음"
+            content="완료"
             activeStyle
             handleClick={() => {
               handleRouter();

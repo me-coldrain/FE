@@ -38,6 +38,8 @@ interface Teams {
 const {
   page,
   pageLanding,
+  ButtonBox,
+  ButtonBoxTime,
   pageContent,
   placeholder,
   teamCard,
@@ -82,7 +84,6 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 const Page = (props: PageProps): JSX.Element => {
   const { isLanding, data } = props;
   const { title = "", description = "" } = usePageDetails();
-  const { content = "" } = usePageData();
 
   const [teams, setTeams] = useState<Teams[]>([]);
 
@@ -138,12 +139,33 @@ const Page = (props: PageProps): JSX.Element => {
 
   // 로그인 되어있지 않을 시 온보딩페이지로 이동시킴
   useEffect(() => {
-    if (data) {
-      setTeams(data?.content);
+    if (homePage === true) {
+      if (data) {
+        const _teams: Teams[] = [];
+        for (let i = 0; i < data.content.length; i++) {
+          if (data?.content[i].match) {
+            _teams.push(data.content[i]);
+          }
+        }
+        setTeams(_teams);
+      }
+    } else {
+      const _teams: Teams[] = [];
+      if (data) {
+        for (let i = 0; i < data.content.length; i++) {
+          if (data?.content[i].recruit) {
+            _teams.push(data.content[i]);
+          }
+        }
+        setTeams(_teams);
+      }
     }
-    // if (data === false) {
-    //   router.push("/introduction");
-    // }
+  }, [homePage]);
+  
+  useEffect(() => {
+    if (!data) {
+      router.push("/introduction");
+    }
   }, []);
 
   const handleLocationClick = (content: string) => {
@@ -155,6 +177,8 @@ const Page = (props: PageProps): JSX.Element => {
       setLocationModal(false);
     }
   };
+
+  console.log(teams);
 
   const handleWeekdayClick = (content: string) => {
     if (weekdays?.includes(content)) {
@@ -207,68 +231,76 @@ const Page = (props: PageProps): JSX.Element => {
           show={locationModal}
           onClose={() => setLocationModal(false)}
         >
-          {addressList.map((location, index) => (
-            <div key={`address-${index}`}>
-              <ButtonForSelect
-                location={true}
-                active={address?.includes(location) ? true : false}
-                onClick={() => handleLocationClick(location)}
-              >
-                {location}
-              </ButtonForSelect>
-            </div>
-          ))}
+          <div className={ButtonBox}>
+            {addressList.map((location, index) => (
+              <div key={`address-${index}`}>
+                <ButtonForSelect
+                  location={true}
+                  active={address?.includes(location) ? true : false}
+                  onClick={() => handleLocationClick(location)}
+                >
+                  {location}
+                </ButtonForSelect>
+              </div>
+            ))}
+          </div>
         </CenterModal>
         <CenterModal
           title="요일"
           show={daysModal}
           onClose={() => setDaysModal(false)}
         >
-          {weekdaysList.map((weekday, index) => (
-            <div key={`weekdays-${index}`}>
-              <ButtonForSelect
-                location={true}
-                active={weekdays?.includes(weekday) ? true : false}
-                onClick={() => handleWeekdayClick(weekday)}
-              >
-                {weekday}
-              </ButtonForSelect>
-            </div>
-          ))}
+          <div className={ButtonBox}>
+            {weekdaysList.map((weekday, index) => (
+              <div key={`weekdays-${index}`}>
+                <ButtonForSelect
+                  location={true}
+                  active={weekdays?.includes(weekday) ? true : false}
+                  onClick={() => handleWeekdayClick(weekday)}
+                >
+                  {weekday}
+                </ButtonForSelect>
+              </div>
+            ))}
+          </div>
         </CenterModal>
         <CenterModal
           title="시간"
           show={timeModal}
           onClose={() => setTimeModal(false)}
         >
-          {ampm.map((hours, index) => (
-            <div key={`times-${index}`}>
-              <ButtonForSelect
-                location={true}
-                active={time?.includes(hours) ? true : false}
-                onClick={() => handleTimeClick(hours)}
-              >
-                {hours}
-              </ButtonForSelect>
-            </div>
-          ))}
+          <div className={ButtonBoxTime}>
+            {ampm.map((hours, index) => (
+              <div key={`times-${index}`}>
+                <ButtonForSelect
+                  location={true}
+                  active={time?.includes(hours) ? true : false}
+                  onClick={() => handleTimeClick(hours)}
+                >
+                  {hours}
+                </ButtonForSelect>
+              </div>
+            ))}
+          </div>
         </CenterModal>
         <CenterModal
           title="승률"
           show={winRateModal}
           onClose={() => setWinRateModal(false)}
         >
-          {winRatesUp.map((rate, index) => (
-            <div key={`win-rate-${index}`}>
-              <ButtonForSelect
-                location={true}
-                active={winRate === rate ? true : false}
-                onClick={() => handleRateClick(rate)}
-              >
-                {rate + "%"}
-              </ButtonForSelect>
-            </div>
-          ))}
+          <div className={ButtonBox}>
+            {winRatesUp.map((rate, index) => (
+              <div key={`win-rate-${index}`}>
+                <ButtonForSelect
+                  location={true}
+                  active={winRate === rate ? true : false}
+                  onClick={() => handleRateClick(rate)}
+                >
+                  {rate + "%"}
+                </ButtonForSelect>
+              </div>
+            ))}
+          </div>
         </CenterModal>
         {isLanding && (
           <Landing
@@ -304,9 +336,9 @@ const Page = (props: PageProps): JSX.Element => {
                     </div>
                     <div className={teamCardWinRate}>
                       <p>승률</p>
-                      <h3>{item.winRate}%</h3>
+                      <h3 style={{ marginLeft: "0.5rem" }}>{item.winRate}%</h3>
                       <h3>|</h3>
-                      <h3>
+                      <h3 style={{ fontSize: "14px" }}>
                         {item.totalGameCount}전 {item.winCount}승{" "}
                         {item.drawCount}무 {item.loseCount}패
                       </h3>

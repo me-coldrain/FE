@@ -2,11 +2,7 @@
 @use "styles/variables/placeholder" as *;
 
 .aboutTeam {
-  --profile-picture-size: 200px;
-
-  p {
-    font-size: 20px;
-  }
+  background-color: rgba(247, 247, 247, 1);
 
   &Main {
     background-color: var(--primary-block-color);
@@ -173,27 +169,29 @@
 }
 
 .scoreBoard {
+  box-sizing: border-box;
+  position: absolute;
+  top: 40vh;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
-
+  justify-content: center;
   align-items: center;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: #fff;
-  width: 100%;
-  height: fit-content;
-
-  margin-bottom: 2rem;
+  width: 90%;
+  padding: 1rem;
+  margin: auto;
 
   &ContentName {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    h5 {
-      font-size: 18px;
-      color: #ababab;
-      margin-block-start: 1em;
-      margin-block-end: 0em;
+    margin-bottom: 0.3rem;
+    p {
+      font-weight: 500;
+      font-size: 12px;
+      color: #868686;
+      margin: inherit;
     }
   }
 
@@ -206,23 +204,64 @@
       flex-direction: column;
       width: 100%;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       margin: 2%;
-
-      p:first-child {
-        font-size: 24px;
+      padding-left: 1rem;
+      &Content {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        &Total {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #000;
+          color: #000;
+          width: 1rem;
+          height: 1rem;
+          margin-right: 0.3rem;
+          border-radius: 0.2rem;
+        }
+        &Win {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(0, 198, 103, 1);
+          color: rgba(0, 198, 103, 1);
+          width: 1rem;
+          height: 1rem;
+          margin-right: 0.3rem;
+          border-radius: 0.2rem;
+        }
+        &Draw {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(155, 155, 155, 1);
+          color: rgba(155, 155, 155, 1);
+          width: 1rem;
+          height: 1rem;
+          margin-right: 0.3rem;
+          border-radius: 0.2rem;
+        }
+        &Lose {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(241, 75, 75, 1);
+          color: rgba(241, 75, 75, 1);
+          width: 1rem;
+          height: 1rem;
+          border-radius: 0.2rem;
+        }
+      }
+      P {
+        margin: inherit;
+        margin-right: 1rem;
+      }
+      strong {
         font-weight: 600;
-        margin-block-start: 0em;
-        margin-block-end: 0em;
-      }
-      p {
-        font-size: 18px;
-        font-weight: 500;
-        margin-block-start: 1em;
-        margin-block-end: 1em;
-      }
-      ::before {
-        border-right: 1px solid;
+        font-size: 24px;
       }
     }
   }
@@ -243,23 +282,30 @@
     display: flex;
     // justify-content: center;
     align-items: center;
+    padding: 1rem;
 
     h4 {
-      font-size: 18px;
-      font-weight: 500;
+      font-size: 14px;
+      font-weight: 400;
       color: #868686;
+      margin: inherit;
       margin-right: 3rem;
     }
 
     h5 {
-      font-size: 18px;
-      font-weight: 500;
+      font-size: 14px;
+      font-weight: 400;
+      margin: inherit;
+      color: #000;
     }
 
     &Icon {
       --icon-size: 20px;
-
-      margin: 1.5rem;
+      margin-right: 0.5rem;
+      path {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }
@@ -274,14 +320,14 @@
   justify-content: space-between;
   padding: 1rem 0px;
   p {
-    font-size: medium;
+    font-size: 16px;
     font-weight: 400;
-    margin-left: 1rem;
     align-items: center;
     justify-content: center;
+    margin: 0.5rem 0 0.5rem 1rem;
   }
   &Icon {
     --icon-size: 20px;
-    margin: 1.5rem;
+    margin: 1rem;
   }
 }

@@ -18,7 +18,7 @@ export default function stadium(): JSX.Element {
   };
   const handleRouter = () => {
     router.push({
-      pathname: "/founding/team",
+      pathname: "/founding/time",
       query: {
         ...router.query,
         stadium: stadium,
@@ -30,10 +30,13 @@ export default function stadium(): JSX.Element {
       <main>
         <section>
           <Progressbar size="75%"></Progressbar>
-          <Back></Back>
         </section>
-        <h3>선호지역</h3>
-        <p>1개만 선택 가능합니다.</p>
+        <h3 style={{ color: "#2F4EB4", fontWeight: "600", fontSize: "24px" }}>
+          대결시 선호하는 곳은?
+          <p style={{ color: "rgba(163, 163, 163, 1)" }}>
+            1개만 선택 가능합니다.
+          </p>
+        </h3>
         <div className={selectBox}>
           <SelectButton
             stadium

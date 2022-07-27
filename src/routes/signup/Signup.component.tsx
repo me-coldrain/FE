@@ -99,7 +99,7 @@ export default function User(): JSX.Element {
       auth: false,
     }).then((res: any) => {
       console.log(res);
-      if (res?.status === 200) {
+      if (res?.status <= 201) {
         window.alert("회원가입이 완료되었습니다."), router.replace("/login");
       } else {
         window.alert("회원가입에 실패하였습니다. 잠시후 다시 시도해주세요.");

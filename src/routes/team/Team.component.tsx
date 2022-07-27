@@ -5,19 +5,21 @@ import { useRouter } from "next/router";
 import { ImageWithHeader } from "@components/image";
 import Icon from "@components/icon";
 import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
+import SafeArea from "@components/safeArea";
 // style
 import Link from "next/link";
 import { InfoFooter, RegisterFooter } from "@components/footer";
 import Reddot from "@components/reddot";
 import { makeRequest } from "services/makeRequest";
 import styles from "./Team.module.scss";
-import SafeArea from "@components/safeArea";
 
 type PageProps = {
   data?: any;
 };
 
 type ITeam = {
+  apply: boolean;
+  approved: boolean;
   createdDate: string;
   drawCount: number;
   headCount: number;
@@ -25,9 +27,10 @@ type ITeam = {
   loseCount: number;
   mainArea: string;
   match: boolean;
+  matching: boolean; //todo
   modifiedDate: string;
-  otherCaptain: true;
-  participate: false;
+  otherCaptain: boolean;
+  participate: boolean;
   preferredArea: string;
   recentMatchHistory: any;
   recruit: boolean;
@@ -49,6 +52,11 @@ const {
   scoreBoard,
   scoreBoardDetail,
   scoreBoardDetailBox,
+  scoreBoardDetailBoxContent,
+  scoreBoardDetailBoxContentTotal,
+  scoreBoardDetailBoxContentWin,
+  scoreBoardDetailBoxContentDraw,
+  scoreBoardDetailBoxContentLose,
   scoreBoardContentName,
   matchInfo,
   matchInfoContainer,
@@ -73,8 +81,11 @@ export default function Team(props: PageProps): JSX.Element {
   const { teamId, teamName, status } = router.query;
   console.log("fetch with teamId =", typeof teamId, teamName);
   //state
-  const [goMatches, setGoMatches] = useState<boolean>();
-  const [recruitMember, setRecruitMember] = useState<boolean>();
+  const [teamDetail, setTeamDetail] = useState<ITeam>();
+  const [from, setFrom] = useState<boolean>(false);
+  const [goMatches, setGoMatches] = useState<boolean | null>(null);
+  const [recruitMember, setRecruitMember] = useState<boolean | null>(null);
+  const [isTeamCaptain, setIsTeamCaptain] = useState<boolean | null>();
   const [error, setError] = useState<string>();
 
   //hooks
@@ -86,13 +97,18 @@ export default function Team(props: PageProps): JSX.Element {
 
   // match, recruit 전송 -----------
   useEffect(() => {
-    if (teamData?.match) {
+    setTeamDetail(teamData);
+    if (status === "true") {
+      setFrom(true);
+    } else {
+      setFrom(false);
+    }
+    if (teamDetail?.matching) {
       setGoMatches(true);
     } else {
       setGoMatches(false);
     }
-
-    if (teamData?.recruit) {
+    if (teamDetail?.recruit) {
       setRecruitMember(true);
     } else {
       setRecruitMember(false);
@@ -129,42 +145,62 @@ export default function Team(props: PageProps): JSX.Element {
         .then(() => setRecruitMember(false))
         .catch((error: any) => console.log(error));
     } else {
-      await makeRequest({
-        endpoint: `home/teams/${teamId}/recruit/start`,
-        method: "POST",
-        auth: true,
-      })
-        .then(() => setRecruitMember(true))
-        .catch((error: any) => console.log(error));
+      router.push({
+        pathname: `[teamName]/recruit`,
+        query: { teamId: teamId, teamName: teamName },
+      });
+      // await makeRequest({
+      //   endpoint: `home/teams/${teamId}/recruit/start`,
+      //   method: "POST",
+      //   auth: true,
+      // })
+      //   .then(() => setRecruitMember(true))
+      //   .catch((error: any) => console.log(error));
     }
   };
   // ---------------------
 
-  const handleClickFooter = () => {
-    if (status) {
-      router.push({
-        pathname: `/team/${teamName}/match`,
-        query: { teamId: teamId },
+  const handleClickFooterParticipate = async () => {
+    if (teamDetail?.participate) {
+      await makeRequest({
+        endpoint: `home/teams/${teamId}/leave`,
+        method: "DELETE",
+        auth: true,
       });
     } else {
-      if (teamData.recruit) {
-        if (teamData?.participate) {
-          router.push({
-            pathname: `${teamName}/apply/rules`,
-            query: { teamId: teamId },
-          });
-        } else {
-          makeRequest({
-            endpoint: `home/teams/${teamId}/leave`,
-            method: "DELETE",
-            auth: true,
-          }).then(() => router.push("/"));
-        }
-      } else {
-        setError("신청 기간이 아닙니다.");
-      }
+      router.push({
+        pathname: `/team/[teamName]/apply/rules`,
+        query: { teamId: teamId, teamName: teamName },
+      });
     }
   };
+  const handleClickFooterChallenge = () => {
+    if (teamDetail?.apply) {
+      console.log("매치 취소 api");
+    } else {
+      router.push({
+        pathname: `/team/[teamName]/match`,
+        query: { teamId: teamId, teamName: teamName },
+      });
+    }
+  };
+  const deleteTeam = async () => {
+    await makeRequest({
+      endpoint: `home/teams/${teamId}`,
+      method: "DELETE",
+      auth: true,
+    }).then(() => router.push("/"));
+  };
+  const unsubscribe = () => {
+    setGoMatches(null);
+    setRecruitMember(null);
+    setError("");
+    setIsTeamCaptain(null);
+  };
+  useEffect(() => {
+    return unsubscribe;
+  }, []);
+  console.log(from);
 
   const matchContainer = (
     <div className={matchHistoryContainer}>
@@ -200,31 +236,51 @@ export default function Team(props: PageProps): JSX.Element {
       <SafeArea />
       <ImageWithHeader
         className={aboutTeamImage}
-        src={teamData?.teamImageFileUrl}
+        src={teamDetail?.teamImageFileUrl}
         alt="Desktop & Mobile PWA Application"
         width="100%"
-        height="220px"
+        // height="220px"
         title={teamName as string}
-        content={teamData?.introduce}
+        content={teamDetail?.introduce}
       />
       <div className={scoreBoard}>
-        <div className={scoreBoardContentName}>
-          <h5>승점</h5>
-          <h5>승률</h5>
-        </div>
         <div className={scoreBoardDetail}>
           <div
             className={scoreBoardDetailBox}
-            style={{ borderRight: "1px solid" }}
+            style={{ borderRight: "1px solid rgba(200, 200, 200, 1)" }}
           >
-            <p>{teamData?.winPoint}</p>
+            <div className={scoreBoardContentName}>
+              <p>승점</p>
+            </div>
+            <div>
+              <p>
+                <strong>{teamDetail?.winPoint}</strong>점
+              </p>
+            </div>
           </div>
           <div className={scoreBoardDetailBox}>
-            <p>{teamData?.winRate}%</p>
-            <p>
-              {teamData?.totalGameCount}전 {teamData?.winCount}승{" "}
-              {teamData?.drawCount}무 {teamData?.loseCount}패
-            </p>
+            <div className={scoreBoardContentName}>
+              <p>승률</p>
+            </div>
+            <div className={scoreBoardDetailBoxContent}>
+              <p>
+                <strong>{teamDetail?.winRate}</strong>%
+              </p>
+              <div className={scoreBoardDetailBoxContent}>
+                <div className={scoreBoardDetailBoxContentTotal}>
+                  {teamDetail?.totalGameCount}
+                </div>
+                <div className={scoreBoardDetailBoxContentWin}>
+                  {teamDetail?.winCount}
+                </div>
+                <div className={scoreBoardDetailBoxContentDraw}>
+                  {teamDetail?.drawCount}
+                </div>
+                <div className={scoreBoardDetailBoxContentLose}>
+                  {teamDetail?.loseCount}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -234,12 +290,12 @@ export default function Team(props: PageProps): JSX.Element {
           <div className={matchInfoContainer}>
             <Icon asset="Location" className={matchInfoContainerIcon} />
             <h4>활동 지역</h4>
-            <h5>{teamData?.mainArea}</h5>
+            <h5>{teamDetail?.mainArea}</h5>
           </div>
           <div className={matchInfoContainer}>
             <Icon asset="Person-Pin" className={matchInfoContainerIcon} />
             <h4>선호 장소</h4>
-            {teamData?.preferredArea === "home" ? (
+            {teamDetail?.preferredArea === "home" ? (
               <h5>저희 홈구장에서 하고 싶습니다.</h5>
             ) : (
               <h5>어디든 달려갑니다.</h5>
@@ -248,14 +304,14 @@ export default function Team(props: PageProps): JSX.Element {
           <div className={matchInfoContainer}>
             <Icon asset="Calendar" className={matchInfoContainerIcon} />
             <h4>가능 요일</h4>
-            {teamData?.weekdays?.map((weekday, index) => (
+            {teamDetail?.weekdays?.map((weekday, index) => (
               <h5 key={`weekday-${index}`}>{weekday}. </h5>
             ))}
           </div>
           <div className={matchInfoContainer}>
             <Icon asset="Alarm" className={matchInfoContainerIcon} />
             <h4>가능 시간</h4>
-            {teamData?.time?.map((times, index) => (
+            {teamDetail?.time?.map((times, index) => (
               <h5 key={`times-${index}`}>{times}. </h5>
             ))}
           </div>
@@ -288,7 +344,7 @@ export default function Team(props: PageProps): JSX.Element {
           }}
         >
           <div className={tabs}>
-            <p>멤버 소개({teamData.headCount})</p>
+            <p>멤버 소개({teamDetail?.headCount})</p>
             <Icon asset="Right-Arrow" className={tabsIcon} />
           </div>
         </Link>
@@ -303,7 +359,7 @@ export default function Team(props: PageProps): JSX.Element {
             <Icon asset="Right-Arrow" className={tabsIcon} />
           </div>
         </Link>
-        {teamData.teamCaptain && (
+        {teamDetail?.teamCaptain && (
           <>
             <Link
               href={{
@@ -335,7 +391,7 @@ export default function Team(props: PageProps): JSX.Element {
           </>
         )}
 
-        {teamData.teamCaptain ? (
+        {teamDetail?.teamCaptain ? (
           <div style={{ display: "flex" }}>
             <div style={{ display: "flex", width: "50%" }}>
               <RegisterFooter
@@ -354,7 +410,7 @@ export default function Team(props: PageProps): JSX.Element {
           </div>
         ) : (
           <RegisterFooter
-            handleClick={handleClickFooter}
+            handleClick={handleClickFooterChallenge}
             content={
               teamData?.participate
                 ? "탈퇴하기"
@@ -366,9 +422,29 @@ export default function Team(props: PageProps): JSX.Element {
           />
         )}
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <InfoFooter
-          content={`창단 일자: ${teamData?.createdDate?.split("T")[0]}`}
-        />
+        {teamDetail?.teamCaptain && (
+          <>
+            <InfoFooter
+              content={
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    width: "100vw",
+                  }}
+                >
+                  <h5 onClick={() => router.push(`/founding/edit`)}>
+                    수정하기
+                  </h5>
+                  <h5 onClick={deleteTeam}>팀 해체하기</h5>
+                </div>
+              }
+            />
+            <InfoFooter
+              content={`창단 일자: ${teamDetail?.createdDate?.split("T")[0]}`}
+            />
+          </>
+        )}
       </main>
     </>
   );
