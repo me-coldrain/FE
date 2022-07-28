@@ -5,8 +5,9 @@
 .circleBox {
   display: flex;
   div {
+    width: 100%;
     margin: 0 0.5rem;
-    height: 3.5rem;
+    height: 2rem;
   }
 }
 .circle {
@@ -46,6 +47,7 @@
   }
 }
 .completeButton {
+  color: #fff;
 }
 .disabledButton {
   div {

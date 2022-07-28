@@ -384,7 +384,7 @@ export default function Team(props: PageProps): JSX.Element {
         )}
 
         {teamDetail?.teamCaptain ? (
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", color: "#fff" }}>
             <div style={{ display: "flex", width: "50%" }}>
               <RegisterFooter
                 content={goMatches ? "대결등록 중" : "대결등록하기"}
@@ -401,17 +401,19 @@ export default function Team(props: PageProps): JSX.Element {
             </div>
           </div>
         ) : (
-          <RegisterFooter
-            handleClick={handleClickFooterChallenge}
-            content={
-              teamData?.participate
-                ? "탈퇴하기"
-                : status
-                ? "대결하기"
-                : "신청하기"
-            }
-            activeStyle={!!teamData?.recruit}
-          />
+          <div style={{ color: "#fff" }}>
+            <RegisterFooter
+              handleClick={handleClickFooterChallenge}
+              content={
+                teamData?.participate
+                  ? "탈퇴하기"
+                  : status
+                  ? "대결하기"
+                  : "신청하기"
+              }
+              activeStyle={!!teamData?.recruit}
+            />
+          </div>
         )}
         {error && <p style={{ color: "red" }}>{error}</p>}
         {teamDetail?.teamCaptain && (

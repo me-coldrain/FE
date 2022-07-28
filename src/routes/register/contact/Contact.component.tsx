@@ -89,7 +89,6 @@ export default function contact(): JSX.Element {
       <main>
         <section>
           <Progressbar size="100%"></Progressbar>
-          <Back></Back>
         </section>
         <section className={main}>
           <div>
