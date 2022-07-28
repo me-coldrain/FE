@@ -10,6 +10,7 @@ import Icon from "@components/icon";
 
 // style
 import styles from "./Join.module.scss";
+import Link from "next/link";
 
 type PageProps = {
   data?: any;

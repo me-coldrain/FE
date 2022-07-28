@@ -165,8 +165,8 @@ export default function MyPage(props: PageProps): JSX.Element {
   const myId = props?.data?.decodedData?.memberId;
   useEffect(() => {
     makeRequest({
-      endpoint: `home/members/${myId}`,
-      // endpoint: `home/members/12`,
+      // endpoint: `home/members/${myId}`,
+      endpoint: `home/members/12`,
       method: "GET",
       auth: true,
     })
@@ -360,7 +360,25 @@ export default function MyPage(props: PageProps): JSX.Element {
         </div>
 
         <div className={secession}>
-          <p>회원 탈퇴하기</p>
+          <p
+            onClick={() => {
+              if (
+                window.confirm(
+                  "정말 탈퇴하시겠습니까? 탈퇴 후 회원 정보는 복구되지 않습니다."
+                )
+              ) {
+                makeRequest({
+                  endpoint: "home/members/secession",
+                  method: "PATCH",
+                  auth: true,
+                });
+                router.replace("/introduction");
+              }
+              return;
+            }}
+          >
+            회원 탈퇴하기
+          </p>
         </div>
       </main>
     </>

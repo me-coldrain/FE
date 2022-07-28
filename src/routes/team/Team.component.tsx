@@ -109,7 +109,6 @@ export default function Team(props: PageProps): JSX.Element {
     } else {
       setGoMatches(false);
     }
-
     if (teamDetail?.recruit) {
       setRecruitMember(true);
     } else {
@@ -180,7 +179,6 @@ export default function Team(props: PageProps): JSX.Element {
       });
     }
   };
-
   const deleteTeam = async () => {
     await makeRequest({
       endpoint: `home/teams/${teamId}`,
@@ -188,14 +186,12 @@ export default function Team(props: PageProps): JSX.Element {
       auth: true,
     }).then(() => router.push("/"));
   };
-
   const unsubscribe = () => {
     setGoMatches(null);
     setRecruitMember(null);
     setError("");
     setIsTeamCaptain(null);
   };
-
   useEffect(() => {
     return unsubscribe;
   }, []);
@@ -237,7 +233,7 @@ export default function Team(props: PageProps): JSX.Element {
         src={teamDetail?.teamImageFileUrl}
         alt="Desktop & Mobile PWA Application"
         width="100%"
-        height="220px"
+        // height="220px"
         title={teamName as string}
         content={teamDetail?.introduce}
       />
@@ -247,14 +243,38 @@ export default function Team(props: PageProps): JSX.Element {
             className={scoreBoardDetailBox}
             style={{ borderRight: "1px solid rgba(200, 200, 200, 1)" }}
           >
-            <p>{teamDetail?.winPoint}</p>
+            <div className={scoreBoardContentName}>
+              <p>승점</p>
+            </div>
+            <div>
+              <p>
+                <strong>{teamDetail?.winPoint}</strong>점
+              </p>
+            </div>
           </div>
           <div className={scoreBoardDetailBox}>
-            <p>{teamDetail?.winRate}%</p>
-            <p>
-              {teamDetail?.totalGameCount}전 {teamDetail?.winCount}승{" "}
-              {teamDetail?.drawCount}무 {teamDetail?.loseCount}패
-            </p>
+            <div className={scoreBoardContentName}>
+              <p>승률</p>
+            </div>
+            <div className={scoreBoardDetailBoxContent}>
+              <p>
+                <strong>{teamDetail?.winRate}</strong>%
+              </p>
+              <div className={scoreBoardDetailBoxContent}>
+                <div className={scoreBoardDetailBoxContentTotal}>
+                  {teamDetail?.totalGameCount}
+                </div>
+                <div className={scoreBoardDetailBoxContentWin}>
+                  {teamDetail?.winCount}
+                </div>
+                <div className={scoreBoardDetailBoxContentDraw}>
+                  {teamDetail?.drawCount}
+                </div>
+                <div className={scoreBoardDetailBoxContentLose}>
+                  {teamDetail?.loseCount}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -333,7 +353,7 @@ export default function Team(props: PageProps): JSX.Element {
             <Icon asset="Right-Arrow" className={tabsIcon} />
           </div>
         </Link>
-        {isTeamCaptain && (
+        {teamDetail?.teamCaptain && (
           <>
             <Link
               href={{
@@ -366,21 +386,15 @@ export default function Team(props: PageProps): JSX.Element {
         )}
 
         {teamDetail?.teamCaptain ? (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              border: "1px solid",
-            }}
-          >
-            <div style={{ display: "flex", width: "10vw" }}>
+          <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", width: "50%" }}>
               <RegisterFooter
                 content={goMatches ? "대결등록 중" : "대결등록하기"}
                 handleClick={goMatchesApi}
                 activeStyle={!!goMatches}
               />
             </div>
-            <div style={{ display: "flex", width: "10vw" }}>
+            <div style={{ display: "flex", width: "50%" }}>
               <RegisterFooter
                 handleClick={recruitMembers}
                 content={recruitMember ? "팀원 모집 중" : "팀원모집하기"}
@@ -388,23 +402,17 @@ export default function Team(props: PageProps): JSX.Element {
               />
             </div>
           </div>
-        ) : !isTeamCaptain && from === false ? (
-          <RegisterFooter
-            handleClick={handleClickFooterParticipate}
-            content={teamDetail?.participate ? "탈퇴하기" : "신청하기"}
-            activeStyle={teamDetail?.participate === false}
-          />
         ) : (
           <RegisterFooter
             handleClick={handleClickFooterChallenge}
             content={
-              teamDetail?.apply && teamDetail?.matching
-                ? "대결 신청"
-                : teamDetail?.apply && !teamDetail?.matching
-                ? "대결 신청 중"
-                : "대결 신청"
+              teamData?.participate
+                ? "탈퇴하기"
+                : status
+                ? "대결하기"
+                : "신청하기"
             }
-            activeStyle={!!teamDetail?.apply === false}
+            activeStyle={!!teamData?.recruit}
           />
         )}
         {error && <p style={{ color: "red" }}>{error}</p>}
