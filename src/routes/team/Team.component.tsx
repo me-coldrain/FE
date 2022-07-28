@@ -104,7 +104,7 @@ export default function Team(props: PageProps): JSX.Element {
       setFrom(false);
     }
 
-    if (teamDetail?.matching) {
+    if (teamDetail?.match) {
       setGoMatches(true);
     } else {
       setGoMatches(false);
@@ -151,13 +151,6 @@ export default function Team(props: PageProps): JSX.Element {
         pathname: `[teamName]/recruit`,
         query: { teamId: teamId, teamName: teamName },
       });
-      // await makeRequest({
-      //   endpoint: `home/teams/${teamId}/recruit/start`,
-      //   method: "POST",
-      //   auth: true,
-      // })
-      //   .then(() => setRecruitMember(true))
-      //   .catch((error: any) => console.log(error));
     }
   };
   // ---------------------
@@ -176,6 +169,7 @@ export default function Team(props: PageProps): JSX.Element {
       });
     }
   };
+
   const handleClickFooterChallenge = () => {
     if (teamDetail?.apply) {
       console.log("매치 취소 api");
@@ -205,8 +199,6 @@ export default function Team(props: PageProps): JSX.Element {
   useEffect(() => {
     return unsubscribe;
   }, []);
-
-  console.log(from);
 
   const matchContainer = (
     <div className={matchHistoryContainer}>
@@ -330,6 +322,17 @@ export default function Team(props: PageProps): JSX.Element {
             <Icon asset="Right-Arrow" className={tabsIcon} />
           </div>
         </Link>
+        <Link
+          href={{
+            pathname: `/team/${teamName}/schedule`,
+            query: { teamId: teamId, teamName: teamName },
+          }}
+        >
+          <div className={tabs}>
+            <p>예정된 경기 일정</p>
+            <Icon asset="Right-Arrow" className={tabsIcon} />
+          </div>
+        </Link>
         {isTeamCaptain && (
           <>
             <Link
@@ -394,7 +397,13 @@ export default function Team(props: PageProps): JSX.Element {
         ) : (
           <RegisterFooter
             handleClick={handleClickFooterChallenge}
-            content={teamDetail?.apply ? "대결 신청 취소" : "대결 신청"}
+            content={
+              teamDetail?.apply && teamDetail?.matching
+                ? "대결 신청"
+                : teamDetail?.apply && !teamDetail?.matching
+                ? "대결 신청 중"
+                : "대결 신청"
+            }
             activeStyle={!!teamDetail?.apply === false}
           />
         )}
@@ -433,4 +442,9 @@ export default function Team(props: PageProps): JSX.Element {
  *
  * 팀원 수락할 때 신규 요청이 있는지
  *
+ * 신청만 하면 apply가 true로 바뀜
+ *
+ * 승률 컴포넌트 이상하게 됨
+ *
+ * css 버튼
  */

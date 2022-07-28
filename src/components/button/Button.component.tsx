@@ -8,7 +8,9 @@ type ButtonProps = {
   content: string | JSX.Element;
   length: string;
   color?: boolean;
+  [x: string]: any;
 };
+
 type CheckBoxProps = {
   checked: boolean;
   handleClick: () => void | React.Dispatch<React.SetStateAction<boolean>>;
@@ -44,7 +46,7 @@ export function CheckBox(props: CheckBoxProps): JSX.Element {
 }
 
 export default function Button(props: ButtonProps): JSX.Element {
-  const { handleClick, content, length, color = false } = props;
+  const { handleClick, content, length, color = false, ...rest } = props;
   const injectedClassName = injectClassNames(button, styles[length]);
   const coloredInjectedClassName = injectClassNames(
     coloredButton,
@@ -54,6 +56,7 @@ export default function Button(props: ButtonProps): JSX.Element {
     <button
       onClick={handleClick}
       className={color ? coloredInjectedClassName : injectedClassName}
+      {...rest}
     >
       {content}
     </button>

@@ -54,8 +54,12 @@ export const makeRequest: any = async ({
 
       if (isFile === false && res.status <= 201) {
         const json = await res.json();
-        console.log("makeRequest: json =", json);
-        return json;
+        if (json) {
+          console.log("makeRequest: json =", json);
+          return json;
+        } else {
+          return res;
+        }
       }
       if (isFile === true && res.status <= 201) {
         console.log(res);

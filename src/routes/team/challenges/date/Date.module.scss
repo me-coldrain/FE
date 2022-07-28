@@ -1,0 +1,11 @@
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  &Icon {
+    --icon-size: 30px;
+    margin-right: 10px;
+  }
+}

@@ -1,5 +1,6 @@
 import Icon from "@components/icon";
 import SafeArea from "@components/safeArea";
+import { ISchedules } from "@pages/team/[teamName]/schedule";
 import React from "react";
 
 import styles from "./Schedule.module.scss";
@@ -7,7 +8,9 @@ import styles from "./Schedule.module.scss";
 const { scheduleCard, scheduleCardContents, scheduleCardIcon, dDay, dDayIcon } =
   styles;
 
-export default function Schedule(): JSX.Element {
+export default function Schedule(props: ISchedules): JSX.Element {
+  console.log(props);
+
   const scheduleMatches: JSX.Element = (
     <div className={scheduleCard}>
       <div className={scheduleCardContents}>
