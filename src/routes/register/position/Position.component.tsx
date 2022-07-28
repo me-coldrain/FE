@@ -20,7 +20,6 @@ export default function position(): JSX.Element {
       <main>
         <section>
           <Progressbar size="66%"></Progressbar>
-          <Back></Back>
         </section>
         <h3>
           선호하는 포지션을
