@@ -64,7 +64,7 @@ export default function contact(): JSX.Element {
       return _reg.test(phoneNumber);
     };
 
-    if (!phoneNumberCheck(phoneNumber as number)) {
+    if (phoneNumber && !phoneNumberCheck(phoneNumber as number)) {
       alert("숫자만 가능합니다.");
       return;
     }
