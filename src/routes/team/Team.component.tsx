@@ -90,7 +90,7 @@ export default function Team(props: PageProps): JSX.Element {
 
   //hooks
   const link = {
-    pathname: "/team/[teamName]/matches",
+    pathname: `/team/${teamName}/matches`,
     query: { teamId: teamId as string, teamName: teamName as string },
     as: `/team/${teamName}/matches`,
   };
@@ -181,7 +181,7 @@ export default function Team(props: PageProps): JSX.Element {
   };
   const deleteTeam = async () => {
     await makeRequest({
-      endpoint: `home/teams/${teamId}`,
+      endpoint: `home/teams/${teamId}/disband`,
       method: "DELETE",
       auth: true,
     }).then(() => router.push("/"));

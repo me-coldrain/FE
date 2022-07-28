@@ -161,7 +161,7 @@ const Page = (props: PageProps): JSX.Element => {
       }
     }
   }, [homePage]);
-  
+
   useEffect(() => {
     if (!data) {
       router.push("/introduction");

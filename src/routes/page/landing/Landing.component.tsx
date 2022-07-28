@@ -1,10 +1,11 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Image from "components/image";
-// style
+import { makeRequest } from "services/makeRequest";
 import { injectClassNames } from "utils/css";
+import Image from "components/image";
 import Icon from "@components/icon";
-import styles from "./Landing.module.scss";
 import Modal from "@components/modal";
+// style
+import styles from "./Landing.module.scss";
 
 const {
   wrapper,
@@ -29,6 +30,8 @@ type ILandingProps = {
 
 export default function Landing(props: ILandingProps): JSX.Element {
   const { homePage, setHomePage } = props;
+  const [keyword, setKeyword] = useState<string>();
+
   // modal state
 
   const fetchMatches = () => {
@@ -39,6 +42,29 @@ export default function Landing(props: ILandingProps): JSX.Element {
   const fetchRecruit = () => {
     console.log("fetchRecruit :");
     setHomePage(false);
+  };
+
+  const handleChange = (e: any): any => {
+    setKeyword(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    makeRequest({
+      endpoint: `home/teams?input=${keyword}`,
+      method: "GET",
+      auth: true,
+    }).then((res: any) => {
+      console.log(res);
+      // if (res !== undefined) {
+      //   if (res?.first) {
+      //     router.replace("/register/nickname");
+      //   } else {
+      //     router.replace("/");
+      //   }
+      // } else {
+      //   window.alert("아이디 혹은 비밀번호를 다시 입력해주세요.");
+      // }
+    });
   };
 
   return (
@@ -61,8 +87,15 @@ export default function Landing(props: ILandingProps): JSX.Element {
         </div>
 
         <div className={searchBar}>
-          <input placeholder="팀 이름을 검색해주세요." />
-          <Icon asset={"Search"} className={searchBarIcon} />
+          <input
+            id="keyword"
+            placeholder="팀 이름을 검색해주세요."
+            onChange={handleChange}
+            value={keyword || ""}
+          />
+          <div onClick={handleSubmit}>
+            <Icon asset={"Search"} className={searchBarIcon} />
+          </div>
         </div>
 
         <div className={filters}>
