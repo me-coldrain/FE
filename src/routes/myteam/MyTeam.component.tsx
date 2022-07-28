@@ -18,28 +18,28 @@ type PageProps = {
   decodedData?: any;
 };
 
-type IInfo = [
-  {
-    captain: boolean;
-    teamId: number;
-    teamName: string;
-    headCount: number;
-    mainArea: string;
-    preferredArea: string;
-    weekdays: Array<string>;
-    time: Array<string>;
-    winPoint: number;
-    winRate: number;
-    recruit: boolean;
-    match: boolean;
-    totalGameCount: number;
-    winCount: number;
-    drawCount: number;
-    loseCount: number;
-    createdDate: string;
-    modifiedDate: string;
-  }
-];
+type ITeam = {
+  captain: boolean;
+  teamId: number;
+  teamName: string;
+  headCount: number;
+  mainArea: string;
+  preferredArea: string;
+  weekdays: Array<string>;
+  time: Array<string>;
+  winPoint: number;
+  winRate: number;
+  recruit: boolean;
+  match: boolean;
+  totalGameCount: number;
+  winCount: number;
+  drawCount: number;
+  loseCount: number;
+  createdDate: string;
+  modifiedDate: string;
+};
+
+type IInfo = ITeam[];
 
 const { myTeam, team, activeTeam } = styles;
 
@@ -49,8 +49,8 @@ export default function MyTeam(props: PageProps): JSX.Element {
 
   //state
   const [active, setActive] = useState(true);
-  const [joinTeamInfo, setJoinTeamInfo] = useState([{}]);
-  const [applyTeamInfo, setApplyTeamInfo] = useState([{}]);
+  const [joinTeamInfo, setJoinTeamInfo] = useState<IInfo>([]);
+  const [applyTeamInfo, setApplyTeamInfo] = useState<IInfo>([]);
   const handleActive = () => {
     setActive(!active);
   };
@@ -58,8 +58,8 @@ export default function MyTeam(props: PageProps): JSX.Element {
   const myId = props?.data?.decodedData?.memberId;
   useEffect(() => {
     makeRequest({
-      // endpoint: `members/${myId}/matches`,
-      endpoint: `members/12/matches`,
+      endpoint: `members/${myId}/matches`,
+      // endpoint: `members/12/matches`,
       method: "GET",
       auth: true,
     })

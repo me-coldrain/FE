@@ -103,7 +103,8 @@ export default function Team(props: PageProps): JSX.Element {
     } else {
       setFrom(false);
     }
-    if (teamDetail?.matching) {
+
+    if (teamDetail?.match) {
       setGoMatches(true);
     } else {
       setGoMatches(false);
@@ -149,13 +150,6 @@ export default function Team(props: PageProps): JSX.Element {
         pathname: `[teamName]/recruit`,
         query: { teamId: teamId, teamName: teamName },
       });
-      // await makeRequest({
-      //   endpoint: `home/teams/${teamId}/recruit/start`,
-      //   method: "POST",
-      //   auth: true,
-      // })
-      //   .then(() => setRecruitMember(true))
-      //   .catch((error: any) => console.log(error));
     }
   };
   // ---------------------
@@ -174,6 +168,7 @@ export default function Team(props: PageProps): JSX.Element {
       });
     }
   };
+
   const handleClickFooterChallenge = () => {
     if (teamDetail?.apply) {
       console.log("매치 취소 api");
@@ -200,7 +195,6 @@ export default function Team(props: PageProps): JSX.Element {
   useEffect(() => {
     return unsubscribe;
   }, []);
-  console.log(from);
 
   const matchContainer = (
     <div className={matchHistoryContainer}>
@@ -350,7 +344,7 @@ export default function Team(props: PageProps): JSX.Element {
         </Link>
         <Link
           href={{
-            pathname: "/team/[teamName]/schedule",
+            pathname: `/team/${teamName}/schedule`,
             query: { teamId: teamId, teamName: teamName },
           }}
         >
@@ -366,7 +360,6 @@ export default function Team(props: PageProps): JSX.Element {
                 pathname: "/team/[teamName]/challenges",
                 query: { teamId: teamId, teamName: teamName },
               }}
-              as="/team/[teamName]/challenges"
             >
               <div className={tabs}>
                 <p>대결 요청</p>
@@ -378,7 +371,6 @@ export default function Team(props: PageProps): JSX.Element {
                 pathname: "/team/[teamName]/accept",
                 query: { teamId: teamId, teamName: teamName },
               }}
-              as="/team/[teamName]/accept"
             >
               <div className={tabs}>
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -456,4 +448,9 @@ export default function Team(props: PageProps): JSX.Element {
  *
  * 팀원 수락할 때 신규 요청이 있는지
  *
+ * 신청만 하면 apply가 true로 바뀜
+ *
+ * 승률 컴포넌트 이상하게 됨
+ *
+ * css 버튼
  */

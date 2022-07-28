@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 // hooks
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { makeRequest } from "services/makeRequest";
 // component
-import Image, { ImageWithHeader } from "@components/image";
 import Icon from "@components/icon";
-import RouterButton from "@components/RouterButton";
+import { RegisterFooter } from "@components/footer";
 import { PlaceholderWithJSX } from "@components/PlaceholderWithTitle";
 // style
-import Link from "next/link";
-import Footer, { RegisterFooter } from "@components/footer";
 import styles from "./Match.module.scss";
-import { user } from "stores/user";
 
 const {
   aboutTeam,
@@ -49,55 +47,57 @@ const {
 
 export default function Team(): JSX.Element {
   const router = useRouter();
-  const { teamId, teamName } = router.query;
-  console.log("fetch with teamId =", teamId, teamName);
+  const { teamId, matchId } = router.query;
+  console.log("fetch with teamId =", teamId);
+
+  type IInfo = {
+    matchId: number;
+    teamId: number;
+    isCaptain: boolean;
+    opposingTeamId: number;
+    opposingTeamName: string;
+    opposingTeamMemberCount: number;
+    opposingTeamPoint: number;
+    opposingTeamWinRate: number;
+    opposingTeamTotalGameCount: number;
+    opposingTeamWinCount: number;
+    opposingTeamDrawCount: number;
+    opposingTeamLoseCount: number;
+    contact: string;
+    phone: string;
+    matchDate: string;
+    matchLocation: string;
+    createdDate: string;
+    modifiedDate: string;
+    matchStatus: true;
+    dday: number;
+  };
 
   //state
   const [possible, setPossible] = useState<boolean>();
-  const [recruitMember, setRecruitMember] = useState<boolean>();
+  const [teamInfo, setTeamInfo] = useState<IInfo>();
   const [isCaptain, setIsCaptain] = useState<boolean>(true);
-
-  //hooks
-  const link = {
-    pathname: "/team/[teamName]/matches",
-    query: { teamId: teamId, teamName: teamName },
-    as: "/team/[teamName]/matches",
-  };
 
   const captainHandler = () => {
     console.log("if this team's captain");
   };
 
-  useEffect(captainHandler, []);
+  const getTeamDetail = async () => {
+    await makeRequest({
+      endpoint: `teams/${teamId}/matches/${matchId}/detail`,
+      method: "GET",
+      auth: true,
+    })
+      .then((res: IInfo) => {
+        console.log(res);
+        setTeamInfo(res);
+      })
+      .catch((error: any) => console.log(error));
+  };
 
-  const matchContainer = (
-    <div className={matchHistoryContainer}>
-      <div className={matchHistoryContainerWin}>
-        <div className={matchHistoryContainerWinner}>
-          <p>승리</p>
-        </div>
-        <p>A팀</p>
-      </div>
-      <div className={matchHistoryContainerResult}>
-        <p>2022.03.04</p>
-        <p
-          style={{
-            fontWeight: "bold",
-            fontSize: "30px",
-            margin: "0.5rem",
-          }}
-        >
-          4:2
-        </p>
-      </div>
-      <div className={matchHistoryContainerLose}>
-        <div className={matchHistoryContainerLoser}>
-          <p>패배</p>
-        </div>
-        <p>B팀</p>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    getTeamDetail();
+  }, []);
 
   return (
     <>
@@ -107,15 +107,15 @@ export default function Team(): JSX.Element {
           <div className={team}>
             <div className={upperBox}>
               <div>
-                <p>서울FC</p>
+                <p>{teamInfo?.opposingTeamName}</p>
                 <div className={location}>
                   <div>
                     <Icon asset="Location"></Icon>
-                    <p>서울특별시</p>
+                    <p>{teamInfo?.matchLocation}</p>
                   </div>
                   <div>
                     <Icon asset="People"></Icon>
-                    <p>42명</p>
+                    <p>{teamInfo?.opposingTeamMemberCount}명</p>
                   </div>
                 </div>
               </div>
@@ -123,19 +123,27 @@ export default function Team(): JSX.Element {
             <div className={lowerBox}>
               <div className={lowerBoxLeft}>
                 <p>승점</p>
-                <p>230</p>
+                <p>{teamInfo?.opposingTeamPoint}</p>
               </div>
               <div className={lowerBoxRight}>
                 <p>승률</p>
                 <div className={lowerBoxRightContent}>
                   <div className={lowerBoxRightContentPercent}>
-                    <p>40%</p>
+                    <p>{teamInfo?.opposingTeamWinRate}%</p>
                   </div>
                   <div>
-                    <div className={lowerBoxRightContentTotal}>10</div>
-                    <div className={lowerBoxRightContentWin}>3</div>
-                    <div className={lowerBoxRightContentDraw}>5</div>
-                    <div className={lowerBoxRightContentLose}>2</div>
+                    <div className={lowerBoxRightContentTotal}>
+                      {teamInfo?.opposingTeamTotalGameCount}
+                    </div>
+                    <div className={lowerBoxRightContentWin}>
+                      {teamInfo?.opposingTeamWinCount}
+                    </div>
+                    <div className={lowerBoxRightContentDraw}>
+                      {teamInfo?.opposingTeamDrawCount}
+                    </div>
+                    <div className={lowerBoxRightContentLose}>
+                      {teamInfo?.opposingTeamLoseCount}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -150,32 +158,32 @@ export default function Team(): JSX.Element {
               <Icon asset="Location" className={matchInfoContainerIcon} />
               <h4>대결장소</h4>
             </div>
-            <h5>서울 월드컵경기장</h5>
+            <h5>{teamInfo?.matchLocation}</h5>
           </div>
           <div className={matchInfoContainer}>
             <div>
               <Icon asset="Calendar" className={matchInfoContainerIcon} />
               <h4>날짜/시간</h4>
             </div>
-            <h5>22.07.17(월) 오후2시</h5>
+            <h5>{teamInfo?.matchDate}</h5>
           </div>
           <div className={matchInfoContainer}>
             <div>
               <Icon asset="Calendar" className={matchInfoContainerIcon} />
               <h4>주장 연락수단</h4>
             </div>
-            <h5>ddfesgstd</h5>
+            <h5>{teamInfo?.contact}</h5>
           </div>
           <div className={matchInfoContainer}>
             <div>
               <Icon asset="Alarm" className={matchInfoContainerIcon} />
               <h4>주장 핸드폰</h4>
             </div>
-            <h5>01012345678</h5>
+            <h5>{teamInfo?.phone}</h5>
           </div>
         </div>
         <h3>포메이션</h3>
-        <Link href="/formation">
+        <Link href={{ pathname: "/formation", query: { teamId, matchId } }}>
           <div className={matchInfoContainerBox}>
             <div className={matchInfoContainerBoxText}>
               <div>+</div>
@@ -186,7 +194,9 @@ export default function Team(): JSX.Element {
         <RegisterFooter
           content="경기취소"
           activeStyle={false}
-          handleClick={() => {}}
+          handleClick={() => {
+            // handleMatchCancel();
+          }}
         ></RegisterFooter>
       </main>
     </>

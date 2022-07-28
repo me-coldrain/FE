@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Landing from "routes/formation/landing";
 import UserProfile from "@components/userProfile";
@@ -7,6 +7,8 @@ import { usePageData, usePageDetails } from "hooks/page";
 import { injectClassNames } from "utils/css";
 import Link from "next/link";
 import styles from "./Formation.module.scss";
+import { useRouter } from "next/router";
+import { makeRequest } from "services/makeRequest";
 
 const { profiles } = styles;
 
@@ -33,9 +35,42 @@ export const addDescriptionTag = (description: string): JSX.Element => {
   );
 };
 
+type Member = {
+  memberId: number;
+  nickname: string;
+  profileImageUrl: string;
+};
+
+type Members = {
+  captain: Member;
+  defender: Member[];
+  midfielder: Member[];
+  striker: Member[];
+  goalkeeper: Member[];
+};
+
 export default function Page(): JSX.Element {
+  const router = useRouter();
+  const { teamId, matchId } = router.query;
+
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
+
+  //state
+  const [teamMembers, setTeamMembers] = useState<Members>();
+  const [memberToPlay, setMemberToPlay] = useState<Members>();
+
+  const members = async () => {
+    await makeRequest({
+      endpoint: `home/teams/${teamId}/players`,
+      method: "GET",
+      auth: true,
+    }).then((res: any) => setTeamMembers(res));
+  };
+
+  useEffect(() => {
+    members();
+  }, []);
 
   return (
     <>
@@ -48,34 +83,67 @@ export default function Page(): JSX.Element {
         <Landing />
         <section>
           <article>
+            <h3>주장</h3>
+            <hr />
+            <div className={profiles}>
+              <div>
+                <UserProfile
+                  nickname={teamMembers?.captain.nickname}
+                  src={teamMembers?.captain.profileImageUrl}
+                />
+              </div>
+            </div>
+          </article>
+          <article>
             <h3>공격수</h3>
             <hr />
             <div className={profiles}>
-              <UserProfile></UserProfile>
-              <UserProfile></UserProfile>
-              <UserProfile></UserProfile>
-              <UserProfile></UserProfile>
+              {teamMembers?.striker.map((member, index) => (
+                <UserProfile
+                  key={`striker-${index}`}
+                  nickname={member.nickname}
+                  src={member.profileImageUrl}
+                />
+              ))}
             </div>
           </article>
           <article>
             <h3>미드필더</h3>
             <hr />
             <div>
-              <UserProfile></UserProfile>
+              {teamMembers?.midfielder.map((member, index) => (
+                <UserProfile
+                  key={`midfielder-${index}`}
+                  nickname={member.nickname}
+                  src={member.profileImageUrl}
+                />
+              ))}
             </div>
           </article>
           <article>
             <h3>수비수</h3>
             <hr />
             <div>
-              <UserProfile></UserProfile>
+              {teamMembers?.defender.map((member, index) => (
+                <UserProfile
+                  key={`defender-${index}`}
+                  nickname={member.nickname}
+                  src={member.profileImageUrl}
+                />
+              ))}
             </div>
           </article>
           <article>
             <h3>골키퍼</h3>
             <hr />
             <div>
-              <UserProfile></UserProfile>
+              {teamMembers?.goalkeeper.map((member, index) => (
+                <UserProfile
+                  key={`goalkeeper-${index}`}
+                  nickname={member.nickname}
+                  src={member.profileImageUrl}
+                />
+              ))}
             </div>
           </article>
         </section>

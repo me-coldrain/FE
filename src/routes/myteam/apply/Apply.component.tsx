@@ -10,6 +10,7 @@ import Icon from "@components/icon";
 
 // style
 import styles from "./Apply.module.scss";
+import { CenterModal } from "@components/modal";
 
 type PageProps = {
   data?: any;
@@ -58,15 +59,30 @@ export default function MyTeam(props: PageProps): JSX.Element {
   console.log(props);
   const teamInfo = props?.data;
 
+  // state
+  const [checked, setChecked] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
   return (
     <>
+      <CenterModal
+        show={modalOpen}
+        verify={true}
+        checked={checked}
+        setChecked={setChecked}
+        onClose={() => setModalOpen(false)}
+        handleVerified={() => setModalOpen(false)}
+        title={"팀원 신청을 취소하시겠습니까?"}
+      >
+        <h5>취소하시면 되돌릴 수 없습니다.</h5>
+      </CenterModal>
       <main className={teams}>
         {teamInfo.map((x: any, i: any) => (
           <div className={teamCard} key={`teamKey_${i}`}>
             <div
               className={team}
               onClick={() => {
-                router.push("/myteam/match");
+                setModalOpen(true);
               }}
             >
               <div className={upperBox}>

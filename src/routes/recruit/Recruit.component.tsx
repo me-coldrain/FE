@@ -1,8 +1,11 @@
-import Button from "@components/button/Button.component";
-import Input, { TextArea } from "@components/Input";
-import SafeArea from "@components/safeArea";
+// hook
 import React, { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { makeRequest } from "services/makeRequest";
+// component
+import Button from "@components/button/Button.component";
+import { TextArea } from "@components/Input";
+// config
 import { browserStorage } from "utils/browser";
 
 import styles from "./Recruit.module.scss";
@@ -10,6 +13,10 @@ import styles from "./Recruit.module.scss";
 const { container, getQuestion, questionInput, buttonBottom } = styles;
 
 export default function MakeTeam(): JSX.Element {
+  const router = useRouter();
+  const { teamId } = router.query;
+
+  // state
   const [error, setError] = useState<string>("");
   const [question, setQuestion] = useState<string>("");
   const [questionLength, setQuestionLength] = useState<number>(0);
@@ -38,7 +45,7 @@ export default function MakeTeam(): JSX.Element {
         question: question,
       };
       makeRequest({
-        endpoint: "home/teams/8/recruit/start",
+        endpoint: `home/teams/${teamId}/recruit/start`,
         method: "POST",
         params,
         auth: true,
