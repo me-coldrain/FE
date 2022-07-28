@@ -14,6 +14,7 @@ type params = {
   teamName: string | string[] | undefined;
   mainArea: string | string[] | undefined;
   preferredArea: string | string[] | undefined;
+  url: string | string[] | undefined;
   weekdays: string[];
   time: string[];
 };
@@ -43,10 +44,7 @@ export default function time(): JSX.Element {
   const handleRouter = async () => {
     console.log(router.query);
     const params: params = {
-      introduce: router.query.teamInfo,
-      teamName: router.query.teamName,
-      mainArea: router.query.location,
-      preferredArea: router.query.stadium,
+      ...router.query,
       weekdays: preferedDays,
       time: preferedTime,
     };
@@ -57,6 +55,7 @@ export default function time(): JSX.Element {
       method: "POST",
       params: params,
       auth: true,
+      notJson: true,
     }).then((res: any) => {
       console.log(res);
       if (res.status === 201) {
