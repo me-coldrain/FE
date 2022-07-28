@@ -360,7 +360,6 @@ export default function Team(props: PageProps): JSX.Element {
                 pathname: "/team/[teamName]/challenges",
                 query: { teamId: teamId, teamName: teamName },
               }}
-              as="/team/[teamName]/challenges"
             >
               <div className={tabs}>
                 <p>대결 요청</p>
@@ -372,7 +371,6 @@ export default function Team(props: PageProps): JSX.Element {
                 pathname: "/team/[teamName]/accept",
                 query: { teamId: teamId, teamName: teamName },
               }}
-              as="/team/[teamName]/accept"
             >
               <div className={tabs}>
                 <div style={{ display: "flex", alignItems: "center" }}>

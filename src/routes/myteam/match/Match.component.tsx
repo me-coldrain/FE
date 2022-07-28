@@ -47,7 +47,7 @@ const {
 
 export default function Team(): JSX.Element {
   const router = useRouter();
-  const { teamId } = router.query;
+  const { teamId, matchId } = router.query;
   console.log("fetch with teamId =", teamId);
 
   type IInfo = {
@@ -82,17 +82,9 @@ export default function Team(): JSX.Element {
     console.log("if this team's captain");
   };
 
-  // const handleMatchCancel = () => {
-  //   makeRequest({
-  //     endpoint: `matches/${teamInfo?.matchId}`,
-  //     method: "DELETE",
-  //     auth: true,
-  //   })
-  // };
-
-  useEffect(() => {
-    makeRequest({
-      endpoint: `teams/${teamId}/matches`,
+  const getTeamDetail = async () => {
+    await makeRequest({
+      endpoint: `teams/${teamId}/matches/${matchId}/detail`,
       method: "GET",
       auth: true,
     })
@@ -101,6 +93,10 @@ export default function Team(): JSX.Element {
         setTeamInfo(res);
       })
       .catch((error: any) => console.log(error));
+  };
+
+  useEffect(() => {
+    getTeamDetail();
   }, []);
 
   return (
@@ -187,7 +183,7 @@ export default function Team(): JSX.Element {
           </div>
         </div>
         <h3>포메이션</h3>
-        <Link href="/formation">
+        <Link href={{ pathname: "/formation", query: { teamId, matchId } }}>
           <div className={matchInfoContainerBox}>
             <div className={matchInfoContainerBoxText}>
               <div>+</div>
