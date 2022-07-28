@@ -17,7 +17,7 @@ type ButtonProps = {
   share?: boolean;
   teamName?: string;
   teamInfo?: string;
-  teamImageFile?: File | null;
+  teamImageFile?: string | null;
   location?: string;
   stadium?: string;
   mine?: boolean;
@@ -39,6 +39,7 @@ export default function Button(props: ButtonProps): JSX.Element {
     location = "",
     stadium = "",
     mine,
+    teamImageFile = "",
   } = props;
 
   if (bigRound) {
@@ -82,6 +83,7 @@ export default function Button(props: ButtonProps): JSX.Element {
             query: {
               teamName: teamName,
               teamInfo: teamInfo,
+              url: teamImageFile,
               location: location,
               stadium: stadium,
             },

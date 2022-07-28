@@ -49,6 +49,7 @@ export default function MakeTeam(): JSX.Element {
         method: "POST",
         params,
         auth: true,
+        notJson: true,
       });
       // makeRequest({
       //   endpoint: "home/teams/8/recruit/end",
@@ -78,7 +79,7 @@ export default function MakeTeam(): JSX.Element {
               }}
               error={error !== "" ? true : false}
               label="질문"
-              placeholder="팀 이름을 검색해주세요."
+              placeholder="이곳에 작성하는 내용은 신청자에게 보여집니다."
             />
           </div>
           <div className={buttonBottom}>

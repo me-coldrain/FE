@@ -9,6 +9,7 @@ type RequestParams = {
   auth?: boolean;
   token: string;
   isFile: boolean;
+  notJson: boolean;
 };
 
 const baseUrl = "https://90minglm.kro.kr/api/";
@@ -20,6 +21,7 @@ export const makeRequest: any = async ({
   params = null,
   auth = true,
   isFile = false,
+  notJson = false,
   token,
 }: RequestParams) => {
   const options: {
@@ -52,6 +54,10 @@ export const makeRequest: any = async ({
       const res = await fetch(apiUri, options);
       console.log("makeRequest: res =", res);
 
+      if (notJson && !isFile && res.status <= 201) {
+        return res;
+      }
+
       if (isFile === false && res.status <= 201) {
         const json = await res.json();
         if (json) {
@@ -62,7 +68,7 @@ export const makeRequest: any = async ({
         }
       }
       if (isFile === true && res.status <= 201) {
-        console.log(res);
+        console.log(await res.json());
         return res;
       }
       throw {

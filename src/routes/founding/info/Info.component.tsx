@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { handleFile } from "@hooks/events";
+import { makeRequest } from "services/makeRequest";
 import RouterButton from "components/RouterButton";
 import Back from "components/back";
 import Progressbar from "components/progressbar";
@@ -15,7 +16,7 @@ export default function info(): JSX.Element {
   const [previewURL, setPreviewURL] = useState("");
   const [teamName, setTeamName] = useState("");
   const [teamInfo, setTeamInfo] = useState("");
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState("");
 
   const handleName = (e: any) => {
     setTeamName(e.target.value);
@@ -76,9 +77,23 @@ export default function info(): JSX.Element {
               </label>
               <input
                 type="file"
-                // id="ex_file"
+                id="ex_file"
                 accept="image/jpg, image/png, image/jpeg, image/gif"
-                onChange={(e) => setFile(handleFile(e, setPreviewURL))}
+                onChange={async (e) =>
+                  await handleFile(e, setPreviewURL).then((res: any) => {
+                    const formData = new FormData();
+                    formData.append("teamImageFile", res);
+                    makeRequest({
+                      endpoint: "home/teams/image",
+                      method: "POST",
+                      params: formData,
+                      auth: true,
+                      isFile: true,
+                    }).then((res: any) => {
+                      res?.url ? setFile(res?.url) : null;
+                    });
+                  })
+                }
               />
             </div>
             <div className={informationBox}>
