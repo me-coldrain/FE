@@ -10,6 +10,7 @@
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
+    border: 3px solid transparent;
   }
   &Selected {
     display: flex;
@@ -21,7 +22,7 @@
       width: 5rem;
       height: 5rem;
       border-radius: 50%;
-      border: 5px solid var(--highlight-color);
+      border: 3px solid var(--highlight-color);
     }
     p {
       color: var(--highlight-color);

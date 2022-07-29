@@ -27,9 +27,21 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
       });
     }
   }, []);
+  useEffect(() => {
+    try {
+      if (!window.Kakao.isInitialized() && window.Kakao) {
+        window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
   const router = useRouter();
   const showNav =
-    router.pathname === "/login" || router.pathname === "/introduction"
+    router.pathname === "/login" ||
+    router.pathname === "/introduction" ||
+    router.pathname === "/endmatch/success"
       ? false
       : true;
 

@@ -1,0 +1,46 @@
+@use "styles/variables/placeholder" as animations;
+@use "styles/variables/media";
+
+.user {
+  & section {
+    > h1,
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      margin-bottom: 3rem;
+    }
+
+    > p {
+      font-size: 18px;
+      margin: 0;
+      white-space: pre-line;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+    input {
+      margin-bottom: 2rem;
+    }
+    label {
+      font-size: 16px;
+      color: #000;
+    }
+  }
+}
+
+.ButtonBox {
+  margin-top: 25vh;
+  width: 100%;
+  footer {
+    margin: 0.5rem 0 2rem;
+    padding: 0;
+    P {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+}
