@@ -59,7 +59,7 @@ type MemberToPlay = {
   position: "striker" | "defender" | "midfielder" | "goalkeeper";
   anonymous: boolean;
   memberProfileUrl: string;
-  nickName: string;
+  nickName: string | undefined;
 };
 
 export default function Page(): JSX.Element {
@@ -69,6 +69,8 @@ export default function Page(): JSX.Element {
   const formations = useSelector((state: RootState) => state.formations);
   console.log("formations =", formations);
   const { teamId, matchId, teamName } = router.query;
+
+  console.log(router.query);
 
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();

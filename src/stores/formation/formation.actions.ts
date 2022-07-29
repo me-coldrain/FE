@@ -5,7 +5,7 @@ export type MemberToPlay = {
   memberId: number | null;
   position: "striker" | "defender" | "midfielder" | "goalkeeper";
   anonymous: boolean;
-  nickName: string;
+  nickName?: string;
   memberProfileUrl?: string;
 };
 

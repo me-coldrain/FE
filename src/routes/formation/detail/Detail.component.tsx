@@ -34,26 +34,44 @@ const {
 export default function FormationDetail(): JSX.Element {
   const router = useRouter();
   const { teamId, matchId } = router.query;
+  console.log(teamId, matchId);
   const formations = useSelector((state: RootState) => state.formations);
   console.log("formations =", formations);
 
-  const [players, setPlayers] = useState<MemberToPlay[]>();
-
-  const params = players?.forEach((player) => {
-    delete player["memberProfileUrl"];
-    //   delete player["nickName"];
-  });
-  console.log("params =", params);
+  const [players, setPlayers] = useState<MemberToPlay[]>([
+    {
+      memberId: 3,
+      position: "striker",
+      anonymous: true,
+      memberProfileUrl: "string",
+      nickName: "string",
+    },
+  ]);
   const saveFormation = async () => {
-    console.log(players);
-    await makeRequest({
-      endpoint: `/teams/${teamId}/matches/${matchId}/formation`,
+    const params = players?.forEach((player) => {
+      delete player["memberProfileUrl"];
+      delete player["nickName"];
     });
+    await makeRequest({
+      endpoint: `teams/${teamId}/matches/${matchId}/formation`,
+      method: "POST",
+      params,
+      auth: true,
+    }).then(() =>
+      router.push({
+        pathname: `/team/[teamName]`,
+        query: {
+          status: true,
+          teamName: router.query.teamName,
+          teamId: teamId,
+        },
+      })
+    );
   };
 
-  useEffect(() => {
-    setPlayers(formations);
-  }, []);
+  //   useEffect(() => {
+  //     setPlayers(formations);
+  //   }, []);
 
   return (
     <main>

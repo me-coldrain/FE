@@ -186,7 +186,7 @@ export default function Team(): JSX.Element {
         <Link
           href={{
             pathname: "/formation",
-            query: { teamId, matchId, teamName },
+            query: { teamId: teamId, matchId: matchId, teamName: teamName },
           }}
         >
           <div className={matchInfoContainerBox}>

@@ -46,6 +46,7 @@ const { myTeam, team, activeTeam } = styles;
 export default function MyTeam(props: PageProps): JSX.Element {
   console.log(props);
   const router = useRouter();
+  console.log(router.query);
 
   //state
   const [active, setActive] = useState(true);
