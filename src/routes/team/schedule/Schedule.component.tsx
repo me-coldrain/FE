@@ -96,7 +96,7 @@ export default function Schedule(props: ISchedules): JSX.Element {
     <div>
       <SafeArea />
       {/** @map scheduleMatches */}
-      {data.map((match, index) => (
+      {data?.map((match, index) => (
         <div key={`match-${index}`} style={{ padding: "1rem" }}>
           <ScheduleMatches {...match} />
         </div>

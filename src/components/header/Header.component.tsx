@@ -44,7 +44,8 @@ export default memo(function Header({ backBtn }: IHeader): JSX.Element {
     pathname === "/rank/team" ||
     pathname === "/rank/player" ||
     pathname === "/founding/success" ||
-    pathname === "/player/[playerId]"
+    pathname === "/player/[playerId]" ||
+    pathname === "/formation/detail"
       ? false
       : true;
   const colorUrl = "/";

@@ -47,7 +47,7 @@ const {
 
 export default function Team(): JSX.Element {
   const router = useRouter();
-  const { teamId, matchId } = router.query;
+  const { teamId, matchId, teamName } = router.query;
   console.log("fetch with teamId =", teamId);
 
   type IInfo = {
@@ -183,7 +183,12 @@ export default function Team(): JSX.Element {
           </div>
         </div>
         <h3>포메이션</h3>
-        <Link href={{ pathname: "/formation", query: { teamId, matchId } }}>
+        <Link
+          href={{
+            pathname: "/formation",
+            query: { teamId, matchId, teamName },
+          }}
+        >
           <div className={matchInfoContainerBox}>
             <div className={matchInfoContainerBoxText}>
               <div>+</div>

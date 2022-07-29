@@ -6,14 +6,15 @@ const { wait, cancel } = styles;
 type ButtonProps = {
   join?: boolean;
   apply?: boolean;
+  onClick?: () => void;
 };
 
 export default function StatusButton(props: ButtonProps): JSX.Element {
-  const { join, apply } = props;
+  const { join, apply, onClick } = props;
 
   if (join) {
     return (
-      <div className={wait}>
+      <div onClick={onClick} className={wait}>
         <p>경기예정</p>
       </div>
     );

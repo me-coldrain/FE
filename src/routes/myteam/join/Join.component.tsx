@@ -64,25 +64,24 @@ export default function MyTeam(props: PageProps): JSX.Element {
       <main className={teams}>
         {teamInfo.map((x: any, i: any) => (
           <div className={teamCard} key={`teamKey_${i}`}>
-            <div
-              className={team}
-              onClick={() => {
-                router.push(
-                  {
-                    pathname: `/team/${x.teamName}`,
-                    query: {
-                      teamName: x.teamName,
-                      teamId: x.teamId,
-                      status: true,
-                    },
-                  },
-                  `team/${x.teamName}`
-                );
-              }}
-            >
+            <div className={team}>
               <div className={upperBox}>
                 <div>
-                  <p>{x?.teamName}</p>
+                  <p
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      router.push({
+                        pathname: `/team/${x.teamName}`,
+                        query: {
+                          teamName: x.teamName,
+                          teamId: x.teamId,
+                          status: true,
+                        },
+                      });
+                    }}
+                  >
+                    {x?.teamName}
+                  </p>
                   <div className={location}>
                     <div>
                       <Icon asset="Location"></Icon>
@@ -95,7 +94,23 @@ export default function MyTeam(props: PageProps): JSX.Element {
                   </div>
                 </div>
                 <div>
-                  {x?.matchStatus ? <StatusButton join></StatusButton> : <></>}
+                  {x?.matchStatus ? (
+                    <StatusButton
+                      join
+                      onClick={() =>
+                        router.push({
+                          pathname: `/team/[teamName]`,
+                          query: {
+                            teamId: x.teamId,
+                            teamName: x.teamName,
+                            status: true,
+                          },
+                        })
+                      }
+                    ></StatusButton>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
               <div className={lowerBox}>
