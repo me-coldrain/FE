@@ -50,6 +50,18 @@ export default memo(function Header({ backBtn }: IHeader): JSX.Element {
       : true;
   const colorUrl = "/";
 
+  const showHeader =
+    pathname === "/endmatch" ||
+    pathname === "/endmatch/score" ||
+    pathname === "/endmatch/check" ||
+    pathname === "/endmatch/substitute" ||
+    pathname === "/endmatch/charming" ||
+    pathname === "/endmatch/mvp" ||
+    pathname === "/endmatch/scorer" ||
+    pathname === "/endmatch/preview"
+      ? false
+      : true;
+
   useEffect(() => {
     if (typeof window !== undefined) {
       handleNetworkChange();
@@ -81,7 +93,7 @@ export default memo(function Header({ backBtn }: IHeader): JSX.Element {
               )}
               <Logo />
             </div>
-            <Items />
+            {showHeader && <Items />}
           </nav>
         </header>
       )}
