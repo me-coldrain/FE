@@ -12,6 +12,7 @@ import { InfoFooter, RegisterFooter } from "@components/footer";
 import Reddot from "@components/reddot";
 import { makeRequest } from "services/makeRequest";
 import styles from "./Team.module.scss";
+import team from ".";
 
 type PageProps = {
   data?: any;
@@ -32,7 +33,20 @@ type ITeam = {
   otherCaptain: boolean;
   participate: boolean;
   preferredArea: string;
-  recentMatchHistory: any;
+  recentMatchHistory: {
+    historyId: number;
+    matchDate: string;
+    opposingTeam: {
+      name: string;
+      result: string;
+      score: number;
+    };
+    team: {
+      name: string;
+      result: string;
+      score: number;
+    };
+  } | null;
   recruit: boolean;
   teamCaptain: boolean;
   teamId: number;
@@ -45,6 +59,21 @@ type ITeam = {
   winPoint: number;
   winRate: number;
 };
+
+type TeamBasicInfo = {
+  historyId: number;
+  matchDate: string;
+  opposingTeam: {
+    name: string;
+    result: string;
+    score: number;
+  };
+  team: {
+    name: string;
+    result: string;
+    score: number;
+  };
+} | null;
 
 const {
   aboutTeam,
@@ -196,16 +225,20 @@ export default function Team(props: PageProps): JSX.Element {
     return unsubscribe;
   }, []);
 
-  const matchContainer = (
+  const MatchContainer = ({
+    opposingTeam,
+    team,
+    matchDate,
+  }: TeamBasicInfo): JSX.Element => (
     <div className={matchHistoryContainer}>
       <div className={matchHistoryContainerWin}>
         <div className={matchHistoryContainerWinner}>
           <p>승리</p>
         </div>
-        <p>A팀</p>
+        <p>{team.result === "승리" ? team.name : opposingTeam.name}</p>
       </div>
       <div className={matchHistoryContainerResult}>
-        <p>2022.03.04</p>
+        <p>{matchDate}</p>
         <p
           style={{
             fontWeight: "bold",
@@ -213,14 +246,16 @@ export default function Team(props: PageProps): JSX.Element {
             margin: "0.5rem",
           }}
         >
-          4:2
+          {team.result === "승리"
+            ? `${team.score} : ${opposingTeam.score}`
+            : `${opposingTeam.score} : ${team.score}`}
         </p>
       </div>
       <div className={matchHistoryContainerLose}>
         <div className={matchHistoryContainerLoser}>
           <p>패배</p>
         </div>
-        <p>B팀</p>
+        <p>{team.result === "승리" ? opposingTeam.name : team.name}</p>
       </div>
     </div>
   );
@@ -319,14 +354,19 @@ export default function Team(props: PageProps): JSX.Element {
             }}
           >
             <div className={rowDiv}>
-              <PlaceholderWithJSX
-                label="경기 히스토리"
-                content={matchContainer}
-                length="long"
-                linkType={false}
-                arrowLink={link}
-                arrowLinkAs={link.as}
-              />
+              {teamDetail?.recentMatchHistory && (
+                <PlaceholderWithJSX
+                  label="경기 히스토리"
+                  content={
+                    <MatchContainer {...teamDetail?.recentMatchHistory} />
+                  }
+                  length="long"
+                  linkType={false}
+                  arrowLink={link}
+                  arrowLinkAs={link.as}
+                  {...teamDetail?.recentMatchHistory}
+                />
+              )}
             </div>
           </Link>
         </div>
