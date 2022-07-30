@@ -97,7 +97,7 @@ export default function User(): JSX.Element {
           </div>
           <div className={kakao}>
             <p>SNS계정으로 간편 로그인</p>
-            <a href="https://kauth.kakao.com/oauth/authorize?client_id=3c2e867a60400604cd64199c1ec0227a&redirect_uri=http://localhost:3000/kakao&response_type=code">
+            <a href="https://kauth.kakao.com/oauth/authorize?client_id=3c2e867a60400604cd64199c1ec0227a&redirect_uri=https://ninety.site/kakao&response_type=code">
               <div className={kakaoBox}>
                 <RegisterFooter
                   content="KAKAO"
