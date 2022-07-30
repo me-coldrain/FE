@@ -38,8 +38,6 @@ type IMatches = {
 
 export default function Matches({ query, data }: IPropsHistories): JSX.Element {
   const { teamId, teamName } = query;
-  console.log("teamId", query.teamId);
-  console.log("data=", data);
 
   return (
     <div className={container}>

@@ -46,7 +46,6 @@ export function InfoFooter({ content }: Content): JSX.Element {
 
 export default function Footer(): JSX.Element | null {
   const router = useRouter();
-  console.log(router.pathname);
   if (noFooterRoutes.includes(router.pathname)) {
     return null;
   }

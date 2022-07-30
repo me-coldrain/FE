@@ -34,9 +34,7 @@ const {
 export default function FormationDetail(): JSX.Element {
   const router = useRouter();
   const { teamId, matchId } = router.query;
-  console.log(teamId, matchId);
   const formations = useSelector((state: RootState) => state.formations);
-  console.log("formations =", formations);
 
   const [players, setPlayers] = useState<MemberToPlay[]>([
     {

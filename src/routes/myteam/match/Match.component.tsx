@@ -48,7 +48,6 @@ const {
 export default function Team(): JSX.Element {
   const router = useRouter();
   const { teamId, matchId, teamName } = router.query;
-  console.log("fetch with teamId =", teamId);
 
   type IInfo = {
     matchId: number;
@@ -78,9 +77,9 @@ export default function Team(): JSX.Element {
   const [teamInfo, setTeamInfo] = useState<IInfo>();
   const [isCaptain, setIsCaptain] = useState<boolean>(true);
 
-  const captainHandler = () => {
-    console.log("if this team's captain");
-  };
+  // const captainHandler = () => {
+  //   console.log("if this team's captain");
+  // };
 
   const getTeamDetail = async () => {
     await makeRequest({
@@ -89,7 +88,6 @@ export default function Team(): JSX.Element {
       auth: true,
     })
       .then((res: IInfo) => {
-        console.log(res);
         setTeamInfo(res);
       })
       .catch((error: any) => console.log(error));

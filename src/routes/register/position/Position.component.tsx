@@ -10,7 +10,6 @@ const { selectBox } = styles;
 
 export default function position(): JSX.Element {
   const router = useRouter();
-  console.log(router);
   const [preferedPosition, setPreferedPosition] = useState("fwd");
   const handlePosition = (text: string) => {
     setPreferedPosition(text);

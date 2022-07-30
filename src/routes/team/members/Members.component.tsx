@@ -49,8 +49,6 @@ export default function Members({ data }: IMembers): JSX.Element {
   const { captain } = data;
   const [modify, setModify] = useState<boolean>(false);
 
-  console.log(modify);
-
   const MemberCard = ({
     memberId,
     profileImageUrl,

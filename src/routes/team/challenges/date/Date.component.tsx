@@ -31,11 +31,9 @@ export default function Date({ query }: IProps): JSX.Element {
 
   const [value, setValue] = React.useState<Date | null>(null);
 
-  console.log(value);
   const handleChange = (newValue: Date | null) => {
     setValue(newValue);
   };
-  console.log(router.query);
   return (
     <main>
       <div style={{ display: "flex", flexDirection: "column" }}>

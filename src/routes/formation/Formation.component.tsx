@@ -67,10 +67,7 @@ export default function Page(): JSX.Element {
   const router = useRouter();
   const dispatch = useDispatch();
   const formations = useSelector((state: RootState) => state.formations);
-  console.log("formations =", formations);
   const { teamId, matchId, teamName } = router.query;
-
-  console.log(router.query);
 
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
@@ -89,8 +86,6 @@ export default function Page(): JSX.Element {
   };
 
   const deleteAnonymous = (position: string, index: number) => {
-    console.log("clicked");
-
     const _memberToPlayIndex = memberToPlay.findIndex(
       (member, _) => member.position === position && member.anonymous === true
     );
@@ -124,8 +119,6 @@ export default function Page(): JSX.Element {
   useEffect(() => {
     members();
   }, [teamId]);
-
-  console.log(memberToPlay);
 
   return (
     <>

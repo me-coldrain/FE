@@ -23,7 +23,6 @@ type A = keyof params;
 
 export default function time(): JSX.Element {
   const router = useRouter();
-  console.log(router);
   const [preferedDays, setpreferedDays] = useState<string[]>(["sun"]);
   const [preferedTime, setpreferedTime] = useState<string[]>(["am"]);
   const handleDays = (text: string) => {
@@ -42,14 +41,12 @@ export default function time(): JSX.Element {
   };
 
   const handleRouter = async () => {
-    console.log(router.query);
     const params: params = {
       ...router.query,
       weekdays: preferedDays,
       time: preferedTime,
     };
 
-    console.log("params =", params);
     await makeRequest({
       endpoint: "home/teams",
       method: "POST",
@@ -57,7 +54,6 @@ export default function time(): JSX.Element {
       auth: true,
       notJson: true,
     }).then((res: any) => {
-      console.log(res);
       if (res.status === 201) {
         router.replace("/founding/success");
       } else {

@@ -31,9 +31,7 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 
 export default function User(): JSX.Element {
   const router = useRouter();
-  console.log(router);
   const code = router.query?.code;
-  console.log(code);
   const { user } = styles;
   const { title = "", description = "" } = usePageDetails();
 
@@ -44,7 +42,6 @@ export default function User(): JSX.Element {
         method: "GET",
         auth: false,
       }).then((res: any) => {
-        console.log(res);
         if (res !== undefined) {
           if (res?.first) {
             router.replace("/register/nickname");

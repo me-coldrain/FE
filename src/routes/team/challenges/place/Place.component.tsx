@@ -10,8 +10,6 @@ export default function Location(): JSX.Element {
   const router = useRouter();
   const { applyTeamId, applyId, date } = router.query;
 
-  console.log(router.query);
-
   const [location, setLocation] = useState<string>();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 

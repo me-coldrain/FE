@@ -10,7 +10,6 @@ const { selectBox } = styles;
 
 export default function location(): JSX.Element {
   const router = useRouter();
-  console.log(router);
   const [location, setLocation] = useState("seoul");
   const handleLocation = (text: string) => {
     setLocation(text);

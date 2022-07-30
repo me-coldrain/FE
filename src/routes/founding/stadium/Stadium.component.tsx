@@ -11,7 +11,6 @@ const { selectBox, buttonBox } = styles;
 
 export default function stadium(): JSX.Element {
   const router = useRouter();
-  console.log(router);
   const [stadium, setStadium] = useState("both");
   const handleStadium = (text: string) => {
     setStadium(text);

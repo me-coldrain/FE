@@ -74,7 +74,6 @@ export class BrowserStorage {
 
       return true;
     } catch (error) {
-      console.log("set cookie: ", error);
       return false;
     }
   }
@@ -96,7 +95,6 @@ export class BrowserStorage {
         name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
       return true;
     } catch (error) {
-      console.log("delete cookie: ", error);
       return false;
     }
   }

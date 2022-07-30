@@ -5,15 +5,12 @@ import { getCookie } from "cookies-next";
 import jwtDecode from "jwt-decode";
 
 const Myteam = (props: any): JSX.Element => {
-  console.log("props =", props);
-
   return <Page data={props} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const data = getCookie("token", { req, res });
   const decodedData = jwtDecode(data as string, { header: false });
-  console.log(decodedData);
 
   return {
     props: {

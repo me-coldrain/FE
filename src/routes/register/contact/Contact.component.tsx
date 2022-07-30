@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import { getUser } from "stores/user";
 import RouterButton from "components/RouterButton";
 import Back from "components/back";
@@ -25,8 +24,6 @@ const {
 
 export default function contact(): JSX.Element {
   const router = useRouter();
-  const dispatch = useDispatch();
-  console.log(router);
   const [selectSNS, setSelectSNS] = useState("");
   const [sns, setSns] = useState<string>();
   const [phoneNumber, setPhoneNumber] = useState<number>();

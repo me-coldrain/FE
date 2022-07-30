@@ -5,7 +5,17 @@ import { useRouter } from "next/router";
 import { makeRequest } from "services/makeRequest";
 import { RegisterFooter } from "@components/footer";
 import UserProfile from "@components/userProfile";
+
+//dummy data
+import { dummy } from "dummyData";
+
 import styles from "./substitute.module.scss";
+
+// interface teamMembers {
+//   memberId: 1,
+// memberProfileUrl: "url…",
+// nickName: "nickName1"
+// }
 
 const {
   end,
@@ -46,12 +56,11 @@ export default function score(): JSX.Element {
   const router = useRouter();
   const { teamId, matchId, teamName } = router.query;
 
-  console.log(router.query);
-
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
 
   //state
+  const [teamMembers, setTeamMembers] = useState<any>();
   const [selectedMember, setSelectedMember] = useState<string[]>([""]);
 
   const handleMembers = (text: string) => {
@@ -64,30 +73,32 @@ export default function score(): JSX.Element {
 
   const handleSubs = () => {
     router.push({
-      pathname: "",
+      pathname: "/endmatch/mvp",
       query: { substitutes: selectedMember },
     });
   };
 
   useEffect(() => {
-    makeRequest({
-      // 필드멤버를 제외한 소속팀 멤버 받아오는 api
-      // endpoint: `matches/${matchId}/score`,
-      method: "GET",
-      auth: true,
-    }).then((res: any) => {
-      console.log(res);
-      // setInfo(res)
-      // if (res !== undefined) {
-      //   if (res?.first) {
-      //     router.replace("/");
-      //   } else {
-      //     router.replace("/");
-      //   }
-      // } else {
-      //   window.alert("팀 정보 입력에 실패하였습니다.");
-      // }
-    });
+    // setTeamMembers(dummy.members);
+    // setSelectedMember
+    // makeRequest({
+    // 필드멤버를 제외한 소속팀 멤버 받아오는 api
+    //   endpoint: `matches/${matchId}/score`,
+    //   method: "GET",
+    //   auth: true,
+    // }).then((res: any) => {
+    //   console.log(res);
+    // setInfo(res)
+    // if (res !== undefined) {
+    //   if (res?.first) {
+    //     router.replace("/");
+    //   } else {
+    //     router.replace("/");
+    //   }
+    // } else {
+    //   window.alert("팀 정보 입력에 실패하였습니다.");
+    // }
+    // });
   }, []);
 
   return (
@@ -106,17 +117,73 @@ export default function score(): JSX.Element {
             <p>개인점수가 부여됩니다.</p>
           </div>
           <div className={upperBoxSelect}>
-            {/* {selectedMember?.map((x,i) => {
-              <UserProfile nickname={x?.nickname} src="">
-                <div className={xButton}
-                  onClick={() => {setSelectedMember(selectedMember.filter((x) => x !== text))}}
-                >x</div>
-              </UserProfile>
-            })} */}
+            {selectedMember?.map((x, i) => {
+              <UserProfile nickname="닉네임" src="">
+                <div
+                  className={xButton}
+                  onClick={() => {
+                    setSelectedMember(
+                      selectedMember.filter((x) => x !== "nickname1")
+                    );
+                  }}
+                >
+                  x
+                </div>
+              </UserProfile>;
+            })}
+            {/* <UserProfile nickname="닉네임" src="">
+              <div
+                className={xButton}
+                onClick={() => {
+                  setSelectedMember(
+                    selectedMember.filter((x) => x !== "닉네임")
+                  );
+                }}
+              >
+                x
+              </div>
+            </UserProfile> */}
           </div>
         </div>
         <div className={lowerBox}>
-          {/* <UserProfile nickname="닉네임" src="" selected={selectedMember.find((x) => x === "mon") ? true : false} onClick={() => handleMembers(x)}></UserProfile> */}
+          {/* {teamMembers.map((x: any, i: any) => {
+            <UserProfile
+              nickname={x.nickName}
+              src={x.memberProfileUrl}
+              // selected={selectedMember.find((i) => i.nickName === x.nickName) ? true : false}
+              onClick={() => handleMembers(x)}
+            ></UserProfile>;
+          })} */}
+          {/* <UserProfile
+            nickname="닉네임"
+            src=""
+            selected={selectedMember.find((x) => x === "닉네임") ? true : false}
+            onClick={() => handleMembers("닉네임")}
+          ></UserProfile>
+          <UserProfile
+            nickname="닉네임"
+            src=""
+            selected={selectedMember.find((x) => x === "닉네임") ? true : false}
+            onClick={() => handleMembers("닉네임")}
+          ></UserProfile>
+          <UserProfile
+            nickname="닉네임"
+            src=""
+            selected={selectedMember.find((x) => x === "닉네임") ? true : false}
+            onClick={() => handleMembers("닉네임")}
+          ></UserProfile>
+          <UserProfile
+            nickname="닉네임"
+            src=""
+            selected={selectedMember.find((x) => x === "닉네임") ? true : false}
+            onClick={() => handleMembers("닉네임")}
+          ></UserProfile>
+          <UserProfile
+            nickname="닉네임"
+            src=""
+            selected={selectedMember.find((x) => x === "닉네임") ? true : false}
+            onClick={() => handleMembers("닉네임")}
+          ></UserProfile> */}
         </div>
         <div className={buttonBox}>
           <RegisterFooter
