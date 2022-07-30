@@ -4,8 +4,6 @@ import { makeRequest } from "services/makeRequest";
 import Page from "routes/player";
 
 const Player = (props: any): JSX.Element => {
-  console.log("props =", props);
-
   return <Page data={props} />;
 };
 

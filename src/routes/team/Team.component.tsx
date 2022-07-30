@@ -102,13 +102,11 @@ const {
 } = styles;
 
 export default function Team(props: PageProps): JSX.Element {
-  console.log(props);
   const router = useRouter();
 
   const teamData: ITeam = props?.data;
 
   const { teamId, teamName, status } = router.query;
-  console.log("fetch with teamId =", typeof teamId, teamName);
   //state
   const [teamDetail, setTeamDetail] = useState<ITeam>();
   const [from, setFrom] = useState<boolean>(false);

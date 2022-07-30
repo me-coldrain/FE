@@ -14,8 +14,6 @@ export default function Logo(): JSX.Element {
 
   const whiteLogo = ["/"];
 
-  console.log("pathname =", pathname);
-
   useEffect(() => {
     if (whiteLogo.includes(pathname)) {
       setWhite(true);

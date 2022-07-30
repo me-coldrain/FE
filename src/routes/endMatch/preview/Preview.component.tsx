@@ -46,8 +46,6 @@ export default function score(): JSX.Element {
   const router = useRouter();
   const { teamId, matchId, teamName } = router.query;
 
-  console.log(router.query);
-
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
 
@@ -76,7 +74,7 @@ export default function score(): JSX.Element {
       method: "GET",
       auth: true,
     }).then((res: any) => {
-      console.log(res);
+      // console.log(res);
       // setInfo(res)
       // if (res !== undefined) {
       //   if (res?.first) {

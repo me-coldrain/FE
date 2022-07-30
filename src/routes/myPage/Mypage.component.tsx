@@ -63,7 +63,6 @@ const {
 } = styles;
 
 export default function MyPage(props: PageProps): JSX.Element {
-  console.log(props);
   const [file, setFile] = useState({});
   const [personalInfo, setPersonalInfo] = useState({
     nickname: "",
@@ -178,8 +177,7 @@ export default function MyPage(props: PageProps): JSX.Element {
           res?.defenderPoint,
           res?.strikerPoint,
         ]),
-          setPersonalInfo(res),
-          console.log(res);
+          setPersonalInfo(res);
       })
       .catch((error: any) => console.log(error));
   }, []);

@@ -33,7 +33,6 @@ class Config {
       const token = browserStorage.setCookie(name, value, days);
       return token;
     } catch (error) {
-      console.log("getting token: services: ", error);
       return false;
     }
   }
@@ -45,7 +44,6 @@ class Config {
       const token = browserStorage.getCookie("token");
       return token;
     } catch (error) {
-      console.log("getting token: services: ", error);
       return false;
     }
   }
@@ -56,7 +54,6 @@ class Config {
       const userInfo = {};
       return userInfo;
     } catch (error) {
-      console.log("Config: storeHasPressed: error =", error);
       return false;
     }
   }

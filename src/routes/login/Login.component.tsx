@@ -40,14 +40,12 @@ export default function User(): JSX.Element {
 
   const handleLogin = () => {
     const params = inputs;
-    console.log(params);
     makeRequest({
       endpoint: "members/login",
       method: "POST",
       params,
       auth: false,
     }).then((res: any) => {
-      console.log(res);
       if (res !== undefined) {
         if (res?.first) {
           router.replace("/register/nickname");

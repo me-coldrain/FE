@@ -35,12 +35,10 @@ export default function Landing(props: ILandingProps): JSX.Element {
   // modal state
 
   const fetchMatches = () => {
-    console.log("fetchMatches : with");
     setHomePage(true);
   };
 
   const fetchRecruit = () => {
-    console.log("fetchRecruit :");
     setHomePage(false);
   };
 
@@ -54,7 +52,7 @@ export default function Landing(props: ILandingProps): JSX.Element {
       method: "GET",
       auth: true,
     }).then((res: any) => {
-      console.log(res);
+      // console.log(res);
       // if (res !== undefined) {
       //   if (res?.first) {
       //     router.replace("/register/nickname");

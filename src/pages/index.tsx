@@ -5,7 +5,6 @@ import { makeRequest } from "services/makeRequest";
 
 const Home = (props: any): JSX.Element => {
   const { data } = props;
-  console.log("props =", props);
   return <Page data={data} isLanding />;
 };
 

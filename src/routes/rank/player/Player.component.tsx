@@ -63,10 +63,8 @@ export const getStaticProps: GetStaticProps = async () => {
 export default function Rank({
   data,
 }: InferGetServerSidePropsType<typeof getStaticProps>): JSX.Element {
-  console.log(data);
   const router = useRouter();
   const { teamId, teamName } = router.query;
-  console.log("fetch with teamId =", teamId, teamName);
   //state
   const [playerData, setPlayerData] = useState<IPlayer>();
   const [found, setFound] = useState<string>("mvp");
@@ -78,7 +76,7 @@ export default function Rank({
       auth: true,
     })
       .then((res: IPlayer) => {
-        setPlayerData(res), console.log(res);
+        setPlayerData(res);
       })
       .catch((error: any) => console.log(error));
   };

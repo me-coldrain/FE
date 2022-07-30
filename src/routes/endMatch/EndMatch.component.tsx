@@ -44,8 +44,6 @@ export default function Page(): JSX.Element {
   const router = useRouter();
   const { teamId, matchId, teamName } = router.query;
 
-  console.log(router.query);
-
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
 
@@ -57,7 +55,6 @@ export default function Page(): JSX.Element {
       method: "POST",
       auth: true,
     }).then((res: any) => {
-      console.log(res);
       // if (res !== undefined) {
       //   if (res?.first) {
       //     router.replace("/");
@@ -75,7 +72,7 @@ export default function Page(): JSX.Element {
       method: "DELETE",
       auth: true,
     }).then((res: any) => {
-      console.log(res);
+      // console.log(res)
     });
   };
 
@@ -89,7 +86,7 @@ export default function Page(): JSX.Element {
       <div className={end}>
         <div className={upperBox}>
           <div className={upperBoxTitle}>
-            <p>경기 종료 되셨나요?</p>
+            <p>경기가 종료 되었나요?</p>
           </div>
           <div className={upperBoxSub}>
             <p>경기가 취소된 경우 다시 일정을 잡아주세요.</p>

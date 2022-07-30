@@ -52,7 +52,6 @@ export const makeRequest: any = async ({
       options.headers.Authorization = `Bearer ${userTokens}`;
 
       const res = await fetch(apiUri, options);
-      console.log("makeRequest: res =", res);
 
       if (notJson && !isFile && res.status <= 201) {
         return res;
@@ -61,14 +60,12 @@ export const makeRequest: any = async ({
       if (isFile === false && res.status <= 201) {
         const json = await res.json();
         if (json) {
-          console.log("makeRequest: json =", json);
           return json;
         } else {
           return res;
         }
       }
       if (isFile === true && res.status <= 201) {
-        console.log(await res.json());
         return res;
       }
       throw {
@@ -77,11 +74,9 @@ export const makeRequest: any = async ({
       };
     } else {
       const res = await fetch(apiUri, options);
-      console.log("res =", res);
 
       if (res.status === 200) {
         const json = await res.json();
-        console.log("json =", json);
         return json;
       }
 
@@ -91,7 +86,6 @@ export const makeRequest: any = async ({
 
       if (res.status === 201) {
         const json = await res.json();
-        console.log("json =", json);
         Config.setToken("token", json?.accesstoken, 30);
 
         return json;
@@ -103,7 +97,6 @@ export const makeRequest: any = async ({
       // };
     }
   } catch (error: any) {
-    console.log("makeRequest: error =", error);
     return false;
   }
 };

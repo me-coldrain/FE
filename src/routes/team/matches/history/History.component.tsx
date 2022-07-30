@@ -35,7 +35,6 @@ export default function History({
   query,
   data,
 }: ITeamDetailProps): JSX.Element {
-  console.log(query, data);
   return (
     <main>
       <div className={matchHistoryContainer} style={{ marginBottom: 0 }}>

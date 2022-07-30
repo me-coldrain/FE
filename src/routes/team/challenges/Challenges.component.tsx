@@ -22,7 +22,6 @@ const {
 
 export default function Challenges(props: IChallengeProps): JSX.Element {
   // props
-  console.log("props =", props);
   const { data } = props;
 
   // state

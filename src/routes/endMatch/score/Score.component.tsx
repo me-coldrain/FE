@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { makeRequest } from "services/makeRequest";
 import Input from "@components/Input";
 import { RegisterFooter } from "@components/footer";
-import styles from "./score.module.scss";
+import styles from "./Score.module.scss";
 
 const {
   end,
@@ -46,8 +46,6 @@ export default function score(): JSX.Element {
   const router = useRouter();
   const { teamId, matchId, teamName } = router.query;
 
-  console.log(router.query);
-
   const { title = "", description = "" } = usePageDetails();
   const { content = "" } = usePageData();
 
@@ -57,14 +55,13 @@ export default function score(): JSX.Element {
 
   const handleScore = () => {
     const params = { teamScore: myScore, opponentScore: oppositeScore };
-    console.log(params);
     makeRequest({
       endpoint: `matches/${matchId}/score`,
       method: "POST",
       params,
       auth: true,
     }).then((res: any) => {
-      console.log(res);
+      // console.log(res);
       // if (res !== undefined) {
       //   if (res?.first) {
       //     router.replace("/");
@@ -135,7 +132,7 @@ export default function score(): JSX.Element {
           <RegisterFooter
             content="다음"
             handleClick={() => {
-              router.push("/");
+              router.push("/endmatch/substitute");
             }}
             activeStyle
           ></RegisterFooter>
