@@ -9,7 +9,7 @@ import UserProfile from "@components/userProfile";
 //dummy data
 import { dummy } from "dummyData";
 
-import styles from "./substitute.module.scss";
+import styles from "./Substitute.module.scss";
 
 // interface teamMembers {
 //   memberId: 1,
