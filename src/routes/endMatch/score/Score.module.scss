@@ -1,0 +1,68 @@
+@use "styles/variables/placeholder" as animations;
+@use "styles/variables/media";
+
+.end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5rem 1rem 0rem;
+}
+.upperBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2rem;
+  &Title {
+    p {
+      font-weight: 600;
+      font-size: 24px;
+      color: rgba(47, 78, 180, 1);
+      margin: 2rem 0 0;
+    }
+  }
+  &Sub {
+    p {
+      font-size: 16px;
+      color: #868686;
+    }
+  }
+}
+
+.lowerBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #fff;
+  margin-bottom: 9rem;
+  &Content {
+    width: 100%;
+    div {
+      label {
+        color: #000;
+        font-weight: 600;
+        font-size: 20px;
+      }
+    }
+  }
+  .versus {
+    width: 100%;
+    p {
+      font-weight: 600;
+      font-size: 26px;
+      color: #000;
+    }
+  }
+}
+
+.buttonBox {
+  width: 100%;
+  footer {
+    padding: inherit;
+    padding-bottom: 1rem;
+  }
+}

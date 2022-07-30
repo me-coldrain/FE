@@ -178,8 +178,6 @@ const Page = (props: PageProps): JSX.Element => {
     }
   };
 
-  console.log(teams);
-
   const handleWeekdayClick = (content: string) => {
     if (weekdays?.includes(content)) {
       setWeekdays((prev) => prev?.filter((e) => e !== content));

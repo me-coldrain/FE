@@ -44,7 +44,6 @@ type IInfo = ITeam[];
 const { myTeam, team, activeTeam } = styles;
 
 export default function MyTeam(props: PageProps): JSX.Element {
-  console.log(props);
   const router = useRouter();
 
   //state
@@ -64,7 +63,6 @@ export default function MyTeam(props: PageProps): JSX.Element {
       auth: true,
     })
       .then((res: IInfo) => {
-        console.log(res);
         setJoinTeamInfo(res);
       })
       .catch((error: any) => console.log(error));
@@ -77,7 +75,6 @@ export default function MyTeam(props: PageProps): JSX.Element {
       auth: true,
     })
       .then((res: IInfo) => {
-        console.log(res);
         setApplyTeamInfo(res);
       })
       .catch((error: any) => console.log(error));

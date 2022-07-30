@@ -10,7 +10,6 @@ const Question = (props: any): JSX.Element => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const teamId = context.query.teamId as string;
-  console.log(teamId);
   const data = await makeRequest({
     endpoint: `teams/${teamId}/questions`,
     method: "GET",

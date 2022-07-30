@@ -56,7 +56,6 @@ const {
 } = styles;
 
 export default function MyTeam(props: PageProps): JSX.Element {
-  console.log(props);
   const teamInfo = props?.data;
 
   // state

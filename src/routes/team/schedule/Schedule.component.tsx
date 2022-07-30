@@ -13,6 +13,7 @@ const { scheduleCard, scheduleCardContents, scheduleCardIcon, dDay, dDayIcon } =
 
 export default function Schedule(props: ISchedules): JSX.Element {
   const { data, teamId, teamName } = props;
+  console.log(data);
 
   const ScheduleMatches = ({
     matchId,
@@ -96,11 +97,12 @@ export default function Schedule(props: ISchedules): JSX.Element {
     <div>
       <SafeArea />
       {/** @map scheduleMatches */}
-      {data.map((match, index) => (
-        <div key={`match-${index}`} style={{ padding: "1rem" }}>
-          <ScheduleMatches {...match} />
-        </div>
-      ))}
+      {data &&
+        data?.map((match, index) => (
+          <div key={`match-${index}`} style={{ padding: "1rem" }}>
+            <ScheduleMatches {...match} />
+          </div>
+        ))}
     </div>
   );
 }

@@ -13,6 +13,7 @@ type IProps = {
   arrowLink: BaseRouter;
   arrowLinkAs: string;
   linkType?: boolean;
+  [x: string]: any;
 };
 
 type BaseRouter = {
@@ -35,6 +36,7 @@ export const PlaceholderWithJSX = ({
   arrowLink,
   linkType = true,
   arrowLinkAs,
+  ...rest
 }: IProps): JSX.Element => {
   return (
     <div className={container}>

@@ -1,1 +1,1 @@
-export const noFooterRoutes = ["login", "introduction"];
+export const noFooterRoutes = ["login", "introduction", "/formation/detail"];

@@ -52,7 +52,6 @@ export default function User(): JSX.Element {
     const { id } = e.target;
     const { value } = e.target;
     setInputs((values: IInputs) => ({ ...values, [id]: value }));
-    console.log(inputs);
   };
 
   const handleSubmit = (): any => {
@@ -91,14 +90,12 @@ export default function User(): JSX.Element {
       return;
     }
     const params = inputs;
-    console.log(params);
     makeRequest({
       endpoint: "members/signup",
       method: "POST",
       params,
       auth: false,
     }).then((res: any) => {
-      console.log(res);
       if (res?.status <= 201) {
         window.alert("회원가입이 완료되었습니다."), router.replace("/login");
       } else {

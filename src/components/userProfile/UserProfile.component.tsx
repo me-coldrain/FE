@@ -5,15 +5,18 @@ import styles from "./UserProfile.module.scss";
 type ProfileProps = {
   nickname?: string;
   src?: string;
+  selected?: boolean;
+  children?: any;
+  onClick?: any;
 };
 
 type PositionProfileProps = {
   nickname?: string;
-  src: string | null;
+  src: string | null | undefined;
   position: "striker" | "midfielder" | "defender" | "goalkeeper";
 };
 
-const { profile, position } = styles;
+const { profile, position, profileSelected } = styles;
 
 export function PositionProfile(props: PositionProfileProps): JSX.Element {
   return (
@@ -34,14 +37,20 @@ export function PositionProfile(props: PositionProfileProps): JSX.Element {
 }
 
 export default function UserProfile(props: ProfileProps): JSX.Element {
-  const { nickname = "", src = "" } = props;
+  const {
+    nickname = "닉네임",
+    src = "",
+    selected = false,
+    children,
+    onClick,
+  } = props;
 
   return (
-    <div className={profile}>
-      {/* <img src={src}/> */}
-      <img src="/img/profileImg.png" />
+    <div className={selected ? profileSelected : profile} onClick={onClick}>
+      <img src={src ? src : "/img/profileImg.png"} />
       {/* <p>{nickname}</p> */}
-      <p>닉네임</p>
+      <p>{nickname}</p>
+      {children}
     </div>
   );
 }

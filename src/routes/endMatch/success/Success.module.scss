@@ -1,0 +1,35 @@
+@use "styles/variables/placeholder" as animations;
+@use "styles/variables/media";
+
+.successBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.xBox {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  p {
+    cursor: pointer;
+  }
+}
+
+.successMsgBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.successMsg {
+  color: rgba(47, 78, 180, 1);
+  font-size: 24px;
+  font-weight: 600;
+  margin: inherit;
+}

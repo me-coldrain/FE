@@ -44,10 +44,23 @@ export default memo(function Header({ backBtn }: IHeader): JSX.Element {
     pathname === "/rank/team" ||
     pathname === "/rank/player" ||
     pathname === "/founding/success" ||
-    pathname === "/player/[playerId]"
+    pathname === "/player/[playerId]" ||
+    pathname === "/formation/detail"
       ? false
       : true;
   const colorUrl = "/";
+
+  const showHeader =
+    pathname === "/endmatch" ||
+    pathname === "/endmatch/score" ||
+    pathname === "/endmatch/check" ||
+    pathname === "/endmatch/substitute" ||
+    pathname === "/endmatch/charming" ||
+    pathname === "/endmatch/mvp" ||
+    pathname === "/endmatch/scorer" ||
+    pathname === "/endmatch/preview"
+      ? false
+      : true;
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -80,7 +93,7 @@ export default memo(function Header({ backBtn }: IHeader): JSX.Element {
               )}
               <Logo />
             </div>
-            <Items />
+            {showHeader && <Items />}
           </nav>
         </header>
       )}

@@ -1,0 +1,77 @@
+@use "styles/variables/placeholder" as animations;
+@use "styles/variables/media";
+
+.end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6rem;
+}
+.upperBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 90%;
+  &Title {
+    p {
+      font-weight: 600;
+      font-size: 24px;
+      color: rgba(47, 78, 180, 1);
+      margin: 2rem 0 0;
+    }
+  }
+  &Sub {
+    p {
+      font-size: 16px;
+      color: #868686;
+    }
+    margin-bottom: 1rem;
+  }
+  &Select {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    overflow-x: auto;
+    div {
+      position: relative;
+      margin-right: 0.5rem;
+      img {
+        width: 3rem;
+        height: 3rem;
+      }
+      .xButton {
+        position: absolute;
+        top: 0;
+        right: -0.5rem;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.lowerBox {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  grid-auto-rows: minmax(2rem, auto);
+  align-items: baseline;
+  justify-content: space-around;
+  width: 100%;
+  background-color: #f2f2f2;
+  padding: 2rem;
+}
+
+.buttonBox {
+  width: 100%;
+  background-color: #f2f2f2;
+  footer {
+    padding: 1rem;
+  }
+}

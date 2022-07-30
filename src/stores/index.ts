@@ -11,12 +11,14 @@ import { user } from "stores/user";
 import { notifications } from "stores/notifications";
 import { pages } from "stores/pages";
 import { teams } from "stores/teams";
+import { formations } from "./formation";
 
 const reducers = combineReducers({
   user,
   notifications,
   pages,
   teams,
+  formations,
 });
 
 export type RootState = ReturnType<typeof reducers>;

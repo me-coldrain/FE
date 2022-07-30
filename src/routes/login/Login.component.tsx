@@ -40,14 +40,12 @@ export default function User(): JSX.Element {
 
   const handleLogin = () => {
     const params = inputs;
-    console.log(params);
     makeRequest({
       endpoint: "members/login",
       method: "POST",
       params,
       auth: false,
     }).then((res: any) => {
-      console.log(res);
       if (res !== undefined) {
         if (res?.first) {
           router.replace("/register/nickname");
@@ -99,15 +97,17 @@ export default function User(): JSX.Element {
           </div>
           <div className={kakao}>
             <p>SNS계정으로 간편 로그인</p>
-            <div className={kakaoBox}>
-              <RegisterFooter
-                content="KAKAO"
-                activeStyle
-                handleClick={() => {
-                  window.alert("커밍쑨! 기능이 준비중입니다.");
-                }}
-              ></RegisterFooter>
-            </div>
+            <a href="https://kauth.kakao.com/oauth/authorize?client_id=3c2e867a60400604cd64199c1ec0227a&redirect_uri=http://localhost:3000/kakao&response_type=code">
+              <div className={kakaoBox}>
+                <RegisterFooter
+                  content="KAKAO"
+                  activeStyle
+                  handleClick={() => {
+                    // window.alert("커밍쑨! 기능이 준비중입니다.");
+                  }}
+                ></RegisterFooter>
+              </div>
+            </a>
           </div>
         </section>
       </main>
