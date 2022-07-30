@@ -346,30 +346,32 @@ export default function Team(props: PageProps): JSX.Element {
           </div>
         </div>
 
-        <div style={{ display: "flex", width: "100%" }}>
-          <Link
-            href={{
-              pathname: "/team/[teamName]/matches",
-              query: { teamId: teamId, teamName: teamName },
-            }}
-          >
-            <div className={rowDiv}>
-              {teamDetail?.recentMatchHistory && (
-                <PlaceholderWithJSX
-                  label="경기 히스토리"
-                  content={
-                    <MatchContainer {...teamDetail?.recentMatchHistory} />
-                  }
-                  length="long"
-                  linkType={false}
-                  arrowLink={link}
-                  arrowLinkAs={link.as}
-                  {...teamDetail?.recentMatchHistory}
-                />
-              )}
-            </div>
-          </Link>
-        </div>
+        {teamDetail?.recentMatchHistory !== null && (
+          <div style={{ display: "flex", width: "100%" }}>
+            <Link
+              href={{
+                pathname: "/team/[teamName]/matches",
+                query: { teamId: teamId, teamName: teamName },
+              }}
+            >
+              <div className={rowDiv}>
+                {teamDetail?.recentMatchHistory && (
+                  <PlaceholderWithJSX
+                    label="경기 히스토리"
+                    content={
+                      <MatchContainer {...teamDetail?.recentMatchHistory} />
+                    }
+                    length="long"
+                    linkType={false}
+                    arrowLink={link}
+                    arrowLinkAs={link.as}
+                    {...teamDetail?.recentMatchHistory}
+                  />
+                )}
+              </div>
+            </Link>
+          </div>
+        )}
 
         <Link
           href={{
