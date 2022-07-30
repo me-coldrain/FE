@@ -67,10 +67,6 @@ export default function FormationDetail(): JSX.Element {
     );
   };
 
-  //   useEffect(() => {
-  //     setPlayers(formations);
-  //   }, []);
-
   return (
     <main>
       <h1>포메이션 등록</h1>
