@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { makeRequest } from "services/makeRequest";
 import Input from "@components/Input";
 import { RegisterFooter } from "@components/footer";
-import styles from "./score.module.scss";
+import styles from "./Score.module.scss";
 
 const {
   end,
