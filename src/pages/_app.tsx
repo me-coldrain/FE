@@ -41,7 +41,10 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const showNav =
     router.pathname === "/login" ||
     router.pathname === "/introduction" ||
-    router.pathname === "/endmatch/success"
+    router.pathname === "/endmatch/success" ||
+    router.pathname === "/register/contact" ||
+    router.pathname === "/register/nickname" ||
+    router.pathname === "/register/position"
       ? false
       : true;
 
