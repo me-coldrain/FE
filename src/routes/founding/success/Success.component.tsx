@@ -15,15 +15,15 @@ const shareKakao = () => {
       imageUrl:
         "https://nasal-peony-253.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa7f6ea46-7362-434a-b493-9943f6181104%2FKakaoTalk_20220726_164634430.png?table=block&id=64b09693-ce5f-45bc-8b3a-14f13f579120&spaceId=b6a4d667-ebe0-4c26-8a4d-3f9c44e19612&width=250&userId=&cache=v2",
       link: {
-        mobileWebUrl: "https://fe-90bun.vercel.app/",
-        webUrl: "https://fe-90bun.vercel.app/",
+        mobileWebUrl: "https://www.ninety.site/",
+        webUrl: "https://www.ninety.site/",
       },
     },
     buttons: [
       {
         title: "웹으로 이동",
         link: {
-          mobileWebUrl: "https://fe-90bun.vercel.app/",
+          mobileWebUrl: "https://www.ninety.site/",
         },
       },
     ],

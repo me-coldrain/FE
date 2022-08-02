@@ -82,6 +82,7 @@ export const addDescriptionTag = (description: string): JSX.Element => {
 };
 
 const Page = (props: PageProps): JSX.Element => {
+  console.log(props);
   const { isLanding, data } = props;
   const { title = "", description = "" } = usePageDetails();
 
